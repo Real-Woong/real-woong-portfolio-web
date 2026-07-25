@@ -107,6 +107,7 @@
   .eyebrow .pip{width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px 1px var(--amber);animation:pulse 2.4s ease-in-out infinite;}
   h1,h2,h3{font-weight:700;text-wrap:balance;margin:0;letter-spacing:-.01em;}
   p{line-height:1.7;color:var(--muted);max-width:60ch;margin:0;}
+  h1,h2,h3,p,.tl-item li{word-break:keep-all;overflow-wrap:break-word;}
 
   /* section chapter number */
   .chapter-no{position:absolute;top:clamp(70px,10vw,110px);right:clamp(20px,5vw,64px);font-family:var(--font-mono);font-size:clamp(3rem,7vw,6rem);color:var(--line-strong);line-height:1;user-select:none;z-index:0;}
@@ -125,7 +126,8 @@
   .hero{padding-top:clamp(150px,20vw,210px);}
   .hero .wrap{position:relative;}
   .hero h1{font-family:var(--font-display);font-style:italic;font-weight:400;
-    font-size:clamp(4.2rem,13vw,10.5rem);line-height:.86;letter-spacing:-.02em;
+    font-size:clamp(3.55rem,13vw,10.5rem);line-height:.96;letter-spacing:-.025em;
+    white-space:nowrap;padding-bottom:.12em;overflow:visible;
     background:linear-gradient(160deg,var(--metal-1) 15%,var(--metal-2) 65%,var(--metal-1) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
     opacity:0;transform:translateY(20px) scale(.985);
@@ -133,7 +135,7 @@
     transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter .9s ease;
   }
   html.intro-done .hero h1{opacity:1;transform:translateY(0) scale(1);filter:blur(0) drop-shadow(0 8px 30px rgba(0,0,0,0.25));}
-  .hero .byline{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:18px;
+  .hero .byline{font-family:var(--font-mono);font-size:12px;line-height:1.6;letter-spacing:.075em;text-transform:uppercase;color:var(--muted);margin-top:20px;
     opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) 1.05s,transform .8s cubic-bezier(.16,1,.3,1) 1.05s;}
   .hero .byline b{color:var(--text);}
   .hero .tagline{margin-top:30px;font-size:clamp(16px,1.7vw,19px);max-width:52ch;color:var(--text);
@@ -287,7 +289,7 @@
 <div class="intro" id="intro">
   <div class="intro-stage">
     <div class="boot" id="boot"></div>
-    <div class="intro-mark" id="intro-mark">Real&nbsp;Woong</div>
+    <div class="intro-mark" id="intro-mark">Real Woong</div>
     <div class="intro-sweep" id="intro-sweep"></div>
   </div>
   <div class="intro-skip">Click or press any key to skip</div>
@@ -327,9 +329,9 @@
   <section class="hero" id="hero">
     <div class="wrap">
       <div class="eyebrow"><span class="pip"></span>Seoul, Korea — Yonsei Univ. CS '23 — Design Draft</div>
-      <h1>Real&nbsp;Woong</h1>
+      <h1>Real Woong</h1>
       <div class="byline"><b>Kim JinWoong</b> · Builder — Blockchain / AI / Full-Stack / Brand</div>
-      <p class="tagline">스마트컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지 — <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
+      <p class="tagline">스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지. <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
       <div class="cta-row">
         <a class="btn primary magnetic" href="#work">Selected Work</a>
         <a class="btn ghost magnetic" href="#contact">Get in touch</a>
@@ -362,7 +364,7 @@
       <div class="section-head reveal" data-d="0">
         <div class="eyebrow"><span class="pip"></span>Selected Work</div>
         <h2>다섯 개의 프로젝트로 보는 작업 방식.</h2>
-        <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트, iOS 팀 프로젝트까지 — 서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
+        <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
       </div>
 
       <div class="work-index" id="work-index">
@@ -378,7 +380,7 @@
         <div class="work-row reveal" data-d="4" data-glyph="AI AGENT" data-cap="Toss API + FRED 기반 PAPER Trading 에이전트, 57개 자동 테스트">
           <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cat">AI Agent</span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
-        <div class="work-row reveal" data-d="5" data-glyph="iOS · TEAM" data-cap="건강 정보 기반 외식 추천 iOS 앱, MVVM · RxSwift">
+        <div class="work-row reveal" data-d="5" data-glyph="iOS · TEAM" data-cap="건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift">
           <span class="no tnum">05</span><span class="title">HealEat</span><span class="cat">iOS · Team</span><span class="year tnum">2024</span><span class="arrow">↗</span>
         </div>
       </div>
@@ -391,7 +393,7 @@
       <div class="work-detail reveal" data-d="2">
         <div class="eyebrow" style="margin-bottom:8px;">01 / 05 — Agora</div>
         <h3 style="font-size:1.4rem;">AI Trading Agent Marketplace</h3>
-        <p style="margin-top:12px;">AI 투자 에이전트의 성과를 동일한 조건에서 비교하고, 검증된 에이전트를 발견·Follow할 수 있도록 설계한 마켓플레이스. 프론트엔드 대시보드와 Sui Move 기반 비수탁형 Vault 컨트랙트를 함께 개발하며 실제 창업을 목표로 팀 단위로 진행 중입니다.</p>
+        <p style="margin-top:12px;">AI 투자 에이전트의 성과를 동일한 조건에서 비교하고, 검증된 에이전트를 발견하고 팔로우할 수 있도록 설계한 마켓플레이스입니다. 프론트엔드 대시보드와 Sui Move 기반 비수탁형 Vault 컨트랙트를 함께 개발하며 실제 창업을 목표로 팀 단위 개발을 진행하고 있습니다.</p>
         <div class="stack"><span>Next.js</span><span>Sui / Move</span><span>Framer Motion</span><span>Sui dApp Kit</span></div>
       </div>
     </div>
@@ -411,7 +413,7 @@
       <div class="section-head reveal" data-d="0">
         <div class="eyebrow"><span class="pip"></span>Project Archive</div>
         <h2>선정작 너머, 17개의 기록.</h2>
-        <p>Selected Work가 큐레이션된 다섯 개라면, 여기는 지금까지 만든 것 전체입니다 — 개인 프로젝트, 팀 프로젝트, 그리고 브랜딩·기획 활동까지.</p>
+        <p>Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 개인 프로젝트와 팀 프로젝트, 브랜딩·기획 활동까지 한눈에 볼 수 있습니다.</p>
       </div>
 
       <div class="archive-controls reveal" data-d="1">
@@ -438,7 +440,7 @@
         <article class="a-item reveal" data-cat="blockchain">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">02</span><span class="a-glyph">SUI</span></div>
           <span class="a-cat">Blockchain · Full-Stack</span><span class="a-title">CryptoFunding</span>
-          <span class="a-desc">Sui 크라우드펀딩. 컨트랙트 · 백엔드 · 배포 전 과정을 직접 설계.</span>
+          <span class="a-desc">Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.</span>
           <span class="a-year tnum">2025</span>
         </article>
         <article class="a-item reveal" data-cat="web">
@@ -450,13 +452,13 @@
         <article class="a-item reveal" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">04</span><span class="a-glyph">iOS</span></div>
           <span class="a-cat">iOS · Team</span><span class="a-title">HealEat</span>
-          <span class="a-desc">건강 정보 기반 외식 추천 앱. MVVM · RxSwift 첫 실전 적용.</span>
+          <span class="a-desc">건강 정보 기반 외식 추천 앱. MVVM과 RxSwift를 처음으로 실전에 적용.</span>
           <span class="a-year tnum">2024</span>
         </article>
         <article class="a-item reveal" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">05</span><span class="a-glyph">PRODUCT</span></div>
           <span class="a-cat">Product · Personal</span><span class="a-title">Sogon.zip</span>
-          <span class="a-desc">연인·친구를 위한 프라이빗 아카이브. 웹 베타 + 모바일 MVP.</span>
+          <span class="a-desc">연인과 친구를 위한 프라이빗 아카이브. 웹 베타와 모바일 MVP.</span>
           <span class="a-year tnum">2026</span>
         </article>
         <article class="a-item reveal" data-cat="web">
@@ -480,7 +482,7 @@
         <article class="a-item reveal" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">09</span><span class="a-glyph">CV</span></div>
           <span class="a-cat">AI · Computer Vision</span><span class="a-title">CV Projects</span>
-          <span class="a-desc">손 제스처 · 표정 인식 등 OpenCV 기반 실험 프로젝트 모음.</span>
+          <span class="a-desc">손 제스처와 표정 인식 등 OpenCV 기반 실험 프로젝트 모음.</span>
           <span class="a-year tnum">2024</span>
         </article>
         <article class="a-item reveal" data-cat="ai">
@@ -504,7 +506,7 @@
         <article class="a-item reveal" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">13</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Goods</span><span class="a-title">2023 대동제(새벽)</span>
-          <span class="a-desc">대형 행사 브랜딩. 인생네컷 프레임 · 반다나 단독 디자인.</span>
+          <span class="a-desc">대형 행사 브랜딩. 인생네컷 프레임과 반다나를 단독 디자인.</span>
           <span class="a-year tnum">2023</span>
         </article>
         <article class="a-item reveal" data-cat="brand">
@@ -516,7 +518,7 @@
         <article class="a-item reveal" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">15</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Leadership</span><span class="a-title">하랑 (24대 컴과 학생회)</span>
-          <span class="a-desc">학생회 로고 · 하키티 · 카드뉴스, 브랜딩 총괄.</span>
+          <span class="a-desc">학생회 로고, 하키티와 카드뉴스 제작 및 브랜딩 총괄.</span>
           <span class="a-year tnum">2024</span>
         </article>
         <article class="a-item reveal" data-cat="brand">
@@ -564,12 +566,12 @@
         <div class="p-row">
           <div class="p-no tnum">03</div>
           <div class="p-title"><span>Build</span>제작</div>
-          <p>프론트엔드 · 백엔드 · 스마트컨트랙트 · iOS까지, 필요하면 혼자서도 처음부터 끝까지 만듭니다. 디자인은 Figma로 직접 잡습니다.</p>
+          <p>프론트엔드·백엔드·스마트 컨트랙트·iOS까지, 필요하면 혼자서도 처음부터 끝까지 만듭니다. 디자인은 Figma로 직접 설계합니다.</p>
         </div>
         <div class="p-row">
           <div class="p-no tnum">04</div>
-          <div class="p-title"><span>Verify &amp; Ship</span>검증 · 배포</div>
-          <p>AWS · Vercel · Cloudflare · Oracle Cloud에 실제로 배포하고, TAPIoca는 자동 테스트 57개와 PAPER Trading 안전장치로 먼저 검증한 뒤에만 다음 단계로 넘어갑니다.</p>
+          <div class="p-title"><span>Verify &amp; Ship</span>검증·배포</div>
+          <p>AWS·Vercel·Cloudflare·Oracle Cloud에 실제로 배포합니다. TAPIoca는 자동 테스트 57개와 PAPER Trading 안전장치로 먼저 검증한 뒤에만 다음 단계로 넘어갑니다.</p>
         </div>
       </div>
     </div>
@@ -586,22 +588,22 @@
       <div class="timeline">
         <div class="tl-item reveal reveal-l">
           <div class="tl-year tnum">2026</div>
-          <h3>블록블록 개발팀장 · SUI-HackerThon TF팀</h3>
+          <h3>블록블록 개발팀장·SUI-HackerThon TF팀</h3>
           <ul><li>연세 블록체인 동아리 블록블록 개발팀장</li><li>2026 SUI-HackerThon TF팀 — 해커하우스 세션 담당</li><li>Agora 개발</li></ul>
         </div>
         <div class="tl-item reveal reveal-r">
           <div class="tl-year tnum">2025</div>
-          <h3>블록블록 활동 · CryptoFunding · Textro</h3>
+          <h3>블록블록 활동·CryptoFunding·Textro</h3>
           <ul><li>연세 블록체인 동아리 “블록블록” 활동</li><li>CryptoFunding, Textro 개발</li></ul>
         </div>
         <div class="tl-item reveal reveal-l">
           <div class="tl-year tnum">2024</div>
-          <h3>하랑 홍보부장 · UMC 부회장</h3>
-          <ul><li>24대 컴퓨터과학과 학생회 “하랑” 홍보부장 · 브랜딩 총괄</li><li>2024 UMC 연세 지부 부회장</li><li>Uni-Made, HealEat 팀 프로젝트</li></ul>
+          <h3>하랑 홍보부장·UMC 부회장</h3>
+          <ul><li>24대 컴퓨터과학과 학생회 “하랑” 홍보부장·브랜딩 총괄</li><li>2024 UMC 연세 지부 부회장</li><li>Uni-Made, HealEat 팀 프로젝트</li></ul>
         </div>
         <div class="tl-item reveal reveal-r">
           <div class="tl-year tnum">2023</div>
-          <h3>총동아리연합회 홍보처 · 학생회 홍보처</h3>
+          <h3>총동아리연합회 홍보처·학생회 홍보처</h3>
           <ul><li>총동아리연합회 홍보처</li><li>컴퓨터과학과 학생회(온새미로) 홍보처</li><li>대동제, 연고 동아리 교류전 웹사이트 제작</li></ul>
         </div>
       </div>
@@ -635,7 +637,7 @@
         <a class="btn primary magnetic" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
         <a class="btn ghost magnetic" href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
-      <p class="note reveal" data-d="4">DESIGN DRAFT — 콘텐츠는 notion_portfolio 폴더 정리본을 기반으로 구성했습니다. 프로젝트별 정확한 기간·상태, GitHub·배포 링크의 공개 여부, CryptoFunding 표기, 기술 스택 불일치는 최종 반영 전 확인이 필요합니다. 개인 연락처 중 휴대폰 번호는 공개 페이지 노출을 피하기 위해 이메일 · GitHub만 표기했습니다.</p>
+      <p class="note reveal" data-d="4">문제를 발견하고, 구조를 설계하고, 실제로 동작하는 제품까지 만듭니다. 블록체인·AI·풀스택·iOS·브랜드를 잇는 다음 작업을 기다립니다.</p>
     </div>
   </section>
 </main>
