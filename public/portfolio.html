@@ -377,16 +377,16 @@
       </div>
 
       <div class="work-index" id="work-index">
-        <div class="work-row reveal" data-d="1" data-glyph="SUI · AI" data-cap="Sui 기반 AI 트레이딩 에이전트 마켓플레이스, 창업 진행 중">
+        <div class="work-row reveal" data-d="1" data-glyph="SUI · AI" data-cap="Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임">
           <span class="no tnum">01</span><span class="title">Agora</span><span class="cat">Blockchain · Startup</span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-d="2" data-glyph="SUI · FULLSTACK" data-cap="Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지">
           <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="cat">Blockchain · Full-Stack</span><span class="year tnum">2025</span><span class="arrow">↗</span>
         </div>
-        <div class="work-row reveal" data-d="3" data-glyph="PRODUCT" data-cap="관계 기반 프라이빗 아카이브, 개인 프로덕트 디자인">
+        <div class="work-row reveal" data-d="3" data-glyph="PRODUCT" data-cap="소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함">
           <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="cat">Product · Personal</span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
-        <div class="work-row reveal" data-d="4" data-glyph="AI AGENT" data-cap="Toss API + FRED 기반 PAPER Trading 에이전트, 57개 자동 테스트">
+        <div class="work-row reveal" data-d="4" data-glyph="AI AGENT" data-cap="Toss API + FRED 기반 PAPER Trading 에이전트, 80개 자동 테스트">
           <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cat">AI Agent</span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-d="5" data-glyph="iOS · TEAM" data-cap="건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift">
@@ -401,9 +401,9 @@
 
       <div class="work-detail reveal" data-d="2">
         <div class="eyebrow" style="margin-bottom:8px;">01 / 05 — Agora</div>
-        <h3 style="font-size:1.4rem;">AI Trading Agent Marketplace</h3>
-        <p style="margin-top:12px;">AI 투자 에이전트의 성과를 동일한 조건에서 비교하고, 검증된 에이전트를 발견하고 팔로우할 수 있도록 설계한 마켓플레이스입니다. 프론트엔드 대시보드와 Sui Move 기반 비수탁형 Vault 컨트랙트를 함께 개발하며 실제 창업을 목표로 팀 단위 개발을 진행하고 있습니다.</p>
-        <div class="stack"><span>Next.js</span><span>Sui / Move</span><span>Framer Motion</span><span>Sui dApp Kit</span></div>
+        <h3 style="font-size:1.4rem;">Delegated Investment Vault on Sui</h3>
+        <p style="margin-top:12px;">사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, 외부 Signal Provider 결제는 HTTP 402 기반 x402로 처리해 그 비용을 사용자가 아닌 AgoraAgent가 대신 부담합니다. 블록블록 2026 Summer 팀 프로젝트로, 2026년 7월 기준 MVP 개발 단계입니다.</p>
+        <div class="stack"><span>Sui Move</span><span>x402</span><span>Next.js</span><span>Sui dApp Kit</span></div>
       </div>
     </div>
   </section>
@@ -443,7 +443,7 @@
         <article class="a-item reveal" data-cat="blockchain">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">01</span><span class="a-glyph">SUI</span></div>
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
-          <span class="a-desc">AI 투자 에이전트 마켓플레이스. Sui Move 기반 Vault 컨트랙트 개발.</span>
+          <span class="a-desc">거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.</span>
           <span class="a-year tnum">2026</span>
         </article>
         <article class="a-item reveal" data-cat="blockchain">
@@ -455,7 +455,7 @@
         <article class="a-item reveal" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">03</span><span class="a-glyph">WEB</span></div>
           <span class="a-cat">Product · Social</span><span class="a-title">BubbleBreak</span>
-          <span class="a-desc">관심사 버블로 낯선 사람과의 대화를 여는 아이스브레이킹 앱.</span>
+          <span class="a-desc">방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.</span>
           <span class="a-year tnum">2025</span>
         </article>
         <article class="a-item reveal" data-cat="web">
@@ -467,7 +467,7 @@
         <article class="a-item reveal" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">05</span><span class="a-glyph">PRODUCT</span></div>
           <span class="a-cat">Product · Personal</span><span class="a-title">Sogon.zip</span>
-          <span class="a-desc">연인과 친구를 위한 프라이빗 아카이브. 웹 베타와 모바일 MVP.</span>
+          <span class="a-desc">소곤파일 예약공개와 계정 코드 기반 1:1 연결. 웹 베타 + Expo 모바일 MVP.</span>
           <span class="a-year tnum">2026</span>
         </article>
         <article class="a-item reveal" data-cat="web">
@@ -497,13 +497,13 @@
         <article class="a-item reveal" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">10</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Telegram</span><span class="a-title">Marvis</span>
-          <span class="a-desc">텔레그램 기반 개인 AI 비서. 대화만으로 일정·아이디어 기록.</span>
+          <span class="a-desc">텔레그램 기반 개인 AI 비서. Gemini로 기억을 분류하고 매일 아침 먼저 브리핑, Siri로 손 안 대고 기록.</span>
           <span class="a-year tnum">2025</span>
         </article>
         <article class="a-item reveal" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">11</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Investment</span><span class="a-title">TAPIoca</span>
-          <span class="a-desc">Toss API 기반 PAPER Trading 에이전트. 57개 자동 테스트 운영.</span>
+          <span class="a-desc">Toss API 기반 PAPER Trading 에이전트. 80개 자동 테스트 운영.</span>
           <span class="a-year tnum">2026</span>
         </article>
         <article class="a-item reveal" data-cat="ai">
@@ -580,7 +580,7 @@
         <div class="p-row">
           <div class="p-no tnum">04</div>
           <div class="p-title"><span>Verify &amp; Ship</span>검증·배포</div>
-          <p>AWS·Vercel·Cloudflare·Oracle Cloud에 실제로 배포합니다. TAPIoca는 자동 테스트 57개와 PAPER Trading 안전장치로 먼저 검증한 뒤에만 다음 단계로 넘어갑니다.</p>
+          <p>AWS·Vercel·Cloudflare·Oracle Cloud에 실제로 배포합니다. TAPIoca는 자동 테스트 80개와 PAPER Trading 안전장치로 먼저 검증한 뒤에만 다음 단계로 넘어갑니다.</p>
         </div>
       </div>
     </div>
