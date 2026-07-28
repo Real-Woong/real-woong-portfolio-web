@@ -284,6 +284,44 @@
     .reveal{opacity:1;transform:none;transition:none;}
     .mtrack,.scroll-cue .bar,.eyebrow .pip{animation:none !important;}
   }
+
+  /* ---------------- PROJECT DETAIL MODAL ---------------- */
+  .work-row,.a-item{cursor:pointer;}
+  html.pm-lock,html.pm-lock body{overflow:hidden;}
+  .pm-overlay{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-start;justify-content:center;
+    padding:min(9vh,88px) 20px 60px;opacity:0;pointer-events:none;
+    background:color-mix(in srgb, #050504 78%, transparent);backdrop-filter:blur(10px) saturate(120%);
+    transition:opacity .35s cubic-bezier(.16,1,.3,1);}
+  .pm-overlay.open{opacity:1;pointer-events:auto;}
+  .pm-overlay[hidden]{display:none;}
+  .pm-panel{position:relative;width:min(760px,100%);max-height:calc(100vh - min(9vh,88px) - 60px);overflow-y:auto;
+    background:var(--bg-raised);border:1px solid var(--line-strong);box-shadow:0 40px 90px -30px rgba(0,0,0,0.6);
+    padding:clamp(28px,4.4vw,52px);transform:translateY(28px) scale(.98);opacity:0;
+    transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .35s ease;}
+  .pm-overlay.open .pm-panel{transform:translateY(0) scale(1);opacity:1;}
+  .pm-close{position:sticky;top:0;float:right;margin:-6px -6px 0 12px;width:34px;height:34px;border:1px solid var(--line-strong);
+    background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-family:var(--font-mono);font-size:16px;line-height:1;transition:border-color .2s ease,color .2s ease;z-index:2;}
+  .pm-close:hover{border-color:var(--amber);color:var(--amber);}
+  .pm-meta{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+  .pm-meta .pm-no{color:var(--amber);}
+  .pm-meta .pm-dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong);}
+  .pm-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(1.8rem,4.4vw,2.7rem);line-height:1.06;margin:0 0 14px;}
+  .pm-tagline{font-size:15.5px;line-height:1.65;color:var(--muted);max-width:56ch;margin:0 0 22px;}
+  .pm-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
+  .pm-links .btn{padding:11px 20px;font-size:11.5px;}
+  .pm-body{border-top:1px solid var(--line);padding-top:28px;display:flex;flex-direction:column;gap:26px;}
+  .pm-section h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:0 0 12px;}
+  .pm-section p{font-size:14.5px;line-height:1.7;color:var(--text);margin:0 0 10px;}
+  .pm-section p:last-child{margin-bottom:0;}
+  .pm-section ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .pm-section ul li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.65;color:var(--text);}
+  .pm-section ul li::before{content:"—";position:absolute;left:0;color:var(--amber);font-size:12px;}
+  .pm-stack{display:flex;gap:8px;flex-wrap:wrap;}
+  .pm-stack span{font-family:var(--font-mono);font-size:10.5px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--muted);}
+  .pm-section a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;}
+  @media (max-width:600px){.pm-overlay{padding:0;}
+    .pm-panel{max-height:100vh;height:100vh;width:100%;padding:22px 20px 40px;}}
 </style>
 
 <div class="intro" id="intro">
@@ -650,6 +688,13 @@
     <a href="#hero">Back to top ↑</a>
   </div>
 </footer>
+
+<div class="pm-overlay" id="pm-overlay" hidden>
+  <div class="pm-panel" id="pm-panel" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+    <button class="pm-close" id="pm-close" aria-label="Close">✕</button>
+    <div id="pm-content"></div>
+  </div>
+</div>
 
 <script>
 (function(){
