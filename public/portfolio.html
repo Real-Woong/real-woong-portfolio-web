@@ -535,7 +535,7 @@
         <article class="a-item reveal" data-project="marvis" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">10</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Telegram</span><span class="a-title">Marvis</span>
-          <span class="a-desc">텔레그램 기반 개인 AI 비서. Gemini로 기억을 분류하고 매일 아침 먼저 브리핑, Siri로 손 안 대고 기록.</span>
+          <span class="a-desc">텔레그램 기반 개인 AI 비서. 기억과 사이드 프로젝트를 자연어로 관리하고, 요일별 능동 브리핑과 Siri 음성 캡처를 제공.</span>
           <span class="a-year tnum">2025</span>
         </article>
         <article class="a-item reveal" data-project="tapioca" data-cat="ai">
@@ -1307,7 +1307,7 @@
     "cat": "AI · Telegram",
     "year": "2025",
     "title": "Marvis",
-    "tagline": "My + Jarvis. 텔레그램(또는 Siri 단축어)으로 보낸 메시지를 기억하고, 메모·아이디어·할 일·일정으로 분류해 관리하는 개인 AI 비서. Oracle Cloud 상시 운영.",
+    "tagline": "My + Jarvis. 텔레그램 또는 Siri로 보낸 메시지를 기억하고 메모·아이디어·할 일·일정·사이드 프로젝트 현황으로 분류해 관리하는 개인 AI 비서. Oracle Cloud에서 24시간 운영하며 매일 직접 사용하고 개선하고 있습니다.",
     "github": "https://github.com/Real-Woong/marvis",
     "demo": null,
     "stack": [
@@ -1322,9 +1322,10 @@
       {
         "h": "핵심 기능",
         "body": [
-          "- 자연어 메시지를 Schedule/Idea/Note로 자동 분류",
+          "- 자연어 메시지를 Schedule/Idea/Note로 자동 분류하고, 저장된 기억과 사이드 프로젝트 현황을 Gemini 문맥에 함께 제공",
           "- 날짜·시간 표현을 정규식으로 분석해 일정·리마인더 자동 저장",
-          "- 매일 아침 8시, 요청 없이 오늘 일정을 먼저 브리핑",
+          "- 평일 8:30·토요일 10:00에 오늘 일정과 진행 중인 프로젝트를 먼저 브리핑하고 일요일은 발송하지 않도록 요일별 스케줄링",
+          "- 자연어로 사이드 프로젝트 추가·중단·다음 할 일 갱신·브리핑 알림 on/off",
           "- iPhone Siri 단축어로 손 안 대고 음성 캡처(Cloudflare Tunnel 경유), 같은 파이프라인으로 저장",
           "- Gemini 답변을 텍스트+한국어 음성(gTTS)으로 동시 제공"
         ]
@@ -1333,13 +1334,20 @@
         "h": "해결한 기술적 문제",
         "body": [
           "- 일정 알림 스레드와 메시지 핸들러가 같은 JSON 파일을 동시에 읽고 쓰며 발생하던 lost update를 RLock 공유 락 + 임시파일→원자적 rename 쓰기로 해결",
+          "- 긴 텔레그램 메시지를 iOS가 “메시지를 보냈습니다”로 요약하는 문제를 고정된 짧은 문장, 프로젝트별 분리·간격 발송, 영문 프로젝트명 자동 띄어쓰기로 개선",
           "- 개인 데이터가 담긴 파일이 보호 장치 없이 버전 관리에 올라가 있던 문제를 git 히스토리에서 완전히 제거해 정리"
         ]
       },
       {
         "h": "중요하게 생각한 점",
         "body": [
-          "기능을 추가하는 것보다 실제로 매일 손이 가게 만드는 것이 더 어려운 문제라는 것을 직접 사용하며 확인했고, 이후에는 새 기능보다 진입 장벽을 낮추는 방향(능동적 브리핑, 음성 무마찰 캡처)에 우선순위를 두었습니다."
+          "기능 수보다 실제로 매일 손이 가는 경험을 우선했습니다. 능동 브리핑과 무마찰 음성 캡처를 만들고, 실제 iPhone에서 알림을 끝까지 들을 수 있는 메시지 길이와 발송 간격까지 조정하며 디바이스·OS 제약을 제품 설계에 반영했습니다."
+        ]
+      },
+      {
+        "h": "다음 단계",
+        "body": [
+          "날짜·시간 파싱과 의도 분류 테스트, google.genai SDK 및 SQLite 마이그레이션, 자연어 일정 수정·반복 일정, 고정 도메인 터널과 웹 관리 대시보드를 순차적으로 준비하고 있습니다."
         ]
       }
     ]
