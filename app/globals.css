@@ -5,21 +5,27 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
-  overflow: hidden;
   background: #070707;
+  color: #f3f0e9;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-.portfolio-shell,
-.portfolio-frame {
-  width: 100%;
-  height: 100%;
-  margin: 0;
+/* Fallback shell only. The portfolio document is served directly at `/`. */
+.portfolio-shell {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
 }
 
-.portfolio-frame {
-  display: block;
-  border: 0;
-  background: #070707;
+.fallback {
+  max-width: 40rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.fallback a {
+  color: #ffb84c;
 }

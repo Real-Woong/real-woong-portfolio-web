@@ -1,6 +1,9 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+// Inlined at build time so the root document works identically on the Node dev
+// server and on Workers, without depending on the ASSETS binding.
+import portfolioHtml from "../public/portfolio.html?raw";
 
 interface Env {
   ASSETS: Fetcher;
@@ -28,6 +31,19 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    // Serve the portfolio as the root document itself rather than inside an
+    // iframe, so `#work`-style deep links, browser history and crawlers all
+    // operate on the real page.
+    if (url.pathname === "/" || url.pathname === "/portfolio.html") {
+      return new Response(portfolioHtml, {
+        status: 200,
+        headers: {
+          "content-type": "text/html; charset=utf-8",
+          "cache-control": "public, max-age=0, must-revalidate",
+        },
+      });
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>김진웅 — Resume</title>
+<style>
+  :root{
+    --ink:#16150f; --muted:#5f5c54; --line:#d9d5cb; --amber:#a8710d; --paper:#fff;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#e9e6de;color:var(--ink);font-family:var(--sans);
+       font-size:10.4px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .sheet{width:210mm;min-height:297mm;margin:24px auto;padding:15mm 16mm;background:var(--paper);
+         box-shadow:0 10px 40px rgba(0,0,0,.16);}
+
+  .bar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:10px;
+       padding:10px;background:#16150f;color:#fff;font-family:var(--mono);font-size:11px;}
+  .bar button,.bar a{font:inherit;color:#16150f;background:#ffb84c;border:0;padding:7px 15px;
+                     cursor:pointer;text-decoration:none;}
+  .bar a{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);}
+  .bar span{align-self:center;opacity:.65;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+         border-bottom:1.5px solid var(--ink);padding-bottom:9px;}
+  h1{margin:0;font-size:23px;letter-spacing:-.02em;}
+  h1 small{display:block;font-family:var(--mono);font-size:9.5px;font-weight:400;
+           letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+  .contact{text-align:right;font-family:var(--mono);font-size:9.3px;line-height:1.75;color:var(--muted);}
+  .contact a{color:var(--ink);text-decoration:none;}
+
+  .summary{margin:11px 0 0;font-size:10.6px;line-height:1.62;}
+  .summary b{color:var(--amber);}
+
+  h2{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+     color:var(--amber);margin:16px 0 7px;padding-bottom:4px;border-bottom:1px solid var(--line);}
+
+  .row{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:5px 0;
+       border-bottom:1px dotted var(--line);}
+  .row:last-child{border-bottom:0;}
+  .when{font-family:var(--mono);font-size:8.8px;color:var(--muted);padding-top:2px;letter-spacing:.02em;}
+  .what strong{font-size:11px;}
+  .what .meta{font-family:var(--mono);font-size:8.6px;color:var(--muted);letter-spacing:.03em;
+              text-transform:uppercase;margin:2px 0 3px;}
+  .what ul{margin:3px 0 0;padding-left:14px;}
+  .what li{margin-bottom:2px;}
+  .what li b{color:var(--amber);font-weight:600;}
+  .stack{font-family:var(--mono);font-size:8.5px;color:var(--muted);margin-top:3px;}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
+  .kv{display:grid;grid-template-columns:82px 1fr;gap:8px;padding:3px 0;font-size:9.8px;}
+  .kv dt{font-family:var(--mono);font-size:8.6px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding-top:1px;}
+  .kv dd{margin:0;}
+
+  footer{margin-top:14px;padding-top:7px;border-top:1px solid var(--line);
+         font-family:var(--mono);font-size:8.3px;color:var(--muted);display:flex;justify-content:space-between;}
+
+  @media print{
+    @page{size:A4;margin:0;}
+    body{background:#fff;font-size:9.5pt;}
+    .bar{display:none;}
+    .sheet{width:auto;min-height:0;margin:0;padding:12mm 13mm;box-shadow:none;}
+    a{color:inherit;}
+  }
+  @media (max-width:820px){
+    .sheet{width:auto;margin:12px;padding:20px;}
+    header{flex-direction:column;align-items:flex-start;}
+    .contact{text-align:left;}
+    .cols{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <button onclick="window.print()">PDF로 저장 / 인쇄</button>
+  <a href="/">← 포트폴리오</a>
+  <span>인쇄 대화상자에서 “배경 그래픽” 켜고 A4 선택</span>
+</div>
+
+<div class="sheet">
+
+  <header>
+    <h1>김진웅 <small>Kim JinWoong — Software Engineer</small></h1>
+    <div class="contact">
+      <a href="mailto:jinung344@gmail.com">jinung344@gmail.com</a><br>
+      <a href="https://github.com/Real-Woong">github.com/Real-Woong</a><br>
+      Seoul, South Korea
+    </div>
+  </header>
+
+  <p class="summary">
+    연세대학교 컴퓨터과학과 재학 중이며 현재 사회복무요원으로 복무 중입니다(<b>2026년 12월 소집해제 예정</b>).
+    Sui/Move 스마트 컨트랙트부터 Cloudflare Workers 기반 풀스택, AI 에이전트까지 직접 설계·배포하고,
+    <b>4개 서비스를 실제로 상시 운영</b>하고 있습니다. 만드는 것보다 <b>운영 중에 드러난 결함을 원인까지 밝혀 고치는 일</b>에
+    시간을 더 씁니다. 지금까지 문서화한 장애 수정은 12건입니다.
+  </p>
+
+  <h2>Selected Projects</h2>
+
+  <div class="row">
+    <div class="when">2026 —<br>진행 중</div>
+    <div class="what">
+      <strong>THE ZONE AGORA</strong>
+      <div class="meta">Sui 위임형 투자 Vault · 팀(블록블록) · 컨트랙트 + 풀스택</div>
+      <ul>
+        <li>owner / AgoraAgent / Signal Provider <b>권한을 온체인에서 분리</b>해, Agent 서버 키가 탈취돼도 임의 출금이 불가능하도록 설계</li>
+        <li>초기 마켓플레이스 구조에서 “사용자가 미검증 전략에 직접 노출된다”는 결함을 발견하고 <b>위임형 구조로 전면 재설계</b></li>
+        <li>HTTP 402 기반 x402 결제 계층 구현 — 결제 digest·금액·수령 주소·replay 여부 검증</li>
+        <li>Move 단위 테스트 30/30 통과. 실제 DEX 체결·정산은 미구현(MVP)</li>
+      </ul>
+      <div class="stack">Sui Move · x402 · Next.js · Sui dApp Kit · TypeScript</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="when">2025 —<br>운영 중</div>
+    <div class="what">
+      <strong>BubbleBreak</strong>
+      <div class="meta">오프라인 아이스브레이킹 웹 서비스 · 단독 · 실사용 데모 운영</div>
+      <ul>
+        <li>비로그인 방 코드 입장 + HttpOnly·Secure·SameSite 쿠키 세션으로 인증 없이 참가자 권한 구분</li>
+        <li><b>장애 4건 수정:</b> 전 요청마다 돌던 방 정리 쿼리를 Cron Trigger로 분리 / Pages·Worker 분리 배포를 몰라 발생한 프로덕션 중단 / SameSite 쿠키 호스트 불일치 / useCallback 의존성 실수로 인한 무한 재요청 루프</li>
+      </ul>
+      <div class="stack">React · TypeScript · Cloudflare Workers · D1 · Cron Triggers</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="when">2026 —<br>운영 중</div>
+    <div class="what">
+      <strong>TAPIoca</strong>
+      <div class="meta">토스증권 Open API 기반 PAPER Trading 에이전트 · 단독</div>
+      <ul>
+        <li>11일치 실제 가상매매 데이터를 분석해 <b>RISK_OFF 국면에서 오히려 주식 비중이 오르던 구조적 결함을 발견</b>, 대칭 리밸런싱으로 수정</li>
+        <li>거래비용·벤치마크·감사 로그를 먼저 갖춘 뒤 관찰 단계로 전환. 자동 테스트 80개 통과</li>
+        <li>Oracle Cloud systemd 타이머로 24시간 상시 운영. 실주문 미실행 하드캡 적용</li>
+      </ul>
+      <div class="stack">Node.js · Toss Open API · FRED · systemd · Oracle Cloud</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="when">2025 —<br>운영 중</div>
+    <div class="what">
+      <strong>Marvis</strong>
+      <div class="meta">Telegram + Gemini 개인 AI 비서 · 단독 · 24/7 운영</div>
+      <ul>
+        <li>알림 스레드와 메시지 핸들러가 같은 JSON을 동시에 쓰며 발생한 <b>lost update를 RLock + 임시파일→원자적 rename</b>으로 해결</li>
+        <li>개인 데이터 파일이 보호 없이 버전 관리에 올라간 것을 git 히스토리에서 완전 제거</li>
+      </ul>
+      <div class="stack">Python · Google Gemini · Telegram Bot API · Oracle Cloud</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="when">2026 —<br>운영 중</div>
+    <div class="what">
+      <strong>Sogon.zip</strong>
+      <div class="meta">관계 기반 프라이빗 아카이브 · 단독</div>
+      <ul>
+        <li>관계 해제 시 공유 방 삭제가 <b>계정까지 CASCADE로 지울 수 있던 데이터 손실 버그</b>를 발견해 삭제 순서 재구현 + 회귀 테스트 34개 추가</li>
+        <li>Pages SPA fallback이 없는 API 경로에 200을 반환하던 인증 우회 위험 차단</li>
+      </ul>
+      <div class="stack">React · Cloudflare Workers · D1 · PBKDF2-SHA256</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="when">2025</div>
+    <div class="what">
+      <strong>CryptoFunding</strong>
+      <div class="meta">Sui 크라우드펀딩 플랫폼 · 팀 · 풀스택(FE/BE/Contract)</div>
+      <ul>
+        <li>Move 컨트랙트부터 Express API, AWS EC2/RDS 배포까지 End-to-End 담당. Testnet 실지갑 후원 트랜잭션 성공</li>
+      </ul>
+      <div class="stack">Sui Move · React · Node.js · Prisma · PostgreSQL · AWS</div>
+    </div>
+  </div>
+
+  <h2>Experience &amp; Leadership</h2>
+  <div class="row">
+    <div class="when">2026</div>
+    <div class="what"><strong>연세 블록체인 동아리 “블록블록” 개발팀장</strong>
+      <div class="meta">2026 BlockThon(Sui Hackathon) TF팀 — 해커하우스 세션 담당</div></div>
+  </div>
+  <div class="row">
+    <div class="when">2024</div>
+    <div class="what"><strong>UMC 7기 연세대 지부 부회장 · 컴퓨터과학과 학생회 “하랑” 홍보부장</strong>
+      <div class="meta">학생회 브랜딩 총괄 · 연합 IT 동아리 지부 운영</div></div>
+  </div>
+  <div class="row">
+    <div class="when">2023</div>
+    <div class="what"><strong>총동아리연합회 홍보처 · 컴퓨터과학과 학생회 홍보처</strong>
+      <div class="meta">대동제·연고 교류제 웹사이트 제작 및 브랜딩</div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2>Skills</h2>
+      <dl class="kv">
+        <dt>Language</dt><dd>TypeScript, Python, Sui Move, Swift, SQL</dd>
+        <dt>Frontend</dt><dd>React, Next.js, Vite, Tailwind CSS</dd>
+        <dt>Backend</dt><dd>Cloudflare Workers · D1, Node.js, Express</dd>
+        <dt>Infra</dt><dd>Oracle Cloud, AWS EC2/RDS, Vercel, Wrangler</dd>
+        <dt>AI</dt><dd>Gemini API, HuggingFace (RoBERTa), OpenCV</dd>
+        <dt>Design</dt><dd>Figma, Photoshop, Illustrator, Premiere Pro</dd>
+      </dl>
+    </div>
+    <div>
+      <h2>Education &amp; Certificate</h2>
+      <dl class="kv">
+        <dt>2023.03 —</dt><dd>연세대학교 컴퓨터과학과 (2학년 수료)</dd>
+        <dt>2022 – 2023</dt><dd>성균관대학교 소프트웨어학과</dd>
+        <dt>2025</dt><dd>SQLD</dd>
+        <dt>2024</dt><dd>UMC 7기 수료 · 운영진 공로장</dd>
+        <dt>병역</dt><dd>사회복무요원 복무 중 · 2026.12 소집해제 예정</dd>
+      </dl>
+    </div>
+  </div>
+
+  <footer>
+    <span>전체 프로젝트 기록과 각 장애의 상세 내용은 포트폴리오에서 확인할 수 있습니다.</span>
+    <span>github.com/Real-Woong</span>
+  </footer>
+
+</div>
+</body>
+</html>

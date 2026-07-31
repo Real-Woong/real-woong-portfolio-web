@@ -5,7 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070707">
 <meta name="description" content="블록체인, AI, 풀스택, iOS와 브랜드를 넘나들며 문제를 끝까지 해결하는 김진웅의 포트폴리오입니다.">
+<meta name="author" content="Kim JinWoong">
 <title>Kim JinWoong — Builder Portfolio</title>
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kim JinWoong — Builder Portfolio">
+<meta property="og:title" content="Kim JinWoong — Builder Portfolio">
+<meta property="og:description" content="블록체인, AI, 풀스택, iOS와 브랜드를 넘나들며 문제를 끝까지 해결하는 김진웅의 포트폴리오입니다.">
+<meta property="og:image" content="/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kim JinWoong — Builder Portfolio">
+<meta name="twitter:description" content="블록체인, AI, 풀스택, iOS와 브랜드를 넘나들며 문제를 끝까지 해결하는 김진웅의 포트폴리오입니다.">
+<meta name="twitter:image" content="/og.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kim JinWoong",
+  "alternateName": "김진웅",
+  "url": "https://github.com/Real-Woong",
+  "email": "jinung344@gmail.com",
+  "jobTitle": "Software Engineer / Builder",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Yonsei University" },
+  "knowsAbout": ["Sui", "Move", "Blockchain", "AI Agents", "React", "TypeScript", "Cloudflare Workers", "iOS"],
+  "sameAs": ["https://github.com/Real-Woong"]
+}
+</script>
 <style>
   /* ---------------------------------------------------------
      TOKENS
@@ -243,6 +272,69 @@
   .a-item .a-year{font-family:var(--font-mono);font-size:11px;color:var(--muted);}
   .mode-grid .a-item .a-glyph{align-self:flex-start;font-family:var(--font-mono);font-size:10px;color:var(--muted);border:1px solid var(--line-strong);padding:3px 7px;}
 
+  /* ---------------- BADGES ----------------
+     Two orthogonal signals, deliberately styled apart:
+     - status  : where the project stands (hollow, quiet)
+     - fixed   : documented defects found and repaired (amber, loud)
+     The second one is the differentiator, so it is the one that glows.
+  ------------------------------------------ */
+  /* ---------------- LANGUAGE TOGGLE ---------------- */
+  .nav-actions{display:flex;align-items:center;gap:12px;}
+  .lang-toggle{display:inline-flex;align-items:center;gap:5px;background:transparent;cursor:pointer;
+               border:1px solid var(--line-strong);color:var(--muted);padding:8px 12px;
+               font-family:var(--font-mono);font-size:10.5px;letter-spacing:.09em;
+               transition:border-color .25s ease;}
+  .lang-toggle:hover{border-color:var(--amber);}
+  .lang-toggle .sep{opacity:.35;}
+  .lang-toggle span[data-lang-on]{transition:color .25s ease;}
+  html[lang="ko"] .lang-toggle span[data-lang-on="ko"],
+  html[lang="en"] .lang-toggle span[data-lang-on="en"]{color:var(--amber);}
+  @media (max-width:860px){.lang-toggle{padding:7px 9px;}}
+
+  .pm-langnote{margin:16px 0 0;padding:11px 14px;border:1px dashed var(--line-strong);
+               font-family:var(--font-mono);font-size:10.5px;line-height:1.6;color:var(--muted);}
+
+  .section-head .legend{font-size:13.5px;color:var(--muted);border-left:2px solid rgba(255,184,76,0.5);padding-left:14px;margin-top:18px;}
+  .section-head .legend b{color:var(--amber);font-weight:500;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;}
+  .badges{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .badge{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+         padding:3px 7px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap;line-height:1.4;}
+  .badge.live{color:#7fd6a4;border-color:rgba(127,214,164,0.42);}
+  .badge.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+                      background:#7fd6a4;margin-right:6px;vertical-align:1px;animation:pulse-dot 2.4s ease-in-out infinite;}
+  .badge.mvp{color:var(--amber);border-color:rgba(255,184,76,0.42);}
+  .badge.wip{color:#9db4d8;border-color:rgba(157,180,216,0.4);}
+  .badge.done{color:var(--muted);}
+  .badge.lab{color:var(--muted);border-style:dashed;}
+  .badge.fixed{color:var(--amber);border-color:rgba(255,184,76,0.55);background:rgba(255,184,76,0.07);font-weight:500;}
+  @keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:.25;}}
+  @media (prefers-reduced-motion:reduce){.badge.live::before{animation:none;}}
+
+  /* Badges live inside the category cell so the 5-column grid stays intact. */
+  .work-row .cat{display:flex;flex-direction:column;align-items:flex-start;gap:9px;}
+  @media (max-width:720px){.work-row .badges{display:none;}}
+  .mode-list .a-item .badges{display:none;}
+  .mode-grid .a-item .badges{margin-top:auto;}
+
+  /* Fixed-defect log inside the project modal */
+  .pm-fixlog{margin:0;padding:0;list-style:none;counter-reset:fix;}
+  .pm-fixlog li{position:relative;padding:14px 0 14px 46px;border-top:1px solid var(--line);
+                font-size:14px;line-height:1.62;color:var(--text);}
+  .pm-fixlog li::before{counter-increment:fix;content:"FIX " counter(fix,decimal-leading-zero);
+                        position:absolute;left:0;top:16px;font-family:var(--font-mono);font-size:9.5px;
+                        letter-spacing:.06em;color:var(--amber);}
+
+  /* ---------------- HERO STATS ---------------- */
+  .hero-stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px;
+              opacity:0;transform:translateY(16px);transition:opacity .8s ease .55s,transform .8s ease .55s;}
+  html.intro-done .hero-stats{opacity:1;transform:translateY(0);}
+  .hero-stats .st{display:flex;flex-direction:column;gap:5px;}
+  .hero-stats .st b{font-family:var(--font-display);font-style:italic;font-weight:400;
+                    font-size:clamp(1.5rem,3vw,2.1rem);line-height:1;color:var(--text);}
+  .hero-stats .st span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;
+                       text-transform:uppercase;color:var(--muted);}
+  .hero-stats .st b em{font-style:normal;color:var(--amber);}
+
   /* ---------------- PROCESS ---------------- */
   .process-list{border-top:1px solid var(--line);position:relative;z-index:1;}
   .p-row{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:28px;padding:36px 4px;border-bottom:1px solid var(--line);}
@@ -359,7 +451,12 @@
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a class="btn ghost" href="#contact" style="padding:10px 18px;">Say hello</a>
+  <div class="nav-actions">
+    <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language" aria-pressed="false">
+      <span data-lang-on="ko">KO</span><span class="sep">/</span><span data-lang-on="en">EN</span>
+    </button>
+    <a class="btn ghost" href="#contact" style="padding:10px 18px;">Say hello</a>
+  </div>
 </header>
 
 <div class="rail" id="rail">
@@ -382,6 +479,12 @@
       <div class="cta-row">
         <a class="btn primary magnetic" href="#work">Selected Work</a>
         <a class="btn ghost magnetic" href="#contact">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="st"><b class="tnum" data-uptime-days>—</b><span>Marvis 연속 운영 (일)</span></div>
+        <div class="st"><b class="tnum">4</b><span>배포·운영 중인 서비스</span></div>
+        <div class="st"><b class="tnum"><em>12</em></b><span>문서화한 장애 수정</span></div>
+        <div class="st"><b class="tnum">80</b><span>TAPIoca 자동 테스트</span></div>
       </div>
     </div>
     <div class="marquee-divider focus-marquee">
@@ -412,29 +515,30 @@
         <div class="eyebrow"><span class="pip"></span>Selected Work</div>
         <h2>다섯 개의 프로젝트로 보는 작업 방식.</h2>
         <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
+        <p class="legend"><b>Fixed ×N</b>은 운영 중 직접 겪고 원인까지 밝혀 고친 결함의 수입니다. 카드를 열면 각 건의 증상과 수정 내용을 볼 수 있습니다. 진행 상태는 숨기지 않고 그대로 표기합니다.</p>
       </div>
 
       <div class="work-index" id="work-index">
         <div class="work-row reveal" data-project="agora" data-d="1" data-glyph="SUI · AI" data-cap="Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임">
-          <span class="no tnum">01</span><span class="title">Agora</span><span class="cat">Blockchain · Startup</span><span class="year tnum">2026</span><span class="arrow">↗</span>
+          <span class="no tnum">01</span><span class="title">Agora</span><span class="cat">Blockchain · Startup<span class="badges"><span class="badge mvp">MVP 개발 중</span><span class="badge fixed">Fixed &times;1</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-project="cryptofunding" data-d="2" data-glyph="SUI · FULLSTACK" data-cap="Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지">
-          <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="cat">Blockchain · Full-Stack</span><span class="year tnum">2025</span><span class="arrow">↗</span>
+          <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="cat">Blockchain · Full-Stack<span class="badges"><span class="badge done">완료</span></span></span><span class="year tnum">2025</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-project="sogonzip" data-d="3" data-glyph="PRODUCT" data-cap="소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함">
-          <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="cat">Product · Personal</span><span class="year tnum">2026</span><span class="arrow">↗</span>
+          <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="cat">Product · Personal<span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;3</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-project="tapioca" data-d="4" data-glyph="AI AGENT" data-cap="Toss API + FRED 기반 PAPER Trading 에이전트, 80개 자동 테스트">
-          <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cat">AI Agent</span><span class="year tnum">2026</span><span class="arrow">↗</span>
+          <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cat">AI Agent<span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;1</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
         </div>
         <div class="work-row reveal" data-project="healeat" data-d="5" data-glyph="iOS · TEAM" data-cap="건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift">
-          <span class="no tnum">05</span><span class="title">HealEat</span><span class="cat">iOS · Team</span><span class="year tnum">2024</span><span class="arrow">↗</span>
+          <span class="no tnum">05</span><span class="title">HealEat</span><span class="cat">iOS · Team<span class="badges"><span class="badge done">완료</span></span></span><span class="year tnum">2024</span><span class="arrow">↗</span>
         </div>
       </div>
 
       <div class="preview-panel" id="preview-panel">
         <div class="swatch"><span class="glyph" id="preview-glyph">SUI · AI</span></div>
-        <p class="cap" id="preview-cap">Sui 기반 AI 트레이딩 에이전트 마켓플레이스</p>
+        <p class="cap" id="preview-cap">Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임</p>
       </div>
 
       <div class="work-detail reveal" data-d="2">
@@ -483,102 +587,119 @@
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
           <span class="a-desc">거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.</span>
           <span class="a-year tnum">2026</span>
+          <span class="badges"><span class="badge mvp">MVP 개발 중</span><span class="badge fixed">Fixed &times;1</span></span>
         </article>
         <article class="a-item reveal" data-project="cryptofunding" data-cat="blockchain">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">02</span><span class="a-glyph">SUI</span></div>
           <span class="a-cat">Blockchain · Full-Stack</span><span class="a-title">CryptoFunding</span>
           <span class="a-desc">Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="bubblebreak" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">03</span><span class="a-glyph">WEB</span></div>
           <span class="a-cat">Product · Social</span><span class="a-title">BubbleBreak</span>
           <span class="a-desc">방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;4</span></span>
         </article>
         <article class="a-item reveal" data-project="healeat" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">04</span><span class="a-glyph">iOS</span></div>
           <span class="a-cat">iOS · Team</span><span class="a-title">HealEat</span>
           <span class="a-desc">건강 정보 기반 외식 추천 앱. MVVM과 RxSwift를 처음으로 실전에 적용.</span>
           <span class="a-year tnum">2024</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="sogonzip" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">05</span><span class="a-glyph">PRODUCT</span></div>
           <span class="a-cat">Product · Personal</span><span class="a-title">Sogon.zip</span>
           <span class="a-desc">소곤파일 예약공개와 계정 코드 기반 1:1 연결. 웹 베타 + Expo 모바일 MVP.</span>
           <span class="a-year tnum">2026</span>
+          <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;3</span></span>
         </article>
         <article class="a-item reveal" data-project="unimade" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">06</span><span class="a-glyph">WEB</span></div>
           <span class="a-cat">Web · Team</span><span class="a-title">UNI-MADE</span>
           <span class="a-desc">대학생 셀러 커머스 플랫폼. 첫 팀 단위 React 프로젝트.</span>
           <span class="a-year tnum">2024</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="aispoc" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">07</span><span class="a-glyph">NLP</span></div>
           <span class="a-cat">AI · Public Sector</span><span class="a-title">AI-Spoc</span>
           <span class="a-desc">RoBERTa 기반 전자민원 자동 라우팅 시스템 설계.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="blocktroll" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">08</span><span class="a-glyph">NLP</span></div>
           <span class="a-cat">AI · Chrome Ext.</span><span class="a-title">BlockTroll</span>
           <span class="a-desc">악성 댓글을 로컬에서 분류·필터링하는 브라우저 확장.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge wip">개발 중</span></span>
         </article>
         <article class="a-item reveal" data-project="cvprojects" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">09</span><span class="a-glyph">CV</span></div>
           <span class="a-cat">AI · Computer Vision</span><span class="a-title">CV Projects</span>
           <span class="a-desc">손 제스처와 표정 인식 등 OpenCV 기반 실험 프로젝트 모음.</span>
           <span class="a-year tnum">2024</span>
+          <span class="badges"><span class="badge lab">학습용</span></span>
         </article>
         <article class="a-item reveal" data-project="marvis" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">10</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Telegram</span><span class="a-title">Marvis</span>
           <span class="a-desc">텔레그램 기반 개인 AI 비서. 기억과 사이드 프로젝트를 자연어로 관리하고, 요일별 능동 브리핑과 Siri 음성 캡처를 제공.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;3</span></span>
         </article>
         <article class="a-item reveal" data-project="tapioca" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">11</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Investment</span><span class="a-title">TAPIoca</span>
           <span class="a-desc">Toss API 기반 PAPER Trading 에이전트. 80개 자동 테스트 운영.</span>
           <span class="a-year tnum">2026</span>
+          <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;1</span></span>
         </article>
         <article class="a-item reveal" data-project="textro" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">12</span><span class="a-glyph">OCR</span></div>
           <span class="a-cat">AI · Tool</span><span class="a-title">Textro</span>
           <span class="a-desc">보안 환경을 위한 오프라인 스캔 PDF OCR 도구.</span>
           <span class="a-year tnum">2025</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="daedongje2023" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">13</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Goods</span><span class="a-title">2023 대동제(새벽)</span>
           <span class="a-desc">대형 행사 브랜딩. 인생네컷 프레임과 반다나를 단독 디자인.</span>
           <span class="a-year tnum">2023</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="yonsei-korea-exchange" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">14</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Web · Branding</span><span class="a-title">연세 X 고려대 대동단결</span>
           <span class="a-desc">양교 동아리 교류제 웹사이트 제작 및 브랜딩.</span>
           <span class="a-year tnum">2023</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="harang" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">15</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Leadership</span><span class="a-title">하랑 (24대 컴과 학생회)</span>
           <span class="a-desc">학생회 로고, 하키티와 카드뉴스 제작 및 브랜딩 총괄.</span>
           <span class="a-year tnum">2024</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="birthrate-bm" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">16</span><span class="a-glyph">BM</span></div>
           <span class="a-cat">Planning · Strategy</span><span class="a-title">출산율 저하 해결 BM</span>
           <span class="a-desc">저출산 문제 비즈니스 모델 설계. 교양 기말 만점.</span>
           <span class="a-year tnum">2024</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="gongppung" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">17</span><span class="a-glyph">3D</span></div>
           <span class="a-cat">Planning · UI</span><span class="a-title">공뽕</span>
           <span class="a-desc">폐컨테이너 공간 대여 플랫폼. 설계부터 법률 자문까지.</span>
           <span class="a-year tnum">2023</span>
+          <span class="badges"><span class="badge done">완료</span></span>
         </article>
       </div>
     </div>
@@ -635,8 +756,8 @@
       <div class="timeline">
         <div class="tl-item reveal reveal-l">
           <div class="tl-year tnum">2026</div>
-          <h3>블록블록 개발팀장·SUI-HackerThon TF팀</h3>
-          <ul><li>연세 블록체인 동아리 블록블록 개발팀장</li><li>2026 SUI-HackerThon TF팀 — 해커하우스 세션 담당</li><li>Agora 개발</li></ul>
+          <h3>블록블록 개발팀장 · BlockThon TF팀</h3>
+          <ul><li>연세 블록체인 동아리 블록블록 개발팀장</li><li>2026 BlockThon(Sui Hackathon) TF팀 — 해커하우스 세션 담당</li><li>THE ZONE AGORA 개발</li></ul>
         </div>
         <div class="tl-item reveal reveal-r">
           <div class="tl-year tnum">2025</div>
@@ -683,6 +804,7 @@
       <div class="cta-row reveal" data-d="3">
         <a class="btn primary magnetic" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
         <a class="btn ghost magnetic" href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn ghost magnetic" href="/resume.html">Resume ↗</a>
       </div>
       <p class="note reveal" data-d="4">문제를 발견하고, 구조를 설계하고, 실제로 동작하는 제품까지 만듭니다. 블록체인·AI·풀스택·iOS·브랜드를 잇는 다음 작업을 기다립니다.</p>
     </div>
@@ -694,9 +816,166 @@
   <div class="socials">
     <a href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub</a>
     <a href="mailto:jinung344@gmail.com">Email</a>
+    <a href="/resume.html">Resume</a>
     <a href="#hero">Back to top ↑</a>
   </div>
 </footer>
+
+<script>
+/* =====================================================================
+   LANGUAGE TOGGLE (ko ⇄ en)
+
+   Rather than duplicating the markup, every translatable string is keyed
+   by its exact Korean text. Switching walks the text nodes once, swaps
+   what it recognises, and keeps the original on the node so switching
+   back is lossless. Unknown strings simply stay Korean — a missing entry
+   degrades, it never blanks the page.
+   ===================================================================== */
+(function(){
+  var EN = {
+    /* hero */
+    '스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지.':'From smart contracts to AI agents to brand goods.',
+    '문제를 발견하고 구조를 설계해 끝까지 만드는':'I find the problem, design the structure, and build it all the way through',
+    '엔지니어입니다.':'—that is the engineer I am.',
+    'Marvis 연속 운영 (일)':'Marvis uptime (days)',
+    '배포·운영 중인 서비스':'Services deployed & running',
+    '문서화한 장애 수정':'Documented defect fixes',
+    'TAPIoca 자동 테스트':'TAPIoca automated tests',
+
+    /* work */
+    '다섯 개의 프로젝트로 보는 작업 방식.':'Five projects that show how I work.',
+    '블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.':'From a blockchain startup prototype to a full-stack service in production, a personal product and an iOS team project—five projects, five different kinds of problem.',
+    '은 운영 중 직접 겪고 원인까지 밝혀 고친 결함의 수입니다. 카드를 열면 각 건의 증상과 수정 내용을 볼 수 있습니다. 진행 상태는 숨기지 않고 그대로 표기합니다.':' counts the defects I hit in production, traced to root cause, and fixed. Open a card to read the symptom and the fix for each one. Project status is stated as it is, never hidden.',
+    'Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임':'A delegated investment vault on Sui—AgoraAgent receives trading rights only, never custody',
+    '사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, 외부 Signal Provider 결제는 HTTP 402 기반 x402로 처리해 그 비용을 사용자가 아닌 AgoraAgent가 대신 부담합니다. 블록블록 2026 Summer 팀 프로젝트로, 2026년 7월 기준 MVP 개발 단계입니다.':'A Sui-based investment vault where the user keeps final ownership and withdrawal rights, delegating only limited automated-trading authority to AgoraAgent. Owner, AgoraAgent and Signal Provider permissions are separated on-chain, so a stolen agent server key still cannot withdraw funds. Paid Signal Provider APIs are settled over x402 (HTTP 402), with AgoraAgent—not the user—covering that cost. A BlockBlock 2026 Summer team project, at MVP stage as of July 2026.',
+
+    /* status badges */
+    'MVP 개발 중':'MVP in progress', '완료':'Shipped', '운영 중':'Live', '개발 중':'In progress', '학습용':'Learning',
+
+    /* archive */
+    '선정작 너머, 17개의 기록.':'Beyond the selected work—17 records.',
+    'Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 개인 프로젝트와 팀 프로젝트, 브랜딩·기획 활동까지 한눈에 볼 수 있습니다.':'Selected Work is the curated five; this is everything. Personal and team projects, plus branding and planning work, all in one view.',
+    '거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.':'An on-chain Sui vault that delegates trading rights only, with an x402 payment layer.',
+    'Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.':'Sui crowdfunding—contract, backend and deployment all designed end to end.',
+    '방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.':'Offline icebreaking: join by room code, pop each other’s interest bubbles. Running in real use on Cloudflare Workers + D1.',
+    '건강 정보 기반 외식 추천 앱. MVVM과 RxSwift를 처음으로 실전에 적용.':'A health-aware restaurant recommendation app. My first production use of MVVM and RxSwift.',
+    '소곤파일 예약공개와 계정 코드 기반 1:1 연결. 웹 베타 + Expo 모바일 MVP.':'Scheduled-release private files with account-code 1:1 pairing. Web beta plus an Expo mobile MVP.',
+    '대학생 셀러 커머스 플랫폼. 첫 팀 단위 React 프로젝트.':'A commerce platform for student sellers. My first team React project.',
+    'RoBERTa 기반 전자민원 자동 라우팅 시스템 설계.':'A RoBERTa-based automatic routing system for public civil complaints.',
+    '악성 댓글을 로컬에서 분류·필터링하는 브라우저 확장.':'A browser extension that classifies and filters toxic comments locally.',
+    '손 제스처와 표정 인식 등 OpenCV 기반 실험 프로젝트 모음.':'A set of OpenCV experiments—hand gesture and facial expression recognition.',
+    '텔레그램 기반 개인 AI 비서. 기억과 사이드 프로젝트를 자연어로 관리하고, 요일별 능동 브리핑과 Siri 음성 캡처를 제공.':'A Telegram-based personal AI assistant. Manages memories and side projects in natural language, with scheduled briefings and Siri voice capture.',
+    'Toss API 기반 PAPER Trading 에이전트. 80개 자동 테스트 운영.':'A paper-trading agent on the Toss API, covered by 80 automated tests.',
+    '보안 환경을 위한 오프라인 스캔 PDF OCR 도구.':'An offline OCR tool for scanned PDFs in security-restricted environments.',
+    '2023 대동제(새벽)':'2023 Daedongje Festival (Saebyeok)',
+    '대형 행사 브랜딩. 인생네컷 프레임과 반다나를 단독 디자인.':'Large-event branding. Sole designer of the photo-booth frames and bandanas.',
+    '연세 X 고려대 대동단결':'Yonsei × Korea Univ. Joint Festival',
+    '양교 동아리 교류제 웹사이트 제작 및 브랜딩.':'Website and branding for the inter-university club exchange festival.',
+    '하랑 (24대 컴과 학생회)':'Harang (24th CS Student Council)',
+    '학생회 로고, 하키티와 카드뉴스 제작 및 브랜딩 총괄.':'Led branding: student council logo, mascot and card-news production.',
+    '출산율 저하 해결 BM':'Declining Birth Rate — Business Model',
+    '저출산 문제 비즈니스 모델 설계. 교양 기말 만점.':'A business model addressing low birth rates. Full marks on the final.',
+    '공뽕':'Gongppung',
+    '폐컨테이너 공간 대여 플랫폼. 설계부터 법률 자문까지.':'A rental platform for repurposed shipping containers—design through legal consultation.',
+
+    /* process */
+    '불편함을 발견하고, 구조를 먼저 그립니다.':'I start from a real annoyance, and draw the structure first.',
+    'Textro의 스캔 PDF 문제, AI-Spoc의 민원 재이첩 문제처럼 실제 불편함에서 시작해, 검증 가능한 형태로 끝까지 만드는 네 단계입니다.':'Four steps, from a genuine problem—Textro’s scanned PDFs, AI-Spoc’s misrouted complaints—to something finished and verifiable.',
+    '발견':'Discover',
+    '스캔 PDF 수기 타이핑(Textro), 민원 재이첩(AI-Spoc), 악성 댓글(BlockTroll)처럼 실제로 존재하는 불편함에서 프로젝트를 시작합니다.':'Every project starts from friction that actually exists: retyping scanned PDFs (Textro), misrouted civil complaints (AI-Spoc), toxic comments (BlockTroll).',
+    '설계':'Design',
+    '기능보다 구조를 먼저 그립니다. Sui Move 리소스 모델, MVVM 아키텍처, 온체인·오프체인 동기화 구조를 코드 전에 설계합니다.':'Structure before features. Sui Move resource models, MVVM architecture and on-chain/off-chain sync are designed before any code.',
+    '제작':'Build',
+    '프론트엔드·백엔드·스마트 컨트랙트·iOS까지, 필요하면 혼자서도 처음부터 끝까지 만듭니다. 디자인은 Figma로 직접 설계합니다.':'Frontend, backend, smart contracts, iOS—end to end alone when needed. I design the interface myself in Figma.',
+    '검증·배포':'Verify & Ship',
+    'AWS·Vercel·Cloudflare·Oracle Cloud에 실제로 배포합니다. TAPIoca는 자동 테스트 80개와 PAPER Trading 안전장치로 먼저 검증한 뒤에만 다음 단계로 넘어갑니다.':'Everything actually ships—to AWS, Vercel, Cloudflare and Oracle Cloud. TAPIoca only moves forward after 80 automated tests and its paper-trading safeguards pass.',
+
+    /* community */
+    '만드는 사람이자, 이끄는 사람.':'I build, and I lead.',
+    '2023년부터 학생회·동아리·연합 프로그램에서 홍보와 브랜딩, 그리고 최근에는 개발팀을 이끌고 있습니다.':'Since 2023 I have led PR and branding across student councils, clubs and inter-university programs—and more recently, a development team.',
+    '블록블록 개발팀장 · BlockThon TF팀':'BlockBlock Dev Lead · BlockThon TF',
+    '연세 블록체인 동아리 블록블록 개발팀장':'Development Lead, BlockBlock (Yonsei blockchain club)',
+    '2026 BlockThon(Sui Hackathon) TF팀 — 해커하우스 세션 담당':'2026 BlockThon (Sui Hackathon) task force — ran the hacker-house sessions',
+    'THE ZONE AGORA 개발':'Built THE ZONE AGORA',
+    '블록블록 활동·CryptoFunding·Textro':'BlockBlock · CryptoFunding · Textro',
+    '연세 블록체인 동아리 “블록블록” 활동':'Member, BlockBlock (Yonsei blockchain club)',
+    'CryptoFunding, Textro 개발':'Built CryptoFunding and Textro',
+    '하랑 홍보부장·UMC 부회장':'Harang PR Lead · UMC Vice President',
+    '24대 컴퓨터과학과 학생회 “하랑” 홍보부장·브랜딩 총괄':'PR Lead and branding director, 24th CS Student Council (Harang)',
+    '2024 UMC 연세 지부 부회장':'Vice President, UMC Yonsei chapter (2024)',
+    'Uni-Made, HealEat 팀 프로젝트':'Uni-Made and HealEat team projects',
+    '총동아리연합회 홍보처·학생회 홍보처':'Union of Clubs PR · Student Council PR',
+    '총동아리연합회 홍보처':'PR team, Union of Student Clubs',
+    '컴퓨터과학과 학생회(온새미로) 홍보처':'PR team, CS Student Council (Onsaemiro)',
+    '대동제, 연고 동아리 교류전 웹사이트 제작':'Built the websites for Daedongje and the Yonsei–Korea club exchange',
+
+    /* skills + contact */
+    '여섯 영역을 넘나드는 도구들.':'Tools across six disciplines.',
+    '새로운 프로젝트, 팀, 채용 제안 모두 환영합니다. 이메일이 가장 빠릅니다.':'New projects, teams and hiring conversations are all welcome. Email reaches me fastest.',
+    '문제를 발견하고, 구조를 설계하고, 실제로 동작하는 제품까지 만듭니다. 블록체인·AI·풀스택·iOS·브랜드를 잇는 다음 작업을 기다립니다.':'I find problems, design the structure, and build products that actually run. Looking for the next thing that connects blockchain, AI, full-stack, iOS and brand.',
+
+    /* modal section headings */
+    '개요':'Overview', '핵심 설계':'Core design', '핵심 기능':'Key features',
+    '해결한 기술적 문제':'Defects found and fixed', '해결한 문제':'Defects found and fixed',
+    '현재 상태':'Current status', '중요하게 생각한 점':'What mattered most',
+    '담당 범위':'Scope of ownership', '담당 영역':'Scope of ownership', '담당 부분':'Scope of ownership',
+    '담당 역할':'Role', '기술적으로 고민한 부분':'Technical challenges', '성과':'Outcome',
+    '배운 점':'What I learned', '의미':'Why it mattered', '다음 단계':'Next steps',
+    '포함된 실험':'Experiments included', '성격':'Nature of the work',
+    '프라이버시 · 안정성':'Privacy & reliability', '수행 내용':'What I did', '기술 스택':'Tech stack'
+  };
+
+  var docEl = document.documentElement;
+  var STORE = 'pf-lang';
+
+  function translateTree(root, lang){
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var nodes = [], n;
+    while((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function(node){
+      if(node.parentNode && node.parentNode.closest('#lang-toggle')) return;
+      var raw = node.nodeValue;
+      var trimmed = raw.trim();
+      if(!trimmed) return;
+      if(lang === 'en'){
+        var hit = EN[trimmed];
+        if(!hit) return;
+        if(node.__ko === undefined) node.__ko = raw;
+        node.nodeValue = raw.replace(trimmed, hit);
+      } else if(node.__ko !== undefined){
+        node.nodeValue = node.__ko;
+      }
+    });
+  }
+
+  function apply(lang){
+    translateTree(document.body, lang);
+    docEl.setAttribute('lang', lang);
+    var btn = document.getElementById('lang-toggle');
+    if(btn) btn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+  }
+
+  // Exposed so dynamically rendered content (the project modal) can be
+  // translated right after it is inserted.
+  window.__pfLang = function(){ return docEl.getAttribute('lang') || 'ko'; };
+  window.__pfTranslate = function(root){
+    if(window.__pfLang() === 'en') translateTree(root, 'en');
+  };
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORE); } catch(e){}
+  if(saved === 'en') apply('en');
+
+  var btn = document.getElementById('lang-toggle');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var next = window.__pfLang() === 'en' ? 'ko' : 'en';
+      apply(next);
+      try { localStorage.setItem(STORE, next); } catch(e){}
+    });
+  }
+})();
+</script>
 
 <div class="pm-overlay" id="pm-overlay" hidden>
   <div class="pm-panel" id="pm-panel" role="dialog" aria-modal="true" aria-labelledby="pm-title">
@@ -993,9 +1272,14 @@
         ]
       },
       {
+        "h": "해결한 문제",
+        "body": [
+          "초기 설계는 사용자가 여러 Trading Agent 중 하나를 골라 Follow하는 마켓플레이스 구조였는데, 검토 과정에서 “사용자가 검증되지 않은 전략에 직접 자산을 노출한다”는 근본적인 결함을 확인했습니다. 사용자의 Agent 선택·Follow·Follow fee를 모두 제거하고 AgoraAgent가 신호를 검증한 뒤에만 실행하는 위임형 구조로 전면 재설계했으며, 이 과정에서 agent_registry.move와 follow.move 모듈을 삭제했습니다."
+        ]
+      },
+      {
         "h": "중요하게 생각한 점",
         "body": [
-          "초기에는 사용자가 여러 Trading Agent 중 하나를 골라 Follow하는 마켓플레이스 구조였지만, “사용자가 검증되지 않은 전략에 직접 자산을 노출한다”는 문제를 확인하고 위임형 구조로 전면 재설계했습니다.",
           "“아직 실제 DEX 체결이 없다”는 한계를 숨기지 않고, 디자인 가이드에 “요청(Requested)과 완료된 거래를 혼동시키지 말 것”이라는 원칙을 명시했습니다."
         ]
       }
@@ -1566,6 +1850,49 @@
 
   function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
 
+  /* ---- Hero uptime counter -------------------------------------------
+     Set this to the date Marvis actually started running continuously on
+     Oracle Cloud (YYYY-MM-DD). While it is null the stat removes itself
+     rather than showing a number that cannot be backed up.
+  --------------------------------------------------------------------- */
+  var MARVIS_SINCE = null;
+  (function(){
+    var el = document.querySelector('[data-uptime-days]');
+    if(!el) return;
+    var stat = el.closest('.st');
+    if(!MARVIS_SINCE){ if(stat) stat.remove(); return; }
+    var start = new Date(MARVIS_SINCE + 'T00:00:00');
+    if(isNaN(start)){ if(stat) stat.remove(); return; }
+    var days = Math.floor((Date.now() - start.getTime()) / 86400000);
+    if(days < 1){ if(stat) stat.remove(); return; }
+    el.textContent = String(days);
+  })();
+
+  // Status + documented-fix count, kept next to the markup badges so both
+  // surfaces stay in sync.
+  var META = {
+    'agora':                 ['mvp',  'MVP 개발 중', 1],
+    'cryptofunding':         ['done', '완료',        0],
+    'bubblebreak':           ['live', '운영 중',     4],
+    'healeat':               ['done', '완료',        0],
+    'sogonzip':              ['live', '운영 중',     3],
+    'unimade':               ['done', '완료',        0],
+    'aispoc':                ['done', '완료',        0],
+    'blocktroll':            ['wip',  '개발 중',     0],
+    'cvprojects':            ['lab',  '학습용',      0],
+    'marvis':                ['live', '운영 중',     3],
+    'tapioca':               ['live', '운영 중',     1],
+    'textro':                ['done', '완료',        0],
+    'daedongje2023':         ['done', '완료',        0],
+    'yonsei-korea-exchange': ['done', '완료',        0],
+    'harang':                ['done', '완료',        0],
+    'birthrate-bm':          ['done', '완료',        0],
+    'gongppung':             ['done', '완료',        0]
+  };
+
+  // Section headings that describe defects actually found and repaired.
+  var FIX_HEADINGS = ['해결한 기술적 문제', '해결한 문제'];
+
   function renderBody(lines){
     var html = '', list = [];
     function flush(){ if(list.length){ html += '<ul>' + list.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>'; list = []; } }
@@ -1577,27 +1904,54 @@
     return html;
   }
 
-  function render(p){
+  function renderBadges(slug){
+    var m = META[slug];
+    if(!m) return '';
+    var html = '<div class="badges" style="margin:14px 0 2px;"><span class="badge '+m[0]+'">'+esc(m[1])+'</span>';
+    if(m[2]){ html += '<span class="badge fixed">Fixed &times;'+m[2]+'</span>'; }
+    return html + '</div>';
+  }
+
+  function render(p, slug){
     var links = '';
     if(p.github){ links += '<a class="btn primary" href="'+p.github+'" target="_blank" rel="noopener">GitHub ↗</a>'; }
     if(p.demo){ links += '<a class="btn ghost" href="'+p.demo+'" target="_blank" rel="noopener">Live Demo ↗</a>'; }
     var sections = p.sections.map(function(s){
+      // Defect sections get a numbered FIX log instead of a plain bullet list,
+      // because "what broke and how it was fixed" is the point of this section.
+      if(FIX_HEADINGS.indexOf(s.h) !== -1){
+        var items = s.body.map(function(line){
+          return '<li>'+(line.indexOf('- ') === 0 ? line.slice(2) : line)+'</li>';
+        }).join('');
+        return '<div class="pm-section"><h3>'+esc(s.h)+'</h3><ol class="pm-fixlog">'+items+'</ol></div>';
+      }
       return '<div class="pm-section"><h3>'+esc(s.h)+'</h3>'+renderBody(s.body)+'</div>';
     }).join('');
     var stack = (p.stack && p.stack.length) ? '<div class="pm-section"><h3>기술 스택</h3><div class="pm-stack">'+p.stack.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div></div>' : '';
     contentEl.innerHTML =
       '<div class="pm-meta"><span class="pm-no tnum">'+esc(p.no)+'</span><span class="pm-dot"></span><span>'+esc(p.cat)+'</span><span class="pm-dot"></span><span class="tnum">'+esc(p.year)+'</span></div>'+
       '<h2 class="pm-title" id="pm-title">'+esc(p.title)+'</h2>'+
+      renderBadges(slug)+
       '<p class="pm-tagline">'+esc(p.tagline)+'</p>'+
       (links ? '<div class="pm-links">'+links+'</div>' : '')+
       '<div class="pm-body">'+sections+stack+'</div>';
+
+    // Headings and badges have English entries; the long-form write-ups do
+    // not, so say that plainly instead of showing a half-translated panel.
+    if(window.__pfLang && window.__pfLang() === 'en'){
+      var note = document.createElement('p');
+      note.className = 'pm-langnote';
+      note.textContent = 'Detailed write-ups for this project are currently available in Korean only.';
+      contentEl.insertBefore(note, contentEl.querySelector('.pm-body'));
+      window.__pfTranslate(contentEl);
+    }
   }
 
   function openProject(slug, trigger){
     var p = PROJECTS[slug];
     if(!p) return;
     lastFocused = trigger || document.activeElement;
-    render(p);
+    render(p, slug);
     overlay.hidden = false;
     document.documentElement.classList.add('pm-lock');
     requestAnimationFrame(function(){
