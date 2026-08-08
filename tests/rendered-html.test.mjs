@@ -78,6 +78,28 @@ test("share URLs are absolute and the worker fills the origin in", () => {
   assert.match(html, /<link rel="icon"/, "missing favicon");
 });
 
+test("the running-status green lives in tokens, not in component rules", () => {
+  // The dark-mode mint sits at 1.52:1 on the light ground, so a component that
+  // hardcodes it is unreadable for half the audience. Every use goes through
+  // --ok, which each palette redefines.
+  const palettes = [
+    /:root\{[^}]*--ok:/,
+    /@media \(prefers-color-scheme: light\)\{\s*:root\{[^}]*--ok:/,
+    /:root\[data-theme="dark"\]\{[^}]*--ok:/,
+    /:root\[data-theme="light"\]\{[^}]*--ok:/,
+  ];
+  for (const re of palettes) {
+    assert.match(html, re, `--ok missing from a palette: ${re}`);
+  }
+
+  // Raw greens may appear only inside those four declarations.
+  for (const hex of ["#7fd6a4", "#17784a"]) {
+    const uses = [...html.matchAll(new RegExp(hex, "g"))].length;
+    const inTokens = [...html.matchAll(new RegExp(`--ok(?:-line)?:\\s*[^;]*${hex}`, "g"))].length;
+    assert.equal(uses, inTokens, `${hex} is hardcoded outside the palette (${uses} uses, ${inTokens} in tokens)`);
+  }
+});
+
 test("the intro never blocks reading the page", () => {
   // The boot sequence is decoration. It must not lock scrolling, and it must
   // stay short enough that a recruiter is not staring at an animation.

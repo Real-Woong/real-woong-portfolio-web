@@ -49,12 +49,16 @@
      Ground: cinematic near-black / warm paper (light)
      Single accent: schematic amber — used sparingly (numerals,
      link states, corner ticks, one gradient moment).
+     --ok is the one semantic colour: "this is running". It must stay
+     legible on both grounds, so light mode darkens it rather than
+     reusing the dark-mode mint (1.52:1 on paper — unreadable).
   --------------------------------------------------------- */
   :root{
     --bg:#070707; --bg-raised:#111110; --bg-raised-2:#181109;
     --text:#f3f0e9; --muted:#8f8c84;
     --line:rgba(243,240,233,0.10); --line-strong:rgba(243,240,233,0.22);
     --amber:#ffb84c; --amber-dim:#c98a2c;
+    --ok:#7fd6a4; --ok-line:rgba(127,214,164,0.42);
     --metal-1:#efece3; --metal-2:#77746c;
     --font-display:Georgia,'Iowan Old Style','Palatino Linotype',Palatino,serif;
     --font-body:-apple-system,'SF Pro Text','Pretendard Variable',Pretendard,'Helvetica Neue',sans-serif;
@@ -66,18 +70,21 @@
       --text:#151410; --muted:#68655b;
       --line:rgba(21,20,16,0.12); --line-strong:rgba(21,20,16,0.22);
       --amber:#b3660a; --amber-dim:#8f5308;
+      --ok:#17784a; --ok-line:rgba(23,120,74,0.45);
       --metal-1:#1c1b17; --metal-2:#56534a;
     }
   }
   :root[data-theme="dark"]{
     --bg:#070707;--bg-raised:#111110;--bg-raised-2:#181109;--text:#f3f0e9;--muted:#8f8c84;
     --line:rgba(243,240,233,0.10);--line-strong:rgba(243,240,233,0.22);
-    --amber:#ffb84c;--amber-dim:#c98a2c;--metal-1:#efece3;--metal-2:#77746c;
+    --amber:#ffb84c;--amber-dim:#c98a2c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);
+    --metal-1:#efece3;--metal-2:#77746c;
   }
   :root[data-theme="light"]{
     --bg:#f2efe7;--bg-raised:#e8e4d7;--bg-raised-2:#e1dccb;--text:#151410;--muted:#68655b;
     --line:rgba(21,20,16,0.12);--line-strong:rgba(21,20,16,0.22);
-    --amber:#b3660a;--amber-dim:#8f5308;--metal-1:#1c1b17;--metal-2:#56534a;
+    --amber:#b3660a;--amber-dim:#8f5308;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);
+    --metal-1:#1c1b17;--metal-2:#56534a;
   }
 
   *,*::before,*::after{box-sizing:border-box;}
@@ -308,9 +315,9 @@
   .badges{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .badge{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
          padding:3px 7px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap;line-height:1.4;}
-  .badge.live{color:#7fd6a4;border-color:rgba(127,214,164,0.42);}
+  .badge.live{color:var(--ok);border-color:var(--ok-line);}
   .badge.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
-                      background:#7fd6a4;margin-right:6px;vertical-align:1px;animation:pulse-dot 2.4s ease-in-out infinite;}
+                      background:var(--ok);margin-right:6px;vertical-align:1px;animation:pulse-dot 2.4s ease-in-out infinite;}
   .badge.mvp{color:var(--amber);border-color:rgba(255,184,76,0.42);}
   .badge.wip{color:#9db4d8;border-color:rgba(157,180,216,0.4);}
   .badge.done{color:var(--muted);}
@@ -382,14 +389,10 @@
   html.intro-done .hero-avail{opacity:1;transform:translateY(0);}
   .hero-avail span{text-wrap:balance;}
   .hero-avail b{display:inline-flex;align-items:center;gap:7px;flex:none;font-weight:500;
-                letter-spacing:.09em;text-transform:uppercase;color:#7fd6a4;
-                border:1px solid rgba(127,214,164,0.42);padding:4px 9px;}
-  .hero-avail b::before{content:"";width:5px;height:5px;border-radius:50%;background:#7fd6a4;
+                letter-spacing:.09em;text-transform:uppercase;color:var(--ok);
+                border:1px solid var(--ok-line);padding:4px 9px;}
+  .hero-avail b::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ok);
                         animation:pulse-dot 2.4s ease-in-out infinite;}
-  @media (prefers-color-scheme:light){.hero-avail b{color:#1d7a4a;border-color:rgba(29,122,74,0.45);}
-                                      .hero-avail b::before{background:#1d7a4a;}}
-  :root[data-theme="light"] .hero-avail b{color:#1d7a4a;border-color:rgba(29,122,74,0.45);}
-  :root[data-theme="light"] .hero-avail b::before{background:#1d7a4a;}
   @media (prefers-reduced-motion:reduce){.hero-avail b::before{animation:none;}}
   @media (max-width:620px){.hero-avail{font-size:11px;gap:9px;}}
   .hero-stats .st{display:flex;flex-direction:column;gap:5px;}
