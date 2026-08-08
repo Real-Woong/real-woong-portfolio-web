@@ -49,9 +49,10 @@
      Ground: cinematic near-black / warm paper (light)
      Single accent: schematic amber — used sparingly (numerals,
      link states, corner ticks, one gradient moment).
-     --ok is the one semantic colour: "this is running". It must stay
-     legible on both grounds, so light mode darkens it rather than
-     reusing the dark-mode mint (1.52:1 on paper — unreadable).
+     --ok / --wip are the semantic status colours ("running", "in
+     progress"). Both must stay legible on either ground, so light mode
+     darkens them rather than reusing the dark-mode tints, which measure
+     1.52:1 and 1.84:1 on paper — effectively invisible.
   --------------------------------------------------------- */
   :root{
     --bg:#070707; --bg-raised:#111110; --bg-raised-2:#181109;
@@ -59,6 +60,7 @@
     --line:rgba(243,240,233,0.10); --line-strong:rgba(243,240,233,0.22);
     --amber:#ffb84c; --amber-dim:#c98a2c;
     --ok:#7fd6a4; --ok-line:rgba(127,214,164,0.42);
+    --wip:#9db4d8; --wip-line:rgba(157,180,216,0.40);
     --metal-1:#efece3; --metal-2:#77746c;
     --font-display:Georgia,'Iowan Old Style','Palatino Linotype',Palatino,serif;
     --font-body:-apple-system,'SF Pro Text','Pretendard Variable',Pretendard,'Helvetica Neue',sans-serif;
@@ -71,19 +73,20 @@
       --line:rgba(21,20,16,0.12); --line-strong:rgba(21,20,16,0.22);
       --amber:#b3660a; --amber-dim:#8f5308;
       --ok:#17784a; --ok-line:rgba(23,120,74,0.45);
+      --wip:#45689f; --wip-line:rgba(69,104,159,0.45);
       --metal-1:#1c1b17; --metal-2:#56534a;
     }
   }
   :root[data-theme="dark"]{
     --bg:#070707;--bg-raised:#111110;--bg-raised-2:#181109;--text:#f3f0e9;--muted:#8f8c84;
     --line:rgba(243,240,233,0.10);--line-strong:rgba(243,240,233,0.22);
-    --amber:#ffb84c;--amber-dim:#c98a2c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);
+    --amber:#ffb84c;--amber-dim:#c98a2c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);--wip:#9db4d8;--wip-line:rgba(157,180,216,0.40);
     --metal-1:#efece3;--metal-2:#77746c;
   }
   :root[data-theme="light"]{
     --bg:#f2efe7;--bg-raised:#e8e4d7;--bg-raised-2:#e1dccb;--text:#151410;--muted:#68655b;
     --line:rgba(21,20,16,0.12);--line-strong:rgba(21,20,16,0.22);
-    --amber:#b3660a;--amber-dim:#8f5308;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);
+    --amber:#b3660a;--amber-dim:#8f5308;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);--wip:#45689f;--wip-line:rgba(69,104,159,0.45);
     --metal-1:#1c1b17;--metal-2:#56534a;
   }
 
@@ -319,7 +322,7 @@
   .badge.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
                       background:var(--ok);margin-right:6px;vertical-align:1px;animation:pulse-dot 2.4s ease-in-out infinite;}
   .badge.mvp{color:var(--amber);border-color:rgba(255,184,76,0.42);}
-  .badge.wip{color:#9db4d8;border-color:rgba(157,180,216,0.4);}
+  .badge.wip{color:var(--wip);border-color:var(--wip-line);}
   .badge.done{color:var(--muted);}
   .badge.lab{color:var(--muted);border-style:dashed;}
   .badge.fixed{color:var(--amber);border-color:rgba(255,184,76,0.55);background:rgba(255,184,76,0.07);font-weight:500;}
