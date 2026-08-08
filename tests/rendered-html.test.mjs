@@ -53,8 +53,61 @@ test("social preview metadata is present in the document itself", () => {
   assert.equal(layout.includes("og.png"), false, "stale 1.8MB og.png reference");
 });
 
+test("share URLs are absolute and the worker fills the origin in", () => {
+  // KakaoTalk and Slack drop relative og:image paths and render no preview,
+  // so these three must never regress to a bare "/..." path.
+  const absolute = [
+    /<link rel="canonical" href="(%ORIGIN%|https:\/\/)[^"]*">/,
+    /<meta property="og:url" content="(%ORIGIN%|https:\/\/)[^"]*">/,
+    /<meta property="og:image" content="(%ORIGIN%|https:\/\/)[^"]*">/,
+    /<meta name="twitter:image" content="(%ORIGIN%|https:\/\/)[^"]*">/,
+  ];
+  for (const re of absolute) {
+    assert.match(html, re, `share URL must be absolute: ${re}`);
+  }
+
+  const worker = readFileSync("worker/index.ts", "utf8");
+  if (html.includes("%ORIGIN%")) {
+    assert.match(
+      worker,
+      /replaceAll\("%ORIGIN%", url\.origin\)/,
+      "worker must substitute %ORIGIN% before serving the document",
+    );
+  }
+
+  assert.match(html, /<link rel="icon"/, "missing favicon");
+});
+
+test("the intro never blocks reading the page", () => {
+  // The boot sequence is decoration. It must not lock scrolling, and it must
+  // stay short enough that a recruiter is not staring at an animation.
+  assert.equal(
+    /classList\.add\('intro-lock'\)/.test(html),
+    false,
+    "intro must not lock scrolling",
+  );
+  assert.equal(html.includes("html.intro-lock"), false, "dead intro-lock styles");
+
+  const skips = html.match(/var SKIP_EVENTS = \[([^\]]*)\]/);
+  assert.ok(skips, "intro skip events not found");
+  for (const evt of ["wheel", "touchmove", "scroll"]) {
+    assert.match(skips[1], new RegExp(`'${evt}'`), `scrolling must skip the intro (${evt})`);
+  }
+
+  // Rough upper bound on the scripted sequence, recomputed from the source.
+  const lines = html.match(/var lines = \[([\s\S]*?)\];/);
+  assert.ok(lines, "intro lines not found");
+  const chars = [...lines[1].matchAll(/'([^']*)'/g)]
+    .reduce((n, m) => n + m[1].length + 3, 0); // +2 prompt, +1 trailing step
+  const perChar = Number(html.match(/timers\.push\(setTimeout\(typeStep, (\d+)\)\);\n\s*} else if/)[1]);
+  const fixed = [...html.matchAll(/timers\.push\(setTimeout\((?:showMark|sweepAndClose|function\(\)\{ finish\(false\); \}), (\d+)\)\)/g)]
+    .reduce((n, m) => n + Number(m[1]), 0);
+  const total = chars * perChar + fixed;
+  assert.ok(total < 1600, `intro runs ~${total}ms; keep it under 1600ms`);
+});
+
 test("inline scripts parse", () => {
-  assert.equal(scripts.length, 3, "expected three inline script blocks");
+  assert.equal(scripts.length, 4, "expected four inline script blocks");
   for (const [i, src] of scripts.entries()) {
     assert.doesNotThrow(() => new Function(src), `script block ${i} has a syntax error`);
   }

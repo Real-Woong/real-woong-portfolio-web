@@ -36,7 +36,11 @@ const worker = {
     // iframe, so `#work`-style deep links, browser history and crawlers all
     // operate on the real page.
     if (url.pathname === "/" || url.pathname === "/portfolio.html") {
-      return new Response(portfolioHtml, {
+      // Canonical, og:url and og:image must be absolute — crawlers such as
+      // KakaoTalk and Slack drop relative ones and render no preview at all.
+      // Deriving them from the request keeps the document domain-agnostic, so
+      // it stays correct on workers.dev and on a custom domain alike.
+      return new Response(portfolioHtml.replaceAll("%ORIGIN%", url.origin), {
         status: 200,
         headers: {
           "content-type": "text/html; charset=utf-8",
