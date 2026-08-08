@@ -13,7 +13,7 @@
   },
   "tagline": {
     "ko": "방장이 만든 방 코드로 로그인 없이 입장해, 관심사 버블을 서로 pop하며 오프라인 대화를 시작하는 아이스브레이킹 서비스.",
-    "en": "An icebreaker: join with the host's room code, no login, then pop each other's interest bubbles to start a conversation in the room."
+    "en": "An icebreaker: join with the host's room code, no login, then pop each other's interest bubbles to start a conversation in person."
   },
   "github": "https://github.com/Real-Woong/bubblebreak",
   "demo": "https://bubblebreak-demo.jinung344.workers.dev/",

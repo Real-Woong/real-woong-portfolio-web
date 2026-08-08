@@ -42,7 +42,7 @@
         ],
         "en": [
           "What sets this apart is not a feature, it is <b>how it was validated</b>. I built four signal layers, measured each one separately against 20 years of real data, and <b>removed three of them from the allocation.</b> Exactly one layer moves weights today.",
-          "This is not a machine for beating the market, it is a machine for <b>losing less</b>. Over 20 years of real data it trades 1.9–2.6 percentage points of annual return for 12–23 points of maximum drawdown. That trade is deliberate.",
+          "This is not a machine for beating the market, it is a machine for <b>losing less</b>. Over 20 years of real data it gives up 1.9–2.6 percentage points of annual return to cut maximum drawdown by 12–23 percentage points. That trade is deliberate.",
           "In August 2026 it began measuring real execution costs, placing small confirmation orders in a live account."
         ]
       }
@@ -90,12 +90,12 @@
           "<b>6. 실패하면 멈춘다, 추측하지 않는다.</b> 실주문 계층은 추측의 실패 모드가 진짜 돈으로 하는 중복 매수이기 때문에 규칙이 하나입니다. 원장은 덧붙이기 전용이고 상태는 저장하지 않고 매번 로그에서 재계산합니다. 미결 주문이 하나라도 있으면 다음 주문을 내지 않고, 모르는 주문 상태값은 멈추고 사람을 부릅니다. 긴급 중지는 환경변수가 아니라 파일이라 재시작 없이 다음 사이클부터 듣습니다."
         ],
         "en": [
-          "<b>1. Removing layers was harder than building them.</b> I measured all four separately against 20 years of real data. Only trend (Faber 200-day) kept a weight of 1 — lower drawdown than 0.5 and a higher Sharpe than 2, in all four sub-periods on both counts. Macro, sentiment and MACD went to zero. Macro was not a signal while it sat constant, it was an exposure dial, and when it did move it was harmful on average. Sentiment was cutting exposure by 6.6 points while still unvalidated. MACD's contribution ceiling was smaller than the no-trade band, so it could never produce an order at all. Zero-weighted layers still get scored and logged, so they can be judged again once the sample grows.",
+          "<b>1. Removing layers was harder than building them.</b> I measured all four separately against 20 years of real data. Only trend (Faber 200-day) kept a weight of 1 — lower drawdown than a weight of 0.5, and a higher Sharpe than a weight of 2, in all four sub-periods on both counts. Macro, sentiment and MACD went to zero. Macro was not a signal while it sat constant, it was an exposure dial, and when it did move it was harmful on average. Sentiment was cutting exposure by 6.6 percentage points while still unvalidated. MACD's contribution ceiling was smaller than the no-trade band, so it could never produce an order at all. Zero-weighted layers still get scored and logged, so they can be judged again once the sample grows.",
           "<b>2. A backtest that cannot see the future.</b> What FRED returns by default is the revised value, so asking today for September 2008 unemployment gives you a final figure nobody had at the time. Feed that into a backtest and you have traded on the future, and the macro layer looks far smarter than it was. <b>This error hides because the results look good.</b> So the vintage series is used instead, filtered by the realtimeStart that ships with each observation, leaving only what was knowable that day. Release lag falls out of the same mechanism.",
-          "<b>3. Write the pass criteria before looking at the result.</b> Every experiment has its acceptance threshold committed to a document before the numbers come in, so the interpretation cannot be chosen afterwards. That discipline has reversed a conclusion at least once.",
-          "<b>4. Check sign agreement across sub-periods.</b> A single average over the whole sample cannot separate effect from noise, so the sample is split into four and checked for the same direction in every one. Comparing volatility targets of 0.15 and 0.20 this way, drawdown favoured 0.15 in all four and Sharpe favoured 0.20 in all four. That is a real trade-off rather than noise, and since drawdown is what is being bought, 0.15 won.",
+          "<b>3. Write the pass criteria before looking at the result.</b> Every experiment has its acceptance threshold committed to a document before the numbers come in, so the interpretation cannot be chosen afterwards. That discipline has actually reversed a conclusion before.",
+          "<b>4. Check sign agreement across sub-periods.</b> A single average over the whole sample cannot separate effect from noise, so the sample is split into four and checked for the same direction in every one. Comparing volatility targets of 0.15 and 0.20 this way, drawdown favoured 0.15 in all four and Sharpe favoured 0.20 in all four. That is a real trade-off rather than noise, and since what this system buys is lower drawdown, 0.15 won.",
           "<b>5. Split alpha into intended cost and defect.</b> Designed cost is the return given up by deliberately holding cash; defect is failing to reach the target. The first is a risk decision and the second is a bug, and because the response to each is the opposite, they are never added into one number.",
-          "<b>6. Fail stopped, never guessed.</b> In the live order layer the failure mode of guessing is a duplicate buy with real money, so there is one rule. The ledger is append-only and state is never stored, it is recomputed from the log each time. No new order goes out while any order is still open, and an unrecognised order status halts and calls a human. The emergency stop is a file rather than an environment variable, so it takes effect on the next cycle without a restart."
+          "<b>6. Stop on failure; never guess.</b> In the live order layer the failure mode of guessing is a duplicate buy with real money, so there is one rule. The ledger is append-only and state is never stored, it is recomputed from the log each time. No new order goes out while any order is still open, and an unrecognised order status halts and calls a human. The emergency stop is a file rather than an environment variable, so it takes effect on the next cycle without a restart."
         ]
       }
     },
@@ -119,12 +119,12 @@
           "보유 기준선에 <b>읽는 코드만 있고 쓰는 코드가 없는</b> 구멍이 있었습니다. 기록된 적 없는 기준선을 계속 읽고 있던 것이라, 쓰기 경로를 구현해 메꿨습니다."
         ],
         "en": [
-          "Chasing the target weight was producing <b>a $0.02 order every 15 minutes</b>. The trades were pure fee, so a $1 minimum order rule cut them off.",
+          "Chasing the target weight was producing <b>a $0.02 order every 15 minutes</b>. The trades were nothing but fees, so a $1 minimum order rule cut them off.",
           "A position that had been liquidated once was <b>excluded from buying forever</b>. The liquidation record was acting as a permanent flag against re-entry; it became a 24-hour cooldown instead.",
           "Equity weight was rising during RISK_OFF. The engine could only <b>buy the shortfall</b> to the target and had no way to reduce an excess, so it was rebuilt with symmetric rebalancing that sells back to the target line once the band is breached.",
-          "I had assumed negative alpha came from cash drag; attribution showed <b>80% of it was defect</b> and structural cash drag was effectively zero. A liquidation rule meant for individual stocks was misfiring on index ETFs, and turning it off cut turnover by 21x.",
+          "I had assumed negative alpha came from cash drag; attribution showed <b>80% of it was defect, not design</b>, and structural cash drag was effectively zero. A liquidation rule meant for individual stocks was misfiring on index ETFs, and turning it off cut turnover by 21x.",
           "A safeguard that halts trading at a loss limit was <b>pushing maximum drawdown from 29.8% to 51.6%</b>. Buying stopped while defensive selling continued, freezing the account into all cash — an absorbing state. The limit now warns instead of halting.",
-          "The no-trade band grew with the account, so <b>a drift that opened once would set</b>. A separate drift cap now pulls it back regardless of the band.",
+          "The no-trade band grew with the account, so <b>a drift that opened once would harden in place</b>. A separate drift cap now pulls it back regardless of the band.",
           "The first live order surfaced an <b>agent-halts-forever bug</b> that 314 passing tests had not. A notional order always fills slightly under the amount requested because shares are discrete, and the engine read that $0.01 gap as a partial fill, leaving an order permanently open and every later cycle blocked. The fake broker always filled the exact amount, so it could never have caught this.",
           "The first slippage measurement claimed a market buy had filled better than the mid — which cannot happen. The broker reports average fill price to two decimals, so at $33.69 one cent is 2.97bp: <b>far too coarse</b> to test a 10bp assumption. Filled quantity comes back to six decimals, and inverting it brought the error down to 0.17bp.",
           "The news sentiment source had stalled, and <b>a stalled value has an autocorrelation near 1</b>, which the acceptance rule would have read as the strongest signal on offer. Three wrong diagnoses later the cause was found and fixed, and a gate now runs ahead of autocorrelation: does the value move at all?",
@@ -242,7 +242,7 @@
               },
               "l": {
                 "ko": "0.20이 좋아 보였지만 2008을 넣자 낙폭이 5.28%p 나빠짐 → 0.15 유지",
-                "en": "0.20 looked better until 2008 went in and drawdown worsened 5.28pp → kept 0.15"
+                "en": "0.20 looked better until 2008 went in and drawdown worsened by 5.28 percentage points → kept 0.15"
               }
             },
             {
@@ -253,7 +253,7 @@
               },
               "l": {
                 "ko": "밴드가 자산과 함께 커져 한 번 벌어진 이탈이 굳는 구조 발견",
-                "en": "The band grew with the account, so a drift that opened once would set"
+                "en": "The band grew with the account, so a drift that opened once would harden in place"
               }
             },
             {
@@ -361,7 +361,7 @@
         ],
         "en": [
           "Over 20 years of real data (2006–2026): 5.99% CAGR, 29.9% maximum drawdown, 75.6% average exposure. The production stack and the stack the backtester measures are <b>exactly the same</b> — if they diverged I would be running something that was never measured, so keeping them identical is a standing rule.",
-          "- Drawdown versus static allocation — <b>it wins.</b> 10–16 points once exposure is matched",
+          "- Drawdown versus static allocation — <b>it wins.</b> 10–16 percentage points once exposure is matched",
           "- Return versus static allocation — <b>there is none.</b> I cannot claim one",
           "- Where the edge comes from — volatility management, 84–99% of it. Trend is mostly redundant",
           "- Does it always win — no. Three of four sub-periods. In calm stretches static allocation did better",
@@ -418,7 +418,7 @@
           "- Do not judge on a single average. Split the sample and check the signs agree",
           "- Whether a safeguard is safe has to be measured. The automatic stop loss made drawdown worse",
           "- When a measurement looks wrong, suspect the ruler before the world",
-          "- Fail stopped. Do not guess — especially where real money moves",
+          "- Stop on failure. Do not guess — especially where real money moves",
           "Building something and making it trustworthy are different problems, and I wanted to work on that distinction in a domain where being wrong costs money immediately."
         ]
       }
