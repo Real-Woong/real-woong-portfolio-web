@@ -187,6 +187,24 @@ test("status and fix badges agree between markup and modal", () => {
   }
 });
 
+test("the documented-fix total is derived from META, not typed", () => {
+  const META = modalMeta();
+  const total = Object.values(META).reduce((n, [, , fixed]) => n + fixed, 0);
+
+  const slots = [...html.matchAll(/data-fix-total/g)].length;
+  assert.ok(slots >= 2, `expected the total to be shown in at least two places, found ${slots}`);
+  assert.match(
+    html,
+    /Object\.keys\(META\)\.reduce/,
+    "the total must be summed from META at runtime",
+  );
+
+  // The static fallbacks are what a crawler sees, so they still have to be right.
+  for (const m of html.matchAll(/data-fix-total[^>]*>(\d+)</g)) {
+    assert.equal(Number(m[1]), total, `hardcoded fallback ${m[1]} does not match META's ${total}`);
+  }
+});
+
 test("fix counts match the documented defect sections", () => {
   const META = modalMeta();
   const FIX_HEADINGS = ["해결한 기술적 문제", "해결한 문제"];
