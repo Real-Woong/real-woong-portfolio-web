@@ -133,11 +133,12 @@
     <div class="when">2026 —<br>운영 중</div>
     <div class="what">
       <strong>TAPIoca</strong>
-      <div class="meta">토스증권 Open API 기반 PAPER Trading 에이전트 · 단독</div>
+      <div class="meta">거시·뉴스·추세·변동성을 통합한 ETF 투자 AI 에이전트 · 단독</div>
       <ul>
-        <li>11일치 실제 가상매매 데이터를 분석해 <b>RISK_OFF 국면에서 오히려 주식 비중이 오르던 구조적 결함을 발견</b>, 대칭 리밸런싱으로 수정</li>
-        <li>거래비용·벤치마크·감사 로그를 먼저 갖춘 뒤 관찰 단계로 전환. 자동 테스트 80개 통과</li>
-        <li>Oracle Cloud systemd 타이머로 24시간 상시 운영. 실주문 미실행 하드캡 적용</li>
+        <li>신호 층 넷을 20년 실데이터로 각각 검증해 <b>그중 셋을 배분에서 제외</b>. 미래 데이터 누수를 막기 위해 FRED 개정 이력(vintage)으로 그날 알 수 있던 값만 사용</li>
+        <li>alpha를 의도한 비용과 결함으로 분해해 <b>마이너스 alpha의 80%가 결함</b>임을 규명, 원인 규칙을 끄자 회전율 21배 감소. 자동 손절이 낙폭을 29.8%→51.6%로 키운다는 것도 재측정으로 발견해 경고로 전환</li>
+        <li>실주문 실행 계층 구축 후 소액 확인 주문으로 <b>테스트 314개가 못 잡은 영구 정지 버그</b>를 발견·수정. 외부 런타임 패키지 0개, 자동 테스트 352개 통과</li>
+        <li>Oracle Cloud systemd 타이머로 15분 주기 24시간 상시 운영. 예약 실행은 PAPER 전용, 실주문은 수동 확인 시에만</li>
       </ul>
       <div class="stack">Node.js · Toss Open API · FRED · systemd · Oracle Cloud</div>
     </div>

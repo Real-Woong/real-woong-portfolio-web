@@ -66,6 +66,8 @@ Thumbs.db
 /.claude/
 /.codex/
 
-# Portfolio_INFO
-/Projects_info/*.md
-/notion_portfolio/
+# Portfolio content
+/Portfolio_info/
+
+# Private personal records (medical / military service). Never publish.
+/military_issue/
