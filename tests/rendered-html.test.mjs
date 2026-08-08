@@ -187,6 +187,29 @@ test("status and fix badges agree between markup and modal", () => {
   }
 });
 
+test("the archive opens on a subset and can be expanded", () => {
+  const total = [...body.matchAll(/<article class="a-item /g)].length;
+  const featured = [...body.matchAll(/<article class="a-item reveal" data-featured/g)].length;
+
+  assert.ok(featured > 0 && featured < total, `featured ${featured} of ${total} makes no subset`);
+  assert.ok(featured <= 9, `${featured} cards is not a shortlist`);
+  assert.match(body, /id="archive-more"/, "no control to expand the archive");
+
+  // Both button labels ship in the markup so each is a translatable text node.
+  assert.match(body, /data-am-collapsed/, "missing collapsed label");
+  assert.match(body, /data-am-expanded/, "missing expanded label");
+
+  // A category filter must ignore the cap, or small categories look empty.
+  assert.match(
+    html,
+    /activeFilter === 'all' && !expanded && !item\.hasAttribute\('data-featured'\)/,
+    "the cap must apply only to the unfiltered view",
+  );
+
+  // The counter is derived, never typed.
+  assert.match(html, /\[data-archive-total\][\s\S]{0,120}items\.length/, "total must come from the DOM");
+});
+
 test("the documented-fix total is derived from META, not typed", () => {
   const META = modalMeta();
   const total = Object.values(META).reduce((n, [, , fixed]) => n + fixed, 0);

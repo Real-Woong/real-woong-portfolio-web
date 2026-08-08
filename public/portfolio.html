@@ -262,6 +262,17 @@
   .filters button{all:unset;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line-strong);color:var(--muted);transition:all .25s ease;}
   .filters button:hover{color:var(--text);border-color:var(--text);}
   .filters button.active{background:var(--amber);border-color:var(--amber);color:#100b03;}
+  .archive-more{display:flex;justify-content:center;margin-top:34px;position:relative;z-index:1;}
+  .archive-more[hidden]{display:none;}
+  .archive-more button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:12px;
+                       font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+                       padding:13px 22px;border:1px solid var(--line-strong);color:var(--muted);
+                       transition:color .25s ease,border-color .25s ease;}
+  .archive-more button:hover{color:var(--amber);border-color:var(--amber);}
+  .archive-more button:focus-visible{outline:1px solid var(--amber);outline-offset:3px;}
+  .archive-more .am-label[hidden]{display:none;}
+  .archive-more .am-count{color:var(--line-strong);}
+  .archive-more .am-count b{color:var(--amber);font-weight:500;}
   .view-toggle{display:flex;gap:2px;border:1px solid var(--line-strong);}
   .view-toggle button{all:unset;cursor:pointer;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--muted);}
   .view-toggle button.active{background:var(--text);color:var(--bg);}
@@ -694,8 +705,8 @@
     <div class="wrap">
       <div class="section-head reveal" data-d="0">
         <div class="eyebrow"><span class="pip"></span>Project Archive</div>
-        <h2>선정작 너머, 17개의 기록.</h2>
-        <p>Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 개인 프로젝트와 팀 프로젝트, 브랜딩·기획 활동까지 한눈에 볼 수 있습니다.</p>
+        <h2>선정작 너머, 전체 기록.</h2>
+        <p>Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 기본은 대표작만 보여주고, 분야를 고르면 그 분야는 전부 펼칩니다.</p>
       </div>
 
       <div class="archive-controls reveal" data-d="1">
@@ -713,35 +724,35 @@
       </div>
 
       <div class="archive-list mode-grid" id="archive-list">
-        <article class="a-item reveal" data-project="agora" data-cat="blockchain">
+        <article class="a-item reveal" data-featured data-project="agora" data-cat="blockchain">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">01</span><span class="a-glyph">SUI</span></div>
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
           <span class="a-desc">거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.</span>
           <span class="a-year tnum">2026</span>
           <span class="badges"><span class="badge mvp">MVP 개발 중</span><span class="badge fixed">Fixed &times;1</span></span>
         </article>
-        <article class="a-item reveal" data-project="cryptofunding" data-cat="blockchain">
+        <article class="a-item reveal" data-featured data-project="cryptofunding" data-cat="blockchain">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">02</span><span class="a-glyph">SUI</span></div>
           <span class="a-cat">Blockchain · Full-Stack</span><span class="a-title">CryptoFunding</span>
           <span class="a-desc">Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
-        <article class="a-item reveal" data-project="bubblebreak" data-cat="web">
+        <article class="a-item reveal" data-featured data-project="bubblebreak" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">03</span><span class="a-glyph">WEB</span></div>
           <span class="a-cat">Product · Social</span><span class="a-title">BubbleBreak</span>
           <span class="a-desc">방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;4</span></span>
         </article>
-        <article class="a-item reveal" data-project="healeat" data-cat="web">
+        <article class="a-item reveal" data-featured data-project="healeat" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">04</span><span class="a-glyph">iOS</span></div>
           <span class="a-cat">iOS · Team</span><span class="a-title">HealEat</span>
           <span class="a-desc">건강 정보 기반 외식 추천 앱. MVVM과 RxSwift를 처음으로 실전에 적용.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
-        <article class="a-item reveal" data-project="sogonzip" data-cat="web">
+        <article class="a-item reveal" data-featured data-project="sogonzip" data-cat="web">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">05</span><span class="a-glyph">PRODUCT</span></div>
           <span class="a-cat">Product · Personal</span><span class="a-title">Sogon.zip</span>
           <span class="a-desc">소곤파일 예약공개와 계정 코드 기반 1:1 연결. 웹 베타 + Expo 모바일 MVP.</span>
@@ -776,14 +787,14 @@
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge lab">학습용</span></span>
         </article>
-        <article class="a-item reveal" data-project="marvis" data-cat="ai">
+        <article class="a-item reveal" data-featured data-project="marvis" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">10</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Telegram</span><span class="a-title">Marvis</span>
           <span class="a-desc">텔레그램 기반 개인 AI 비서. 기억과 사이드 프로젝트를 자연어로 관리하고, 요일별 능동 브리핑과 Siri 음성 캡처를 제공.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;3</span></span>
         </article>
-        <article class="a-item reveal" data-project="tapioca" data-cat="ai">
+        <article class="a-item reveal" data-featured data-project="tapioca" data-cat="ai">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">11</span><span class="a-glyph">AGENT</span></div>
           <span class="a-cat">AI · Investment</span><span class="a-title">TAPIoca</span>
           <span class="a-desc">거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트. 20년 실데이터로 각 신호 층을 따로 검증.</span>
@@ -797,7 +808,7 @@
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
-        <article class="a-item reveal" data-project="daedongje2023" data-cat="brand">
+        <article class="a-item reveal" data-featured data-project="daedongje2023" data-cat="brand">
           <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">13</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Goods</span><span class="a-title">2023 대동제(새벽)</span>
           <span class="a-desc">대형 행사 브랜딩. 인생네컷 프레임과 반다나를 단독 디자인.</span>
@@ -832,6 +843,17 @@
           <span class="a-year tnum">2023</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
+
+        <!-- Seventeen cards at once dilutes; the default view is the eight
+             that carry the most weight. Category filters ignore the cap. -->
+      </div>
+
+      <div class="archive-more reveal" data-d="1">
+        <button type="button" id="archive-more">
+          <span class="am-label" data-am-collapsed>전체 아카이브 보기</span>
+          <span class="am-label" data-am-expanded hidden>대표작만 보기</span>
+          <span class="am-count tnum"><b data-archive-shown>8</b>/<b data-archive-total>17</b></span>
+        </button>
       </div>
     </div>
   </section>
@@ -992,8 +1014,9 @@
     'MVP 개발 중':'MVP in progress', '완료':'Shipped', '운영 중':'Live', '개발 중':'In progress', '학습용':'Learning',
 
     /* archive */
-    '선정작 너머, 17개의 기록.':'Beyond the selected work—17 records.',
-    'Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 개인 프로젝트와 팀 프로젝트, 브랜딩·기획 활동까지 한눈에 볼 수 있습니다.':'Selected Work is the curated five; this is everything. Personal and team projects, plus branding and planning work, all in one view.',
+    '선정작 너머, 전체 기록.':'Beyond the selected work—the whole record.',
+    '전체 아카이브 보기':'Show the full archive', '대표작만 보기':'Show highlights only',
+    'Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 기본은 대표작만 보여주고, 분야를 고르면 그 분야는 전부 펼칩니다.':'Selected Work is the curated five; this is everything I have built. It opens on the highlights, and picking a field expands that field in full.',
     '거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.':'An on-chain Sui vault that delegates trading rights only, with an x402 payment layer.',
     'Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.':'Sui crowdfunding—contract, backend and deployment all designed end to end.',
     '방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.':'Offline icebreaking: join by room code, pop each other’s interest bubbles. Running in real use on Cloudflare Workers + D1.',
@@ -1328,19 +1351,54 @@
     row.addEventListener('mouseleave', function(){ panel.classList.remove('active'); });
   });
 
-  /* archive filter + view toggle */
+  /* archive filter + view toggle + featured cap */
   var filterBtns = document.querySelectorAll('#filters button');
   var items = document.querySelectorAll('#archive-list .a-item');
+  var moreBtn = document.getElementById('archive-more');
+  var activeFilter = 'all';
+  var expanded = false;
+
+  // The cap only applies to the unfiltered view. Picking a category always
+  // shows that whole category — otherwise "Design · Brand" would surface one
+  // card out of five and read like there is nothing there.
+  function applyArchive(){
+    var shown = 0;
+    items.forEach(function(item){
+      var matches = activeFilter === 'all' || item.getAttribute('data-cat') === activeFilter;
+      var capped = activeFilter === 'all' && !expanded && !item.hasAttribute('data-featured');
+      item.hidden = !matches || capped;
+      if(!item.hidden) shown++;
+    });
+    if(moreBtn){
+      moreBtn.hidden = activeFilter !== 'all';
+      moreBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      var collapsed = moreBtn.querySelector('[data-am-collapsed]');
+      var opened = moreBtn.querySelector('[data-am-expanded]');
+      if(collapsed) collapsed.hidden = expanded;
+      if(opened) opened.hidden = !expanded;
+    }
+    var shownEl = document.querySelector('[data-archive-shown]');
+    if(shownEl) shownEl.textContent = String(shown);
+  }
+
+  var totalEl = document.querySelector('[data-archive-total]');
+  if(totalEl) totalEl.textContent = String(items.length);
+
   filterBtns.forEach(function(btn){
     btn.addEventListener('click', function(){
       filterBtns.forEach(function(b){ b.classList.remove('active'); });
       btn.classList.add('active');
-      var f = btn.getAttribute('data-filter');
-      items.forEach(function(item){
-        item.hidden = (f !== 'all' && item.getAttribute('data-cat') !== f);
-      });
+      activeFilter = btn.getAttribute('data-filter');
+      applyArchive();
     });
   });
+  if(moreBtn){
+    moreBtn.addEventListener('click', function(){
+      expanded = !expanded;
+      applyArchive();
+    });
+  }
+  applyArchive();
   var viewBtns = document.querySelectorAll('#view-toggle button');
   var archiveList = document.getElementById('archive-list');
   viewBtns.forEach(function(btn){
