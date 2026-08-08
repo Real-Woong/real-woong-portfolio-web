@@ -1,0 +1,57 @@
+{
+  "slug": "harang",
+  "no": "15",
+  "cat": "Branding · Leadership",
+  "year": "2024",
+  "title": "하랑 (24대 컴과 학생회)",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "연세대학교 컴퓨터과학과 24대 학생회 “하랑”의 브랜딩·홍보 총괄. 로고부터 연고전 굿즈까지 디자인 방향을 직접 이끌었습니다.",
+    "en": "Branding and PR lead for Harang, the 24th Computer Science student council at Yonsei. I drove the design direction from the logo through to the Yon-Ko games merchandise."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 역할",
+        "en": "Role"
+      },
+      "body": {
+        "ko": [
+          "- 학생회 “하랑” 로고 디자인",
+          "- 연고전 전용 하키티 디자인",
+          "- 카드뉴스 및 학과 복지 포스터 제작",
+          "- 돕바(롱패딩) 디자인"
+        ],
+        "en": [
+          "- Designed the Harang student council logo",
+          "- Designed the hockey jersey for the Yon-Ko games",
+          "- Produced card news and department welfare posters",
+          "- Designed the long padding coat"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "학과 단위 브랜딩 리뉴얼과 디자인 방향성 결정을 총괄하며, 지속적인 홍보 콘텐츠 제작 경험을 쌓았습니다."
+        ],
+        "en": [
+          "I led a department-wide branding refresh and owned the design direction, while building up experience producing PR content continuously."
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "healeat",
+  "no": "04",
+  "cat": "iOS · Team",
+  "year": "2024",
+  "title": "HealEat",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "건강 정보를 기반으로 외식 가능한 매장을 추천하는 iOS 앱. MVVM과 Reactive Programming을 처음으로 실전 적용한 팀 프로젝트(UMC).",
+    "en": "An iOS app that recommends places to eat out based on your health profile. A UMC team project, and the first time I applied MVVM and reactive programming for real."
+  },
+  "github": "https://github.com/HealEat/Frontend",
+  "demo": null,
+  "stack": [
+    "Swift",
+    "UIKit",
+    "MVVM",
+    "RxSwift",
+    "Moya",
+    "Alamofire",
+    "SnapKit",
+    "Then"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 부분",
+        "en": "Scope of ownership"
+      },
+      "body": {
+        "ko": [
+          "- 로그인 화면 및 건강 정보 설정 UI 구현",
+          "- Moya 기반 API 연동, RxSwift 기반 데이터 바인딩",
+          "- Auth 브랜치 독립 작업 및 Feature Branch 기반 협업"
+        ],
+        "en": [
+          "- Built the login screen and the health-profile setup UI",
+          "- Wired the API with Moya and bound data with RxSwift",
+          "- Worked independently on the Auth branch, collaborating via feature branches"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "MVVM 아키텍처를 실제 코드에 적용하고 Reactive Programming 개념을 체득한 프로젝트로, 앱 개발을 “기능 구현”이 아니라 “구조 설계” 관점으로 보기 시작한 계기가 되었습니다."
+        ],
+        "en": [
+          "Applying MVVM to real code and internalising reactive programming is what made me start seeing app development as structural design rather than feature work."
+        ]
+      }
+    }
+  ]
+}

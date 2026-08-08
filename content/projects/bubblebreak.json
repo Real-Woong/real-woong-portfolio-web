@@ -1,0 +1,85 @@
+{
+  "slug": "bubblebreak",
+  "no": "03",
+  "cat": "Product · Social",
+  "year": "2025",
+  "title": "BubbleBreak",
+  "status": {
+    "kind": "live",
+    "label": {
+      "ko": "운영 중",
+      "en": "Live"
+    }
+  },
+  "tagline": {
+    "ko": "방장이 만든 방 코드로 로그인 없이 입장해, 관심사 버블을 서로 pop하며 오프라인 대화를 시작하는 아이스브레이킹 서비스.",
+    "en": "An icebreaker: join with the host's room code, no login, then pop each other's interest bubbles to start a conversation in the room."
+  },
+  "github": "https://github.com/Real-Woong/bubblebreak",
+  "demo": "https://bubblebreak-demo.jinung344.workers.dev/",
+  "stack": [
+    "React",
+    "Vite",
+    "TypeScript",
+    "TailwindCSS",
+    "Cloudflare Workers",
+    "Cloudflare D1",
+    "Cloudflare Cron Triggers"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 기능",
+        "en": "Key features"
+      },
+      "body": {
+        "ko": [
+          "- 방 코드 기반 비로그인 참여, HttpOnly·Secure·SameSite=Lax 쿠키 세션",
+          "- 관심사 민감도 3단계(공개/블러/잠금) 등록과 노출 제어",
+          "- 버블 pop 인터랙션과 pop 기반 실시간 알림, 동일 pop의 서버 멱등 처리",
+          "- 실제 pop 이벤트를 근거로 한 방 종료 요약(상호 확인 매칭 강조)"
+        ],
+        "en": [
+          "- Login-free entry by room code, with HttpOnly / Secure / SameSite=Lax cookie sessions",
+          "- Interests registered at three sensitivity levels (open, blurred, locked) with matching exposure control",
+          "- Bubble-pop interaction and pop-driven live notifications, with repeat pops made idempotent server-side",
+          "- An end-of-room summary built from actual pop events, foregrounding mutually confirmed matches"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 기술적 문제",
+        "en": "Defects found and fixed"
+      },
+      "body": {
+        "ko": [
+          "- 모든 요청마다 실행되던 방 정리 쿼리를 Cloudflare Cron Trigger로 분리해 무관한 요청의 지연을 제거",
+          "- Pages와 Worker가 분리 배포되는 구조를 모른 채 운영하다 프로덕션이 멈춘 적이 있어, Worker 주소를 정식 서비스 주소로 전환하고 배포 흐름을 정리",
+          "- localhost/127.0.0.1 호스트 불일치로 SameSite 쿠키가 조용히 실패하던 문제를 호스트 통일로 해결",
+          "- useCallback 의존성 배열 실수로 발생한 렌더→재요청 무한 루프를 메모이제이션으로 해결"
+        ],
+        "en": [
+          "- The room cleanup query ran on every request; moving it to a Cloudflare Cron Trigger removed the latency it added to unrelated requests",
+          "- Production went down because I was running it without realising Pages and the Worker deploy separately; the Worker address became the canonical one and the deploy flow was straightened out",
+          "- SameSite cookies failed silently on a localhost / 127.0.0.1 host mismatch, fixed by settling on one host",
+          "- A wrong useCallback dependency array caused a render-refetch loop, fixed with proper memoisation"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "현재 상태",
+        "en": "Current status"
+      },
+      "body": {
+        "ko": [
+          "소규모 실사용 데모로 운영 중이며, Cloudflare Worker 단일 배포(정적 자산+API)로 프론트엔드와 백엔드를 함께 관리합니다. Durable Objects 기반 실시간 push로 폴링을 대체하는 것이 다음 과제입니다."
+        ],
+        "en": [
+          "Running as a small live demo, with frontend and backend managed together in a single Cloudflare Worker deploy (static assets plus API). Replacing polling with Durable Objects push is the next piece."
+        ]
+      }
+    }
+  ]
+}

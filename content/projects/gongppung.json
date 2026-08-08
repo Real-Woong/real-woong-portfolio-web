@@ -1,0 +1,57 @@
+{
+  "slug": "gongppung",
+  "no": "17",
+  "cat": "Planning · UI",
+  "year": "2023",
+  "title": "공뽕",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "폐컨테이너를 활용한 공간 대여 플랫폼 기획. 넥슨 창업 플랫폼 5인 팀 프로젝트로, 설계부터 법률 자문까지 전 과정을 경험했습니다.",
+    "en": "A space-rental platform built out of decommissioned shipping containers. A five-person team project on Nexon's startup programme, covering everything from design to legal consultation."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 역할",
+        "en": "Role"
+      },
+      "body": {
+        "ko": [
+          "- 공간 구조 설계 및 3D 모델링 제작",
+          "- 앱 UI 구성 및 디자인 설계",
+          "- 프론트엔드 구현 참여",
+          "- 인천 지역 공간대여업 관련 법률 자문 진행"
+        ],
+        "en": [
+          "- Spatial design and 3D modelling",
+          "- App UI structure and design",
+          "- Contributed to the frontend implementation",
+          "- Sought legal advice on space-rental regulations in Incheon"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "연세대 1학년 1학기에 참여한 첫 팀 프로젝트로, 기획이 현실로 이어질 수 있다는 경험을 남긴 출발점이었습니다. 법·행정적 제약으로 실행까지 이어지지는 못했지만, 제품과 사업을 함께 고민한 경험을 얻었습니다."
+        ],
+        "en": [
+          "My first team project, in the first semester of my first year at Yonsei, and the point where planning first turned into something real. Legal and administrative constraints stopped it short of launch, but it taught me to think about the product and the business together."
+        ]
+      }
+    }
+  ]
+}

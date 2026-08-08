@@ -1,0 +1,64 @@
+{
+  "slug": "aispoc",
+  "no": "07",
+  "cat": "AI · Public Sector",
+  "year": "2025",
+  "title": "AI-Spoc",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "공공기관 전자민원의 오접수·재이첩 문제를 해결하기 위한 AI 기반 민원 자동 라우팅 시스템(단일창구, SPOC).",
+    "en": "An AI routing system (a single point of contact) for public-sector e-petitions, built to stop misfiled cases from being handed between departments."
+  },
+  "github": "https://github.com/Real-Woong/ai-spoc",
+  "demo": null,
+  "stack": [
+    "Python",
+    "PyTorch",
+    "HuggingFace Transformers",
+    "RoBERTa",
+    "Pandas",
+    "NumPy"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "- RoBERTa 기반 민원 분류 모델",
+          "- Direct → Coordinator → Fallback 3단계 분기 라우팅 구조",
+          "- 복합 민원 자동 분해 후 복수 부서 동시 라우팅",
+          "- Selective Prediction 기반 신뢰도 임계값 설계"
+        ],
+        "en": [
+          "- A RoBERTa-based petition classifier",
+          "- Three-stage routing: Direct → Coordinator → Fallback",
+          "- Compound petitions split automatically and routed to several departments at once",
+          "- Confidence thresholds designed around selective prediction"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "성과",
+        "en": "Outcome"
+      },
+      "body": {
+        "ko": [
+          "민원 분류 모델 Accuracy 0.515 / Top-3 Accuracy 0.71, 평균 AI 추론 시간 약 10ms를 달성했습니다. 실제 행정 문제는 모델 정확도보다 자동화 범위와 인간 개입을 함께 설계하는 시스템 구조가 더 중요하다는 것을 확인한 프로젝트입니다."
+        ],
+        "en": [
+          "The classifier reached 0.515 accuracy and 0.71 top-3 accuracy, with inference averaging about 10ms. The lesson was that a real administrative problem depends less on model accuracy than on designing where automation stops and a human steps in."
+        ]
+      }
+    }
+  ]
+}

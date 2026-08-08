@@ -1,0 +1,100 @@
+{
+  "slug": "marvis",
+  "no": "10",
+  "cat": "AI · Telegram",
+  "year": "2025",
+  "title": "Marvis",
+  "status": {
+    "kind": "live",
+    "label": {
+      "ko": "운영 중",
+      "en": "Live"
+    }
+  },
+  "tagline": {
+    "ko": "My + Jarvis. 텔레그램 또는 Siri로 보낸 메시지를 기억하고 메모·아이디어·할 일·일정·사이드 프로젝트 현황으로 분류해 관리하는 개인 AI 비서. Oracle Cloud에서 24시간 운영하며 매일 직접 사용하고 개선하고 있습니다.",
+    "en": "My + Jarvis. A personal AI assistant that remembers what I send it over Telegram or Siri and files it as a note, idea, task, event or side-project update. It has run 24/7 on Oracle Cloud since launch, and I use and improve it daily."
+  },
+  "github": "https://github.com/Real-Woong/marvis",
+  "demo": null,
+  "stack": [
+    "Python",
+    "Google Gemini 2.5 Flash",
+    "python-telegram-bot",
+    "gTTS",
+    "Oracle Cloud",
+    "Cloudflare Tunnel"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 기능",
+        "en": "Key features"
+      },
+      "body": {
+        "ko": [
+          "- 자연어 메시지를 Schedule/Idea/Note로 자동 분류하고, 저장된 기억과 사이드 프로젝트 현황을 Gemini 문맥에 함께 제공",
+          "- 날짜·시간 표현을 정규식으로 분석해 일정·리마인더 자동 저장",
+          "- 평일 8:30·토요일 10:00에 오늘 일정과 진행 중인 프로젝트를 먼저 브리핑하고 일요일은 발송하지 않도록 요일별 스케줄링",
+          "- 자연어로 사이드 프로젝트 추가·중단·다음 할 일 갱신·브리핑 알림 on/off",
+          "- iPhone Siri 단축어로 손 안 대고 음성 캡처(Cloudflare Tunnel 경유), 같은 파이프라인으로 저장",
+          "- Gemini 답변을 텍스트+한국어 음성(gTTS)으로 동시 제공"
+        ],
+        "en": [
+          "- Classifies natural-language messages as Schedule / Idea / Note, and feeds stored memories plus current side-project state into Gemini as context",
+          "- Parses date and time expressions with regular expressions to file events and reminders automatically",
+          "- Briefs me on today's schedule and active projects at 8:30 on weekdays and 10:00 on Saturdays, and stays quiet on Sundays",
+          "- Add, pause, re-scope or mute a side project entirely in natural language",
+          "- Hands-free voice capture through an iPhone Siri shortcut over a Cloudflare Tunnel, saved through the same pipeline",
+          "- Gemini's answers come back as text and Korean speech (gTTS) at once"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 기술적 문제",
+        "en": "Defects found and fixed"
+      },
+      "body": {
+        "ko": [
+          "- 일정 알림 스레드와 메시지 핸들러가 같은 JSON 파일을 동시에 읽고 쓰며 발생하던 lost update를 RLock 공유 락 + 임시파일→원자적 rename 쓰기로 해결",
+          "- 긴 텔레그램 메시지를 iOS가 “메시지를 보냈습니다”로 요약하는 문제를 고정된 짧은 문장, 프로젝트별 분리·간격 발송, 영문 프로젝트명 자동 띄어쓰기로 개선",
+          "- 개인 데이터가 담긴 파일이 보호 장치 없이 버전 관리에 올라가 있던 문제를 git 히스토리에서 완전히 제거해 정리"
+        ],
+        "en": [
+          "- The reminder thread and the message handler both read and wrote the same JSON file, losing updates. Fixed with a shared RLock plus atomic write-to-temp-then-rename.",
+          "- iOS collapsed long Telegram messages into \"sent a message\". Fixed with a fixed short opening line, one message per project with spacing between sends, and automatic word spacing for English project names.",
+          "- A file containing personal data had been committed with no protection. Removed from the git history entirely."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "중요하게 생각한 점",
+        "en": "What mattered most"
+      },
+      "body": {
+        "ko": [
+          "기능 수보다 실제로 매일 손이 가는 경험을 우선했습니다. 능동 브리핑과 무마찰 음성 캡처를 만들고, 실제 iPhone에서 알림을 끝까지 들을 수 있는 메시지 길이와 발송 간격까지 조정하며 디바이스·OS 제약을 제품 설계에 반영했습니다."
+        ],
+        "en": [
+          "I cared more about it being something I actually reach for every day than about the feature count. The proactive briefing and frictionless voice capture came first, and I tuned message length and send intervals until notifications were listenable to the end on a real iPhone — device and OS constraints treated as product design."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "다음 단계",
+        "en": "Next steps"
+      },
+      "body": {
+        "ko": [
+          "날짜·시간 파싱과 의도 분류 테스트, google.genai SDK 및 SQLite 마이그레이션, 자연어 일정 수정·반복 일정, 고정 도메인 터널과 웹 관리 대시보드를 순차적으로 준비하고 있습니다."
+        ],
+        "en": [
+          "Next up, in order: tests for date/time parsing and intent classification, migration to the google.genai SDK and SQLite, natural-language edits and recurring events, then a fixed-domain tunnel and a web admin dashboard."
+        ]
+      }
+    }
+  ]
+}

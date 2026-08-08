@@ -1,0 +1,55 @@
+{
+  "slug": "daedongje2023",
+  "no": "13",
+  "cat": "Branding · Goods",
+  "year": "2023",
+  "title": "2023 대동제(새벽)",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "약 3주간 준비한 연세대 대형 행사 브랜딩 프로젝트. 매주 주말 밤샘 회의로 행사 전체 디자인 방향성을 설계했습니다.",
+    "en": "Branding for a major Yonsei University festival, prepared over about three weeks. The overall design direction came out of all-night sessions every weekend."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 역할",
+        "en": "Role"
+      },
+      "body": {
+        "ko": [
+          "- 로고 및 포스터 디자인 참여",
+          "- 인생네컷 프레임 단독 디자인",
+          "- 반다나 단독 디자인"
+        ],
+        "en": [
+          "- Contributed to the logo and poster design",
+          "- Sole designer of the photo-booth frame",
+          "- Sole designer of the bandana"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "대형 행사 브랜딩 설계와 단독 굿즈 디자인 제작, 팀 기반 디자인 협업을 처음 경험한 프로젝트입니다."
+        ],
+        "en": [
+          "My first time designing branding for a large event, producing merchandise design solo, and collaborating on design as a team."
+        ]
+      }
+    }
+  ]
+}

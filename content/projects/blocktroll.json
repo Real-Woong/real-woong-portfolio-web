@@ -1,0 +1,63 @@
+{
+  "slug": "blocktroll",
+  "no": "08",
+  "cat": "AI · Chrome Ext.",
+  "year": "2025",
+  "title": "BlockTroll",
+  "status": {
+    "kind": "wip",
+    "label": {
+      "ko": "개발 중",
+      "en": "In progress"
+    }
+  },
+  "tagline": {
+    "ko": "욕설·비꼼·트롤링 등 악성 댓글을 브라우저에서 로컬로 분류·필터링하는 AI 기반 확장 프로그램. 개발 진행 중.",
+    "en": "A browser extension that classifies and filters abusive comments — insults, sarcasm, trolling — locally, without a server. In development."
+  },
+  "github": "https://github.com/Real-Woong/block-troll",
+  "demo": null,
+  "stack": [
+    "PyTorch",
+    "HuggingFace Transformers",
+    "Scikit-learn",
+    "Chrome Extension",
+    "JavaScript"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "- Transformer 기반 댓글 유형 분류(욕설/비꼼/과도한 찬양 등)",
+          "- 페이지 로드 시 자동 분석 후 블러·숨김 처리하는 실시간 필터링",
+          "- 서버 API 없이 로컬에서 추론해 개인정보·활동 데이터를 외부로 보내지 않는 구조",
+          "- HuggingFace 모델 교체·데이터셋 확장이 가능한 구조"
+        ],
+        "en": [
+          "- Transformer-based comment classification (insults, sarcasm, excessive praise and so on)",
+          "- Real-time filtering: analysed on page load, then blurred or hidden",
+          "- Inference runs locally with no server API, so browsing and activity data never leave the machine",
+          "- Structured so the HuggingFace model can be swapped and the dataset extended"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "배운 점",
+        "en": "What I learned"
+      },
+      "body": {
+        "ko": [
+          "NLP 모델 성능은 구조보다 데이터 품질과 라벨링 기준이 더 중요하다는 것, 실 서비스 환경에서는 정확도뿐 아니라 추론 속도·리소스 사용량 최적화가 중요하다는 것을 확인했습니다."
+        ],
+        "en": [
+          "Two things became clear: NLP performance depends more on data quality and labelling standards than on architecture, and in a shipped product inference speed and resource use matter alongside accuracy."
+        ]
+      }
+    }
+  ]
+}

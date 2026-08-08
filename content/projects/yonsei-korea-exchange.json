@@ -1,0 +1,55 @@
+{
+  "slug": "yonsei-korea-exchange",
+  "no": "14",
+  "cat": "Web · Branding",
+  "year": "2023",
+  "title": "연세 X 고려대 대동단결",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "연세대–고려대 동아리 교류 행사를 위한 웹사이트 제작 및 브랜딩 디자인. 총동아리연합회 홍보부 디자인팀으로 참여.",
+    "en": "Website and branding for a club exchange event between Yonsei and Korea University, as part of the Union of Clubs PR design team."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 역할",
+        "en": "Role"
+      },
+      "body": {
+        "ko": [
+          "- 행사 웹사이트 제작",
+          "- 밤샘 회의를 통한 디자인 기획 및 시안 설계",
+          "- 고려대 현장 방문 촬영 및 릴스 제작 참여"
+        ],
+        "en": [
+          "- Built the event website",
+          "- Design planning and mockups through all-night sessions",
+          "- Shot on location at Korea University and helped produce the reels"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "실사용 행사 웹사이트를 직접 제작하고, 오프라인 행사와 온라인 홍보를 연결하는 대규모 협업 브랜딩을 경험했습니다."
+        ],
+        "en": [
+          "I built an event website that people actually used, and worked on large-scale collaborative branding that connected an offline event to its online promotion."
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 
 const html = readFileSync("public/portfolio.html", "utf8");
 const resume = readFileSync("public/resume.html", "utf8");
@@ -23,11 +24,29 @@ function translationDictionary() {
   return new Function(`return ${src[1]};`)();
 }
 
-/** The `var META = { ... }` status/fix map used by the project modal. */
+/** The generated `var META = { ... }` status/fix map used by the project modal. */
 function modalMeta() {
   const src = html.match(/var META = (\{[\s\S]*?\n {2}\});/);
   assert.ok(src, "modal META map not found");
   return new Function(`return ${src[1]};`)();
+}
+
+/** The authored source the page is generated from. */
+function contentProjects() {
+  return readdirSync("content/projects")
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(`content/projects/${f}`, "utf8")));
+}
+
+/** Every {ko, en} leaf under a value, in document order. */
+function i18nLeaves(value) {
+  const out = [];
+  (function walk(v) {
+    if (!v || typeof v !== "object") return;
+    if (!Array.isArray(v) && "ko" in v) return void out.push(v);
+    (Array.isArray(v) ? v : Object.values(v)).forEach(walk);
+  })(value);
+  return out;
 }
 
 test("portfolio is the root document, not an iframe", () => {
@@ -158,7 +177,7 @@ test("translation dictionary has no dead entries", () => {
   const EN = translationDictionary();
   const nodes = new Set(bodyTextNodes());
   const modalHeadings = new Set(
-    [...html.matchAll(/"h": "([^"]+)"/g)].map((m) => m[1]).concat("기술 스택"),
+    [...html.matchAll(/"h":\s*\{\s*"ko":\s*"([^"]+)"/g)].map((m) => m[1]),
   );
   const dead = Object.keys(EN).filter((k) => !nodes.has(k) && !modalHeadings.has(k));
   assert.deepEqual(dead, [], `dictionary entries matching nothing:\n  ${dead.join("\n  ")}`);
@@ -173,7 +192,8 @@ test("status and fix badges agree between markup and modal", () => {
   }
 
   // Each card renders its status label, and a Fixed badge only when count > 0.
-  for (const [slug, [, label, fixed]] of Object.entries(META)) {
+  for (const [slug, [, labelI18n, fixed]] of Object.entries(META)) {
+    const label = labelI18n.ko;
     const card = body.match(
       new RegExp(`<article class="a-item reveal" data-project="${slug}"[\\s\\S]*?</article>`),
     );
@@ -232,19 +252,67 @@ test("fix counts match the documented defect sections", () => {
   const META = modalMeta();
   const FIX_HEADINGS = ["해결한 기술적 문제", "해결한 문제"];
 
-  for (const [slug, [, , expected]] of Object.entries(META)) {
-    const block = html.match(new RegExp(`"${slug}": \\{[\\s\\S]*?\\n {2}\\}`));
-    if (!block) continue;
-    const heading = FIX_HEADINGS.find((h) => block[0].includes(`"h": "${h}"`));
-    if (!heading) {
-      assert.equal(expected, 0, `${slug} claims ${expected} fixes but documents none`);
-      continue;
-    }
-    const section = block[0].slice(block[0].indexOf(`"h": "${heading}"`));
-    const bodyArr = section.match(/"body": \[([\s\S]*?)\]/);
-    const items = (bodyArr?.[1].match(/"/g)?.length ?? 0) / 2;
-    assert.equal(items, expected, `${slug} documents ${items} fixes but badge says ${expected}`);
+  for (const doc of contentProjects()) {
+    const section = doc.sections.find((s) => FIX_HEADINGS.includes(s.h.ko));
+    const documented = section ? section.body.ko.length : 0;
+    assert.equal(
+      META[doc.slug][2],
+      documented,
+      `${doc.slug}: badge says ${META[doc.slug][2]} fixes, the log documents ${documented}`,
+    );
   }
+});
+
+test("every project write-up is fully translated", () => {
+  // The EN toggle used to be a half-product: chrome in English, every project
+  // body in Korean behind a "Korean only" notice. Adding copy without its
+  // translation puts that back, so it fails here instead.
+  const gaps = [];
+  for (const doc of contentProjects()) {
+    for (const leaf of i18nLeaves({ t: doc.tagline, s: doc.sections, st: doc.status.label })) {
+      if (leaf.en === undefined || leaf.en === null) {
+        const sample = Array.isArray(leaf.ko) ? leaf.ko[0] : leaf.ko;
+        gaps.push(`${doc.slug}: ${String(sample).slice(0, 60)}`);
+      }
+    }
+  }
+  assert.deepEqual(gaps, [], `untranslated project copy:\n  ${gaps.join("\n  ")}`);
+});
+
+test("translated lists keep the same number of lines as the original", () => {
+  // A body is rendered as bullets; a short en array would silently drop them.
+  for (const doc of contentProjects()) {
+    for (const leaf of i18nLeaves({ s: doc.sections })) {
+      if (Array.isArray(leaf.ko) && Array.isArray(leaf.en)) {
+        assert.equal(
+          leaf.en.length,
+          leaf.ko.length,
+          `${doc.slug}: ${leaf.ko.length} Korean lines but ${leaf.en.length} English`,
+        );
+      }
+    }
+  }
+});
+
+test("the page is in sync with content/projects", () => {
+  // The generated blocks are derived, so a hand edit to the HTML — or a
+  // content change nobody rebuilt — has to fail loudly rather than ship.
+  execFileSync("node", ["scripts/build-projects.mjs", "--check"], { stdio: "pipe" });
+});
+
+test("every project in the content source reaches the page", () => {
+  const META = modalMeta();
+  const docs = contentProjects();
+  const slugs = new Set(docs.map((d) => d.slug));
+
+  assert.equal(docs.length, Object.keys(META).length, "META and content disagree on project count");
+  for (const slug of [...html.matchAll(/data-project="([a-z0-9-]+)"/g)].map((m) => m[1])) {
+    assert.ok(slugs.has(slug), `${slug} is referenced in markup but has no content file`);
+  }
+
+  // Numbering is the archive's identity; duplicates would break the ordering.
+  const numbers = docs.map((d) => d.no);
+  assert.equal(new Set(numbers).size, numbers.length, "duplicate project numbers");
 });
 
 test("hero uptime stat hides itself until a real start date is set", () => {

@@ -1,0 +1,59 @@
+{
+  "slug": "unimade",
+  "no": "06",
+  "cat": "Web · Team",
+  "year": "2024",
+  "title": "UNI-MADE",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "대학생 셀러가 상품을 등록·판매할 수 있는 온라인 커머스 플랫폼. 팀 기반으로 구현한 첫 React 프로젝트(UMC).",
+    "en": "An online commerce platform where university-student sellers list and sell their products. My first React project, built as a team (UMC)."
+  },
+  "github": "https://github.com/Uni-Made/FE",
+  "demo": null,
+  "stack": [
+    "React",
+    "Vite",
+    "TanStack Query"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "담당 영역",
+        "en": "Scope of ownership"
+      },
+      "body": {
+        "ko": [
+          "- MyPage, SellerPage 구현",
+          "- 상품 등록/수정/상세 확인 기능, 회원정보 수정 기능",
+          "- Figma 기반 디자인 일부 보조"
+        ],
+        "en": [
+          "- Built MyPage and SellerPage",
+          "- Product creation, editing and detail views, plus account-info editing",
+          "- Assisted with parts of the Figma design"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "배운 점",
+        "en": "What I learned"
+      },
+      "body": {
+        "ko": [
+          "컴포넌트 단위 설계와 TanStack Query 기반 서버 상태 관리, CRUD 흐름 설계, PR 기반 협업을 통해 단순 React 학습을 넘어 실제 서비스 구조를 경험했습니다."
+        ],
+        "en": [
+          "Component-level design, server state with TanStack Query, CRUD flow design and PR-based collaboration took this past learning React and into how a real service is structured."
+        ]
+      }
+    }
+  ]
+}

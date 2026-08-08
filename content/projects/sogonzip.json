@@ -1,0 +1,89 @@
+{
+  "slug": "sogonzip",
+  "no": "05",
+  "cat": "Product · Personal",
+  "year": "2026",
+  "title": "Sogon.zip",
+  "status": {
+    "kind": "live",
+    "label": {
+      "ko": "운영 중",
+      "en": "Live"
+    }
+  },
+  "tagline": {
+    "ko": "연인이나 가까운 친구가 취향과 마음을 소곤파일로 저장하고, 정해둔 순간에 직접 열어보는 관계 기반 프라이빗 아카이브. 웹 베타 + Expo 모바일 MVP.",
+    "en": "A private, relationship-scoped archive: a partner or close friend saves their tastes and feelings as a \"sogon file\" and opens it at a moment they chose in advance. Web beta plus an Expo mobile MVP."
+  },
+  "github": "https://github.com/Real-Woong/sogon.zip",
+  "demo": "https://sogon-zip.pages.dev/",
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "React Router",
+    "TailwindCSS",
+    "Radix UI",
+    "Cloudflare Pages Functions",
+    "Cloudflare D1",
+    "Expo/React Native"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 기능",
+        "en": "Key features"
+      },
+      "body": {
+        "ko": [
+          "- 소곤파일: 공개 시점·민감도·데이트 추천 반영 여부를 직접 설정하는 프라이빗 파일",
+          "- 예약 공개 + 작성자 최종 압축해제 — 시간이 되어도 자동 공개되지 않고 결정권은 항상 작성자에게 있음",
+          "- 계정 코드 기반 1:1 관계 연결, 정원 2명 제한과 중복 요청 방지",
+          "- 두 사람 중 낮은 쪽 만족도를 보호하는 공동 데이트 코스 추천 설계"
+        ],
+        "en": [
+          "- Sogon files: private files where the reveal time, sensitivity and whether they feed date recommendations are all set by the author",
+          "- Scheduled reveal with a final unlock by the author — the file never opens by itself, and the decision always stays with the person who wrote it",
+          "- One-to-one linking by account code, with a two-person cap and duplicate requests blocked",
+          "- Joint date-course recommendations designed to protect whichever of the two is less satisfied"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "프라이버시 · 안정성",
+        "en": "Privacy & reliability"
+      },
+      "body": {
+        "ko": [
+          "- 비밀번호 salt+PBKDF2-SHA256 해싱, 세션 토큰은 해시로만 저장, 30일 만료+슬라이딩 연장",
+          "- 15분 내 로그인 10회 실패 시 일시 잠금, 상대에게는 opened 상태 파일만 반환",
+          "- 공개 전 파일 가시성·공유 공간 정원·예약 상태 전환 같은 핵심 규칙을 자동 회귀 테스트로 고정"
+        ],
+        "en": [
+          "- Passwords hashed with salt and PBKDF2-SHA256; session tokens stored only as hashes, expiring in 30 days with sliding renewal",
+          "- Ten failed logins within 15 minutes locks the account temporarily, and the other person only ever receives files already in the opened state",
+          "- Core rules — visibility before reveal, the shared-space capacity, scheduled-state transitions — are pinned by automated regression tests"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 기술적 문제",
+        "en": "Defects found and fixed"
+      },
+      "body": {
+        "ko": [
+          "- Cloudflare Pages SPA fallback이 없는 API 경로에도 index.html을 200으로 반환할 수 있어, content-type과 응답 형태를 함께 검증하도록 처리",
+          "- 관계 해제 시 공유 방을 먼저 지우면 계정까지 CASCADE 삭제될 수 있던 문제를 dissolveRoom() 순서 재구현으로 해결",
+          "- 예약 규칙을 shared/sogonOpening.ts 단일 모듈로 통일해 화면마다 다른 상태로 보이는 문제 방지"
+        ],
+        "en": [
+          "- Cloudflare Pages SPA fallback could return index.html with a 200 for API paths that did not exist, so responses are now verified on content type and shape together",
+          "- Dissolving a relationship deleted the shared room first, which could CASCADE all the way to the accounts; dissolveRoom() was reimplemented to run in the right order",
+          "- Scheduling rules were unified into a single shared/sogonOpening.ts module, so a file can no longer appear in different states on different screens"
+        ]
+      }
+    }
+  ]
+}

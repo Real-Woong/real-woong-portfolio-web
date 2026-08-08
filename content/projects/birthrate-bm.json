@@ -1,0 +1,57 @@
+{
+  "slug": "birthrate-bm",
+  "no": "16",
+  "cat": "Planning · Strategy",
+  "year": "2024",
+  "title": "출산율 저하 해결 BM",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "저출산 문제 해결을 위한 비즈니스 모델을 설계한 교양 기말 프로젝트. 만점을 받았습니다.",
+    "en": "A business model addressing South Korea's declining birth rate, built as a final project for an elective. It received full marks."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [],
+  "sections": [
+    {
+      "h": {
+        "ko": "수행 내용",
+        "en": "What I did"
+      },
+      "body": {
+        "ko": [
+          "- 문제 정의 및 시장 분석",
+          "- 타겟 세분화",
+          "- 수익 구조 설계",
+          "- 실행 전략 도출"
+        ],
+        "en": [
+          "- Problem definition and market analysis",
+          "- Target segmentation",
+          "- Revenue model design",
+          "- Execution strategy"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "의미",
+        "en": "Why it mattered"
+      },
+      "body": {
+        "ko": [
+          "교양 과제였지만 사회 문제를 비즈니스 모델 관점에서 구조화해본 프로젝트입니다."
+        ],
+        "en": [
+          "It was coursework, but it was the first time I structured a social problem as a business model."
+        ]
+      }
+    }
+  ]
+}

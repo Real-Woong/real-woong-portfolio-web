@@ -1,0 +1,95 @@
+{
+  "slug": "agora",
+  "no": "01",
+  "cat": "Blockchain · Startup",
+  "year": "2026",
+  "title": "Agora",
+  "status": {
+    "kind": "mvp",
+    "label": {
+      "ko": "MVP 개발 중",
+      "en": "MVP in progress"
+    }
+  },
+  "tagline": {
+    "ko": "사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault. 블록블록 2026 Summer 팀 프로젝트.",
+    "en": "A Sui-based investment vault where the user keeps final ownership and withdrawal rights, delegating only a bounded automated-trading permission to AgoraAgent. A BlockBlock 2026 Summer team project."
+  },
+  "github": "https://github.com/TheZoneAgora/the-zone-agora",
+  "demo": null,
+  "stack": [
+    "Sui Move",
+    "x402",
+    "Next.js",
+    "Sui dApp Kit",
+    "Framer Motion"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "개요",
+        "en": "Overview"
+      },
+      "body": {
+        "ko": [
+          "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
+          "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
+          "2026년 7월 기준 MVP 개발 단계이며, 실제 DEX 체결·정산과 Testnet E2E는 아직 완성되지 않았습니다."
+        ],
+        "en": [
+          "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
+          "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
+          "As of July 2026 this is at MVP stage: real DEX execution and settlement, and testnet end-to-end runs, are not finished."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "- 2자산(Fiat/Crypto) Vault, owner 전용 입출금, AgoraAgent 전용 BUY/SELL 권한 분리",
+          "- BUY/SELL 1회·epoch 누적 한도 및 ACTIVE/REDUCE_ONLY/PAUSED 상태 관리",
+          "- signal digest·위험 점수를 온체인 이벤트로 기록해 판단 근거를 감사 가능하게 보존",
+          "- 사용자가 서명하는 구간과 Agora가 대신 서명·부담하는 구간을 명확히 분리(자동 투자 중에는 사용자 지갑에서 가스가 빠지지 않음)"
+        ],
+        "en": [
+          "- A two-asset (fiat/crypto) vault with owner-only deposits and withdrawals, and BUY/SELL permission held separately by AgoraAgent",
+          "- Per-trade and per-epoch cumulative caps on BUY/SELL, with ACTIVE / REDUCE_ONLY / PAUSED states",
+          "- Signal digests and risk scores recorded as on-chain events, so the reasoning behind a trade stays auditable",
+          "- A clear split between what the user signs and what Agora signs and pays for — no gas leaves the user's wallet during automated investing"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 문제",
+        "en": "Defects found and fixed"
+      },
+      "body": {
+        "ko": [
+          "초기 설계는 사용자가 여러 Trading Agent 중 하나를 골라 Follow하는 마켓플레이스 구조였는데, 검토 과정에서 “사용자가 검증되지 않은 전략에 직접 자산을 노출한다”는 근본적인 결함을 확인했습니다. 사용자의 Agent 선택·Follow·Follow fee를 모두 제거하고 AgoraAgent가 신호를 검증한 뒤에만 실행하는 위임형 구조로 전면 재설계했으며, 이 과정에서 agent_registry.move와 follow.move 모듈을 삭제했습니다."
+        ],
+        "en": [
+          "The first design was a marketplace: users would pick a trading agent and follow it. Reviewing it surfaced a defect in the premise itself — the user would be exposing real assets to an unvetted strategy. Agent selection, following and follow fees were removed entirely and rebuilt as delegation, where AgoraAgent validates a signal before acting on it. The agent_registry.move and follow.move modules were deleted in the process."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "중요하게 생각한 점",
+        "en": "What mattered most"
+      },
+      "body": {
+        "ko": [
+          "“아직 실제 DEX 체결이 없다”는 한계를 숨기지 않고, 디자인 가이드에 “요청(Requested)과 완료된 거래를 혼동시키지 말 것”이라는 원칙을 명시했습니다."
+        ],
+        "en": [
+          "Rather than hide that real DEX execution does not exist yet, the design guide states the rule outright: never let a requested trade look like a completed one."
+        ]
+      }
+    }
+  ]
+}

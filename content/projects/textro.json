@@ -1,0 +1,59 @@
+{
+  "slug": "textro",
+  "no": "12",
+  "cat": "AI · Tool",
+  "year": "2025",
+  "title": "Textro",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "보안 이슈로 클라우드 OCR을 쓸 수 없는 환경을 위해 만든, 오프라인에서만 동작하는 로컬 OCR 도구. 스캔 PDF 수기 타이핑 문제 해결.",
+    "en": "A local OCR tool that runs entirely offline, built for an environment where cloud OCR was ruled out on security grounds. It removes the need to retype scanned PDFs by hand."
+  },
+  "github": "https://github.com/Real-Woong/textro",
+  "demo": null,
+  "stack": [
+    "Python",
+    "로컬 OCR 파이프라인",
+    "이미지 전처리"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "- 텍스트 PDF / 스캔 이미지 PDF를 자동으로 구분해 분기 처리",
+          "- OCR 정확도 개선을 위한 이미지 전처리 로직",
+          "- 외부 서버를 쓰지 않는 완전 로컬 실행 구조"
+        ],
+        "en": [
+          "- Detects whether a PDF is text or scanned images and branches accordingly",
+          "- Image preprocessing to raise OCR accuracy",
+          "- Runs fully locally, with no external server involved"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "성과",
+        "en": "Outcome"
+      },
+      "body": {
+        "ko": [
+          "수십 분 걸리던 수기 타이핑 작업을 수 초 내로 줄였고, 스캔 PDF 기준 실무 검토가 가능한 수준까지 텍스트를 추출했습니다. “기술이 아니라 문제 해결 관점에서 접근한 프로젝트”라는 원칙을 지켰습니다."
+        ],
+        "en": [
+          "Work that took tens of minutes of manual typing now takes seconds, and text comes out of scanned PDFs clean enough to review properly. It held to its own rule: approach this as a problem to solve, not a technology to use."
+        ]
+      }
+    }
+  ]
+}
