@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 
 const HTML = "public/portfolio.html";
+const RESUME = "public/resume.html";
 
 // Two regions, because live code (the modal refs, esc(), the uptime counter)
 // sits between the two objects and must not be inside a generated span.
@@ -103,6 +104,25 @@ function fixCount(doc) {
   return sec?.body?.ko?.length ?? 0;
 }
 
+/**
+ * The portfolio sums the total from META in the browser. The resume ships as
+ * static print HTML with no script, so its copy is written here instead — it
+ * read 12 while the log documented 21, having been typed when TAPIoca still
+ * claimed a single fix.
+ */
+function withFixTotal(source, total) {
+  let found = 0;
+  const next = source.replace(/(data-fix-total[^>]*>)\d+(<)/g, (_, open, close) => {
+    found += 1;
+    return `${open}${total}${close}`;
+  });
+  if (found === 0) {
+    console.error(`no data-fix-total marker found in ${RESUME}`);
+    process.exit(1);
+  }
+  return next;
+}
+
 const docs = load();
 const PROJECTS = Object.fromEntries(docs.map((d) => [d.slug, buildProject(d)]));
 const META = Object.fromEntries(
@@ -123,17 +143,26 @@ next = replaceRegion(
   ].join("\n"),
 );
 
+const fixTotal = Object.values(META).reduce((n, meta) => n + meta[2], 0);
+const resume = readFileSync(RESUME, "utf8");
+const nextResume = withFixTotal(resume, fixTotal);
+
 if (process.argv.includes("--check")) {
-  if (next !== html) {
+  const stale = [next !== html && HTML, nextResume !== resume && RESUME].filter(Boolean);
+  if (stale.length) {
     console.error(
-      `${HTML} is out of sync with content/projects.\n` +
+      `${stale.join(" and ")} out of sync with content/projects.\n` +
         `Run: node scripts/build-projects.mjs`,
     );
     process.exit(1);
   }
-  console.log(`in sync: ${docs.length} projects`);
+  console.log(`in sync: ${docs.length} projects, ${fixTotal} documented fixes`);
 } else {
   writeFileSync(HTML, next);
+  writeFileSync(RESUME, nextResume);
   const translated = JSON.stringify(PROJECTS).match(/"en":/g)?.length ?? 0;
-  console.log(`wrote ${docs.length} projects into ${HTML} (${translated} translated strings)`);
+  console.log(
+    `wrote ${docs.length} projects into ${HTML} (${translated} translated strings)\n` +
+      `wrote ${fixTotal} documented fixes into ${RESUME}`,
+  );
 }

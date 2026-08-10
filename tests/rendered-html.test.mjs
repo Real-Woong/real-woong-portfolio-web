@@ -248,6 +248,20 @@ test("the documented-fix total is derived from META, not typed", () => {
   }
 });
 
+test("the resume quotes the same fix total as the portfolio", () => {
+  // These drifted: the portfolio derived 21 from META while the resume's
+  // summary still read a typed 12. A recruiter reading both sees the numbers
+  // disagree and stops trusting the rest of them.
+  const META = modalMeta();
+  const total = Object.values(META).reduce((n, [, , fixed]) => n + fixed, 0);
+
+  const quoted = [...resume.matchAll(/data-fix-total[^>]*>(\d+)</g)].map((m) => Number(m[1]));
+  assert.ok(quoted.length > 0, "resume must mark its fix total with data-fix-total");
+  for (const n of quoted) {
+    assert.equal(n, total, `resume says ${n} documented fixes, the log documents ${total}`);
+  }
+});
+
 test("fix counts match the documented defect sections", () => {
   const META = modalMeta();
   const FIX_HEADINGS = ["해결한 기술적 문제", "해결한 문제"];
