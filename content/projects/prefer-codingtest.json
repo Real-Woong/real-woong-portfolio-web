@@ -1,0 +1,98 @@
+{
+  "slug": "prefer-codingtest",
+  "no": "18",
+  "cat": "Automation · Study",
+  "year": "2026",
+  "title": "Prefer for CodingTest",
+  "status": {
+    "kind": "live",
+    "label": {
+      "ko": "운영 중",
+      "en": "Live"
+    }
+  },
+  "tagline": {
+    "ko": "주 5문제라는 약속을 내가 실제로 지키는지 확인하려고 만든 저장소입니다. 문제 수를 적는 칸을 두지 않고 커밋 히스토리에서 계산하게 만들어, 기록이 나에게 유리한 쪽으로 틀릴 수 없게 했습니다.",
+    "en": "A repository built to check whether I actually keep the promise of five problems a week. There is no field to type the count into — it is computed from the commit history, so the record cannot be wrong in my favour."
+  },
+  "github": "https://github.com/Real-Woong/Prefer_for_CodingTest",
+  "demo": null,
+  "stack": ["Python 3", "Git post-commit hook", "GitHub Actions", "zoneinfo (Asia/Seoul)"],
+  "sections": [
+    {
+      "h": {
+        "ko": "왜 만들었나",
+        "en": "Why it exists"
+      },
+      "body": {
+        "ko": [
+          "2026년 7월 31일에 코딩테스트 준비를 시작하면서, 주 5문제를 꾸준히 푸는지 스스로 확인할 방법이 필요했습니다. 다이어리나 노션에 적는 방식은 이미 여러 번 실패했는데, 원인은 게을러서가 아니라 <b>기록 자체를 내가 쓰기 때문</b>이었습니다. 안 한 날은 안 적으면 그만이고, 며칠 지나면 기억이 유리한 쪽으로 흐려집니다.",
+          "그래서 이 저장소에는 문제 수를 적는 칸을 만들지 않았습니다. 풀이 파일을 커밋하는 행위 자체가 유일한 입력이고, README는 커밋 히스토리를 다시 읽어 매번 새로 생성됩니다. 안 푼 주는 안 푼 주로 남습니다."
+        ],
+        "en": [
+          "I started preparing for coding tests on 31 July 2026 and needed a way to check whether I was really solving five problems a week. Diaries and Notion pages had already failed me several times, and the cause was not laziness — it was that <b>I write the record myself</b>. A day I skip is simply a day I do not write down, and after a few days memory drifts in whichever direction flatters me.",
+          "So this repository has no field for the problem count. Committing a solution file is the only input, and the README is regenerated from scratch by re-reading the commit history. A week I missed stays a week I missed."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "<b>모든 수치는 git log에서 계산합니다.</b> LV숫자/문제이름.py 경로가 들어온 커밋 하나가 한 문제이고, 같은 파일은 처음 한 번만 집계합니다. 누적 문제 수, 주차별 달성률, 커밋한 날 수까지 저장된 숫자가 아니라 전부 파생값입니다.",
+          "<b>대시보드 이전 기록은 보수적으로 인정합니다.</b> 자동 집계를 켜기 전에 올려둔 미완성 파일이 점수를 부풀리지 않도록, 2026년 8월 11일 이전 커밋은 메시지에 풀이를 뜻하는 표현이 있을 때만 한 문제로 셉니다. 그 뒤로는 파일만 커밋하면 메시지와 무관하게 잡힙니다.",
+          "<b>기록은 문제와 같은 커밋에 들어갑니다.</b> post-commit 훅이 README를 다시 만들고 amend로 합치기 때문에, 문제 풀이 커밋과 그 결과가 반영된 로그가 항상 한 덩어리입니다. GitHub Actions 워크플로는 훅을 못 쓰는 환경을 위한 수동 복구용으로만 남겨두었습니다.",
+          "<b>봇과 자동 커밋은 집계에서 제외합니다.</b> 로그 갱신 커밋을 걸러내지 않으면, 기록하는 행위가 스스로를 활동으로 세는 순환이 생깁니다.",
+          "주 단위 경계와 날짜는 Asia/Seoul 기준으로 고정했습니다. GitHub Actions 러너는 UTC라, 밤늦게 푼 문제가 다음 주로 넘어가는 것을 막기 위해서입니다."
+        ],
+        "en": [
+          "<b>Every number is computed from git log.</b> One commit touching an LV&lt;n&gt;/&lt;problem&gt;.py path is one problem, and the same file counts only the first time. The running total, the weekly hit rate and the number of active days are all derived values, never stored ones.",
+          "<b>Pre-dashboard history is credited conservatively.</b> So that unfinished files pushed before automatic tracking existed cannot inflate the score, commits before 11 August 2026 count only if the subject says something that means \"solved\". After that date, committing the file is enough regardless of the message.",
+          "<b>The log ships inside the same commit as the problem.</b> A post-commit hook regenerates the README and folds it in with an amend, so a solution and the log that reflects it are always one unit. The GitHub Actions workflow is kept only as manual recovery for environments where the hook cannot run.",
+          "<b>Bot and automation commits are excluded.</b> Without filtering out the log-update commits, the act of recording would count itself as activity.",
+          "Week boundaries and dates are pinned to Asia/Seoul. GitHub Actions runners are on UTC, which would otherwise push a problem solved late at night into the following week."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 문제",
+        "en": "Defects found and fixed"
+      },
+      "collapsed": true,
+      "body": {
+        "ko": [
+          "풀이 파일이 전부 한글 이름인데 <b>대시보드에는 한 문제도 잡히지 않았습니다.</b> git log --name-only가 비ASCII 경로를 따옴표 안 8진 이스케이프로 출력해서, LV숫자/이름.py 패턴에 아무것도 걸리지 않았던 것입니다. core.quotepath를 꺼서 원래 경로를 받도록 고쳤습니다.",
+          "기록이 항상 <b>한 커밋 늦게 도착했습니다.</b> GitHub Actions가 push 이후에 돌면서 README를 별도 커밋으로 올렸기 때문에, 문제를 푼 커밋 안에는 그 문제가 반영된 로그가 없었습니다. 생성을 post-commit 훅으로 옮겨 같은 커밋에 amend하고, 워크플로는 수동 실행 전용으로 내렸습니다.",
+          "그 amend가 이번에는 <b>방금 쓴 링크를 깨뜨렸습니다.</b> README를 만든 뒤 amend하면 HEAD의 SHA가 바뀌므로, 가장 최근 커밋 행이 더 이상 존재하지 않는 SHA를 가리켰습니다. HEAD만은 링크 대신 “현재 커밋”으로 표기하도록 바꿔, 자기 자신을 가리키다 깨지는 경우를 없앴습니다."
+        ],
+        "en": [
+          "Every solution file has a Korean name, and <b>the dashboard counted none of them.</b> git log --name-only prints non-ASCII paths as quoted octal escapes, so the LV&lt;n&gt;/&lt;name&gt;.py pattern matched nothing at all. Turning core.quotepath off restored the real paths.",
+          "The log always arrived <b>one commit late.</b> GitHub Actions ran after the push and committed the README separately, so the commit that solved a problem never contained the log reflecting it. Generation moved into a post-commit hook that amends the same commit, and the workflow was demoted to manual-only.",
+          "That amend then <b>broke the link it had just written.</b> Regenerating the README and amending changes HEAD's SHA, so the row for the newest commit pointed at a SHA that no longer existed. HEAD now reads “this commit” instead of a link, removing the only self-reference that could break."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "현재 상태",
+        "en": "Where it stands"
+      },
+      "body": {
+        "ko": [
+          "2026년 8월 12일 기준 누적 8문제(전부 LV1), 3주차 진행 중입니다. 주간 달성은 1문제 · 4문제 · 3문제로, <b>아직 목표인 5문제를 채운 주가 없습니다.</b>",
+          "낮은 주가 그대로 남아 있다는 점이 이 저장소의 요점입니다. 손으로 고칠 수 있는 숫자였다면 진작 5로 적혀 있었을 것이고, 그 순간부터 이 기록은 아무것도 증명하지 못합니다.",
+          "같은 저장소의 STUDY_PLAN.md에는 요일별로 코딩테스트와 선형대수를 나눠 배치하고, 한 문제당 50분 타이머와 하루 2시간 상한을 정해두었습니다. 최소치뿐 아니라 상한을 둔 이유는, 하루에 몰아치면 다음 날이 0이 되기 때문입니다."
+        ],
+        "en": [
+          "As of 12 August 2026: eight problems, all LV1, in the third week. The weekly counts are 1, 4 and 3 — <b>no week has yet reached the target of five.</b>",
+          "That the weak weeks are still there is the point of the repository. If the number were something I could edit by hand it would already read five, and from that moment the record would prove nothing at all.",
+          "STUDY_PLAN.md in the same repository splits the week by day between coding tests and linear algebra, with a 50-minute timer per problem and a two-hour daily ceiling. The ceiling exists as much as the floor does, because cramming one day turns the next day into a zero."
+        ]
+      }
+    }
+  ]
+}

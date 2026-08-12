@@ -105,19 +105,21 @@ function fixCount(doc) {
 }
 
 /**
- * The portfolio sums the total from META in the browser. The resume ships as
- * static print HTML with no script, so its copy is written here instead — it
- * read 12 while the log documented 21, having been typed when TAPIoca still
- * claimed a single fix.
+ * Both documents mark the total with data-fix-total, and both get it written
+ * here. The resume ships as static print HTML with no script, so the markup is
+ * its only copy — it read 12 while the log documented 21, having been typed
+ * when TAPIoca still claimed a single fix. The portfolio does sum META in the
+ * browser, but its markup value is what a crawler and a reader with no JS see,
+ * and leaving that one hand-typed just moves the same drift somewhere quieter.
  */
-function withFixTotal(source, total) {
+function withFixTotal(source, total, where) {
   let found = 0;
   const next = source.replace(/(data-fix-total[^>]*>)\d+(<)/g, (_, open, close) => {
     found += 1;
     return `${open}${total}${close}`;
   });
   if (found === 0) {
-    console.error(`no data-fix-total marker found in ${RESUME}`);
+    console.error(`no data-fix-total marker found in ${where}`);
     process.exit(1);
   }
   return next;
@@ -144,8 +146,9 @@ next = replaceRegion(
 );
 
 const fixTotal = Object.values(META).reduce((n, meta) => n + meta[2], 0);
+next = withFixTotal(next, fixTotal, HTML);
 const resume = readFileSync(RESUME, "utf8");
-const nextResume = withFixTotal(resume, fixTotal);
+const nextResume = withFixTotal(resume, fixTotal, RESUME);
 
 if (process.argv.includes("--check")) {
   const stale = [next !== html && HTML, nextResume !== resume && RESUME].filter(Boolean);
@@ -163,6 +166,6 @@ if (process.argv.includes("--check")) {
   const translated = JSON.stringify(PROJECTS).match(/"en":/g)?.length ?? 0;
   console.log(
     `wrote ${docs.length} projects into ${HTML} (${translated} translated strings)\n` +
-      `wrote ${fixTotal} documented fixes into ${RESUME}`,
+      `wrote ${fixTotal} documented fixes into ${HTML} and ${RESUME}`,
   );
 }
