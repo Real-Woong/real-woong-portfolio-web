@@ -34,16 +34,38 @@
       },
       "body": {
         "ko": [
-          "- 방 코드 기반 비로그인 참여, HttpOnly·Secure·SameSite=Lax 쿠키 세션",
-          "- 관심사 민감도 3단계(공개/블러/잠금) 등록과 노출 제어",
-          "- 버블 pop 인터랙션과 pop 기반 실시간 알림, 동일 pop의 서버 멱등 처리",
-          "- 실제 pop 이벤트를 근거로 한 방 종료 요약(상호 확인 매칭 강조)"
+          "- 방 코드 기반 비로그인 참여, HttpOnly·Secure·SameSite=Lax 쿠키 세션과 401 만료 자동 감지",
+          "- 관심사 민감도 3단계 — 항상 보이는 공개, 상대가 pop해야 풀리는 블러, 대상자가 승인해야 열리는 잠금",
+          "- 버블 pop 즉시 대상자에게 토스트 알림, 잠금 관심사는 pop 대신 열람 요청을 보내고 수락해야 본문 공개",
+          "- 같은 대상·같은 관심사에 대한 pop은 서버에서 멱등 처리해, 연타해도 이벤트가 중복 적재되지 않음",
+          "- 실제 pop·승인 이벤트로 만드는 방 종료 요약 — 양방향 pop은 상호 확인으로 강조하고, 잠금 관심사 본문은 당사자에게만 노출",
+          "- 방 생성 → 참여 → 관심사 등록 → 준비완료 → 버블 필드 → 종료까지 room lifecycle 전체 구현"
         ],
         "en": [
-          "- Login-free entry by room code, with HttpOnly / Secure / SameSite=Lax cookie sessions",
-          "- Interests registered at three sensitivity levels (open, blurred, locked) with matching exposure control",
-          "- Bubble-pop interaction and pop-driven live notifications, with repeat pops made idempotent server-side",
-          "- An end-of-room summary built from actual pop events, foregrounding mutually confirmed matches"
+          "- Login-free entry by room code, with HttpOnly / Secure / SameSite=Lax cookie sessions and automatic detection of a 401 expiry",
+          "- Interests at three sensitivity levels: always visible, blurred until the other person pops it, and locked until its owner approves",
+          "- A pop raises a toast for its target immediately; a locked interest sends a view request instead, and the text opens only once accepted",
+          "- Pops on the same person and the same interest are made idempotent server-side, so repeated taps never pile up duplicate events",
+          "- An end-of-room summary built from the real pop and approval events — mutual pops are highlighted as confirmed, and locked text stays visible only to the people involved",
+          "- The full room lifecycle is implemented: create, join, register interests, ready up, the bubble field, and closing the room"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "설계 판단",
+        "en": "Design decisions"
+      },
+      "body": {
+        "ko": [
+          "텍스트 유사도 매칭은 쓰지 않았습니다. \"야구\"와 \"야구직관\"처럼 같은 취향을 각자 다른 단어로 적는 문제를 그대로 안고 가기 때문입니다. 대신 <b>누가 누구의 버블을 눌렀는지</b>라는 실제 행동만 매칭 근거로 삼아, 표현의 자유도를 지키면서도 요약이 추측이 아니라 기록이 되도록 했습니다.",
+          "실시간성은 Durable Objects 없이 짧은 주기 폴링과 하트비트로 확보했습니다. 데모 규모에 맞춰 주기를 조정해 서버 부하와 체감 반응 속도의 균형을 맞췄고, 세션 stale 판정 기준도 폴링 동작 방식에 맞게 재조정해 가만히 있어도 세션이 조용히 끊기지 않게 했습니다. 완전한 push는 다음 단계로 분리했습니다.",
+          "공개 범위를 서비스가 정하지 않고 참가자가 직접 3단계로 고르게 했습니다. 처음 만난 자리에서 어디까지 드러낼지는 사람마다 다르고, 그 선택을 뺏는 순간 관심사를 솔직하게 적을 이유가 사라지기 때문입니다."
+        ],
+        "en": [
+          "There is no text-similarity matching. Two people write the same taste in different words — \"baseball\" and \"going to baseball games\" — and similarity matching inherits that problem whole. What counts as evidence here is <b>who popped whose bubble</b>: real behaviour, which keeps people free to phrase interests their own way while the summary stays a record rather than a guess.",
+          "Live updates run on short-interval polling plus a heartbeat, without Durable Objects. The interval is tuned to the size of the demo to balance server load against how responsive it feels, and the staleness rule for sessions was retuned to match how polling actually behaves, so sitting still no longer quietly drops your session. Full push is deliberately left to the next step.",
+          "The service never decides how much of an interest is exposed; each participant picks one of the three levels themselves. How much you want to reveal on a first meeting differs from person to person, and taking that choice away removes the reason to write anything honest in the first place."
         ]
       }
     },
@@ -54,16 +76,16 @@
       },
       "body": {
         "ko": [
-          "- 모든 요청마다 실행되던 방 정리 쿼리를 Cloudflare Cron Trigger로 분리해 무관한 요청의 지연을 제거",
-          "- Pages와 Worker가 분리 배포되는 구조를 모른 채 운영하다 프로덕션이 멈춘 적이 있어, Worker 주소를 정식 서비스 주소로 전환하고 배포 흐름을 정리",
-          "- localhost/127.0.0.1 호스트 불일치로 SameSite 쿠키가 조용히 실패하던 문제를 호스트 통일로 해결",
-          "- useCallback 의존성 배열 실수로 발생한 렌더→재요청 무한 루프를 메모이제이션으로 해결"
+          "- 정적 자산 요청까지 포함해 모든 요청마다 만료된 방을 정리하는 쿼리가 함께 돌고 있어, 방이 늘수록 무관한 요청이 느려졌습니다. 정리 로직을 요청 경로에서 떼어내 Cloudflare Cron Trigger(scheduled 핸들러)로 옮겼습니다",
+          "- Pages와 Worker가 분리 배포된다는 것을 모른 채 운영하다 프로덕션이 완전히 멈춘 적이 있습니다. git push로는 API를 처리하는 Worker가 갱신되지 않는다는 점을 확인하고, Worker 주소를 정식 서비스 주소로 전환한 뒤 wrangler deploy로 프론트·백엔드를 함께 배포하도록 정리했습니다",
+          "- 프론트는 localhost, API는 127.0.0.1을 바라보고 있어 브라우저가 둘을 다른 사이트로 취급했고, SameSite 쿠키가 조용히 실패해 인증이 계속 깨졌습니다. 호스트를 하나로 통일해 해결했습니다",
+          "- 세션 초기화 함수를 useCallback 의존성 배열에 넣으면서 매 렌더마다 새 함수가 생겨 렌더 → 재요청 → 재렌더 무한 루프가 발생했습니다. 네트워크 로그에서 짧은 시간에 쌓인 수백 건의 중복 요청으로 원인을 찾아 메모이제이션으로 고쳤습니다"
         ],
         "en": [
-          "- The room cleanup query ran on every request; moving it to a Cloudflare Cron Trigger removed the latency it added to unrelated requests",
-          "- Production went down because I was running it without realising Pages and the Worker deploy separately; the Worker address became the canonical one and the deploy flow was straightened out",
-          "- SameSite cookies failed silently on a localhost / 127.0.0.1 host mismatch, fixed by settling on one host",
-          "- A wrong useCallback dependency array caused a render-refetch loop, fixed with proper memoisation"
+          "- A cleanup query for expired rooms ran alongside every request, static assets included, so unrelated requests got slower as rooms accumulated. The cleanup was lifted out of the request path into a Cloudflare Cron Trigger (the scheduled handler)",
+          "- Production went down completely because I was running it without realising Pages and the Worker deploy separately. Once it was clear that git push never updates the Worker that serves the API, the Worker address became the canonical one and wrangler deploy now ships frontend and backend together",
+          "- The frontend talked to localhost while the API sat on 127.0.0.1, which the browser treats as two different sites; SameSite cookies failed silently and auth kept breaking. Settling on a single host fixed it",
+          "- Adding the session-init function to a useCallback dependency array recreated it on every render, producing a render → refetch → re-render loop. Hundreds of duplicate requests in a few seconds of network log gave it away, and memoisation fixed it"
         ]
       }
     },
@@ -74,10 +96,10 @@
       },
       "body": {
         "ko": [
-          "소규모 실사용 데모로 운영 중이며, Cloudflare Worker 단일 배포(정적 자산+API)로 프론트엔드와 백엔드를 함께 관리합니다. Durable Objects 기반 실시간 push로 폴링을 대체하는 것이 다음 과제입니다."
+          "소규모 실사용 데모로 운영 중이며, Cloudflare Worker 단일 배포(정적 자산 + API)로 프론트엔드와 백엔드를 함께 관리합니다. 방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현을 마쳤습니다. 다음 과제는 Durable Objects 기반 실시간 push로 폴링을 대체하는 것, 그리고 방 규모가 커질 때의 부하 구조를 다시 보는 것입니다."
         ],
         "en": [
-          "Running as a small live demo, with frontend and backend managed together in a single Cloudflare Worker deploy (static assets plus API). Replacing polling with Durable Objects push is the next piece."
+          "Running as a small live demo, with frontend and backend managed together in a single Cloudflare Worker deploy (static assets plus API). The room lifecycle, the three sensitivity levels, pop notifications, the closing summary and automatic cleanup of expired rooms are all in place. Next up: replacing polling with Durable Objects push, and revisiting the load model for larger rooms."
         ]
       }
     }
