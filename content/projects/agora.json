@@ -34,12 +34,12 @@
         "ko": [
           "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
           "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
-          "2026년 7월 기준 MVP 개발 단계이며, 실제 DEX 체결·정산과 Testnet E2E는 아직 완성되지 않았습니다."
+          "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작합니다. Move 60건, x402 23건 테스트가 모두 통과한 상태이며, 남은 일은 BE·FE와의 인터페이스 동결과 3파트 통합 리허설입니다."
         ],
         "en": [
           "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
           "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
-          "As of July 2026 this is at MVP stage: real DEX execution and settlement, and testnet end-to-end runs, are not finished."
+          "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 60 Move tests and 23 x402 tests pass. What remains is freezing the interfaces with the backend and frontend, and a three-part integration rehearsal."
         ]
       }
     },
@@ -84,10 +84,10 @@
       },
       "body": {
         "ko": [
-          "“아직 실제 DEX 체결이 없다”는 한계를 숨기지 않고, 디자인 가이드에 “요청(Requested)과 완료된 거래를 혼동시키지 말 것”이라는 원칙을 명시했습니다."
+          "체결 상태를 부풀리지 않는 것을 원칙으로 삼아, 디자인 가이드에 \"요청(Requested)과 완료된 거래를 혼동시키지 말 것\"을 명시했습니다. Testnet 체결이 붙은 뒤에도 이 구분은 그대로 유지하고 있습니다."
         ],
         "en": [
-          "Rather than hide that real DEX execution does not exist yet, the design guide states the rule outright: never let a requested trade look like a completed one."
+          "The rule was never to overstate execution: the design guide says outright that a requested trade must never look like a completed one. That separation still holds now that testnet execution is wired in."
         ]
       }
     }
