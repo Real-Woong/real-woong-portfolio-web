@@ -1,0 +1,69 @@
+{
+  "_comment": [
+    "SECRETARY 의 _STATUS.md 와 이 저장소의 status.kind 를 대조하는 규칙.",
+    "scripts/sync-status.mjs 가 읽는다.",
+    "",
+    "두 어휘는 서로 다른 축이다. _STATUS.md 의 상태는 '내가 손대고 있는가'(활동)이고,",
+    "status.kind 는 '배포됐는가·끝났는가'(성숙도)다. SogonZip 은 진행중이면서 동시에 live 이고,",
+    "둘 다 참이다. 그래서 1:1 로 옮기지 않고, 서로 모순되는 조합만 잡아낸다.",
+    "",
+    "root 는 이 저장소 기준 상대 경로다. _STATUS.md 는 모든 저장소에서 gitignore 되어 있어",
+    "CI/Cloudflare 빌드에는 존재하지 않는다. 로컬에서만 돌리고 결과 json 을 커밋한다."
+  ],
+
+  "root": "../../..",
+
+  "_compatComment": [
+    "각 _STATUS.md 상태와 함께 성립할 수 있는 status.kind 목록.",
+    "여기 없는 조합만 모순으로 보고한다."
+  ],
+  "compat": {
+    "진행중": ["wip", "mvp", "live", "lab"],
+    "관찰중": ["live", "wip", "mvp"],
+    "멈춤":   ["wip", "mvp", "lab"],
+    "종료":   ["done", "lab"]
+  },
+
+  "_autofixComment": [
+    "자동으로 고쳐도 안전한 단 하나의 방향: 내가 종료로 내린 프로젝트가",
+    "포트폴리오에서 아직 진행 중이라고 주장하는 경우. --fix 로만 적용된다.",
+    "반대 방향(포트폴리오가 done 인데 아직 진행 중)은 카피까지 손봐야 하므로 사람이 한다."
+  ],
+  "autofix": { "종료": "done" },
+
+  "labels": {
+    "wip":  { "ko": "개발 중",     "en": "In progress" },
+    "live": { "ko": "운영 중",     "en": "Live" },
+    "done": { "ko": "완료",       "en": "Shipped" },
+    "mvp":  { "ko": "MVP 개발 중", "en": "MVP in progress" },
+    "lab":  { "ko": "학습용",      "en": "Learning" }
+  },
+
+  "projects": {
+    "agora":             "Project_Team/Agora_BlockBlock2026Summer",
+    "aispoc":            "Project_AI/NLP/행정부AI공모전",
+    "blocktroll":        "Project_AI/NLP/BlockTroll",
+    "bubblebreak":       "Project_Personal/react/BubbleBreak",
+    "cryptofunding":     "Project_Team/CryptoFunding",
+    "gongppung":         "Project_Team/공뽕",
+    "healeat":           "Project_Team/HealEat",
+    "marvis":            "Project_AI/LLM/Marvis",
+    "prefer-codingtest": "Prefer_for_CodingTest",
+    "sogonzip":          "Project_Personal/App/SogonZip",
+    "tapioca":           "Project_AI/AI-Agent/toss_AI_Agent",
+    "textro":            "Project_AI/OCR/Textro",
+    "unimade":           "Project_Team/UniMade/FE"
+  },
+
+  "pinned": {
+    "agora": "제품 단계(mvp)는 활동 상태와 다른 축이다. 손으로 유지한다.",
+    "cvprojects": "lab(학습용)은 상태가 아니라 분류다. 3개 프로젝트를 묶은 항목이라 1:1 대응도 없다."
+  },
+
+  "unmapped": {
+    "birthrate-bm": "_STATUS.md 없음",
+    "daedongje2023": "_STATUS.md 없음",
+    "harang": "_STATUS.md 없음",
+    "yonsei-korea-exchange": "_STATUS.md 없음"
+  }
+}
