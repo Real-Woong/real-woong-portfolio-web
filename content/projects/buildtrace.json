@@ -1,0 +1,64 @@
+{
+  "slug": "buildtrace",
+  "no": "20",
+  "cat": "Blockchain · BIM",
+  "year": "2026",
+  "title": "BuildTrace",
+  "status": {
+    "kind": "wip",
+    "label": {
+      "ko": "개발 중",
+      "en": "In progress"
+    }
+  },
+  "tagline": {
+    "ko": "여러 독립 조직이 함께 쓰는 BIM 환경에서 변경·배포·검토·승인 이력을 해시와 전자서명으로 공동 검증하는 provenance 인프라.",
+    "en": "Provenance infrastructure for independently operated BIM organisations to jointly verify change, distribution, review and approval history using hashes and digital signatures."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [
+    "Hyperledger Fabric",
+    "Sui Move",
+    "BIM",
+    "IFC",
+    "Merkle Tree",
+    "REST API"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "현재 설계",
+        "en": "Current design"
+      },
+      "body": {
+        "ko": [
+          "기본 원장은 Hyperledger Fabric permissioned consortium network로 두고, Fabric 이력의 Merkle root를 public chain에 선택적으로 anchoring하는 하이브리드 구조를 설계했습니다.",
+          "BIM 원본은 CDE 또는 S3 호환 저장소에 off-chain으로 보관하고 식별자·해시·버전·이벤트·서명·이전 이벤트 참조만 원장에 기록합니다.",
+          "Sui는 주 원장이 아니라 BIM Object와 Sui Object의 적합성을 Fabric 방식과 비교하는 별도 실험 트랙으로 정의했습니다."
+        ],
+        "en": [
+          "Designed a hybrid architecture with a permissioned Hyperledger Fabric consortium as the primary ledger and optional anchoring of its Merkle roots to a public chain.",
+          "Original BIM assets stay off-chain in a CDE or S3-compatible store; only identifiers, hashes, versions, events, signatures and links to prior events are recorded on the ledger.",
+          "Sui is a separate experiment comparing the fit between BIM objects and Sui objects with the Fabric approach, not the primary ledger."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "현재 상태",
+        "en": "Where it stands"
+      },
+      "body": {
+        "ko": [
+          "MVP 범위, 데이터 모델, 검증 기준, 단계별 구현 계획과 주요 위험을 문서화했고 리서치에서 프로토타입으로 넘어가는 단계입니다.",
+          "아직 실행 가능한 코드나 배포 환경은 없습니다. 다음 검증은 3개 조직·2개 분쟁 시나리오 정의와 로컬 3-org Fabric 핵심 흐름 구현입니다."
+        ],
+        "en": [
+          "The MVP scope, data model, validation criteria, staged implementation plan and major risks are documented, and the project is moving from research into prototyping.",
+          "There is no executable implementation or deployment yet. The next validation step is to define three organisations and two dispute scenarios, then implement the core flow on a local three-organisation Fabric network."
+        ]
+      }
+    }
+  ]
+}

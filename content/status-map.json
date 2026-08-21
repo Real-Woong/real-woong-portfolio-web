@@ -20,6 +20,7 @@
   "compat": {
     "진행중": ["wip", "mvp", "live", "lab"],
     "관찰중": ["live", "wip", "mvp"],
+    "실전":   ["live"],
     "멈춤":   ["wip", "mvp", "lab"],
     "종료":   ["done", "lab"]
   },
@@ -43,7 +44,9 @@
     "agora":             "Project_Team/Agora_BlockBlock2026Summer",
     "aispoc":            "Project_AI/NLP/행정부AI공모전",
     "blocktroll":        "Project_AI/NLP/BlockTroll",
+    "blockthon2026":     "Project_Team/BlockThon_TF",
     "bubblebreak":       "Project_Personal/react/BubbleBreak",
+    "buildtrace":        "Project_BlockChain/BuildTrace",
     "cryptofunding":     "Project_Team/CryptoFunding",
     "gongppung":         "Project_Team/공뽕",
     "healeat":           "Project_Team/HealEat",
@@ -56,7 +59,8 @@
   },
 
   "pinned": {
-    "agora": "제품 단계(mvp)는 활동 상태와 다른 축이다. 손으로 유지한다.",
+    "agora": "2026-08-21 서비스 런칭은 사용자가 직접 확인한 공개 상태다. 활동 상태와 별개로 손으로 유지한다.",
+    "blockthon2026": "2026-08-21 발표 완료와 랜딩페이지 공개는 사용자가 직접 확인했다. SECRETARY 상태가 갱신될 때까지 손으로 유지한다.",
     "cvprojects": "lab(학습용)은 상태가 아니라 분류다. 3개 프로젝트를 묶은 항목이라 1:1 대응도 없다."
   },
 

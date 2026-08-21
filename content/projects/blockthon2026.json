@@ -1,0 +1,65 @@
+{
+  "slug": "blockthon2026",
+  "no": "19",
+  "cat": "Blockchain · Education",
+  "year": "2026",
+  "title": "2026 BlockThon Hacker House",
+  "status": {
+    "kind": "done",
+    "label": {
+      "ko": "완료",
+      "en": "Shipped"
+    }
+  },
+  "tagline": {
+    "ko": "2026 BlockThon Sui·Walrus·AI 해커하우스에서 기술 스택을 참가자 앞에서 발표하고, 교육자료와 행사 랜딩페이지를 제작한 TF 활동.",
+    "en": "A 2026 BlockThon task-force project: presented the Sui, Walrus and AI stack to hacker-house participants, and produced the learning materials and event landing page."
+  },
+  "github": null,
+  "demo": "https://blockthon2026-randingpage.jinung344.workers.dev/",
+  "stack": [
+    "Sui",
+    "Walrus",
+    "Move",
+    "AI",
+    "Next.js",
+    "TypeScript",
+    "Cloudflare Workers"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "역할",
+        "en": "Role"
+      },
+      "body": {
+        "ko": [
+          "Sui·Walrus·AI가 각각 어떤 역할을 맡고 어떻게 하나의 제품 스택으로 연결되는지 해커하우스 참가자 앞에서 발표했습니다.",
+          "Move를 처음 접하는 참가자도 따라올 수 있도록 기초 개념부터 실제 조합까지 이어지는 교육자료를 설계하고 정리했습니다.",
+          "행사 정보를 한곳에서 전달하는 반응형 랜딩페이지를 기획·구현하고 Cloudflare Workers에 배포했습니다."
+        ],
+        "en": [
+          "Presented to hacker-house participants how Sui, Walrus and AI each contribute and connect as one product stack.",
+          "Designed and refined learning materials that move from fundamentals to a practical stack, including for participants new to Move.",
+          "Planned and built a responsive event landing page, then deployed it on Cloudflare Workers."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "핵심 메시지",
+        "en": "Core message"
+      },
+      "body": {
+        "ko": [
+          "데모와 발표를 ‘AI는 만들고, Walrus는 남기고, Sui는 갖습니다’라는 한 문장으로 정리해 세 기술의 관계를 직관적으로 전달했습니다.",
+          "교육자료는 74장 챕터 구분본과 30~40분 발표용 50장 수정본으로 발전시켰습니다."
+        ],
+        "en": [
+          "Reduced the demo and talk to one memorable line — ‘AI creates, Walrus preserves, and Sui owns’ — to make the relationship between the three technologies intuitive.",
+          "Developed the learning material into a 74-slide chaptered deck and a refined 50-slide version for a 30–40 minute talk."
+        ]
+      }
+    }
+  ]
+}
