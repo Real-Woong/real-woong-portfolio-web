@@ -36,13 +36,13 @@
         "ko": [
           "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
           "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
-          "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. 8월 26일에는 체결 수수료와 DEEP 수수료 가드를 넣어 재배포하고 SUI/DEEP 페어로 BUY·SELL을 온체인에서 다시 검증했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며, 현재 Move 70건과 x402 37건 테스트가 모두 통과합니다.",
+          "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. 8월 26일에는 체결 수수료와 DEEP 수수료 가드를 넣어 재배포하고 SUI/DEEP 페어로 BUY·SELL을 온체인에서 다시 검증했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며, 현재 Move 70건과 npm 54건(x402 37건·Agent 실행기 17건) 테스트가 모두 통과합니다.",
           "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다."
         ],
         "en": [
           "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
           "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
-          "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. On 26 August the trading fee and the DEEP fee guard went in, the package was republished, and BUY and SELL were re-verified on chain against the SUI/DEEP pair. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 70 Move tests and 37 x402 tests pass.",
+          "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. On 26 August the trading fee and the DEEP fee guard went in, the package was republished, and BUY and SELL were re-verified on chain against the SUI/DEEP pair. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 70 Move tests and 54 npm tests pass — 37 for x402 and 17 for the Agent executor.",
           "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface."
         ]
       }
@@ -59,7 +59,9 @@
           "- signal digest·위험 점수를 온체인 이벤트로 기록해 판단 근거를 감사 가능하게 보존",
           "- 사용자가 서명하는 구간과 Agora가 대신 서명·부담하는 구간을 명확히 분리(자동 투자 중에는 사용자 지갑에서 가스가 빠지지 않음)",
           "- 체결 수수료 10bps를 모듈 상수로 고정 — Agent도 Owner도 바꿀 수 없고, BUY는 예약한 금액이 아니라 실제 체결분에만 부과",
-          "- DeepBook 수수료 가드 — 비-whitelisted Pool에서는 DEEP 수수료를 필수로, whitelisted Pool에서는 금지로 강제(후자는 넣은 DEEP이 전액 소모되는 것을 Testnet에서 확인하고 막았습니다)"
+          "- DeepBook 수수료 가드 — 비-whitelisted Pool에서는 DEEP 수수료를 필수로, whitelisted Pool에서는 금지로 강제(후자는 넣은 DEEP이 전액 소모되는 것을 Testnet에서 확인하고 막았습니다)",
+          "- 최소 실행기 — Agent 시그널 수신부터 온체인 체결까지 연결하고, Agent별 입력 형식은 어댑터가 흡수해 실행기 본체를 push/polling 방식과 분리",
+          "- 신뢰 경계 — 외부 Agent가 보낸 위험도를 그대로 믿지 않고 Agora가 risk_score와 signal_id를 산출해 온체인 정책을 우회하지 못하게 설계"
         ],
         "en": [
           "- A two-asset (fiat/crypto) vault with owner-only deposits and withdrawals, and BUY/SELL permission held separately by AgoraAgent",
@@ -67,7 +69,9 @@
           "- Signal digests and risk scores recorded as on-chain events, so the reasoning behind a trade stays auditable",
           "- A clear split between what the user signs and what Agora signs and pays for — no gas leaves the user's wallet during automated investing",
           "- A 10bps trading fee fixed as a module constant — neither the agent nor the owner can change it, and a BUY is charged on what actually filled rather than what was reserved",
-          "- A DeepBook fee guard: DEEP fees are required on non-whitelisted pools and forbidden on whitelisted ones — the second rule was added after watching a whitelisted pool consume the entire DEEP input on testnet"
+          "- A DeepBook fee guard: DEEP fees are required on non-whitelisted pools and forbidden on whitelisted ones — the second rule was added after watching a whitelisted pool consume the entire DEEP input on testnet",
+          "- A minimal executor connecting Agent signal intake to on-chain execution, with per-Agent input formats absorbed by adapters so the executor itself stays independent of push or polling",
+          "- A deliberate trust boundary: Agora derives the risk score and signal ID instead of trusting values supplied by an outside Agent, preventing it from bypassing on-chain policy"
         ]
       }
     },
