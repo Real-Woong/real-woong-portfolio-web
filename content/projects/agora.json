@@ -36,13 +36,13 @@
         "ko": [
           "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
           "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
-          "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며 Move 60건, x402 23건 테스트를 모두 통과했습니다.",
+          "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. 8월 26일에는 체결 수수료와 DEEP 수수료 가드를 넣어 재배포하고 SUI/DEEP 페어로 BUY·SELL을 온체인에서 다시 검증했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며, 현재 Move 70건과 x402 37건 테스트가 모두 통과합니다.",
           "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다."
         ],
         "en": [
           "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
           "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
-          "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 60 Move tests and 23 x402 tests pass.",
+          "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. On 26 August the trading fee and the DEEP fee guard went in, the package was republished, and BUY and SELL were re-verified on chain against the SUI/DEEP pair. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 70 Move tests and 37 x402 tests pass.",
           "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface."
         ]
       }
@@ -57,13 +57,17 @@
           "- 2자산(Fiat/Crypto) Vault, owner 전용 입출금, AgoraAgent 전용 BUY/SELL 권한 분리",
           "- BUY/SELL 1회·epoch 누적 한도 및 ACTIVE/REDUCE_ONLY/PAUSED 상태 관리",
           "- signal digest·위험 점수를 온체인 이벤트로 기록해 판단 근거를 감사 가능하게 보존",
-          "- 사용자가 서명하는 구간과 Agora가 대신 서명·부담하는 구간을 명확히 분리(자동 투자 중에는 사용자 지갑에서 가스가 빠지지 않음)"
+          "- 사용자가 서명하는 구간과 Agora가 대신 서명·부담하는 구간을 명확히 분리(자동 투자 중에는 사용자 지갑에서 가스가 빠지지 않음)",
+          "- 체결 수수료 10bps를 모듈 상수로 고정 — Agent도 Owner도 바꿀 수 없고, BUY는 예약한 금액이 아니라 실제 체결분에만 부과",
+          "- DeepBook 수수료 가드 — 비-whitelisted Pool에서는 DEEP 수수료를 필수로, whitelisted Pool에서는 금지로 강제(후자는 넣은 DEEP이 전액 소모되는 것을 Testnet에서 확인하고 막았습니다)"
         ],
         "en": [
           "- A two-asset (fiat/crypto) vault with owner-only deposits and withdrawals, and BUY/SELL permission held separately by AgoraAgent",
           "- Per-trade and per-epoch cumulative caps on BUY/SELL, with ACTIVE / REDUCE_ONLY / PAUSED states",
           "- Signal digests and risk scores recorded as on-chain events, so the reasoning behind a trade stays auditable",
-          "- A clear split between what the user signs and what Agora signs and pays for — no gas leaves the user's wallet during automated investing"
+          "- A clear split between what the user signs and what Agora signs and pays for — no gas leaves the user's wallet during automated investing",
+          "- A 10bps trading fee fixed as a module constant — neither the agent nor the owner can change it, and a BUY is charged on what actually filled rather than what was reserved",
+          "- A DeepBook fee guard: DEEP fees are required on non-whitelisted pools and forbidden on whitelisted ones — the second rule was added after watching a whitelisted pool consume the entire DEEP input on testnet"
         ]
       }
     },
@@ -74,10 +78,12 @@
       },
       "body": {
         "ko": [
-          "초기 설계는 사용자가 여러 Trading Agent 중 하나를 골라 Follow하는 마켓플레이스 구조였는데, 검토 과정에서 “사용자가 검증되지 않은 전략에 직접 자산을 노출한다”는 근본적인 결함을 확인했습니다. 사용자의 Agent 선택·Follow·Follow fee를 모두 제거하고 AgoraAgent가 신호를 검증한 뒤에만 실행하는 위임형 구조로 전면 재설계했으며, 이 과정에서 agent_registry.move와 follow.move 모듈을 삭제했습니다."
+          "초기 설계는 사용자가 여러 Trading Agent 중 하나를 골라 Follow하는 마켓플레이스 구조였는데, 검토 과정에서 “사용자가 검증되지 않은 전략에 직접 자산을 노출한다”는 근본적인 결함을 확인했습니다. 사용자의 Agent 선택·Follow·Follow fee를 모두 제거하고 AgoraAgent가 신호를 검증한 뒤에만 실행하는 위임형 구조로 전면 재설계했으며, 이 과정에서 agent_registry.move와 follow.move 모듈을 삭제했습니다.",
+          "Mock DEX와 DeepBook, 두 개의 실행 경로를 함께 유지하다가 새 수수료를 한쪽에만 넣는 사고를 냈습니다. 경로가 둘이면 결국 갈라진다고 보고 Mock DEX를 제거했고, 거기 걸려 있던 테스트 47건은 Vault 원시 함수를 직접 호출하도록 이관해 커버리지는 그대로 유지했습니다."
         ],
         "en": [
-          "The first design was a marketplace: users would pick a trading agent and follow it. Reviewing it surfaced a defect in the premise itself — the user would be exposing real assets to an unvetted strategy. Agent selection, following and follow fees were removed entirely and rebuilt as delegation, where AgoraAgent validates a signal before acting on it. The agent_registry.move and follow.move modules were deleted in the process."
+          "The first design was a marketplace: users would pick a trading agent and follow it. Reviewing it surfaced a defect in the premise itself — the user would be exposing real assets to an unvetted strategy. Agent selection, following and follow fees were removed entirely and rebuilt as delegation, where AgoraAgent validates a signal before acting on it. The agent_registry.move and follow.move modules were deleted in the process.",
+          "Keeping two execution paths — a mock DEX alongside DeepBook — led to exactly the accident it invites: the new fee went into one path and not the other. Two paths diverge eventually, so the mock DEX was deleted and the 47 tests that ran through it were moved onto direct calls into the vault primitives, keeping coverage intact."
         ]
       }
     },

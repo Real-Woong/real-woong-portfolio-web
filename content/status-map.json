@@ -19,6 +19,7 @@
   ],
   "compat": {
     "진행중": ["wip", "mvp", "live", "lab"],
+    "운영중": ["live", "wip", "mvp"],
     "관찰중": ["live", "wip", "mvp"],
     "실전":   ["live"],
     "멈춤":   ["wip", "mvp", "lab"],

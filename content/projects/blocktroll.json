@@ -2,27 +2,28 @@
   "slug": "blocktroll",
   "no": "08",
   "cat": "AI · Chrome Ext.",
-  "year": "2025",
+  "year": "2026",
   "title": "BlockTroll",
   "status": {
-    "kind": "wip",
+    "kind": "live",
     "label": {
-      "ko": "개발 중",
-      "en": "In progress"
+      "ko": "운영 중",
+      "en": "Live"
     }
   },
   "tagline": {
-    "ko": "욕설·비꼼·트롤링 등 악성 댓글을 브라우저에서 로컬로 분류·필터링하는 AI 기반 확장 프로그램. 개발 진행 중.",
-    "en": "A browser extension that classifies and filters abusive comments — insults, sarcasm, trolling — locally, without a server. In development."
+    "ko": "소셜 댓글을 TOXIC(욕설·모욕) / SPAM(광고·링크 미끼) / TAUNT(조롱·비꼼)로 분류해 블러·숨김 처리하는 Chrome 확장과, Mac mini에서 상시 구동하는 로컬 추론 서버. 댓글은 외부 클라우드로 나가지 않습니다.",
+    "en": "A Chrome extension that blurs or hides social comments classified as TOXIC (abuse), SPAM (ads and link bait) or TAUNT (mockery), backed by a local inference server running around the clock on a Mac mini. Comments never leave for an outside cloud."
   },
   "github": "https://github.com/Real-Woong/block-troll",
   "demo": null,
   "stack": [
-    "PyTorch",
-    "HuggingFace Transformers",
-    "Scikit-learn",
-    "Chrome Extension",
-    "JavaScript"
+    "Python 3.12",
+    "FastAPI · uvicorn",
+    "KoELECTRA · Transformers",
+    "Chrome Extension MV3",
+    "Tailscale",
+    "launchd"
   ],
   "sections": [
     {
@@ -32,16 +33,36 @@
       },
       "body": {
         "ko": [
-          "- Transformer 기반 댓글 유형 분류(욕설/비꼼/과도한 찬양 등)",
-          "- 페이지 로드 시 자동 분석 후 블러·숨김 처리하는 실시간 필터링",
-          "- 서버 API 없이 로컬에서 추론해 개인정보·활동 데이터를 외부로 보내지 않는 구조",
-          "- HuggingFace 모델 교체·데이터셋 확장이 가능한 구조"
+          "- 댓글 유형 3분류 — TOXIC(욕설·모욕) / SPAM(광고·링크 미끼) / TAUNT(조롱·비꼼)",
+          "- YouTube · Instagram · X(Twitter) 댓글 DOM 수집기. 페이지 로드 시 분석해 블러·숨김 처리",
+          "- 추론은 내 Mac mini에서만 돌고, uvicorn을 Tailscale 인터페이스에만 바인드해 타일넷 밖에서는 도달할 수 없습니다",
+          "- launchd LaunchAgent로 부팅 시 자동 시작, 죽으면 자동 재시작. 로그는 타임스탬프와 함께 파일로 남습니다",
+          "- 머신 역할을 나눴습니다. Mac mini는 추론과 확장 개발, 학습은 RTX GPU가 달린 Windows. 현재 상시 구동 중인 서버는 룰 계층으로 돌고, KoELECTRA 가중치를 올리면 같은 자리에 분류 계층이 붙습니다",
+          "- 추론 전용 의존성을 학습 패키지와 분리해, 서버는 룰 기준 약 48MB RSS로 돕니다"
         ],
         "en": [
-          "- Transformer-based comment classification (insults, sarcasm, excessive praise and so on)",
-          "- Real-time filtering: analysed on page load, then blurred or hidden",
-          "- Inference runs locally with no server API, so browsing and activity data never leave the machine",
-          "- Structured so the HuggingFace model can be swapped and the dataset extended"
+          "- Three comment classes: TOXIC (abuse), SPAM (ads and link bait), TAUNT (mockery)",
+          "- DOM collectors for YouTube, Instagram and X (Twitter); comments are analysed on page load, then blurred or hidden",
+          "- Inference runs only on my Mac mini, with uvicorn bound to the Tailscale interface alone, so nothing outside the tailnet can reach it",
+          "- A launchd LaunchAgent starts it at boot and restarts it if it dies, with timestamped logs written to file",
+          "- The machines have separate jobs: the Mac mini serves inference and extension work, training happens on a Windows box with an RTX GPU. The server running today uses the rule layer; dropping in the KoELECTRA weights attaches the classifier in the same place",
+          "- Inference dependencies are split from the training packages, so the server holds around 48MB RSS on the rule path"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 문제",
+        "en": "Defects found and fixed"
+      },
+      "body": {
+        "ko": [
+          "로컬 API의 CORS를 chrome-extension:// 로 좁힌 커밋이 content script 경로를 조용히 깨뜨린 상태였습니다. 서버 호출을 전부 background service worker로 옮겨 해소했습니다. SW는 origin이 chrome-extension:// 이라 페이지 origin CORS도, https 페이지에서 http를 막는 mixed-content도 걸리지 않습니다. 덕분에 TLS 없이 평문 http로 타일넷 공유가 가능해졌습니다.",
+          "launchd로 띄운 프로세스가 저장소를 읽지 못했습니다. macOS TCC가 ~/Desktop을 보호해 접근이 막힌 것이라, 레포를 ~/Projects로 옮기고 기존 경로에는 심볼릭 링크를 남겼습니다."
+        ],
+        "en": [
+          "A commit that narrowed the local API's CORS to chrome-extension:// had quietly broken the content-script path. Moving every server call into a background service worker fixed it: the worker's origin is chrome-extension://, so neither the page-origin CORS rule nor the mixed-content block on http calls from an https page applies. That is also what makes plain http over the tailnet workable without TLS.",
+          "The launchd process could not read the repository. macOS TCC protects ~/Desktop and was denying access, so the repo moved to ~/Projects with a symlink left behind at the old path."
         ]
       }
     },
@@ -52,10 +73,10 @@
       },
       "body": {
         "ko": [
-          "NLP 모델 성능은 구조보다 데이터 품질과 라벨링 기준이 더 중요하다는 것, 실 서비스 환경에서는 정확도뿐 아니라 추론 속도·리소스 사용량 최적화가 중요하다는 것을 확인했습니다."
+          "NLP 모델 성능은 구조보다 데이터 품질과 라벨링 기준이 더 중요하다는 것, 그리고 상시 구동을 붙이고 나서야 보이는 문제가 따로 있다는 것을 확인했습니다. 정확도가 아니라 확장의 origin, OS의 파일 접근 권한, 프로세스가 죽었을 때 누가 다시 띄우는가 같은 것들입니다."
         ],
         "en": [
-          "Two things became clear: NLP performance depends more on data quality and labelling standards than on architecture, and in a shipped product inference speed and resource use matter alongside accuracy."
+          "Two things: NLP performance depends more on data quality and labelling standards than on architecture, and a separate class of problem only appears once something runs continuously. Not accuracy — the extension's origin, the OS's file-access rules, and who restarts the process when it dies."
         ]
       }
     }
