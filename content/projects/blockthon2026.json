@@ -16,7 +16,7 @@
     "en": "A 2026 BlockThon task-force project: presented the Sui, Walrus and AI stack to hacker-house participants, and produced the learning materials and event landing page."
   },
   "github": null,
-  "demo": "https://blockthon2026-randingpage.jinung344.workers.dev/",
+  "demo": "https://blockthon.com",
   "stack": [
     "Sui",
     "Walrus",
@@ -24,7 +24,9 @@
     "AI",
     "Next.js",
     "TypeScript",
-    "Cloudflare Workers"
+    "Cloudflare Workers",
+    "Amazon S3",
+    "CloudFront"
   ],
   "sections": [
     {
@@ -36,12 +38,12 @@
         "ko": [
           "Sui·Walrus·AI가 각각 어떤 역할을 맡고 어떻게 하나의 제품 스택으로 연결되는지 해커하우스 참가자 앞에서 발표했습니다.",
           "Move를 처음 접하는 참가자도 따라올 수 있도록 기초 개념부터 실제 조합까지 이어지는 교육자료를 설계하고 정리했습니다.",
-          "행사 정보를 한곳에서 전달하는 반응형 랜딩페이지를 기획·구현하고 Cloudflare Workers에 배포했습니다."
+          "행사 정보를 한곳에서 전달하는 반응형 랜딩페이지를 기획·구현했습니다. 처음에는 Cloudflare Workers에 올렸고, 이후 정적 export를 Amazon S3·CloudFront로 옮겨 지금은 blockthon.com에서 공식 운영 중입니다. 설계와 배포 과정은 별도 기록 <b>BlockThon 2026 Landing Page</b>에 정리했습니다."
         ],
         "en": [
           "Presented to hacker-house participants how Sui, Walrus and AI each contribute and connect as one product stack.",
           "Designed and refined learning materials that move from fundamentals to a practical stack, including for participants new to Move.",
-          "Planned and built a responsive event landing page, then deployed it on Cloudflare Workers."
+          "Planned and built a responsive event landing page. It first went out on Cloudflare Workers, then moved as a static export to Amazon S3 and CloudFront, and now runs officially at blockthon.com. Its design and deployment are written up separately as <b>BlockThon 2026 Landing Page</b>."
         ]
       }
     },

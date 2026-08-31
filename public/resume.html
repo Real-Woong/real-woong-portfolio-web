@@ -96,7 +96,7 @@
     연세대학교 컴퓨터과학과 재학 중이며 현재 사회복무요원으로 복무 중입니다(<b>2026년 12월 소집해제 예정</b>).
     Sui/Move 스마트 컨트랙트부터 Cloudflare Workers 기반 풀스택, AI 에이전트까지 직접 설계·배포하고,
     <b>6개 서비스를 실제로 배포·운영</b>하고 있습니다. 만드는 것보다 <b>운영 중에 드러난 결함을 원인까지 밝혀 고치는 일</b>에
-    시간을 더 씁니다. 지금까지 문서화한 장애 수정은 <span data-fix-total>33</span>건입니다.
+    시간을 더 씁니다. 지금까지 문서화한 장애 수정은 <span data-fix-total>34</span>건입니다.
   </p>
 
   <h2>Selected Projects</h2>
@@ -172,6 +172,21 @@
   </div>
 
   <div class="row">
+    <div class="when">2026 —<br>운영 중</div>
+    <div class="what">
+      <strong>BlockThon 2026 Landing Page</strong>
+      <div class="meta">2026 BlockThon 공식 랜딩페이지 · 기획·디자인·프런트엔드·배포 전 과정 주도</div>
+      <ul>
+        <li>행사 콘셉트·디자인 시스템·정보 구조·프런트엔드 아키텍처를 <b>직접 정하고 구현</b>. AI는 구현 가속에만 쓰고 컴포넌트 구조·동작 조건·검수 기준은 직접 결정해 생성된 코드를 반복 검수</li>
+        <li>이미지 형태를 <b>픽셀 데이터 상수로 변환해 코드에서 조합·렌더링</b>하는 인터랙티브 픽셀아트 시스템 설계(로고 락업 160×28·96×17, 전체 마크 128×100). 정적 export라 런타임 비동기 디코딩 대신 트레이스 결과를 상수로 커밋</li>
+        <li>확정 정보만 공개하는 <b>콘텐츠 단일 소스 구조</b> — 값을 비우면 섹션·내비게이션·섹션 번호가 함께 사라져, 공식 페이지에 미확정 정보가 확정처럼 노출될 수 없음</li>
+        <li>Next.js static export → S3 업로드 → CloudFront 서빙, 도메인 구매부터 DNS·HTTPS 연결까지 수행. 배포 직후 전체 403을 <b>CloudFront Origin Path와 S3 객체 경로 불일치</b>로 추적해 수정하고 캐시 무효화. 이와 <b>별개로</b> 배포에 남아 있던 2008 계열 구형 TLS 보안 정책을 <b>TLSv1.2_2021</b>로 교체</li>
+      </ul>
+      <div class="stack">Next.js · React · TypeScript · CSS Modules · Static Export · Amazon S3 · CloudFront · <a href="https://blockthon.com">blockthon.com</a></div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="when">2025</div>
     <div class="what">
       <strong>CryptoFunding</strong>
@@ -193,7 +208,7 @@
     <div class="when">2026</div>
     <div class="what"><strong>연세 블록체인 동아리 “블록블록” 개발팀장</strong>
       <div class="meta">2026년 2학기까지 · 2026 BlockThon Sui·Walrus·AI 해커하우스 — 기술 스택 발표 · 교육자료·랜딩페이지 제작</div>
-      <div class="stack"><a href="https://blockthon2026-randingpage.jinung344.workers.dev/">BlockThon 2026 Landing Page</a></div></div>
+      <div class="stack"><a href="https://blockthon.com">BlockThon 2026 Landing Page — blockthon.com</a></div></div>
   </div>
   <div class="row">
     <div class="when">2024</div>
