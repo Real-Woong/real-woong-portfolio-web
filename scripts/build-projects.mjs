@@ -70,6 +70,11 @@ function buildProject(doc) {
     tagline: tr(doc.tagline, `${doc.slug}.tagline`),
     github: doc.github ?? null,
     demo: doc.demo ?? null,
+    // Most demo links are demos. One is not: BlockThon's landing page is the
+    // live event site people actually apply through, and calling that button
+    // "Live Demo" misdescribes the work. Projects that need a different word
+    // say so here; everything else keeps the default.
+    ...(doc.demoLabel ? { demoLabel: tr(doc.demoLabel, `${doc.slug}.demoLabel`) } : {}),
     stack: doc.stack ?? [],
     sections: doc.sections.map((s, i) => {
       const at = `${doc.slug}.sections[${i}]`;
