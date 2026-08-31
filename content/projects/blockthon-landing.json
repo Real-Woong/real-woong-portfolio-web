@@ -21,6 +21,7 @@
     "ko": "공식 사이트",
     "en": "Official site"
   },
+  "video": "https://youtu.be/yD2PqwZUFnc",
   "stack": [
     "Next.js",
     "React",

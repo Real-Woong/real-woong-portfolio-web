@@ -1474,6 +1474,7 @@
       },
       "github": "https://github.com/TheZoneAgora/the-zone-agora",
       "demo": "https://thezonebio.com/agora",
+      "video": null,
       "stack": [
         "Sui Move",
         "DeepBook v3",
@@ -1575,6 +1576,7 @@
       },
       "github": "https://github.com/Real-Woong/crypto-funding",
       "demo": null,
+      "video": null,
       "stack": [
         "Sui Move",
         "React",
@@ -1655,6 +1657,7 @@
       },
       "github": "https://github.com/Real-Woong/bubblebreak",
       "demo": "https://bubblebreak-demo.jinung344.workers.dev/",
+      "video": null,
       "stack": [
         "React",
         "Vite",
@@ -1754,6 +1757,7 @@
       },
       "github": "https://github.com/HealEat/Frontend",
       "demo": null,
+      "video": null,
       "stack": [
         "Swift",
         "UIKit",
@@ -1810,6 +1814,7 @@
       },
       "github": "https://github.com/Real-Woong/sogon.zip",
       "demo": "https://sogon-zip.pages.dev/",
+      "video": null,
       "stack": [
         "React",
         "TypeScript",
@@ -1944,6 +1949,7 @@
       },
       "github": "https://github.com/Uni-Made/FE",
       "demo": null,
+      "video": null,
       "stack": [
         "React",
         "Vite",
@@ -1995,6 +2001,7 @@
       },
       "github": "https://github.com/Real-Woong/ai-spoc",
       "demo": null,
+      "video": null,
       "stack": [
         "Python",
         "PyTorch",
@@ -2051,6 +2058,7 @@
       },
       "github": "https://github.com/Real-Woong/block-troll",
       "demo": null,
+      "video": null,
       "stack": [
         "Python 3.12",
         "FastAPI · uvicorn",
@@ -2127,6 +2135,7 @@
       },
       "github": "https://github.com/Real-Woong/hand-gesture-recognition",
       "demo": null,
+      "video": null,
       "stack": [
         "Python",
         "OpenCV",
@@ -2179,6 +2188,7 @@
       },
       "github": "https://github.com/Real-Woong/marvis",
       "demo": null,
+      "video": null,
       "stack": [
         "Python",
         "Google Gemini 2.5 Flash",
@@ -2271,6 +2281,7 @@
       },
       "github": "https://github.com/Real-Woong/TAPIoca",
       "demo": null,
+      "video": null,
       "stack": [
         "Node.js 20+ (ES Modules)",
         "외부 런타임 패키지 0개",
@@ -2762,6 +2773,7 @@
       },
       "github": "https://github.com/Real-Woong/textro",
       "demo": null,
+      "video": null,
       "stack": [
         "Python",
         "로컬 OCR 파이프라인",
@@ -2813,6 +2825,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [],
       "sections": [
         {
@@ -2860,6 +2873,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [],
       "sections": [
         {
@@ -2907,6 +2921,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [],
       "sections": [
         {
@@ -2956,6 +2971,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [],
       "sections": [
         {
@@ -3005,6 +3021,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [],
       "sections": [
         {
@@ -3054,6 +3071,7 @@
       },
       "github": "https://github.com/Real-Woong/Prefer_for_CodingTest",
       "demo": null,
+      "video": null,
       "stack": [
         "Python 3",
         "Git post-commit hook",
@@ -3149,6 +3167,7 @@
       },
       "github": null,
       "demo": "https://blockthon.com",
+      "video": null,
       "stack": [
         "Sui",
         "Walrus",
@@ -3208,6 +3227,7 @@
       },
       "github": null,
       "demo": null,
+      "video": null,
       "stack": [
         "Hyperledger Fabric",
         "Sui Move",
@@ -3268,6 +3288,7 @@
         "ko": "공식 사이트",
         "en": "Official site"
       },
+      "video": "https://youtu.be/yD2PqwZUFnc",
       "stack": [
         "Next.js",
         "React",
@@ -3669,7 +3690,8 @@
   // Chrome the modal supplies itself, rather than project data.
   var UI = {
     stack:  { ko: '기술 스택',      en: 'Tech stack' },
-    fixlog: { ko: '수정 기록 전체', en: 'Full fix log' }
+    fixlog: { ko: '수정 기록 전체', en: 'Full fix log' },
+    video:  { ko: '구현 영상',      en: 'Build video' }
   };
 
   function renderBody(lines){
@@ -3722,6 +3744,7 @@
       var demoLabel = p.demoLabel ? L(p.demoLabel) : 'Live Demo';
       links += '<a class="btn ghost" href="'+p.demo+'" target="_blank" rel="noopener">'+esc(demoLabel)+' ↗</a>';
     }
+    if(p.video){ links += '<a class="btn ghost" href="'+p.video+'" target="_blank" rel="noopener">'+esc(L(UI.video))+' ↗</a>'; }
     var sections = p.sections.map(function(s){
       // Dated build log: every entry lives behind its own accordion so the
       // record is complete without turning the panel into a wall of text.

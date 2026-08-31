@@ -75,6 +75,10 @@ function buildProject(doc) {
     // "Live Demo" misdescribes the work. Projects that need a different word
     // say so here; everything else keeps the default.
     ...(doc.demoLabel ? { demoLabel: tr(doc.demoLabel, `${doc.slug}.demoLabel`) } : {}),
+    // A walkthrough of the thing running, when one exists. The page cannot
+    // embed a player — the portfolio is the root document and carries no
+    // iframes — so this is a link out, not a frame.
+    video: doc.video ?? null,
     stack: doc.stack ?? [],
     sections: doc.sections.map((s, i) => {
       const at = `${doc.slug}.sections[${i}]`;
