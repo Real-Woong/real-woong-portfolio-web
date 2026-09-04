@@ -65,6 +65,25 @@
     "cvprojects": "lab(학습용)은 상태가 아니라 분류다. 3개 프로젝트를 묶은 항목이라 1:1 대응도 없다."
   },
 
+  "_driftExtraComment": [
+    "scripts/check-drift.mjs 만 쓰는 추가 짝. `_STATE.md` 만 있어 프론트매터 status 가",
+    "없는 프로젝트는 sync-status.mjs 의 라벨 대조에는 못 들어가지만, render.py 가",
+    "문서 섹션에서 updated 를 뽑아 주므로 *글이 늙었는지* 는 잴 수 있다."
+  ],
+  "driftExtra": {
+    "ilque": "Project_Personal/react/Il-Que"
+  },
+
+  "_notFeaturedComment": [
+    "SECRETARY 가 진행중·관찰중으로 아는데 이 사이트에 항목이 없는 프로젝트.",
+    "이유를 적어 두지 않으면 check-drift 가 '빠진 것 아니냐' 고 보고한다.",
+    "종료·멈춤은 애초에 안 묻는다 — 포트폴리오에 다 실을 이유가 없다."
+  ],
+  "notFeatured": {
+    "Project_Personal/react/My-Portfolio-Web": "이 사이트 자신.",
+    "github-profile": "프로필 README 저장소. 작업물이 아니라 이 사이트를 가리키는 창구다."
+  },
+
   "unmapped": {
     "ilque": "_STATE.md 만 있어 프론트매터 status 가 없다",
     "birthrate-bm": "_STATUS.md 없음",
