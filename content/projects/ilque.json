@@ -1,0 +1,110 @@
+{
+  "slug": "ilque",
+  "no": "22",
+  "cat": "Desktop · Product",
+  "year": "2026",
+  "title": "Il-Que",
+  "status": {
+    "kind": "wip",
+    "label": {
+      "ko": "개발 중",
+      "en": "In progress"
+    }
+  },
+  "tagline": {
+    "ko": "\"일일 퀘스트\"이자 \"일상 퀘스트\". 할 일을 게임의 퀘스트 헬퍼 UI로 바꿔 데스크톱 위에 띄우는 macOS 위젯입니다. 할 일 앱을 게임 스킨으로 덮은 것이 아니라, 퀘스트 창의 상호작용 자체를 옮기는 것을 목표로 합니다.",
+    "en": "\"Daily quest\" and \"everyday quest\" in one Korean pun. A macOS widget that puts your tasks on the desktop as a game's quest helper. The goal is not a to-do app wearing a game skin, but the interaction language of a quest window itself."
+  },
+  "github": null,
+  "demo": null,
+  "stack": [
+    "Tauri 2",
+    "React 19",
+    "TypeScript",
+    "Vite",
+    "Rust",
+    "macOS"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "개요",
+        "en": "Overview"
+      },
+      "body": {
+        "ko": [
+          "게임의 퀘스트 헬퍼는 할 일 목록과 같은 정보를 담지만 다르게 읽힙니다. 화면 구석에 항상 떠 있고, 진행도가 <code>2/4</code>로 보이고, 완료는 사용자가 직접 누릅니다. Il-Que는 그 읽는 방식을 데스크톱의 실제 할 일에 옮겨 봅니다.",
+          "테마 셋을 범위로 잡았습니다 — 메이플스토리풍 Quest Helper, 로스트아크풍 Quest Tracker, 원신풍 Objective Tracker. <b>지금 동작하는 것은 메이플 테마 하나</b>이고 나머지 둘은 테마 선택 화면의 프리뷰와 준비 화면까지입니다.",
+          "Tauri 2로 만든 네이티브 창이라 프레임이 없고 배경이 투명하며 항상 위에 뜹니다. 렌더된 내용 높이를 <code>ResizeObserver</code>로 재서 창 크기를 따라 바꾸기 때문에, 퀘스트를 더하거나 지우면 창이 그만큼 줄고 늘어납니다."
+        ],
+        "en": [
+          "A game's quest helper carries the same information as a to-do list but reads differently: it sits in the corner at all times, progress shows as <code>2/4</code>, and completion is something you press. Il-Que moves that way of reading onto the actual tasks on a desktop.",
+          "The scope is three themes — a MapleStory-style Quest Helper, a Lost Ark-style Quest Tracker and a Genshin-style Objective Tracker. <b>Only the Maple theme works today</b>; the other two go as far as a preview card on the theme picker and a placeholder screen.",
+          "The window is native, built on Tauri 2: frameless, transparent and always on top. A <code>ResizeObserver</code> measures the rendered content height and resizes the window to match, so adding or deleting a quest shrinks and grows the window itself."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "구현한 것",
+        "en": "What is built"
+      },
+      "body": {
+        "ko": [
+          "- 퀘스트 생성 — 분류·제목·목표를 받고 <code>single</code>(1회성)과 <code>count</code>(수치 진행) 두 가지 목표 형식을 지원합니다. 저장 시 총량은 최소 1, 진행도는 0과 총량 사이로 정규화합니다",
+          "- 진행도 편집 — 접힌 <code>2/4</code>를 누르면 <code>- 2 + /4</code> 편집기로 펼쳐지고, 범위를 벗어나는 조작은 막습니다",
+          "- <b>진행도가 총량에 닿아도 자동 완료되지 않습니다.</b> 완료는 사용자가 누르는 명시적 행동으로 남깁니다",
+          "- 완료·삭제 — 완료한 퀘스트는 표시가 바뀌고, 그때부터는 완료·취소 대신 삭제만 노출합니다",
+          "- 창 조작 — 비인터랙티브 영역에서 끌어 옮기기, 최소화, 닫기. 버튼·입력·진행도·퀘스트 액션 영역은 끌기 시작점에서 제외했습니다",
+          "- 퀘스트 액션 패널과 진행도 편집기는 <b>동시에 열리지 않습니다.</b> 한쪽을 열면 다른 쪽이 닫힙니다",
+          "- Apple Silicon 릴리스 빌드와 DMG 번들 생성까지 확인했습니다"
+        ],
+        "en": [
+          "- Quest creation — category, title and objective, with two objective modes: <code>single</code> (one-off) and <code>count</code> (numeric progress). On save, the total is clamped to at least 1 and progress to between 0 and the total",
+          "- Progress editing — pressing the collapsed <code>2/4</code> expands it into a <code>- 2 + /4</code> editor, with out-of-range steps blocked",
+          "- <b>Reaching the total does not auto-complete a quest.</b> Completion stays an explicit action the user takes",
+          "- Completion and deletion — a completed quest changes its styling and exposes delete instead of complete/cancel",
+          "- Window control — dragging from non-interactive areas, minimise and close. Buttons, inputs, progress controls and quest action areas are excluded as drag origins",
+          "- The quest action panel and the progress editor <b>can never be open at once</b>; opening one closes the other",
+          "- An Apple Silicon release build and a DMG bundle have both been produced and checked"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "현재 상태",
+        "en": "Where it stands"
+      },
+      "body": {
+        "ko": [
+          "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크·원신은 방향과 프리뷰까지만 정해져 있습니다.",
+          "<b>아직 배포 준비가 안 된 것들을 그대로 적어 둡니다</b> — 퀘스트가 React 상태에만 있어 앱을 끄면 사라지고, 초기 목업 퀘스트가 남아 있으며, 폰트가 Geist Mono·Inter로 선언만 되어 있고 실제 번들 전략이 정해지지 않았습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
+          "다음 순서는 폰트 정렬 → 로스트아크·원신 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
+          "공개 배포는 비상업 GitHub 릴리스를 목표로 합니다. 게임의 공식 로고·스크린샷·아이콘·폰트는 번들하지 않고 색·배치·상호작용 언어만 참조하며, <b>IP 안전한 자산 교체를 릴리스 요건으로 두었습니다</b> — 배포 후에 정리할 항목이 아닙니다."
+        ],
+        "en": [
+          "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Lost Ark and Genshin have a defined direction and a preview card, nothing more.",
+          "<b>The parts that are not release-ready are recorded as they are</b>: quests live only in React state and vanish when the app closes, the initial mock quest is still present, and the CSS names Geist Mono and Inter without a settled font bundling strategy. Code signing, notarisation and a universal build are all still open.",
+          "The order of the next four tasks is fixed: font alignment, then the Lost Ark and Genshin trackers, then a full user-flow re-check, then removing the mock data.",
+          "Distribution targets a non-commercial GitHub release. No official game logo, screenshot, icon or font ships as a bundled asset — only colour, layout and interaction language are referenced — and <b>replacing them with IP-safe assets is a release requirement</b>, not post-release cleanup."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "중요하게 생각한 점",
+        "en": "What mattered most"
+      },
+      "body": {
+        "ko": [
+          "만들면서 가장 여러 번 되돌아온 판단은 <b>\"이게 게임 스킨을 입힌 할 일 앱이 되고 있지 않은가\"</b>였습니다. 진행도가 총량에 닿았을 때 자동으로 완료 처리하는 것이 편하지만, 퀘스트를 완료하는 것은 게임에서 사용자가 하는 행동이라 그대로 두었습니다. 편의를 위해 성격을 바꾸면 이 프로젝트가 존재할 이유가 사라집니다.",
+          "참조한 게임의 자산을 쓰지 않는 것도 나중으로 미루지 않았습니다. 릴리스 직전에 교체하려면 이미 그 자산에 맞춰 레이아웃이 굳어 있습니다."
+        ],
+        "en": [
+          "The judgement I returned to most often was <b>whether this was turning into a to-do app in a game skin</b>. Auto-completing a quest when progress hits the total is more convenient, but completing a quest is something the player does in a game, so it stayed manual. Trading that character away for convenience removes the reason for the project to exist.",
+          "Keeping referenced game assets out was also not deferred. Swap them at the last minute and the layout has already hardened around them."
+        ]
+      }
+    }
+  ]
+}

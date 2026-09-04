@@ -20,10 +20,11 @@
   "stack": [
     "Hyperledger Fabric",
     "Sui Move",
+    "Node.js",
+    "Ed25519",
     "BIM",
     "IFC",
-    "Merkle Tree",
-    "REST API"
+    "Merkle Tree"
   ],
   "sections": [
     {
@@ -51,12 +52,18 @@
       },
       "body": {
         "ko": [
-          "MVP 범위, 데이터 모델, 검증 기준, 단계별 구현 계획과 주요 위험을 문서화했고 리서치에서 프로토타입으로 넘어가는 단계입니다.",
-          "아직 실행 가능한 코드나 배포 환경은 없습니다. 다음 검증은 3개 조직·2개 분쟁 시나리오 정의와 로컬 3-org Fabric 핵심 흐름 구현입니다."
+          "분쟁 시나리오 「누가 V11을 받았는가?」를 <b>실행 가능한 형태로 구현했습니다.</b> 외부 의존성 0개의 Node.js proof demo이며, V10/V11 스트리밍 SHA-256과 canonical manifest, 3개 조직의 Ed25519 서명 이벤트, 역할·상태 전이·replay 검증이 동작합니다.",
+          "원본과 변조 파일을 판별하고, 이벤트 Merkle inclusion proof를 검증하며, <b>증거가 없으면 답하지 않고 기권하는</b> citation-first 질의와 JSON 감사 리포트 내보내기를 구현했습니다.",
+          "무권한 승인, 중복 이벤트, 변조 파일, 변조 Merkle leaf, 법적 책임 질문 기권을 포함한 <b>자동 테스트 11개</b>가 통과합니다. 정상 경로만이 아니라 공격 경로를 함께 테스트하는 것이 이 구조의 목적입니다.",
+          "MVP 범위, 데이터 모델, 검증 기준, 단계별 구현 계획과 주요 위험은 기준 문서에 정리했습니다. 아직 배포 환경은 없습니다.",
+          "다음 검증은 최소 IFC fixture를 실제 IFC 샘플과 객체 manifest 파서로 교체해 V10/V11 diff를 확인하는 것, 그리고 로컬 proof ledger와 같은 event contract를 쓰는 Fabric adapter와 Sui Revision Passport 중 제출 트랙에 맞는 하나를 구현하는 것입니다."
         ],
         "en": [
-          "The MVP scope, data model, validation criteria, staged implementation plan and major risks are documented, and the project is moving from research into prototyping.",
-          "There is no executable implementation or deployment yet. The next validation step is to define three organisations and two dispute scenarios, then implement the core flow on a local three-organisation Fabric network."
+          "The dispute scenario \"who received V11?\" is now <b>implemented and runnable</b>. It is a dependency-free Node.js proof demo covering streaming SHA-256 over V10/V11, a canonical manifest, Ed25519-signed events from three organisations, and validation of roles, state transitions and replay.",
+          "It distinguishes original from tampered files, verifies Merkle inclusion proofs over the event log, and answers questions citation-first — <b>abstaining rather than answering when the evidence is not there</b> — with a JSON audit report as output.",
+          "<b>Eleven automated tests</b> pass, covering unauthorised approval, duplicate events, a tampered file, a tampered Merkle leaf and abstention on a question of legal liability. Testing the attack paths alongside the happy path is the point of the structure.",
+          "The MVP scope, data model, validation criteria, staged implementation plan and major risks are written up in the reference document. There is no deployment environment yet.",
+          "Next: replace the minimal IFC fixture with a real IFC sample and an object manifest parser to verify the V10/V11 diff, then implement whichever of the Fabric adapter or the Sui Revision Passport fits the submission track — both against the same event contract as the local proof ledger."
         ]
       }
     }

@@ -61,7 +61,8 @@
           "- 체결 수수료 10bps를 모듈 상수로 고정 — Agent도 Owner도 바꿀 수 없고, BUY는 예약한 금액이 아니라 실제 체결분에만 부과",
           "- DeepBook 수수료 가드 — 비-whitelisted Pool에서는 DEEP 수수료를 필수로, whitelisted Pool에서는 금지로 강제(후자는 넣은 DEEP이 전액 소모되는 것을 Testnet에서 확인하고 막았습니다)",
           "- 최소 실행기 — Agent 시그널 수신부터 온체인 체결까지 연결하고, Agent별 입력 형식은 어댑터가 흡수해 실행기 본체를 push/polling 방식과 분리",
-          "- 신뢰 경계 — 외부 Agent가 보낸 위험도를 그대로 믿지 않고 Agora가 risk_score와 signal_id를 산출해 온체인 정책을 우회하지 못하게 설계"
+          "- 신뢰 경계 — 외부 Agent가 보낸 위험도를 그대로 믿지 않고 Agora가 risk_score와 signal_id를 산출해 온체인 정책을 우회하지 못하게 설계",
+          "- 실행기 수신 엔드포인트에 HMAC-SHA256 인증 — 서명이 없거나 틀리면 401입니다. 실거래를 일으키는 입구가 무인증으로 열려 있던 것을 8월 28일에 닫았습니다"
         ],
         "en": [
           "- A two-asset (fiat/crypto) vault with owner-only deposits and withdrawals, and BUY/SELL permission held separately by AgoraAgent",
@@ -71,7 +72,8 @@
           "- A 10bps trading fee fixed as a module constant — neither the agent nor the owner can change it, and a BUY is charged on what actually filled rather than what was reserved",
           "- A DeepBook fee guard: DEEP fees are required on non-whitelisted pools and forbidden on whitelisted ones — the second rule was added after watching a whitelisted pool consume the entire DEEP input on testnet",
           "- A minimal executor connecting Agent signal intake to on-chain execution, with per-Agent input formats absorbed by adapters so the executor itself stays independent of push or polling",
-          "- A deliberate trust boundary: Agora derives the risk score and signal ID instead of trusting values supplied by an outside Agent, preventing it from bypassing on-chain policy"
+          "- A deliberate trust boundary: Agora derives the risk score and signal ID instead of trusting values supplied by an outside Agent, preventing it from bypassing on-chain policy",
+          "- HMAC-SHA256 authentication on the executor's inbound endpoint — a missing or wrong signature gets a 401. The entry point that triggers real trades had been open with no authentication; it was closed on 28 August"
         ]
       }
     },
