@@ -15,8 +15,8 @@
     "ko": "여러 독립 조직이 함께 쓰는 BIM 환경에서 변경·배포·검토·승인 이력을 해시와 전자서명으로 공동 검증하는 provenance 인프라.",
     "en": "Provenance infrastructure for independently operated BIM organisations to jointly verify change, distribution, review and approval history using hashes and digital signatures."
   },
-  "github": null,
-  "demo": null,
+  "github": "https://github.com/Real-Woong/BuildTrace",
+  "demo": "https://buildtrace-demo.pages.dev",
   "stack": [
     "Hyperledger Fabric",
     "Sui Move",
@@ -24,7 +24,8 @@
     "Ed25519",
     "BIM",
     "IFC",
-    "Merkle Tree"
+    "Merkle Tree",
+    "Walrus Testnet"
   ],
   "sections": [
     {
@@ -36,12 +37,14 @@
         "ko": [
           "기본 원장은 Hyperledger Fabric permissioned consortium network로 두고, Fabric 이력의 Merkle root를 public chain에 선택적으로 anchoring하는 하이브리드 구조를 설계했습니다.",
           "BIM 원본은 CDE 또는 S3 호환 저장소에 off-chain으로 보관하고 식별자·해시·버전·이벤트·서명·이전 이벤트 참조만 원장에 기록합니다.",
-          "Sui는 주 원장이 아니라 BIM Object와 Sui Object의 적합성을 Fabric 방식과 비교하는 별도 실험 트랙으로 정의했습니다."
+          "Sui는 주 원장이 아니라 BIM Object와 Sui Object의 적합성을 Fabric 방식과 비교하는 별도 실험 트랙으로 정의했습니다.",
+          "검증 코드가 있는 private proof 저장소와 심사위원용 public 웹 데모 저장소를 분리하고, 웹 데모는 Cloudflare Pages에 배포했습니다."
         ],
         "en": [
           "Designed a hybrid architecture with a permissioned Hyperledger Fabric consortium as the primary ledger and optional anchoring of its Merkle roots to a public chain.",
           "Original BIM assets stay off-chain in a CDE or S3-compatible store; only identifiers, hashes, versions, events, signatures and links to prior events are recorded on the ledger.",
-          "Sui is a separate experiment comparing the fit between BIM objects and Sui objects with the Fabric approach, not the primary ledger."
+          "Sui is a separate experiment comparing the fit between BIM objects and Sui objects with the Fabric approach, not the primary ledger.",
+          "The private proof repository is separated from the public web demo for reviewers, which is deployed on Cloudflare Pages."
         ]
       }
     },
@@ -54,16 +57,18 @@
         "ko": [
           "분쟁 시나리오 「누가 V11을 받았는가?」를 <b>실행 가능한 형태로 구현했습니다.</b> 외부 의존성 0개의 Node.js proof demo이며, V10/V11 스트리밍 SHA-256과 canonical manifest, 3개 조직의 Ed25519 서명 이벤트, 역할·상태 전이·replay 검증이 동작합니다.",
           "원본과 변조 파일을 판별하고, 이벤트 Merkle inclusion proof를 검증하며, <b>증거가 없으면 답하지 않고 기권하는</b> citation-first 질의와 JSON 감사 리포트 내보내기를 구현했습니다.",
-          "무권한 승인, 중복 이벤트, 변조 파일, 변조 Merkle leaf, 법적 책임 질문 기권을 포함한 <b>자동 테스트 11개</b>가 통과합니다. 정상 경로만이 아니라 공격 경로를 함께 테스트하는 것이 이 구조의 목적입니다.",
-          "MVP 범위, 데이터 모델, 검증 기준, 단계별 구현 계획과 주요 위험은 기준 문서에 정리했습니다. 아직 배포 환경은 없습니다.",
-          "다음 검증은 최소 IFC fixture를 실제 IFC 샘플과 객체 manifest 파서로 교체해 V10/V11 diff를 확인하는 것, 그리고 로컬 proof ledger와 같은 event contract를 쓰는 Fabric adapter와 Sui Revision Passport 중 제출 트랙에 맞는 하나를 구현하는 것입니다."
+          "8줄짜리 fixture를 IfcColumn 2개와 IfcBeam 1개가 담긴 IFC4 STEP 파일로 교체하고, 의존성 없는 IFC4 parser가 객체 manifest를 파일에서 직접 추출하도록 만들었습니다. entity 번호·저장 시각·공백 같은 재저장 노이즈에는 manifest hash가 유지되고 실제 치수 변경에는 달라지는 것을 테스트로 고정했습니다.",
+          "무권한 승인, 중복 이벤트, 변조 파일과 Merkle leaf, 법적 책임 질문 기권을 포함한 <b>자동 테스트 26개</b>가 통과합니다. 정상 경로만이 아니라 공격 경로를 함께 테스트하는 것이 이 구조의 목적입니다.",
+          "증거 묶음을 Walrus testnet에 실제로 업로드하고 Sui 객체로 전송한 뒤, blob을 다시 내려받아 Merkle root와 현재 IFC의 content hash·manifest hash를 재검증하는 경로까지 연결했습니다.",
+          "다음 검증은 Revit·ArchiCAD에서 같은 IFC를 두 번 export해 canonicalization과 GlobalId 안정성을 실제 corpus에서 측정하고, 같은 event contract를 쓰는 Fabric adapter 또는 Sui Revision Passport 중 제출 트랙 하나를 구현하는 것입니다."
         ],
         "en": [
           "The dispute scenario \"who received V11?\" is now <b>implemented and runnable</b>. It is a dependency-free Node.js proof demo covering streaming SHA-256 over V10/V11, a canonical manifest, Ed25519-signed events from three organisations, and validation of roles, state transitions and replay.",
           "It distinguishes original from tampered files, verifies Merkle inclusion proofs over the event log, and answers questions citation-first — <b>abstaining rather than answering when the evidence is not there</b> — with a JSON audit report as output.",
-          "<b>Eleven automated tests</b> pass, covering unauthorised approval, duplicate events, a tampered file, a tampered Merkle leaf and abstention on a question of legal liability. Testing the attack paths alongside the happy path is the point of the structure.",
-          "The MVP scope, data model, validation criteria, staged implementation plan and major risks are written up in the reference document. There is no deployment environment yet.",
-          "Next: replace the minimal IFC fixture with a real IFC sample and an object manifest parser to verify the V10/V11 diff, then implement whichever of the Fabric adapter or the Sui Revision Passport fits the submission track — both against the same event contract as the local proof ledger."
+          "The eight-line fixture was replaced with an IFC4 STEP file containing two IfcColumns and one IfcBeam, and a dependency-free IFC4 parser now extracts the object manifest directly from the file. Tests pin the manifest hash across entity-number, timestamp and whitespace noise while ensuring a real dimensional change alters it.",
+          "<b>Twenty-six automated tests</b> pass, covering unauthorised approval, duplicate events, a tampered file and Merkle leaf, and abstention on legal liability. Testing attack paths alongside the happy path is the point of the structure.",
+          "The evidence bundle is uploaded to Walrus testnet and transferred as a Sui object, then downloaded again to verify its Merkle root and the current IFC content and manifest hashes.",
+          "Next: export the same IFC twice from Revit and ArchiCAD to measure canonicalisation and GlobalId stability against a real corpus, then implement one submission track — a Fabric adapter or Sui Revision Passport — against the same event contract."
         ]
       }
     }

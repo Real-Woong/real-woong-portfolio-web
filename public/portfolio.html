@@ -599,7 +599,7 @@
       <div class="hero-stats">
         <div class="st"><b class="tnum" data-uptime-days>—</b><span>Marvis 연속 운영 (일)</span></div>
         <div class="st"><b class="tnum">6</b><span>배포·운영 중인 서비스</span></div>
-        <div class="st"><b class="tnum"><em data-fix-total>41</em></b><span>문서화한 장애 수정</span></div>
+        <div class="st"><b class="tnum"><em data-fix-total>42</em></b><span>문서화한 장애 수정</span></div>
         <div class="st"><b class="tnum">374</b><span>TAPIoca 자동 테스트</span></div>
       </div>
     </div>
@@ -640,7 +640,7 @@
         <div class="fs-head">
           <span class="fs-tag">FIX 07</span>
           <span class="fs-proj">TAPIoca</span>
-          <span class="fs-of"><b class="tnum" data-fix-total>41</b><span>건 중 하나</span></span>
+          <span class="fs-of"><b class="tnum" data-fix-total>42</b><span>건 중 하나</span></span>
         </div>
         <h3 class="fs-title">테스트 314개를 통과하고도 남아 있던 에이전트 영구 정지 버그</h3>
         <dl class="fs-grid">
@@ -2194,19 +2194,20 @@
       "year": "2025",
       "title": "Marvis",
       "tagline": {
-        "ko": "My + Jarvis. 텔레그램 또는 Siri로 보낸 메시지를 기억하고 메모·아이디어·할 일·일정·사이드 프로젝트 현황으로 분류해 관리하는 개인 AI 비서. Oracle Cloud에서 24시간 운영하며 매일 직접 사용하고 개선하고 있습니다.",
-        "en": "My + Jarvis. A personal AI assistant that remembers what I send it over Telegram or Siri and files it as a note, idea, task, event or side-project update. It has run 24/7 on Oracle Cloud since launch, and I use and improve it daily."
+        "ko": "My + Jarvis. 텔레그램과 Siri로 들어온 메모·아이디어·할 일·일정·프로젝트 현황을 하나의 처리 경로와 SQLite에 기억하는 개인 AI 비서. Mac mini에서 24시간 운영하며 매일 직접 사용하고 개선합니다.",
+        "en": "My + Jarvis. A personal AI assistant that routes notes, ideas, tasks, events and project updates from Telegram and Siri through one core into SQLite. It runs 24/7 on a Mac mini and is used and improved daily."
       },
       "github": "https://github.com/Real-Woong/marvis",
       "demo": null,
       "video": null,
       "stack": [
-        "Python",
+        "Python 3.12",
         "Google Gemini 2.5 Flash",
         "python-telegram-bot",
         "gTTS",
-        "Oracle Cloud",
-        "Cloudflare Tunnel"
+        "SQLite",
+        "Mac mini",
+        "launchd"
       ],
       "sections": [
         {
@@ -2216,20 +2217,18 @@
           },
           "body": {
             "ko": [
-              "- 자연어 메시지를 Schedule/Idea/Note로 자동 분류하고, 저장된 기억과 사이드 프로젝트 현황을 Gemini 문맥에 함께 제공",
-              "- 날짜·시간 표현을 정규식으로 분석해 일정·리마인더 자동 저장",
-              "- 평일 8:30·토요일 10:00에 오늘 일정과 진행 중인 프로젝트를 먼저 브리핑하고 일요일은 발송하지 않도록 요일별 스케줄링",
-              "- 자연어로 사이드 프로젝트 추가·중단·다음 할 일 갱신·브리핑 알림 on/off",
-              "- iPhone Siri 단축어로 손 안 대고 음성 캡처(Cloudflare Tunnel 경유), 같은 파이프라인으로 저장",
-              "- Gemini 답변을 텍스트+한국어 음성(gTTS)으로 동시 제공"
+              "- Telegram 메시지와 Siri 웹훅을 core 단일 경로에서 판단하고 SQLite에 저장한 뒤 필요할 때 Gemini로 답변 생성",
+              "- 도구 호출이 필요한 요청을 다루는 에이전트 루프와 기존 규칙 라우터를 비교하는 shadow 모드",
+              "- SECRETARY의 프로젝트 상태 문서를 원본으로 삼아 Telegram에서 바꾼 상태를 파일과 DB에 원자적으로 반영",
+              "- 30초 주기 리마인더 루프가 시각 알림을 보내고, 아침에는 오늘 할 일과 진행 중인 프로젝트를 한 통으로 브리핑",
+              "- 저장 문장에서 ‘기억해줘’ 같은 부탁 꼬리말과 ‘내일’ 같은 날짜 표현을 분리해 본문과 날짜 필드를 정규화"
             ],
             "en": [
-              "- Classifies natural-language messages as Schedule / Idea / Note, and feeds stored memories plus current side-project state into Gemini as context",
-              "- Parses date and time expressions with regular expressions to file events and reminders automatically",
-              "- Briefs me on today's schedule and active projects at 8:30 on weekdays and 10:00 on Saturdays, and stays quiet on Sundays",
-              "- Add, pause, re-scope or mute a side project entirely in natural language",
-              "- Hands-free voice capture through an iPhone Siri shortcut over a Cloudflare Tunnel, saved through the same pipeline",
-              "- Gemini's answers come back as text and Korean speech (gTTS) at once"
+              "- Routes Telegram messages and Siri webhooks through one core, persists them in SQLite, and invokes Gemini only when a generated answer is needed",
+              "- An agent loop handles tool-using requests while shadow mode compares it with the existing rule-based router",
+              "- Treats SECRETARY project status documents as the source of truth and applies Telegram edits atomically to both the file and database",
+              "- A 30-second reminder loop sends timed alerts, while the morning briefing combines today's tasks and active projects into one message",
+              "- Normalises saved text by separating request suffixes such as ‘remember this’ and leading date phrases such as ‘tomorrow’ from the stored body"
             ]
           }
         },
@@ -2240,14 +2239,16 @@
           },
           "body": {
             "ko": [
-              "- 일정 알림 스레드와 메시지 핸들러가 같은 JSON 파일을 동시에 읽고 쓰며 발생하던 lost update를 RLock 공유 락 + 임시파일→원자적 rename 쓰기로 해결",
-              "- 긴 텔레그램 메시지를 iOS가 “메시지를 보냈습니다”로 요약하는 문제를 고정된 짧은 문장, 프로젝트별 분리·간격 발송, 영문 프로젝트명 자동 띄어쓰기로 개선",
-              "- 개인 데이터가 담긴 파일이 보호 장치 없이 버전 관리에 올라가 있던 문제를 git 히스토리에서 완전히 제거해 정리"
+              "- JSON 파일을 여러 경로가 동시에 갱신하던 구조를 SQLite와 core 단일 처리 경로로 교체해 저장 일관성을 높였습니다.",
+              "- ‘기억해줘’가 저장이 아니라 조회로 분류돼 아무것도 남지 않던 회귀를 고치고, 실제 사용자 문장으로 평가 케이스를 남겼습니다.",
+              "- 프로젝트 상태 파일 쓰기에 실패하면 DB만 바뀌는 반쪽 성공을 허용하지 않고 사용자에게 실패를 알리도록 만들었습니다.",
+              "- 아홉 통으로 흩어지던 아침 알림을 오늘 할 일과 프로젝트를 담은 한 통으로 합치고, 기본 음성 답변을 꺼 읽기 부담을 줄였습니다."
             ],
             "en": [
-              "- The reminder thread and the message handler both read and wrote the same JSON file, losing updates. Fixed with a shared RLock plus atomic write-to-temp-then-rename.",
-              "- iOS collapsed long Telegram messages into \"sent a message\". Fixed with a fixed short opening line, one message per project with spacing between sends, and automatic word spacing for English project names.",
-              "- A file containing personal data had been committed with no protection. Removed from the git history entirely."
+              "- Replaced multiple paths concurrently updating JSON files with SQLite and one core processing path, improving persistence consistency.",
+              "- Fixed a regression where ‘remember this’ was classified as a lookup and nothing was saved, then kept the real user phrasing as an evaluation case.",
+              "- A failed project-status file write can no longer leave the database changed on its own; the operation fails as a unit and tells the user.",
+              "- Combined nine fragmented morning notifications into one briefing containing tasks and projects, and disabled voice replies by default to reduce reading friction."
             ]
           }
         },
@@ -2272,10 +2273,10 @@
           },
           "body": {
             "ko": [
-              "날짜·시간 파싱과 의도 분류 테스트, google.genai SDK 및 SQLite 마이그레이션, 자연어 일정 수정·반복 일정, 고정 도메인 터널과 웹 관리 대시보드를 순차적으로 준비하고 있습니다."
+              "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다."
             ],
             "en": [
-              "Next up, in order: tests for date/time parsing and intent classification, migration to the google.genai SDK and SQLite, natural-language edits and recurring events, then a fixed-domain tunnel and a web admin dashboard."
+              "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it."
             ]
           }
         }
@@ -2706,6 +2707,29 @@
                     "ko": "끄는 조건 셋을 결과 보기 전에 적었다. 손익은 기준이 아니다",
                     "en": "The three shutdown conditions were written before seeing results. P&L is not one of them"
                   }
+                },
+                {
+                  "d": "09.09",
+                  "w": {
+                    "ko": "초기 램프 관문 통과",
+                    "en": "Initial ramp gate passed"
+                  },
+                  "l": {
+                    "ko": "목표미달 −$0.0051, 미달 사이클 0/26 — 구축 램프 이후 결함 신호가 사라졌다",
+                    "en": "Target shortfall −$0.0051, deficient cycles 0/26 — the defect signal disappeared after the build-up ramp"
+                  },
+                  "k": true
+                },
+                {
+                  "d": "09.12",
+                  "w": {
+                    "ko": "PAPER와 실계좌를 함께 표시",
+                    "en": "PAPER and live account shown together"
+                  },
+                  "l": {
+                    "ko": "보고서가 두 장부를 분리해 보여 주고 앱과 1센트 안에서 대사한다. 실제 초기 매수는 아직 보류",
+                    "en": "The report separates both ledgers and reconciles the live view within one cent of the app; initial live purchases remain on hold"
+                  }
                 }
               ]
             },
@@ -2763,26 +2787,26 @@
           "body": {
             "ko": [
               "Oracle Cloud systemd 타이머로 15분 주기 사이클을 24시간 상시 운영하고, 평일에는 Telegram 일일 보고를 받습니다. 외부 런타임 패키지 0개로 Node 표준 기능만 쓰며, 내장 테스트 러너 기준 <b>30개 파일 396개 테스트</b>가 모두 통과합니다.",
-              "<b>9월 1일 실제 돈으로 전환했고 지금 LIVE 3거래일째입니다.</b> 원금은 코드에 못 박힌 10만 원, 1회 주문 $6.7, 일일 매수 $13.4, 총 손실 $6.7, 일일 손실 $2입니다. 손실 한도 둘은 매매를 멈추지 않고 경고만 냅니다 — 멈추는 안전장치가 낙폭을 키운다는 것을 먼저 재봤기 때문입니다.",
+              "<b>9월 1일 LIVE 운용으로 전환했습니다.</b> 원금은 코드에 못 박힌 10만 원, 1회 주문 $6.7, 일일 매수 $13.4, 총 손실 $6.7, 일일 손실 $2입니다. 손실 한도 둘은 매매를 멈추지 않고 경고만 냅니다 — 멈추는 안전장치가 낙폭을 키운다는 것을 먼저 재봤기 때문입니다.",
               "켠 뒤 나흘 동안 <b>결함 넷을 찾아 넷 다 고쳤습니다.</b> 전부 실거래 모드이고 장이 열려 있어야만 닿는 코드라, 전환 전 사전 점검 넷이 모두 통과하고도 드러나지 않던 것들입니다. 그중 하나는 실주문이 나간 날 보고서가 \"실제 주문 없음\"이라고 쓸 뻔했습니다.",
-              "3거래일째까지 실주문은 0건입니다. 이 시스템은 시장이 좋다·나쁘다로 사고팔지 않고 <b>목표 비중과의 거리로만</b> 움직이는데, 세 종목이 전부 무거래 밴드 안에 있습니다. 조용한 것은 고장이 아니라는 것을 전환 전에 적어 두었습니다.",
+              "9월 9일 초기 구축 램프 관문은 목표미달 −$0.0051, 미달 사이클 0/26으로 통과했습니다. 보고서는 PAPER 장부와 실계좌 관리 종목을 함께 표시하고 실제 앱과 1센트 안에서 맞지만, <b>실제 초기 매수는 아직 실행하지 않았습니다.</b>",
               "<b>9월은 개발을 동결했습니다.</b> 보고서 산출이나 관측 대상을 건드리는 변경은 9월 9일(초기 구축 램프 종료)과 10월 30일(감성 층 판정)이 읽는 값을 바꿉니다. LIVE는 유지하고 사람이 하는 일은 아침 보고서를 읽는 것뿐입니다.",
               "9월 30일에 LIVE 지속 여부를 판정합니다. 끄는 조건 셋(대사 멈춤 2일·계획 없는 주문 1건·보고서 못 읽은 날 연속 5거래일)을 <b>결과를 보기 전에</b> 적었고, <b>손익은 기준이 아닙니다.</b>",
               "진행 중인 것:",
               "- 뉴스 감성 층이 신호인지 잡음인지 판정 (10월 30일 마감, 기준은 이미 문서에 박아둠)",
-              "- 원금 증액 관문 다섯 개 측정 — 슬리피지는 10건 중 5건, 환전 비용은 0건, 무중단 대사는 60거래일 중 3일째입니다. 다섯이 모두 설 수 있는 가장 이른 날은 11월 25일입니다",
+              "- 원금 증액 관문 다섯 개 측정 — 슬리피지는 10건 중 5건, 환전 비용은 0건, 대사는 60거래일 중 7일입니다. 다섯이 모두 설 수 있는 가장 이른 날은 11월 25일입니다",
               "- 9월 말~10월 초 첫 배당 입금 — 원천징수 15% 실측과, 수량이 변하지 않아 대사에 걸리지 않는 배당 현금 확인"
             ],
             "en": [
               "A cycle runs every 15 minutes, around the clock, on an Oracle Cloud systemd timer, with a Telegram report on weekdays. It uses zero external runtime packages — only the Node standard library — and <b>396 tests across 30 files</b> pass on the built-in test runner.",
-              "<b>Real money went live on 1 September; this is the third trading day.</b> The principal is 100,000 KRW fixed in code, with caps of $6.7 per order, $13.4 of buying a day, $6.7 of total loss and $2 of daily loss. The two loss caps warn rather than halt trading — because halting was measured first, and it made drawdown worse.",
+              "<b>Live operation began on 1 September.</b> The principal is 100,000 KRW fixed in code, with caps of $6.7 per order, $13.4 of buying a day, $6.7 of total loss and $2 of daily loss. The two loss caps warn rather than halt trading — because halting was measured first, and it made drawdown worse.",
               "In the four days after the switch, <b>four defects were found and all four fixed.</b> Every one of them sat in code reachable only in live mode with the market open, so all four pre-flight checks passed without surfacing any of them. One would have had the report write \"no real orders\" on a day real orders went out.",
-              "No live order has been placed in three trading days. This system does not buy and sell on the market being good or bad; it moves only on <b>distance from the target weight</b>, and all three holdings sit inside the no-trade band. That silence is not a fault — it was written down as the expected behaviour before the switch.",
+              "The initial build-up ramp passed its 9 September gate with a target shortfall of −$0.0051 and zero deficient cycles out of 26. The report now shows the PAPER ledger beside the holdings managed in the live account and matches the app within one cent, but <b>the initial live purchases have not yet been made.</b>",
               "<b>Development is frozen for September.</b> Any change that touches what the report produces or what is being observed would alter what the 9 September reading (end of the initial build-up ramp) and the 30 October judgement (the sentiment layer) see. Live stays on; the only human task is reading the morning report.",
               "On 30 September the decision to keep running live gets made. The three shutdown conditions — two days of stalled reconciliation, one unplanned order, five consecutive trading days with the report unread — were written <b>before any result was visible</b>, and <b>P&amp;L is not among them</b>.",
               "In progress:",
               "- Judging whether the news sentiment layer is signal or noise (deadline 30 October; the criteria are already written down)",
-              "- Measuring the five gates for increasing principal — slippage stands at 5 samples of 10, FX cost at 0, and uninterrupted reconciliation at day 3 of 60. The earliest all five can clear is 25 November",
+              "- Measuring the five gates for increasing principal — slippage stands at 5 samples of 10, FX cost at 0, and reconciliation at day 7 of 60. The earliest all five can clear is 25 November",
               "- The first dividend, late September or early October — measuring the 15% withholding, and the dividend cash that reconciliation cannot see because share counts do not change"
             ]
           }
@@ -3212,12 +3236,12 @@
           },
           "body": {
             "ko": [
-              "2026년 8월 12일 기준 누적 8문제(전부 LV1), 3주차 진행 중입니다. 주간 달성은 1문제 · 4문제 · 3문제로, <b>아직 목표인 5문제를 채운 주가 없습니다.</b>",
+              "2026년 8월 13일 기준 누적 9문제(전부 LV1), 커밋한 날도 9일입니다. 첫 세 주의 주간 달성은 1문제 · 4문제 · 4문제로, <b>아직 목표인 5문제를 채운 주가 없습니다.</b>",
               "낮은 주가 그대로 남아 있다는 점이 이 저장소의 요점입니다. 손으로 고칠 수 있는 숫자였다면 진작 5로 적혀 있었을 것이고, 그 순간부터 이 기록은 아무것도 증명하지 못합니다.",
               "같은 저장소의 STUDY_PLAN.md에는 요일별로 코딩테스트와 선형대수를 나눠 배치하고, 한 문제당 50분 타이머와 하루 2시간 상한을 정해두었습니다. 최소치뿐 아니라 상한을 둔 이유는, 하루에 몰아치면 다음 날이 0이 되기 때문입니다."
             ],
             "en": [
-              "As of 12 August 2026: eight problems, all LV1, in the third week. The weekly counts are 1, 4 and 3 — <b>no week has yet reached the target of five.</b>",
+              "As of 13 August 2026: nine problems, all LV1, across nine active days. The first three weekly counts are 1, 4 and 4 — <b>no week has yet reached the target of five.</b>",
               "That the weak weeks are still there is the point of the repository. If the number were something I could edit by hand it would already read five, and from that moment the record would prove nothing at all.",
               "STUDY_PLAN.md in the same repository splits the week by day between coding tests and linear algebra, with a 50-minute timer per problem and a two-hour daily ceiling. The ceiling exists as much as the floor does, because cramming one day turns the next day into a zero."
             ]
@@ -3294,8 +3318,8 @@
         "ko": "여러 독립 조직이 함께 쓰는 BIM 환경에서 변경·배포·검토·승인 이력을 해시와 전자서명으로 공동 검증하는 provenance 인프라.",
         "en": "Provenance infrastructure for independently operated BIM organisations to jointly verify change, distribution, review and approval history using hashes and digital signatures."
       },
-      "github": null,
-      "demo": null,
+      "github": "https://github.com/Real-Woong/BuildTrace",
+      "demo": "https://buildtrace-demo.pages.dev",
       "video": null,
       "stack": [
         "Hyperledger Fabric",
@@ -3304,7 +3328,8 @@
         "Ed25519",
         "BIM",
         "IFC",
-        "Merkle Tree"
+        "Merkle Tree",
+        "Walrus Testnet"
       ],
       "sections": [
         {
@@ -3316,12 +3341,14 @@
             "ko": [
               "기본 원장은 Hyperledger Fabric permissioned consortium network로 두고, Fabric 이력의 Merkle root를 public chain에 선택적으로 anchoring하는 하이브리드 구조를 설계했습니다.",
               "BIM 원본은 CDE 또는 S3 호환 저장소에 off-chain으로 보관하고 식별자·해시·버전·이벤트·서명·이전 이벤트 참조만 원장에 기록합니다.",
-              "Sui는 주 원장이 아니라 BIM Object와 Sui Object의 적합성을 Fabric 방식과 비교하는 별도 실험 트랙으로 정의했습니다."
+              "Sui는 주 원장이 아니라 BIM Object와 Sui Object의 적합성을 Fabric 방식과 비교하는 별도 실험 트랙으로 정의했습니다.",
+              "검증 코드가 있는 private proof 저장소와 심사위원용 public 웹 데모 저장소를 분리하고, 웹 데모는 Cloudflare Pages에 배포했습니다."
             ],
             "en": [
               "Designed a hybrid architecture with a permissioned Hyperledger Fabric consortium as the primary ledger and optional anchoring of its Merkle roots to a public chain.",
               "Original BIM assets stay off-chain in a CDE or S3-compatible store; only identifiers, hashes, versions, events, signatures and links to prior events are recorded on the ledger.",
-              "Sui is a separate experiment comparing the fit between BIM objects and Sui objects with the Fabric approach, not the primary ledger."
+              "Sui is a separate experiment comparing the fit between BIM objects and Sui objects with the Fabric approach, not the primary ledger.",
+              "The private proof repository is separated from the public web demo for reviewers, which is deployed on Cloudflare Pages."
             ]
           }
         },
@@ -3334,16 +3361,18 @@
             "ko": [
               "분쟁 시나리오 「누가 V11을 받았는가?」를 <b>실행 가능한 형태로 구현했습니다.</b> 외부 의존성 0개의 Node.js proof demo이며, V10/V11 스트리밍 SHA-256과 canonical manifest, 3개 조직의 Ed25519 서명 이벤트, 역할·상태 전이·replay 검증이 동작합니다.",
               "원본과 변조 파일을 판별하고, 이벤트 Merkle inclusion proof를 검증하며, <b>증거가 없으면 답하지 않고 기권하는</b> citation-first 질의와 JSON 감사 리포트 내보내기를 구현했습니다.",
-              "무권한 승인, 중복 이벤트, 변조 파일, 변조 Merkle leaf, 법적 책임 질문 기권을 포함한 <b>자동 테스트 11개</b>가 통과합니다. 정상 경로만이 아니라 공격 경로를 함께 테스트하는 것이 이 구조의 목적입니다.",
-              "MVP 범위, 데이터 모델, 검증 기준, 단계별 구현 계획과 주요 위험은 기준 문서에 정리했습니다. 아직 배포 환경은 없습니다.",
-              "다음 검증은 최소 IFC fixture를 실제 IFC 샘플과 객체 manifest 파서로 교체해 V10/V11 diff를 확인하는 것, 그리고 로컬 proof ledger와 같은 event contract를 쓰는 Fabric adapter와 Sui Revision Passport 중 제출 트랙에 맞는 하나를 구현하는 것입니다."
+              "8줄짜리 fixture를 IfcColumn 2개와 IfcBeam 1개가 담긴 IFC4 STEP 파일로 교체하고, 의존성 없는 IFC4 parser가 객체 manifest를 파일에서 직접 추출하도록 만들었습니다. entity 번호·저장 시각·공백 같은 재저장 노이즈에는 manifest hash가 유지되고 실제 치수 변경에는 달라지는 것을 테스트로 고정했습니다.",
+              "무권한 승인, 중복 이벤트, 변조 파일과 Merkle leaf, 법적 책임 질문 기권을 포함한 <b>자동 테스트 26개</b>가 통과합니다. 정상 경로만이 아니라 공격 경로를 함께 테스트하는 것이 이 구조의 목적입니다.",
+              "증거 묶음을 Walrus testnet에 실제로 업로드하고 Sui 객체로 전송한 뒤, blob을 다시 내려받아 Merkle root와 현재 IFC의 content hash·manifest hash를 재검증하는 경로까지 연결했습니다.",
+              "다음 검증은 Revit·ArchiCAD에서 같은 IFC를 두 번 export해 canonicalization과 GlobalId 안정성을 실제 corpus에서 측정하고, 같은 event contract를 쓰는 Fabric adapter 또는 Sui Revision Passport 중 제출 트랙 하나를 구현하는 것입니다."
             ],
             "en": [
               "The dispute scenario \"who received V11?\" is now <b>implemented and runnable</b>. It is a dependency-free Node.js proof demo covering streaming SHA-256 over V10/V11, a canonical manifest, Ed25519-signed events from three organisations, and validation of roles, state transitions and replay.",
               "It distinguishes original from tampered files, verifies Merkle inclusion proofs over the event log, and answers questions citation-first — <b>abstaining rather than answering when the evidence is not there</b> — with a JSON audit report as output.",
-              "<b>Eleven automated tests</b> pass, covering unauthorised approval, duplicate events, a tampered file, a tampered Merkle leaf and abstention on a question of legal liability. Testing the attack paths alongside the happy path is the point of the structure.",
-              "The MVP scope, data model, validation criteria, staged implementation plan and major risks are written up in the reference document. There is no deployment environment yet.",
-              "Next: replace the minimal IFC fixture with a real IFC sample and an object manifest parser to verify the V10/V11 diff, then implement whichever of the Fabric adapter or the Sui Revision Passport fits the submission track — both against the same event contract as the local proof ledger."
+              "The eight-line fixture was replaced with an IFC4 STEP file containing two IfcColumns and one IfcBeam, and a dependency-free IFC4 parser now extracts the object manifest directly from the file. Tests pin the manifest hash across entity-number, timestamp and whitespace noise while ensuring a real dimensional change alters it.",
+              "<b>Twenty-six automated tests</b> pass, covering unauthorised approval, duplicate events, a tampered file and Merkle leaf, and abstention on legal liability. Testing attack paths alongside the happy path is the point of the structure.",
+              "The evidence bundle is uploaded to Walrus testnet and transferred as a Sui object, then downloaded again to verify its Merkle root and the current IFC content and manifest hashes.",
+              "Next: export the same IFC twice from Revit and ArchiCAD to measure canonicalisation and GlobalId stability against a real corpus, then implement one submission track — a Fabric adapter or Sui Revision Passport — against the same event contract."
             ]
           }
         }
@@ -3738,7 +3767,7 @@
         "ko": "운영 중",
         "en": "Live"
       },
-      3
+      4
     ],
     "tapioca": [
       "live",

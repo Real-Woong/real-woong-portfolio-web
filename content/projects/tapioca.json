@@ -430,6 +430,29 @@
                 "ko": "끄는 조건 셋을 결과 보기 전에 적었다. 손익은 기준이 아니다",
                 "en": "The three shutdown conditions were written before seeing results. P&L is not one of them"
               }
+            },
+            {
+              "d": "09.09",
+              "k": true,
+              "w": {
+                "ko": "초기 램프 관문 통과",
+                "en": "Initial ramp gate passed"
+              },
+              "l": {
+                "ko": "목표미달 −$0.0051, 미달 사이클 0/26 — 구축 램프 이후 결함 신호가 사라졌다",
+                "en": "Target shortfall −$0.0051, deficient cycles 0/26 — the defect signal disappeared after the build-up ramp"
+              }
+            },
+            {
+              "d": "09.12",
+              "w": {
+                "ko": "PAPER와 실계좌를 함께 표시",
+                "en": "PAPER and live account shown together"
+              },
+              "l": {
+                "ko": "보고서가 두 장부를 분리해 보여 주고 앱과 1센트 안에서 대사한다. 실제 초기 매수는 아직 보류",
+                "en": "The report separates both ledgers and reconciles the live view within one cent of the app; initial live purchases remain on hold"
+              }
             }
           ]
         },
@@ -487,26 +510,26 @@
       "body": {
         "ko": [
           "Oracle Cloud systemd 타이머로 15분 주기 사이클을 24시간 상시 운영하고, 평일에는 Telegram 일일 보고를 받습니다. 외부 런타임 패키지 0개로 Node 표준 기능만 쓰며, 내장 테스트 러너 기준 <b>30개 파일 396개 테스트</b>가 모두 통과합니다.",
-          "<b>9월 1일 실제 돈으로 전환했고 지금 LIVE 3거래일째입니다.</b> 원금은 코드에 못 박힌 10만 원, 1회 주문 $6.7, 일일 매수 $13.4, 총 손실 $6.7, 일일 손실 $2입니다. 손실 한도 둘은 매매를 멈추지 않고 경고만 냅니다 — 멈추는 안전장치가 낙폭을 키운다는 것을 먼저 재봤기 때문입니다.",
+          "<b>9월 1일 LIVE 운용으로 전환했습니다.</b> 원금은 코드에 못 박힌 10만 원, 1회 주문 $6.7, 일일 매수 $13.4, 총 손실 $6.7, 일일 손실 $2입니다. 손실 한도 둘은 매매를 멈추지 않고 경고만 냅니다 — 멈추는 안전장치가 낙폭을 키운다는 것을 먼저 재봤기 때문입니다.",
           "켠 뒤 나흘 동안 <b>결함 넷을 찾아 넷 다 고쳤습니다.</b> 전부 실거래 모드이고 장이 열려 있어야만 닿는 코드라, 전환 전 사전 점검 넷이 모두 통과하고도 드러나지 않던 것들입니다. 그중 하나는 실주문이 나간 날 보고서가 \"실제 주문 없음\"이라고 쓸 뻔했습니다.",
-          "3거래일째까지 실주문은 0건입니다. 이 시스템은 시장이 좋다·나쁘다로 사고팔지 않고 <b>목표 비중과의 거리로만</b> 움직이는데, 세 종목이 전부 무거래 밴드 안에 있습니다. 조용한 것은 고장이 아니라는 것을 전환 전에 적어 두었습니다.",
+          "9월 9일 초기 구축 램프 관문은 목표미달 −$0.0051, 미달 사이클 0/26으로 통과했습니다. 보고서는 PAPER 장부와 실계좌 관리 종목을 함께 표시하고 실제 앱과 1센트 안에서 맞지만, <b>실제 초기 매수는 아직 실행하지 않았습니다.</b>",
           "<b>9월은 개발을 동결했습니다.</b> 보고서 산출이나 관측 대상을 건드리는 변경은 9월 9일(초기 구축 램프 종료)과 10월 30일(감성 층 판정)이 읽는 값을 바꿉니다. LIVE는 유지하고 사람이 하는 일은 아침 보고서를 읽는 것뿐입니다.",
           "9월 30일에 LIVE 지속 여부를 판정합니다. 끄는 조건 셋(대사 멈춤 2일·계획 없는 주문 1건·보고서 못 읽은 날 연속 5거래일)을 <b>결과를 보기 전에</b> 적었고, <b>손익은 기준이 아닙니다.</b>",
           "진행 중인 것:",
           "- 뉴스 감성 층이 신호인지 잡음인지 판정 (10월 30일 마감, 기준은 이미 문서에 박아둠)",
-          "- 원금 증액 관문 다섯 개 측정 — 슬리피지는 10건 중 5건, 환전 비용은 0건, 무중단 대사는 60거래일 중 3일째입니다. 다섯이 모두 설 수 있는 가장 이른 날은 11월 25일입니다",
+          "- 원금 증액 관문 다섯 개 측정 — 슬리피지는 10건 중 5건, 환전 비용은 0건, 대사는 60거래일 중 7일입니다. 다섯이 모두 설 수 있는 가장 이른 날은 11월 25일입니다",
           "- 9월 말~10월 초 첫 배당 입금 — 원천징수 15% 실측과, 수량이 변하지 않아 대사에 걸리지 않는 배당 현금 확인"
         ],
         "en": [
           "A cycle runs every 15 minutes, around the clock, on an Oracle Cloud systemd timer, with a Telegram report on weekdays. It uses zero external runtime packages — only the Node standard library — and <b>396 tests across 30 files</b> pass on the built-in test runner.",
-          "<b>Real money went live on 1 September; this is the third trading day.</b> The principal is 100,000 KRW fixed in code, with caps of $6.7 per order, $13.4 of buying a day, $6.7 of total loss and $2 of daily loss. The two loss caps warn rather than halt trading — because halting was measured first, and it made drawdown worse.",
+          "<b>Live operation began on 1 September.</b> The principal is 100,000 KRW fixed in code, with caps of $6.7 per order, $13.4 of buying a day, $6.7 of total loss and $2 of daily loss. The two loss caps warn rather than halt trading — because halting was measured first, and it made drawdown worse.",
           "In the four days after the switch, <b>four defects were found and all four fixed.</b> Every one of them sat in code reachable only in live mode with the market open, so all four pre-flight checks passed without surfacing any of them. One would have had the report write \"no real orders\" on a day real orders went out.",
-          "No live order has been placed in three trading days. This system does not buy and sell on the market being good or bad; it moves only on <b>distance from the target weight</b>, and all three holdings sit inside the no-trade band. That silence is not a fault — it was written down as the expected behaviour before the switch.",
+          "The initial build-up ramp passed its 9 September gate with a target shortfall of −$0.0051 and zero deficient cycles out of 26. The report now shows the PAPER ledger beside the holdings managed in the live account and matches the app within one cent, but <b>the initial live purchases have not yet been made.</b>",
           "<b>Development is frozen for September.</b> Any change that touches what the report produces or what is being observed would alter what the 9 September reading (end of the initial build-up ramp) and the 30 October judgement (the sentiment layer) see. Live stays on; the only human task is reading the morning report.",
           "On 30 September the decision to keep running live gets made. The three shutdown conditions — two days of stalled reconciliation, one unplanned order, five consecutive trading days with the report unread — were written <b>before any result was visible</b>, and <b>P&amp;L is not among them</b>.",
           "In progress:",
           "- Judging whether the news sentiment layer is signal or noise (deadline 30 October; the criteria are already written down)",
-          "- Measuring the five gates for increasing principal — slippage stands at 5 samples of 10, FX cost at 0, and uninterrupted reconciliation at day 3 of 60. The earliest all five can clear is 25 November",
+          "- Measuring the five gates for increasing principal — slippage stands at 5 samples of 10, FX cost at 0, and reconciliation at day 7 of 60. The earliest all five can clear is 25 November",
           "- The first dividend, late September or early October — measuring the 15% withholding, and the dividend cash that reconciliation cannot see because share counts do not change"
         ]
       }

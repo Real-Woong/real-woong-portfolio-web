@@ -12,18 +12,19 @@
     }
   },
   "tagline": {
-    "ko": "My + Jarvis. 텔레그램 또는 Siri로 보낸 메시지를 기억하고 메모·아이디어·할 일·일정·사이드 프로젝트 현황으로 분류해 관리하는 개인 AI 비서. Oracle Cloud에서 24시간 운영하며 매일 직접 사용하고 개선하고 있습니다.",
-    "en": "My + Jarvis. A personal AI assistant that remembers what I send it over Telegram or Siri and files it as a note, idea, task, event or side-project update. It has run 24/7 on Oracle Cloud since launch, and I use and improve it daily."
+    "ko": "My + Jarvis. 텔레그램과 Siri로 들어온 메모·아이디어·할 일·일정·프로젝트 현황을 하나의 처리 경로와 SQLite에 기억하는 개인 AI 비서. Mac mini에서 24시간 운영하며 매일 직접 사용하고 개선합니다.",
+    "en": "My + Jarvis. A personal AI assistant that routes notes, ideas, tasks, events and project updates from Telegram and Siri through one core into SQLite. It runs 24/7 on a Mac mini and is used and improved daily."
   },
   "github": "https://github.com/Real-Woong/marvis",
   "demo": null,
   "stack": [
-    "Python",
+    "Python 3.12",
     "Google Gemini 2.5 Flash",
     "python-telegram-bot",
     "gTTS",
-    "Oracle Cloud",
-    "Cloudflare Tunnel"
+    "SQLite",
+    "Mac mini",
+    "launchd"
   ],
   "sections": [
     {
@@ -33,20 +34,18 @@
       },
       "body": {
         "ko": [
-          "- 자연어 메시지를 Schedule/Idea/Note로 자동 분류하고, 저장된 기억과 사이드 프로젝트 현황을 Gemini 문맥에 함께 제공",
-          "- 날짜·시간 표현을 정규식으로 분석해 일정·리마인더 자동 저장",
-          "- 평일 8:30·토요일 10:00에 오늘 일정과 진행 중인 프로젝트를 먼저 브리핑하고 일요일은 발송하지 않도록 요일별 스케줄링",
-          "- 자연어로 사이드 프로젝트 추가·중단·다음 할 일 갱신·브리핑 알림 on/off",
-          "- iPhone Siri 단축어로 손 안 대고 음성 캡처(Cloudflare Tunnel 경유), 같은 파이프라인으로 저장",
-          "- Gemini 답변을 텍스트+한국어 음성(gTTS)으로 동시 제공"
+          "- Telegram 메시지와 Siri 웹훅을 core 단일 경로에서 판단하고 SQLite에 저장한 뒤 필요할 때 Gemini로 답변 생성",
+          "- 도구 호출이 필요한 요청을 다루는 에이전트 루프와 기존 규칙 라우터를 비교하는 shadow 모드",
+          "- SECRETARY의 프로젝트 상태 문서를 원본으로 삼아 Telegram에서 바꾼 상태를 파일과 DB에 원자적으로 반영",
+          "- 30초 주기 리마인더 루프가 시각 알림을 보내고, 아침에는 오늘 할 일과 진행 중인 프로젝트를 한 통으로 브리핑",
+          "- 저장 문장에서 ‘기억해줘’ 같은 부탁 꼬리말과 ‘내일’ 같은 날짜 표현을 분리해 본문과 날짜 필드를 정규화"
         ],
         "en": [
-          "- Classifies natural-language messages as Schedule / Idea / Note, and feeds stored memories plus current side-project state into Gemini as context",
-          "- Parses date and time expressions with regular expressions to file events and reminders automatically",
-          "- Briefs me on today's schedule and active projects at 8:30 on weekdays and 10:00 on Saturdays, and stays quiet on Sundays",
-          "- Add, pause, re-scope or mute a side project entirely in natural language",
-          "- Hands-free voice capture through an iPhone Siri shortcut over a Cloudflare Tunnel, saved through the same pipeline",
-          "- Gemini's answers come back as text and Korean speech (gTTS) at once"
+          "- Routes Telegram messages and Siri webhooks through one core, persists them in SQLite, and invokes Gemini only when a generated answer is needed",
+          "- An agent loop handles tool-using requests while shadow mode compares it with the existing rule-based router",
+          "- Treats SECRETARY project status documents as the source of truth and applies Telegram edits atomically to both the file and database",
+          "- A 30-second reminder loop sends timed alerts, while the morning briefing combines today's tasks and active projects into one message",
+          "- Normalises saved text by separating request suffixes such as ‘remember this’ and leading date phrases such as ‘tomorrow’ from the stored body"
         ]
       }
     },
@@ -57,14 +56,16 @@
       },
       "body": {
         "ko": [
-          "- 일정 알림 스레드와 메시지 핸들러가 같은 JSON 파일을 동시에 읽고 쓰며 발생하던 lost update를 RLock 공유 락 + 임시파일→원자적 rename 쓰기로 해결",
-          "- 긴 텔레그램 메시지를 iOS가 “메시지를 보냈습니다”로 요약하는 문제를 고정된 짧은 문장, 프로젝트별 분리·간격 발송, 영문 프로젝트명 자동 띄어쓰기로 개선",
-          "- 개인 데이터가 담긴 파일이 보호 장치 없이 버전 관리에 올라가 있던 문제를 git 히스토리에서 완전히 제거해 정리"
+          "- JSON 파일을 여러 경로가 동시에 갱신하던 구조를 SQLite와 core 단일 처리 경로로 교체해 저장 일관성을 높였습니다.",
+          "- ‘기억해줘’가 저장이 아니라 조회로 분류돼 아무것도 남지 않던 회귀를 고치고, 실제 사용자 문장으로 평가 케이스를 남겼습니다.",
+          "- 프로젝트 상태 파일 쓰기에 실패하면 DB만 바뀌는 반쪽 성공을 허용하지 않고 사용자에게 실패를 알리도록 만들었습니다.",
+          "- 아홉 통으로 흩어지던 아침 알림을 오늘 할 일과 프로젝트를 담은 한 통으로 합치고, 기본 음성 답변을 꺼 읽기 부담을 줄였습니다."
         ],
         "en": [
-          "- The reminder thread and the message handler both read and wrote the same JSON file, losing updates. Fixed with a shared RLock plus atomic write-to-temp-then-rename.",
-          "- iOS collapsed long Telegram messages into \"sent a message\". Fixed with a fixed short opening line, one message per project with spacing between sends, and automatic word spacing for English project names.",
-          "- A file containing personal data had been committed with no protection. Removed from the git history entirely."
+          "- Replaced multiple paths concurrently updating JSON files with SQLite and one core processing path, improving persistence consistency.",
+          "- Fixed a regression where ‘remember this’ was classified as a lookup and nothing was saved, then kept the real user phrasing as an evaluation case.",
+          "- A failed project-status file write can no longer leave the database changed on its own; the operation fails as a unit and tells the user.",
+          "- Combined nine fragmented morning notifications into one briefing containing tasks and projects, and disabled voice replies by default to reduce reading friction."
         ]
       }
     },
@@ -89,10 +90,10 @@
       },
       "body": {
         "ko": [
-          "날짜·시간 파싱과 의도 분류 테스트, google.genai SDK 및 SQLite 마이그레이션, 자연어 일정 수정·반복 일정, 고정 도메인 터널과 웹 관리 대시보드를 순차적으로 준비하고 있습니다."
+          "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다."
         ],
         "en": [
-          "Next up, in order: tests for date/time parsing and intent classification, migration to the google.genai SDK and SQLite, natural-language edits and recurring events, then a fixed-domain tunnel and a web admin dashboard."
+          "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it."
         ]
       }
     }

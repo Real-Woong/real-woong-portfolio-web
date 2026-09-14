@@ -83,12 +83,12 @@
       },
       "body": {
         "ko": [
-          "2026년 8월 12일 기준 누적 8문제(전부 LV1), 3주차 진행 중입니다. 주간 달성은 1문제 · 4문제 · 3문제로, <b>아직 목표인 5문제를 채운 주가 없습니다.</b>",
+          "2026년 8월 13일 기준 누적 9문제(전부 LV1), 커밋한 날도 9일입니다. 첫 세 주의 주간 달성은 1문제 · 4문제 · 4문제로, <b>아직 목표인 5문제를 채운 주가 없습니다.</b>",
           "낮은 주가 그대로 남아 있다는 점이 이 저장소의 요점입니다. 손으로 고칠 수 있는 숫자였다면 진작 5로 적혀 있었을 것이고, 그 순간부터 이 기록은 아무것도 증명하지 못합니다.",
           "같은 저장소의 STUDY_PLAN.md에는 요일별로 코딩테스트와 선형대수를 나눠 배치하고, 한 문제당 50분 타이머와 하루 2시간 상한을 정해두었습니다. 최소치뿐 아니라 상한을 둔 이유는, 하루에 몰아치면 다음 날이 0이 되기 때문입니다."
         ],
         "en": [
-          "As of 12 August 2026: eight problems, all LV1, in the third week. The weekly counts are 1, 4 and 3 — <b>no week has yet reached the target of five.</b>",
+          "As of 13 August 2026: nine problems, all LV1, across nine active days. The first three weekly counts are 1, 4 and 4 — <b>no week has yet reached the target of five.</b>",
           "That the weak weeks are still there is the point of the repository. If the number were something I could edit by hand it would already read five, and from that moment the record would prove nothing at all.",
           "STUDY_PLAN.md in the same repository splits the week by day between coding tests and linear algebra, with a 50-minute timer per problem and a two-hour daily ceiling. The ceiling exists as much as the floor does, because cramming one day turns the next day into a zero."
         ]
