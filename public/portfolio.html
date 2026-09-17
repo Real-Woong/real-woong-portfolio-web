@@ -470,6 +470,13 @@
   .tl-item ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.7;}
   .tl-item a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;transition:opacity .25s ease;}
   .tl-item a:hover{opacity:.7;}
+  /* Certificates hang off the activity they came from instead of a list of their own. */
+  .tl-creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .cred{display:inline-flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;background:transparent;border:1px solid var(--line-strong);
+    color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;cursor:pointer;transition:border-color .2s ease,color .2s ease;}
+  .cred img{width:auto;height:37px;max-width:52px;object-fit:cover;display:block;filter:grayscale(1) contrast(.9);opacity:.75;transition:filter .2s ease,opacity .2s ease;}
+  .cred:hover,.cred:focus-visible{border-color:var(--amber);color:var(--amber);}
+  .cred:hover img,.cred:focus-visible img{filter:none;opacity:1;}
 
   /* ---------------- SKILLS ---------------- */
   .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);position:relative;z-index:1;}
@@ -538,6 +545,10 @@
   .pm-section a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;}
   @media (max-width:600px){.pm-overlay{padding:0;}
     .pm-panel{max-height:100vh;height:100vh;width:100%;padding:22px 20px 40px;}}
+  .cred-panel{width:min(560px,100%);}
+  .cred-panel.wide{width:min(820px,100%);}
+  .cred-panel .pm-title{font-size:clamp(1.5rem,3.6vw,2.1rem);}
+  .cred-image{display:block;width:100%;height:auto;margin:0 0 22px;border:1px solid var(--line);}
 </style>
 </head>
 <body>
@@ -958,11 +969,18 @@
           <div class="tl-year tnum">2025</div>
           <h3>블록블록 활동·CryptoFunding·Textro</h3>
           <ul><li>연세 블록체인 동아리 “블록블록” 활동</li><li>CryptoFunding, Textro 개발</li></ul>
+          <div class="tl-creds">
+            <button type="button" class="cred" data-cred="blockblock7-completion"><img src="/credentials/blockblock7-completion.jpg" alt="" width="37" height="26" loading="lazy"><span>블록블록 7기 수료증</span></button>
+          </div>
         </div>
         <div class="tl-item reveal reveal-l">
           <div class="tl-year tnum">2024</div>
           <h3>하랑 홍보부장·UMC 부회장</h3>
           <ul><li>24대 컴퓨터과학과 학생회 “하랑” 홍보부장·브랜딩 총괄</li><li>2024 UMC 연세 지부 부회장</li><li>Uni-Made, HealEat 팀 프로젝트</li></ul>
+          <div class="tl-creds">
+            <button type="button" class="cred" data-cred="umc7-completion"><img src="/credentials/umc7-completion.jpg" alt="" width="26" height="37" loading="lazy"><span>UMC 7기 수료증</span></button>
+            <button type="button" class="cred" data-cred="umc7-award"><img src="/credentials/umc7-award.jpg" alt="" width="26" height="37" loading="lazy"><span>UMC 7기 운영진 공로장</span></button>
+          </div>
         </div>
         <div class="tl-item reveal reveal-r">
           <div class="tl-year tnum">2023</div>
@@ -1114,6 +1132,9 @@
     '24대 컴퓨터과학과 학생회 “하랑” 홍보부장·브랜딩 총괄':'PR Lead and branding director, 24th CS Student Council (Harang)',
     '2024 UMC 연세 지부 부회장':'Vice President, UMC Yonsei chapter (2024)',
     'Uni-Made, HealEat 팀 프로젝트':'Uni-Made and HealEat team projects',
+    '블록블록 7기 수료증':'BlockBlock 7th Certificate',
+    'UMC 7기 수료증':'UMC 7th Certificate',
+    'UMC 7기 운영진 공로장':'UMC 7th Staff Award',
     '총동아리연합회 홍보처·학생회 홍보처':'Union of Clubs PR · Student Council PR',
     '총동아리연합회 홍보처':'PR team, Union of Student Clubs',
     '컴퓨터과학과 학생회(온새미로) 홍보처':'PR team, CS Student Council (Onsaemiro)',
@@ -1185,6 +1206,13 @@
   <div class="pm-panel" id="pm-panel" role="dialog" aria-modal="true" aria-labelledby="pm-title">
     <button class="pm-close" id="pm-close" aria-label="Close">✕</button>
     <div id="pm-content"></div>
+  </div>
+</div>
+
+<div class="pm-overlay" id="cred-overlay" hidden>
+  <div class="pm-panel cred-panel" id="cred-panel" role="dialog" aria-modal="true" aria-labelledby="cred-title">
+    <button class="pm-close" id="cred-close" aria-label="Close">✕</button>
+    <div id="cred-content"></div>
   </div>
 </div>
 
@@ -4073,6 +4101,92 @@
   overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+})();
+
+/* ---------------- CREDENTIAL VIEWER ----------------
+   Opens a certificate from the timeline chip that references it. Where the
+   issuer hosts its own page, `verify` links there so the image is not the
+   only proof. Certificates carrying a birth date, photo or ID number (SQLD)
+   stay off this public page. */
+(function(){
+  var NEORDINARY = { ko: 'NE(O)RDINARY', en: 'NE(O)RDINARY' };
+  var CREDS = {
+    'blockblock7-completion': {
+      img: '/credentials/blockblock7-completion.jpg', w: 1400, h: 989, wide: true,
+      issuer: { ko: '연세대학교 블록체인 동아리 블록블록', en: 'BlockBlock, Yonsei University Blockchain Club' },
+      title: { ko: '블록블록 7기 수료증', en: 'BlockBlock 7th Cohort Certificate of Achievement' },
+      meta: { ko: '7기 부원 · 2025.09 – 2026.08', en: '7th cohort member · Sep 2025 – Aug 2026' }
+    },
+    'umc7-completion': {
+      img: '/credentials/umc7-completion.jpg', w: 800, h: 1150, issuer: NEORDINARY,
+      verify: 'https://www.kolleges.net/ko/neordinary/achievement/2129',
+      title: { ko: 'UMC 7기 챌린저 수료증', en: 'UMC 7th Challenger Certificate of Completion' },
+      meta: { ko: 'iOS 파트 · 2024.09 – 2025.02', en: 'iOS track · Sep 2024 – Feb 2025' }
+    },
+    'umc7-award': {
+      img: '/credentials/umc7-award.jpg', w: 800, h: 1150, issuer: NEORDINARY,
+      verify: 'https://www.kolleges.net/ko/neordinary/achievement/2525',
+      title: { ko: 'UMC 7기 운영진 공로장', en: 'UMC 7th Staff Award' },
+      meta: { ko: '연세대 지부 부회장 · 2024.09 – 2025.02', en: 'Vice President, Yonsei chapter · Sep 2024 – Feb 2025' }
+    }
+  };
+  var ISSUER = { ko: '발급처에서 확인 ↗', en: 'Verify with issuer ↗' };
+
+  var overlay = document.getElementById('cred-overlay');
+  var panel = document.getElementById('cred-panel');
+  var closeBtn = document.getElementById('cred-close');
+  var contentEl = document.getElementById('cred-content');
+  var openKey = null, lastFocused = null;
+
+  function lang(){ return window.__pfLang ? window.__pfLang() : 'ko'; }
+
+  function render(){
+    var c = CREDS[openKey], l = lang();
+    panel.classList.toggle('wide', !!c.wide);
+    contentEl.innerHTML =
+      '<div class="pm-meta"><span class="pm-no">Credential</span><span class="pm-dot"></span><span class="cred-issuer"></span></div>'+
+      '<h2 class="pm-title" id="cred-title"></h2>'+
+      '<p class="pm-tagline"></p>'+
+      '<img class="cred-image" width="'+c.w+'" height="'+c.h+'" src="'+c.img+'">'+
+      (c.verify ? '<div class="pm-links"><a class="btn ghost" target="_blank" rel="noopener" href="'+c.verify+'"></a></div>' : '');
+    contentEl.querySelector('.cred-issuer').textContent = c.issuer[l];
+    contentEl.querySelector('.pm-title').textContent = c.title[l];
+    contentEl.querySelector('.pm-tagline').textContent = c.meta[l];
+    contentEl.querySelector('.cred-image').alt = c.title[l];
+    if(c.verify) contentEl.querySelector('.btn').textContent = ISSUER[l];
+  }
+
+  function open(key, trigger){
+    if(!CREDS[key]) return;
+    openKey = key;
+    lastFocused = trigger || document.activeElement;
+    render();
+    overlay.hidden = false;
+    document.documentElement.classList.add('pm-lock');
+    requestAnimationFrame(function(){
+      overlay.classList.add('open');
+      panel.scrollTop = 0;
+      closeBtn.focus();
+    });
+  }
+
+  function close(){
+    openKey = null;
+    overlay.classList.remove('open');
+    document.documentElement.classList.remove('pm-lock');
+    setTimeout(function(){ overlay.hidden = true; }, 380);
+    if(lastFocused && typeof lastFocused.focus === 'function'){ lastFocused.focus(); }
+  }
+
+  document.querySelectorAll('[data-cred]').forEach(function(el){
+    el.addEventListener('click', function(){ open(el.getAttribute('data-cred'), el); });
+  });
+  document.addEventListener('pf:lang', function(){ if(openKey) render(); });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && openKey) close();
   });
 })();
 </script>
