@@ -77,13 +77,13 @@
       },
       "body": {
         "ko": [
-          "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크·원신은 방향과 프리뷰까지만 정해져 있습니다.",
+          "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크 트래커 구현을 시작했으며 원신은 아직 방향과 프리뷰 단계입니다.",
           "<b>아직 배포 준비가 안 된 것들을 그대로 적어 둡니다</b> — 퀘스트가 React 상태에만 있어 앱을 끄면 사라지고, 초기 목업 퀘스트가 남아 있으며, 폰트가 Geist Mono·Inter로 선언만 되어 있고 실제 번들 전략이 정해지지 않았습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
           "다음 순서는 폰트 정렬 → 로스트아크·원신 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
           "공개 배포는 비상업 GitHub 릴리스를 목표로 합니다. 게임의 공식 로고·스크린샷·아이콘·폰트는 번들하지 않고 색·배치·상호작용 언어만 참조하며, <b>IP 안전한 자산 교체를 릴리스 요건으로 두었습니다</b> — 배포 후에 정리할 항목이 아닙니다."
         ],
         "en": [
-          "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Lost Ark and Genshin have a defined direction and a preview card, nothing more.",
+          "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Implementation of the Lost Ark tracker is now under way, while Genshin remains at the direction and preview stage.",
           "<b>The parts that are not release-ready are recorded as they are</b>: quests live only in React state and vanish when the app closes, the initial mock quest is still present, and the CSS names Geist Mono and Inter without a settled font bundling strategy. Code signing, notarisation and a universal build are all still open.",
           "The order of the next four tasks is fixed: font alignment, then the Lost Ark and Genshin trackers, then a full user-flow re-check, then removing the mock data.",
           "Distribution targets a non-commercial GitHub release. No official game logo, screenshot, icon or font ships as a bundled asset — only colour, layout and interaction language are referenced — and <b>replacing them with IP-safe assets is a release requirement</b>, not post-release cleanup."

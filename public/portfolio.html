@@ -1536,13 +1536,15 @@
               "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
               "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
               "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. 8월 26일에는 체결 수수료와 DEEP 수수료 가드를 넣어 재배포하고 SUI/DEEP 페어로 BUY·SELL을 온체인에서 다시 검증했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며, 현재 Move 70건과 npm 54건(x402 37건·Agent 실행기 17건) 테스트가 모두 통과합니다.",
-              "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다."
+              "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다.",
+              "현재 실행기는 DEEP/SUI 페어의 pull 연결을 받을 준비가 됐지만 MINT GET 주소·public key가 아직 없어 통합이 멈춰 있습니다. BE에는 OCI 주소와 30분 timeframe 스키마가 필요하고, 위험도는 backtest·shadow·trust score가 붙기 전까지 고정값입니다. 공개 화면과 온체인 primitive가 있다는 사실과, 세 파트 통합이 아직 끝나지 않았다는 사실을 구분해 기록합니다."
             ],
             "en": [
               "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
               "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
               "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. On 26 August the trading fee and the DEEP fee guard went in, the package was republished, and BUY and SELL were re-verified on chain against the SUI/DEEP pair. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 70 Move tests and 54 npm tests pass — 37 for x402 and 17 for the Agent executor.",
-              "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface."
+              "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface.",
+              "The executor is ready to pull signals for the DEEP/SUI pair, but integration is waiting on the MINT GET endpoint and public key. Backend registration also needs the OCI address and a 30-minute timeframe in the schema, while risk remains fixed until backtest, shadow and trust-score layers exist. The public interface and on-chain primitives are real; the three-part integration is not yet complete."
             ]
           }
         },
@@ -1780,10 +1782,10 @@
           },
           "body": {
             "ko": [
-              "소규모 실사용 데모로 운영 중이며, Cloudflare Worker 단일 배포(정적 자산 + API)로 프론트엔드와 백엔드를 함께 관리합니다. 방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현을 마쳤습니다. 다음 과제는 Durable Objects 기반 실시간 push로 폴링을 대체하는 것, 그리고 방 규모가 커질 때의 부하 구조를 다시 보는 것입니다."
+              "방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현한 MVP입니다. 다만 주변 사람들에게 실사용 테스트를 요청했지만 응답을 얻지 못해, 실제 아이스브레이킹 상황에서 가치가 있는지는 아직 검증하지 못했습니다. 기능 확장보다 사용자 검증이 먼저라고 판단해 개발을 잠시 멈췄고, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 관심 있는 참여자를 모집할 계획입니다."
             ],
             "en": [
-              "Running as a small live demo, with frontend and backend managed together in a single Cloudflare Worker deploy (static assets plus API). The room lifecycle, the three sensitivity levels, pop notifications, the closing summary and automatic cleanup of expired rooms are all in place. Next up: replacing polling with Durable Objects push, and revisiting the load model for larger rooms."
+              "This MVP implements the room lifecycle, three sensitivity levels, pop notifications, a closing summary and automatic cleanup of expired rooms. However, requests for real-world testing among people nearby drew no responses, so its value in an actual icebreaking setting remains unvalidated. Development is paused because user validation must come before more features; a restart would recruit interested participants through SOPT or the GDGoC Yonsei PIP."
             ]
           }
         }
@@ -1972,10 +1974,10 @@
           },
           "body": {
             "ko": [
-              "Cloudflare Pages 웹 베타로 핵심 UX와 두 사용자 간 연결 구조를 검증하는 단계입니다. 프로덕션 검증 명령 기준으로 TypeScript 검사, Worker 타입 생성, 회귀 테스트 233개, Vite 빌드가 모두 통과하며, Pages Functions + D1 엔드포인트 20개와 Expo React Native 모바일 MVP 골격이 함께 올라가 있습니다. 골격의 빈 칸에 실제 장소를 채우는 슬롯 필링, 남은 장소의 영업시간 수집, 날씨 기반 실내외 대체 코스가 다음 단계입니다."
+              "Cloudflare Pages 웹 베타와 Expo 모바일 MVP 골격까지 구현했고, 웹 베타 자체는 계속 접근할 수 있습니다. 하지만 주변 사람들에게 테스트를 요청했을 때 응답을 얻지 못해 목표 사용자의 실제 문제와 반응을 확인할 표본이 없습니다. 기능 개발을 잠시 멈췄으며, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 주변인 밖의 참여자를 모집하고 테스트 채널부터 다시 설계할 계획입니다."
             ],
             "en": [
-              "Running as a Cloudflare Pages web beta, validating the core UX and the two-person link. The production check — TypeScript, generated Worker types, 233 regression tests and the Vite build — passes end to end, with 20 Pages Functions + D1 endpoints and an Expo React Native mobile MVP skeleton alongside it. Next: slot-filling real places into the day skeleton, collecting opening hours for the remaining places, and weather-driven indoor/outdoor alternatives."
+              "The Cloudflare Pages web beta and an Expo mobile MVP skeleton are built, and the web beta remains accessible. But requests for testing among people nearby drew no responses, leaving no sample with which to validate the target users' real problem or reaction. Feature development is paused; a restart would recruit beyond the immediate circle through SOPT or the GDGoC Yonsei PIP and redesign the testing channel first."
             ]
           }
         }
@@ -2123,7 +2125,8 @@
               "- 추론은 내 Mac mini에서만 돌고, uvicorn을 Tailscale 인터페이스에만 바인드해 타일넷 밖에서는 도달할 수 없습니다",
               "- launchd LaunchAgent로 부팅 시 자동 시작, 죽으면 자동 재시작. 로그는 타임스탬프와 함께 파일로 남습니다",
               "- 머신 역할을 나눴습니다. Mac mini는 추론과 확장 개발, 학습은 RTX GPU가 달린 Windows. 현재 상시 구동 중인 서버는 룰 계층으로 돌고, KoELECTRA 가중치를 올리면 같은 자리에 분류 계층이 붙습니다",
-              "- 추론 전용 의존성을 학습 패키지와 분리해, 서버는 룰 기준 약 48MB RSS로 돕니다"
+              "- 추론 전용 의존성을 학습 패키지와 분리해, 서버는 룰 기준 약 48MB RSS로 돕니다",
+              "- 미끼·연락처·CTA·검색 유도·장식 문자·단축 URL을 조합하는 보수적 스팸 규칙과 회귀 테스트를 추가했습니다"
             ],
             "en": [
               "- Three comment classes: TOXIC (abuse), SPAM (ads and link bait), TAUNT (mockery)",
@@ -2131,7 +2134,8 @@
               "- Inference runs only on my Mac mini, with uvicorn bound to the Tailscale interface alone, so nothing outside the tailnet can reach it",
               "- A launchd LaunchAgent starts it at boot and restarts it if it dies, with timestamped logs written to file",
               "- The machines have separate jobs: the Mac mini serves inference and extension work, training happens on a Windows box with an RTX GPU. The server running today uses the rule layer; dropping in the KoELECTRA weights attaches the classifier in the same place",
-              "- Inference dependencies are split from the training packages, so the server holds around 48MB RSS on the rule path"
+              "- Inference dependencies are split from the training packages, so the server holds around 48MB RSS on the rule path",
+              "- Conservative spam rules combine bait phrases, contact details, calls to action, search redirection, decorative characters and shortened URLs, backed by regression tests"
             ]
           }
         },
@@ -2305,10 +2309,10 @@
           },
           "body": {
             "ko": [
-              "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다."
+              "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다. 다음 하드웨어 실험은 M5Stack StackChan(CoreS3)을 새 비서로 따로 만드는 것이 아니라, Mac mini의 Marvis를 유지한 채 순정 에이전트가 조회 전용 MCP 도구로 호출하는 방식입니다. 기기가 도착하면 순정 펌웨어의 외부 MCP 등록 가능 여부부터 확인합니다."
             ],
             "en": [
-              "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it."
+              "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it. The next hardware experiment keeps Marvis on the Mac mini and lets the stock M5Stack StackChan agent call it as a read-only MCP tool, rather than rebuilding the assistant on-device. Once the hardware arrives, the first check is whether the stock firmware can register an external MCP server."
             ]
           }
         }
@@ -2821,24 +2825,24 @@
               "Oracle Cloud systemd 타이머로 15분 주기 사이클을 24시간 상시 운영하고, 평일에는 Telegram 일일 보고를 받습니다. 외부 런타임 패키지 0개로 Node 표준 기능만 쓰며, 내장 테스트 러너 기준 <b>30개 파일 396개 테스트</b>가 모두 통과합니다.",
               "<b>9월 1일 LIVE 운용으로 전환했습니다.</b> 원금은 코드에 못 박힌 10만 원, 1회 주문 $6.7, 일일 매수 $13.4, 총 손실 $6.7, 일일 손실 $2입니다. 손실 한도 둘은 매매를 멈추지 않고 경고만 냅니다 — 멈추는 안전장치가 낙폭을 키운다는 것을 먼저 재봤기 때문입니다.",
               "켠 뒤 나흘 동안 <b>결함 넷을 찾아 넷 다 고쳤습니다.</b> 전부 실거래 모드이고 장이 열려 있어야만 닿는 코드라, 전환 전 사전 점검 넷이 모두 통과하고도 드러나지 않던 것들입니다. 그중 하나는 실주문이 나간 날 보고서가 \"실제 주문 없음\"이라고 쓸 뻔했습니다.",
-              "9월 9일 초기 구축 램프 관문은 목표미달 −$0.0051, 미달 사이클 0/26으로 통과했습니다. 보고서는 PAPER 장부와 실계좌 관리 종목을 함께 표시하고 실제 앱과 1센트 안에서 맞지만, <b>실제 초기 매수는 아직 실행하지 않았습니다.</b>",
-              "<b>9월은 개발을 동결했습니다.</b> 보고서 산출이나 관측 대상을 건드리는 변경은 9월 9일(초기 구축 램프 종료)과 10월 30일(감성 층 판정)이 읽는 값을 바꿉니다. LIVE는 유지하고 사람이 하는 일은 아침 보고서를 읽는 것뿐입니다.",
+              "9월 9일 초기 구축 램프 관문은 목표미달 −$0.0051, 미달 사이클 0/26으로 통과했습니다. 이후 LIVE가 PAPER 장부의 기존 보유분을 실계좌에 채우지 않는 병목을 찾아 원장 동기화 경로를 추가했습니다. 9월 17일 첫 동기화 주문 4건이 모두 체결돼 장부·실계좌 차이가 $44.77에서 $31.87로 줄었고, 9월 23일 보고서에서 수렴 여부를 확인합니다.",
+              "첫 동기화 체결 4건은 주문 직전 호가가 기록되지 않아 슬리피지 표본에 들어가지 못했습니다. 제출 직전 호가를 기록하되 조회 실패가 주문을 막지는 않도록 고쳤고 테스트 2개를 더했습니다. 이 변경은 아직 작업 트리에 있어 완료로 세지 않습니다.",
               "9월 30일에 LIVE 지속 여부를 판정합니다. 끄는 조건 셋(대사 멈춤 2일·계획 없는 주문 1건·보고서 못 읽은 날 연속 5거래일)을 <b>결과를 보기 전에</b> 적었고, <b>손익은 기준이 아닙니다.</b>",
               "진행 중인 것:",
               "- 뉴스 감성 층이 신호인지 잡음인지 판정 (10월 30일 마감, 기준은 이미 문서에 박아둠)",
-              "- 원금 증액 관문 다섯 개 측정 — 슬리피지는 10건 중 5건, 환전 비용은 0건, 대사는 60거래일 중 7일입니다. 다섯이 모두 설 수 있는 가장 이른 날은 11월 25일입니다",
+              "- 원금 증액 관문 다섯 개 측정 — 슬리피지 측정 가능 표본은 5건, 환전 비용은 0건입니다. 9월 23일에 동기화 주문으로 표본이 늘었는지 확인합니다",
               "- 9월 말~10월 초 첫 배당 입금 — 원천징수 15% 실측과, 수량이 변하지 않아 대사에 걸리지 않는 배당 현금 확인"
             ],
             "en": [
               "A cycle runs every 15 minutes, around the clock, on an Oracle Cloud systemd timer, with a Telegram report on weekdays. It uses zero external runtime packages — only the Node standard library — and <b>396 tests across 30 files</b> pass on the built-in test runner.",
               "<b>Live operation began on 1 September.</b> The principal is 100,000 KRW fixed in code, with caps of $6.7 per order, $13.4 of buying a day, $6.7 of total loss and $2 of daily loss. The two loss caps warn rather than halt trading — because halting was measured first, and it made drawdown worse.",
               "In the four days after the switch, <b>four defects were found and all four fixed.</b> Every one of them sat in code reachable only in live mode with the market open, so all four pre-flight checks passed without surfacing any of them. One would have had the report write \"no real orders\" on a day real orders went out.",
-              "The initial build-up ramp passed its 9 September gate with a target shortfall of −$0.0051 and zero deficient cycles out of 26. The report now shows the PAPER ledger beside the holdings managed in the live account and matches the app within one cent, but <b>the initial live purchases have not yet been made.</b>",
-              "<b>Development is frozen for September.</b> Any change that touches what the report produces or what is being observed would alter what the 9 September reading (end of the initial build-up ramp) and the 30 October judgement (the sentiment layer) see. Live stays on; the only human task is reading the morning report.",
+              "The initial build-up ramp passed its 9 September gate with a target shortfall of −$0.0051 and zero deficient cycles out of 26. A later defect showed that LIVE never filled holdings that already existed in the PAPER ledger, so a ledger-to-account synchronisation path was added. The first four sync orders all filled on 17 September, cutting the ledger/account gap from $44.77 to $31.87; the 23 September report is the convergence check.",
+              "Those four fills did not enter the slippage sample because the pre-order quote was never recorded. The cycle now records a quote immediately before submission without letting a quote failure block the order, with two additional tests. This change is still in the working tree and is not counted as complete.",
               "On 30 September the decision to keep running live gets made. The three shutdown conditions — two days of stalled reconciliation, one unplanned order, five consecutive trading days with the report unread — were written <b>before any result was visible</b>, and <b>P&amp;L is not among them</b>.",
               "In progress:",
               "- Judging whether the news sentiment layer is signal or noise (deadline 30 October; the criteria are already written down)",
-              "- Measuring the five gates for increasing principal — slippage stands at 5 samples of 10, FX cost at 0, and reconciliation at day 7 of 60. The earliest all five can clear is 25 November",
+              "- Measuring the five gates for increasing principal — there are 5 usable slippage samples and no measured FX conversion yet. The 23 September check asks whether the sync orders grew the sample",
               "- The first dividend, late September or early October — measuring the 15% withholding, and the dividend cash that reconciliation cannot see because share counts do not change"
             ]
           }
@@ -3331,11 +3335,11 @@
           "body": {
             "ko": [
               "데모와 발표를 ‘AI는 만들고, Walrus는 남기고, Sui는 갖습니다’라는 한 문장으로 정리해 세 기술의 관계를 직관적으로 전달했습니다.",
-              "교육자료는 74장 챕터 구분본과 30~40분 발표용 50장 수정본으로 발전시켰습니다."
+              "교육자료는 74장 챕터 구분본과 30~40분 발표용 50장 수정본으로 발전시켰습니다. 9월 19일 Demo Day를 앞두고는 실제 밈의 변조 여부를 Walrus 기록과 Sui 소유권으로 판별하는 40초 ‘Proof of Meme’ 데모를 두 개의 녹화 샷으로 나눠 준비했습니다."
             ],
             "en": [
               "Reduced the demo and talk to one memorable line — ‘AI creates, Walrus preserves, and Sui owns’ — to make the relationship between the three technologies intuitive.",
-              "Developed the learning material into a 74-slide chaptered deck and a refined 50-slide version for a 30–40 minute talk."
+              "Developed the learning material into a 74-slide chaptered deck and a refined 50-slide version for a 30–40 minute talk. Ahead of the 19 September Demo Day, a 40-second ‘Proof of Meme’ demo was split into two recording shots: Walrus preserves the image record and Sui establishes ownership so a swapped meme can be identified."
             ]
           }
         }
@@ -3655,13 +3659,13 @@
           },
           "body": {
             "ko": [
-              "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크·원신은 방향과 프리뷰까지만 정해져 있습니다.",
+              "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크 트래커 구현을 시작했으며 원신은 아직 방향과 프리뷰 단계입니다.",
               "<b>아직 배포 준비가 안 된 것들을 그대로 적어 둡니다</b> — 퀘스트가 React 상태에만 있어 앱을 끄면 사라지고, 초기 목업 퀘스트가 남아 있으며, 폰트가 Geist Mono·Inter로 선언만 되어 있고 실제 번들 전략이 정해지지 않았습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
               "다음 순서는 폰트 정렬 → 로스트아크·원신 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
               "공개 배포는 비상업 GitHub 릴리스를 목표로 합니다. 게임의 공식 로고·스크린샷·아이콘·폰트는 번들하지 않고 색·배치·상호작용 언어만 참조하며, <b>IP 안전한 자산 교체를 릴리스 요건으로 두었습니다</b> — 배포 후에 정리할 항목이 아닙니다."
             ],
             "en": [
-              "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Lost Ark and Genshin have a defined direction and a preview card, nothing more.",
+              "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Implementation of the Lost Ark tracker is now under way, while Genshin remains at the direction and preview stage.",
               "<b>The parts that are not release-ready are recorded as they are</b>: quests live only in React state and vanish when the app closes, the initial mock quest is still present, and the CSS names Geist Mono and Inter without a settled font bundling strategy. Code signing, notarisation and a universal build are all still open.",
               "The order of the next four tasks is fixed: font alignment, then the Lost Ark and Genshin trackers, then a full user-flow re-check, then removing the mock data.",
               "Distribution targets a non-commercial GitHub release. No official game logo, screenshot, icon or font ships as a bundled asset — only colour, layout and interaction language are referenced — and <b>replacing them with IP-safe assets is a release requirement</b>, not post-release cleanup."
@@ -3738,10 +3742,10 @@
       0
     ],
     "bubblebreak": [
-      "live",
+      "mvp",
       {
-        "ko": "운영 중",
-        "en": "Live"
+        "ko": "개발 보류",
+        "en": "Paused"
       },
       4
     ],
@@ -3754,10 +3758,10 @@
       0
     ],
     "sogonzip": [
-      "live",
+      "mvp",
       {
-        "ko": "운영 중",
-        "en": "Live"
+        "ko": "개발 보류",
+        "en": "Paused"
       },
       5
     ],

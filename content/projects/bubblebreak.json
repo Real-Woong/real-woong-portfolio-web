@@ -5,10 +5,10 @@
   "year": "2025",
   "title": "BubbleBreak",
   "status": {
-    "kind": "live",
+    "kind": "mvp",
     "label": {
-      "ko": "운영 중",
-      "en": "Live"
+      "ko": "개발 보류",
+      "en": "Paused"
     }
   },
   "tagline": {
@@ -96,10 +96,10 @@
       },
       "body": {
         "ko": [
-          "소규모 실사용 데모로 운영 중이며, Cloudflare Worker 단일 배포(정적 자산 + API)로 프론트엔드와 백엔드를 함께 관리합니다. 방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현을 마쳤습니다. 다음 과제는 Durable Objects 기반 실시간 push로 폴링을 대체하는 것, 그리고 방 규모가 커질 때의 부하 구조를 다시 보는 것입니다."
+          "방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현한 MVP입니다. 다만 주변 사람들에게 실사용 테스트를 요청했지만 응답을 얻지 못해, 실제 아이스브레이킹 상황에서 가치가 있는지는 아직 검증하지 못했습니다. 기능 확장보다 사용자 검증이 먼저라고 판단해 개발을 잠시 멈췄고, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 관심 있는 참여자를 모집할 계획입니다."
         ],
         "en": [
-          "Running as a small live demo, with frontend and backend managed together in a single Cloudflare Worker deploy (static assets plus API). The room lifecycle, the three sensitivity levels, pop notifications, the closing summary and automatic cleanup of expired rooms are all in place. Next up: replacing polling with Durable Objects push, and revisiting the load model for larger rooms."
+          "This MVP implements the room lifecycle, three sensitivity levels, pop notifications, a closing summary and automatic cleanup of expired rooms. However, requests for real-world testing among people nearby drew no responses, so its value in an actual icebreaking setting remains unvalidated. Development is paused because user validation must come before more features; a restart would recruit interested participants through SOPT or the GDGoC Yonsei PIP."
         ]
       }
     }

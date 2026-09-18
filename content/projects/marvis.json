@@ -90,10 +90,10 @@
       },
       "body": {
         "ko": [
-          "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다."
+          "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 결정하고, 저장된 항목을 지웠다가 다시 만들지 않고 Telegram에서 본문만 직접 수정하는 경로를 준비하고 있습니다. 다음 하드웨어 실험은 M5Stack StackChan(CoreS3)을 새 비서로 따로 만드는 것이 아니라, Mac mini의 Marvis를 유지한 채 순정 에이전트가 조회 전용 MCP 도구로 호출하는 방식입니다. 기기가 도착하면 순정 펌웨어의 외부 MCP 등록 가능 여부부터 확인합니다."
         ],
         "en": [
-          "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it."
+          "Next: review shadow-router disagreements to decide when LLM routing is ready, then add a Telegram path for editing a saved item's body without deleting and recreating it. The next hardware experiment keeps Marvis on the Mac mini and lets the stock M5Stack StackChan agent call it as a read-only MCP tool, rather than rebuilding the assistant on-device. Once the hardware arrives, the first check is whether the stock firmware can register an external MCP server."
         ]
       }
     }

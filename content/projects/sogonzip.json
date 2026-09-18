@@ -5,10 +5,10 @@
   "year": "2026",
   "title": "Sogon.zip",
   "status": {
-    "kind": "live",
+    "kind": "mvp",
     "label": {
-      "ko": "운영 중",
-      "en": "Live"
+      "ko": "개발 보류",
+      "en": "Paused"
     }
   },
   "tagline": {
@@ -131,10 +131,10 @@
       },
       "body": {
         "ko": [
-          "Cloudflare Pages 웹 베타로 핵심 UX와 두 사용자 간 연결 구조를 검증하는 단계입니다. 프로덕션 검증 명령 기준으로 TypeScript 검사, Worker 타입 생성, 회귀 테스트 233개, Vite 빌드가 모두 통과하며, Pages Functions + D1 엔드포인트 20개와 Expo React Native 모바일 MVP 골격이 함께 올라가 있습니다. 골격의 빈 칸에 실제 장소를 채우는 슬롯 필링, 남은 장소의 영업시간 수집, 날씨 기반 실내외 대체 코스가 다음 단계입니다."
+          "Cloudflare Pages 웹 베타와 Expo 모바일 MVP 골격까지 구현했고, 웹 베타 자체는 계속 접근할 수 있습니다. 하지만 주변 사람들에게 테스트를 요청했을 때 응답을 얻지 못해 목표 사용자의 실제 문제와 반응을 확인할 표본이 없습니다. 기능 개발을 잠시 멈췄으며, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 주변인 밖의 참여자를 모집하고 테스트 채널부터 다시 설계할 계획입니다."
         ],
         "en": [
-          "Running as a Cloudflare Pages web beta, validating the core UX and the two-person link. The production check — TypeScript, generated Worker types, 233 regression tests and the Vite build — passes end to end, with 20 Pages Functions + D1 endpoints and an Expo React Native mobile MVP skeleton alongside it. Next: slot-filling real places into the day skeleton, collecting opening hours for the remaining places, and weather-driven indoor/outdoor alternatives."
+          "The Cloudflare Pages web beta and an Expo mobile MVP skeleton are built, and the web beta remains accessible. But requests for testing among people nearby drew no responses, leaving no sample with which to validate the target users' real problem or reaction. Feature development is paused; a restart would recruit beyond the immediate circle through SOPT or the GDGoC Yonsei PIP and redesign the testing channel first."
         ]
       }
     }

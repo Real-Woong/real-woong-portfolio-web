@@ -37,13 +37,15 @@
           "owner·AgoraAgent·Signal Provider의 권한을 온체인 Vault 안에서 분리해, Agent 서버 키가 탈취되더라도 임의 출금이나 허용되지 않은 거래가 불가능하도록 설계했습니다.",
           "외부 유료 Signal Provider API 호출에는 HTTP 402 기반 x402 결제를 사용하며, 이 비용과 자동 투자 가스는 사용자가 아니라 AgoraAgent가 대신 부담합니다.",
           "2026년 8월 DeepBook v3 연동과 Testnet publish를 마치고, Pool 확정 → 정책 설정 → BUY → SELL로 이어지는 Testnet E2E를 통과했습니다. 8월 26일에는 체결 수수료와 DEEP 수수료 가드를 넣어 재배포하고 SUI/DEEP 페어로 BUY·SELL을 온체인에서 다시 검증했습니다. x402 결제 검증도 challenge 발급·영수증 검증·replay 차단까지 서버측에서 동작하며, 현재 Move 70건과 npm 54건(x402 37건·Agent 실행기 17건) 테스트가 모두 통과합니다.",
-          "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다."
+          "이 검증 결과를 바탕으로 THE ZONE AGORA 웹 서비스를 런칭해 실제 사용 가능한 화면으로 공개했습니다.",
+          "현재 실행기는 DEEP/SUI 페어의 pull 연결을 받을 준비가 됐지만 MINT GET 주소·public key가 아직 없어 통합이 멈춰 있습니다. BE에는 OCI 주소와 30분 timeframe 스키마가 필요하고, 위험도는 backtest·shadow·trust score가 붙기 전까지 고정값입니다. 공개 화면과 온체인 primitive가 있다는 사실과, 세 파트 통합이 아직 끝나지 않았다는 사실을 구분해 기록합니다."
         ],
         "en": [
           "Owner, AgoraAgent and Signal Provider hold separate rights inside the on-chain vault, so a stolen agent server key still cannot withdraw funds or place a trade outside what was authorised.",
           "Calls to paid external Signal Provider APIs are settled with x402 over HTTP 402, and both that cost and the gas for automated investing are borne by AgoraAgent rather than the user.",
           "In August 2026 the DeepBook v3 integration and testnet publish landed, and the end-to-end testnet run passed: pool selection, policy configuration, BUY, then SELL. On 26 August the trading fee and the DEEP fee guard went in, the package was republished, and BUY and SELL were re-verified on chain against the SUI/DEEP pair. x402 payment verification also runs server-side, covering challenge issuance, receipt checks and replay rejection. All 70 Move tests and 54 npm tests pass — 37 for x402 and 17 for the Agent executor.",
-          "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface."
+          "Based on those results, THE ZONE AGORA launched as a publicly accessible web service with a usable product interface.",
+          "The executor is ready to pull signals for the DEEP/SUI pair, but integration is waiting on the MINT GET endpoint and public key. Backend registration also needs the OCI address and a 30-minute timeframe in the schema, while risk remains fixed until backtest, shadow and trust-score layers exist. The public interface and on-chain primitives are real; the three-part integration is not yet complete."
         ]
       }
     },
