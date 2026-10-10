@@ -34,12 +34,12 @@
       "body": {
         "ko": [
           "게임의 퀘스트 헬퍼는 할 일 목록과 같은 정보를 담지만 다르게 읽힙니다. 화면 구석에 항상 떠 있고, 진행도가 <code>2/4</code>로 보이고, 완료는 사용자가 직접 누릅니다. Il-Que는 그 읽는 방식을 데스크톱의 실제 할 일에 옮겨 봅니다.",
-          "테마 셋을 범위로 잡았습니다 — 메이플스토리풍 Quest Helper, 로스트아크풍 Quest Tracker, 원신풍 Objective Tracker. <b>지금 동작하는 것은 메이플 테마 하나</b>이고 나머지 둘은 테마 선택 화면의 프리뷰와 준비 화면까지입니다.",
+          "테마 셋을 범위로 잡았습니다 — 메이플스토리풍 Quest Helper, 로스트아크풍 Quest Tracker, 원신풍 Objective Tracker. <b>검증된 상호작용 MVP는 메이플 테마</b>입니다. 로스트아크는 공통 퀘스트 모델을 재사용하는 트래커가 작업 트리에 구현돼 있으나 빌드·전체 흐름 검증 전이고, 원신은 프리뷰와 준비 화면 단계입니다.",
           "Tauri 2로 만든 네이티브 창이라 프레임이 없고 배경이 투명하며 항상 위에 뜹니다. 렌더된 내용 높이를 <code>ResizeObserver</code>로 재서 창 크기를 따라 바꾸기 때문에, 퀘스트를 더하거나 지우면 창이 그만큼 줄고 늘어납니다."
         ],
         "en": [
           "A game's quest helper carries the same information as a to-do list but reads differently: it sits in the corner at all times, progress shows as <code>2/4</code>, and completion is something you press. Il-Que moves that way of reading onto the actual tasks on a desktop.",
-          "The scope is three themes — a MapleStory-style Quest Helper, a Lost Ark-style Quest Tracker and a Genshin-style Objective Tracker. <b>Only the Maple theme works today</b>; the other two go as far as a preview card on the theme picker and a placeholder screen.",
+          "The scope covers three themes: a MapleStory-style Quest Helper, a Lost Ark-style Quest Tracker and a Genshin-style Objective Tracker. <b>Maple is the validated interaction MVP.</b> A Lost Ark tracker reusing the shared quest model exists in the working tree but awaits build and full-flow validation; Genshin remains a preview and placeholder.",
           "The window is native, built on Tauri 2: frameless, transparent and always on top. A <code>ResizeObserver</code> measures the rendered content height and resizes the window to match, so adding or deleting a quest shrinks and grows the window itself."
         ]
       }
@@ -77,15 +77,15 @@
       },
       "body": {
         "ko": [
-          "메이플 테마는 상호작용이 동작하는 MVP 단계이고, 남은 것은 시각 마감과 전체 흐름 재점검입니다. 로스트아크 트래커 구현을 시작했으며 원신은 아직 방향과 프리뷰 단계입니다.",
-          "<b>아직 배포 준비가 안 된 것들을 그대로 적어 둡니다</b> — 퀘스트가 React 상태에만 있어 앱을 끄면 사라지고, 초기 목업 퀘스트가 남아 있으며, 폰트가 Geist Mono·Inter로 선언만 되어 있고 실제 번들 전략이 정해지지 않았습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
-          "다음 순서는 폰트 정렬 → 로스트아크·원신 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
+          "메이플 테마는 상호작용이 동작하는 MVP 단계입니다. 9월 22일 작업 트리에는 로스트아크 트래커·전용 CSS·자체 SVG 아이콘과 네이티브 창 호출 보호가 추가됐습니다. 미커밋·미검증 구현이므로 완료로 세지 않습니다.",
+          "퀘스트는 React 상태에만 있어 앱을 끄면 사라지고 초기 목업 퀘스트도 남아 있습니다. Inter·JetBrains Mono는 @fontsource로 작업 트리에 추가했지만 테마별 폰트 선택·라이선스 기록·릴리스 렌더링 검증은 남아 있습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
+          "다음 순서는 폰트 정렬 검증 → 로스트아크 작업 트리 검증·원신 설계 및 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
           "공개 배포는 비상업 GitHub 릴리스를 목표로 합니다. 게임의 공식 로고·스크린샷·아이콘·폰트는 번들하지 않고 색·배치·상호작용 언어만 참조하며, <b>IP 안전한 자산 교체를 릴리스 요건으로 두었습니다</b> — 배포 후에 정리할 항목이 아닙니다."
         ],
         "en": [
-          "The Maple theme is a working interaction MVP; what remains there is visual polish and a full flow re-check. Implementation of the Lost Ark tracker is now under way, while Genshin remains at the direction and preview stage.",
-          "<b>The parts that are not release-ready are recorded as they are</b>: quests live only in React state and vanish when the app closes, the initial mock quest is still present, and the CSS names Geist Mono and Inter without a settled font bundling strategy. Code signing, notarisation and a universal build are all still open.",
-          "The order of the next four tasks is fixed: font alignment, then the Lost Ark and Genshin trackers, then a full user-flow re-check, then removing the mock data.",
+          "Maple is a working interaction MVP. The 22 September working tree adds a Lost Ark tracker, dedicated CSS, project-owned SVG icons and guards around native window calls. These changes remain uncommitted and unvalidated, so they are not counted as complete.",
+          "Quests live only in React state and vanish on restart, and the initial mock quest remains. Inter and JetBrains Mono have been added through @fontsource in the working tree, but per-theme font choice, licensing notes and release rendering still need validation. Code signing, notarisation and universal builds remain open.",
+          "The next tasks remain ordered: validate font alignment, validate the Lost Ark working tree and design/build Genshin, recheck the full user flow, then remove mock data.",
           "Distribution targets a non-commercial GitHub release. No official game logo, screenshot, icon or font ships as a bundled asset — only colour, layout and interaction language are referenced — and <b>replacing them with IP-safe assets is a release requirement</b>, not post-release cleanup."
         ]
       }
