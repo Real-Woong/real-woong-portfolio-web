@@ -91,13 +91,15 @@
       "body": {
         "ko": [
           "Stack Chan은 9월 30일 도착했고 순정 앱의 MCP access point에 Mac mini가 연결해 marvis_hello 도구의 tools/list 노출을 확인했습니다. 브리지 코드는 10월 10일 커밋했으며 로컬 테스트 242개가 통과했습니다. 상시 실행 중인 Mac mini 환경에 연결 설정을 적용하고 실제 브리지 연결을 확인하는 단계는 남아 있습니다.",
+          "10월 11일에는 텔레그램 봇 하나에 프로젝트 정보와 개인 일정이 섞이는 문제를 보고, 개인 비서 봇과 프로젝트 봇으로 역할을 나누는 안을 정리했습니다. 10월 17일 작업 트리에는 이 분리의 구현이 들어 있지만 아직 커밋·검증·운영 반영 전입니다. 실행 단위는 기존처럼 하나로 유지하는 설계이고, 운영 재시작은 구버전 프로세스를 먼저 종료한 뒤에만 합니다.",
           "다음은 오늘 할 일 조회 도구입니다. 순정 AI Agent의 언어 목록에 한국어가 없어 현재 경로로는 한국어 원문이 Marvis에 도달하지 않습니다. 순정 앱에서 조회를 확장할지, 자가 호스팅 경로로 바꿀지 결정해야 합니다.",
           "shadow 라우터의 불일치 기록을 검토해 LLM 라우팅 전환 시점을 정하고, 저장된 항목의 본문을 Telegram에서 직접 수정하는 경로도 남겨 두었습니다."
         ],
         "en": [
-          "Stack Chan arrived on 30 September. The Mac mini connected to the stock app’s MCP access point, and marvis_hello appeared in tools/list. The bridge was committed on 10 October with 242 local tests passing. Applying the connection configuration to the always-on Mac mini and verifying the running bridge remain open.",
-          "The next tool will retrieve today’s tasks. Korean is absent from the stock AI Agent’s language list, so the current path cannot deliver the original Korean input to Marvis. The next decision is whether to extend lookups in the stock app or move to a self-hosted path.",
-          "Reviewing shadow-router disagreements before switching to LLM routing, and editing saved item bodies directly from Telegram, remain on the backlog."
+          "Stack Chan arrived on 30 September. The Mac mini connected to the stock app's MCP access point and I confirmed the marvis_hello tool appears in tools/list. The bridge code was committed on 10 October and its 242 local tests pass. Applying the connection settings to the always-on Mac mini and confirming the live bridge is still to do.",
+          "On 11 October I wrote up a split of the single Telegram bot into a personal-assistant bot and a project bot, because project information and personal schedule were landing in the same chat. The 17 October working tree already contains an implementation, but it is not yet committed, verified or deployed. The design keeps one process as the unit of execution, and a production restart happens only after the old process has been stopped.",
+          "Next is a today's-tasks lookup tool. The stock AI Agent's language list has no Korean, so on the current path the original Korean text never reaches Marvis. I have to decide between extending lookups on the stock app and moving to a self-hosted path.",
+          "Still open: reviewing the shadow router's disagreement log to pick when to switch to LLM routing, and a way to edit the body of a saved item directly from Telegram."
         ]
       }
     }

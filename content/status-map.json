@@ -83,6 +83,8 @@
     "Project_AI/AI-Agent/stocker": "보안 기준과 Toss 포트폴리오 최소 조회까지만 검증된 초기 단계로, 자동 실행·브리핑 구현 후 게재 여부를 다시 본다.",
     "Project_AI/CV/Skin-Care": "주제·데이터셋 검증만 끝난 구현 착수 전 연구로, 최소 실험 결과가 나온 뒤 프로젝트 항목으로 싣는다.",
     "Project_Embedded/AnzZheng": "IMU 2개 기반 자세 알림 연구. 시뮬레이션·학습·평가·펌웨어 파이프라인은 구현됐지만 실측 수집과 직접 재현한 비교 수치가 없어, 최소 실험 결과 확인 후 게재 여부를 판단한다.",
+    "Project_ContentOps": "프로젝트 카드가 아니라 SNS 활용 섹션(#channels)의 R_A_Glance 채널로 싣는다. 설명은 그 모달에 있고 손으로 유지한다.",
+    "Project_Marketing": "프로젝트 카드가 아니라 SNS 활용 섹션(#channels)의 깃웃깃웃 채널로 싣는다. 설명은 그 모달에 있고 손으로 유지한다.",
     "Project_Personal/react/My-Portfolio-Web": "이 사이트 자신.",
     "github-profile": "프로필 README 저장소. 작업물이 아니라 이 사이트를 가리키는 창구다."
   },
