@@ -96,10 +96,12 @@
       },
       "body": {
         "ko": [
-          "방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현한 MVP입니다. 다만 주변 사람들에게 실사용 테스트를 요청했지만 응답을 얻지 못해, 실제 아이스브레이킹 상황에서 가치가 있는지는 아직 검증하지 못했습니다. 기능 확장보다 사용자 검증이 먼저라고 판단해 개발을 잠시 멈췄고, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 관심 있는 참여자를 모집할 계획입니다."
+          "방 lifecycle, 3단계 민감도, pop 알림, 종료 요약, 만료 방 자동 정리까지 구현한 MVP입니다. 다만 주변 사람들에게 실사용 테스트를 요청했지만 응답을 얻지 못해, 실제 아이스브레이킹 상황에서 가치가 있는지는 아직 검증하지 못했습니다. 기능 확장보다 사용자 검증이 먼저라고 판단해 개발을 잠시 멈췄고, 재개할 때는 SOPT 또는 GDGoC Yonsei PIP에서 관심 있는 참여자를 모집할 계획입니다.",
+          "11월 3일에는 쓰지 않는 UI 키트와 목업 코드를 지우고 웹 앱을 <code>features/</code> 단위로 나눴습니다. 기능을 늘린 것이 아니라 재개할 때 다시 읽기 쉽게 정리한 것이고, 빌드와 타입검사로 확인하기 전이라 완료로 세지 않습니다."
         ],
         "en": [
-          "This MVP implements the room lifecycle, three sensitivity levels, pop notifications, a closing summary and automatic cleanup of expired rooms. However, requests for real-world testing among people nearby drew no responses, so its value in an actual icebreaking setting remains unvalidated. Development is paused because user validation must come before more features; a restart would recruit interested participants through SOPT or the GDGoC Yonsei PIP."
+          "This MVP implements the room lifecycle, three sensitivity levels, pop notifications, a closing summary and automatic cleanup of expired rooms. However, requests for real-world testing among people nearby drew no responses, so its value in an actual icebreaking setting remains unvalidated. Development is paused because user validation must come before more features; a restart would recruit interested participants through SOPT or the GDGoC Yonsei PIP.",
+          "On 3 November I deleted the unused UI kit and mock code and split the web app into <code>features/</code> modules. It adds no functionality — it makes the project easier to re-read when it resumes — and it has not yet been checked with a build and type check, so it is not counted as done."
         ]
       }
     }

@@ -77,13 +77,13 @@
       },
       "body": {
         "ko": [
-          "메이플 테마는 상호작용이 동작하는 MVP 단계입니다. 9월 22일 작업 트리에는 로스트아크 트래커·전용 CSS·자체 SVG 아이콘과 네이티브 창 호출 보호가 추가됐습니다. 미커밋·미검증 구현이므로 완료로 세지 않습니다.",
+          "메이플 테마는 상호작용이 동작하는 MVP 단계입니다. 9월 22일 작업 트리에는 로스트아크 트래커·전용 CSS·자체 SVG 아이콘과 네이티브 창 호출 보호가 추가됐지만, 10월 28일 재대조에서도 마지막 커밋은 9월 16일 그대로이고 그 이후 진척이 없습니다. 미커밋·미검증 구현이므로 완료로 세지 않습니다.",
           "퀘스트는 React 상태에만 있어 앱을 끄면 사라지고 초기 목업 퀘스트도 남아 있습니다. Inter·JetBrains Mono는 @fontsource로 작업 트리에 추가했지만 테마별 폰트 선택·라이선스 기록·릴리스 렌더링 검증은 남아 있습니다. 코드 서명·공증·유니버설 빌드도 아직입니다.",
           "다음 순서는 폰트 정렬 검증 → 로스트아크 작업 트리 검증·원신 설계 및 구현 → 전체 사용자 흐름 재점검 → 목업 데이터 제거로 고정해 두었습니다.",
           "공개 배포는 비상업 GitHub 릴리스를 목표로 합니다. 게임의 공식 로고·스크린샷·아이콘·폰트는 번들하지 않고 색·배치·상호작용 언어만 참조하며, <b>IP 안전한 자산 교체를 릴리스 요건으로 두었습니다</b> — 배포 후에 정리할 항목이 아닙니다."
         ],
         "en": [
-          "Maple is a working interaction MVP. The 22 September working tree adds a Lost Ark tracker, dedicated CSS, project-owned SVG icons and guards around native window calls. These changes remain uncommitted and unvalidated, so they are not counted as complete.",
+          "Maple is a working interaction MVP. The 22 September working tree adds a Lost Ark tracker, dedicated CSS, project-owned SVG icons and guards around native window calls, but the 28 October recheck found the last commit still dated 16 September and no progress since. These changes remain uncommitted and unvalidated, so they are not counted as complete.",
           "Quests live only in React state and vanish on restart, and the initial mock quest remains. Inter and JetBrains Mono have been added through @fontsource in the working tree, but per-theme font choice, licensing notes and release rendering still need validation. Code signing, notarisation and universal builds remain open.",
           "The next tasks remain ordered: validate font alignment, validate the Lost Ark working tree and design/build Genshin, recheck the full user flow, then remove mock data.",
           "Distribution targets a non-commercial GitHub release. No official game logo, screenshot, icon or font ships as a bundled asset — only colour, layout and interaction language are referenced — and <b>replacing them with IP-safe assets is a release requirement</b>, not post-release cleanup."

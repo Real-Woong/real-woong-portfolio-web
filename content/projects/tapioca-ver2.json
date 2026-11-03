@@ -1,0 +1,168 @@
+{
+  "slug": "tapioca-ver2",
+  "no": "23",
+  "cat": "AI · Quant",
+  "year": "2026",
+  "title": "TAPIoca Ver2",
+  "status": {
+    "kind": "wip",
+    "label": {
+      "ko": "개발 중",
+      "en": "In progress"
+    }
+  },
+  "tagline": {
+    "ko": "기존 TAPIoca는 덜 잃는 대신 수익이 약했습니다. 그래서 전략을 바꾸고, 이미 해결되고 증명된 환경(토스 API·Oracle·텔레그램·검증 규율)은 그대로 가져온 NASDAQ 스크리너. 거래량 급증 → 횡보 → 돌파를 찾아 모의매매로 먼저 검증합니다.",
+    "en": "The original TAPIoca lost less but earned too little. So I changed the strategy and kept the environment that was already solved and proven — Toss API, Oracle, Telegram, the validation discipline. A NASDAQ screener for volume surge → consolidation → breakout, validated in paper trading first."
+  },
+  "github": "https://github.com/Real-Woong/TAPIOCA-Mk2",
+  "demo": null,
+  "stack": [
+    "Node.js 22 (ES Modules)",
+    "외부 런타임 패키지 0개",
+    "node:sqlite",
+    "node --test",
+    "Toss Open API (읽기 전용)",
+    "Yahoo 일봉",
+    "Telegram Bot API",
+    "Oracle Cloud + cron",
+    "Mac mini + launchd"
+  ],
+  "sections": [
+    {
+      "h": {
+        "ko": "개요",
+        "en": "Overview"
+      },
+      "body": {
+        "ko": [
+          "기존 TAPIoca는 <b>덜 잃는 장치</b>로는 증명됐지만, 정적 배분 대비 수익률은 없었고 연 1.9~2.6%p를 낙폭과 맞바꾸는 구조라 <b>수익성이 너무 떨어졌습니다.</b> Ver2는 그 한계를 전략을 바꿔서 풉니다. 나스닥 종목에서 거래량이 급증했는데 가격은 제자리인 곳을 찾고, 3일 확인을 거친 뒤 박스를 돌파하는 종목만 후보로 올립니다.",
+          "Ver2의 핵심은 <b>처음부터 다시 만들지 않았다</b>는 점입니다. 기존 TAPIoca에서 이미 해결되고 증명된 환경적인 부분 — 토스 Open API 읽기 전용 접근, Oracle 서버와 텔레그램 보고, 외부 패키지 0개 원칙, 원본을 고치지 않는 append-only 기록, PAPER 먼저 검증하는 단계 — 을 그대로 가져왔습니다. 검증된 바닥 위에서는 새 전략의 가설만 시험하면 됩니다.",
+          "두 시스템은 코드·<code>package.json</code>·<code>data/</code>가 전부 따로이고, 이 파이프라인에는 주문 코드가 없습니다. 운영 중인 ETF 실거래 시스템은 건드리지 않습니다."
+        ],
+        "en": [
+          "The original TAPIoca proved itself as a machine for <b>losing less</b>, but it had no return advantage over a static allocation — it gave up 1.9–2.6 points of annual return for drawdown — so its <b>profitability was too weak.</b> Ver2 attacks that limit by changing the strategy: find NASDAQ names where volume surges while price stays flat, wait three days to confirm, and shortlist only those that break out of the box.",
+          "The point of Ver2 is that <b>I did not start over.</b> Everything environmental that the original had already solved and proven carries over unchanged — read-only Toss Open API access, the Oracle server and Telegram reporting, the zero-runtime-dependency rule, append-only records that are never edited, and validating in PAPER first. On a proven floor, only the new strategy's hypothesis has to be tested.",
+          "The two systems share no code, <code>package.json</code> or <code>data/</code>, and this pipeline contains no order code. The live ETF system is left untouched."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "기존 TAPIoca에서 그대로 가져온 것",
+        "en": "What carried over from the original TAPIoca"
+      },
+      "body": {
+        "ko": [
+          "- <b>토스 Open API, 읽기 전용</b> — 토큰 발급 외 주문 코드가 없습니다. 수수료 요율표와 장 일정은 읽어서 모의매매에 반영합니다",
+          "- <b>Oracle + 텔레그램 운영 방식</b> — 서버에서 기록·계산·보고를 맡고, 수집이 안 들어오면 watchdog이 텔레그램으로 알립니다",
+          "- <b>외부 런타임 패키지 0개</b> — Node 표준 기능과 내장 <code>node:sqlite</code>만 씁니다",
+          "- <b>원본 불변 + 재생성 가능한 계산</b> — 받은 그대로 보관하고, DB는 원본에서 언제든 다시 만듭니다. 계산이 이상하면 같은 계산을 재현할 수 있습니다",
+          "- <b>PAPER 먼저, 실주문은 나중에</b> — 수익이 아니라 실행 경로를 확인하는 소액 테스트로 넘어가는 순서를 그대로 따릅니다",
+          "- <b>결과 전에 기준을 적는 규율</b> — 전략 숫자를 바꾸면 버전을 올리고 이유를 남깁니다"
+        ],
+        "en": [
+          "- <b>Read-only Toss Open API</b> — no order code other than token issuance. Fee schedules and market calendars are read and applied to paper trading",
+          "- <b>The Oracle + Telegram operating model</b> — the server records, computes and reports, and a watchdog pings Telegram when a collection fails to arrive",
+          "- <b>Zero external runtime packages</b> — Node's standard library and built-in <code>node:sqlite</code> only",
+          "- <b>Immutable raw data, rebuildable computation</b> — raw files are stored as received and the DB can be rebuilt from them at any time, so a suspicious number can be reproduced",
+          "- <b>PAPER first, real orders later</b> — the same ladder, ending in a small test of the execution path rather than a profit test",
+          "- <b>Writing criteria before seeing results</b> — changing any strategy number bumps the version and records why"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "핵심 기능",
+        "en": "Key features"
+      },
+      "body": {
+        "ko": [
+          "- 거래량 급증(RVOL≥3) + 가격 정체(20일 수익률 ±3%, 범위 ≤12%) + 유동성(ADDV20≥$10M) 필터로 후보 발굴",
+          "- 후보 상태 머신 — 확인 3일 → 박스 → 돌파 / 무효 / 만료. 사건은 줄로 추가해 기록",
+          "- 모의매매(원화 장부) — 다음 날 시가 체결, 슬리피지·환전·수수료, 손절·추적·시간 청산 반영",
+          "- Mac mini가 Yahoo 일봉을 수집하고 Oracle이 검수·적재하는 이중 구조. 검수에 실패한 배치는 통째로 거부",
+          "- 매일 07:00 자동 실행(launchd) → 텔레그램 일일 보고"
+        ],
+        "en": [
+          "- Candidate discovery from a volume surge (RVOL ≥ 3), flat price (20-day return ±3%, range ≤ 12%) and a liquidity floor (ADDV20 ≥ $10M)",
+          "- A candidate state machine: three-day confirmation → box → breakout / invalid / expired, with every event appended as a line",
+          "- Paper trading on a KRW ledger: next-open fills, slippage, FX and fees, stop-loss, trailing and time exits",
+          "- A two-machine design: a Mac mini collects Yahoo daily bars and Oracle validates and loads them. A batch that fails validation is rejected whole",
+          "- Automatic 07:00 run via launchd, ending in a daily Telegram report"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 문제",
+        "en": "Defects found and fixed"
+      },
+      "collapsed": true,
+      "body": {
+        "ko": [
+          "- 자동 수집이 말없이 멈추던 문제 — macOS가 launchd로 띄운 node의 Desktop 폴더 접근을 조용히 막고 있었습니다(10월 31일, 11월 3일 두 번 겪음). 실제 폴더를 Desktop 밖으로 옮기고 Desktop 쪽은 링크로 바꿨습니다.",
+          "- Yahoo는 최근 5봉쯤만 소급 조정해서 액면분할 종목의 거래량이 왜곡될 수 있는 문제 — 분할이 의심되는 종목(AXG, WFF)을 계산에서 제외했습니다.",
+          "- 기준일 봉이 없는 종목(하루 약 800개, 29%)이 계산을 오염시킬 수 있는 문제 — 자동으로 제외합니다."
+        ],
+        "en": [
+          "- Automatic collection silently stopping — macOS was quietly blocking Desktop access for node started by launchd (hit on 31 October and again on 3 November). The real folder now lives outside the Desktop, with a symlink in its place.",
+          "- Split-distorted volume, since Yahoo retroactively adjusts only about the last five bars — suspected splits (AXG, WFF) are excluded from the calculation.",
+          "- Names with no bar for the reference date (about 800 a day, 29%) able to contaminate the computation — they are excluded automatically."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "현재 상태",
+        "en": "Current status"
+      },
+      "body": {
+        "ko": [
+          "11월 3일 기준 <b>모의매매(PAPER) 단계</b>입니다. 수집 → 전송 → 적재 → 후보 → 모의 → 텔레그램 보고까지 파이프라인 전 구간이 처음으로 끝까지 자동 동작했고, 테스트 166개가 통과합니다.",
+          "후보는 돌파 1 · 만료 1 · 무효 23건입니다. 돌파 1건은 신호가 늦게 잡힌 소급 건이라 모의 계좌에 넣지 않았고, <b>모의 계좌는 아직 거래 0건</b>입니다. 성과는 말할 단계가 아닙니다.",
+          "다음은 11월 4일 07:00 첫 정식 자동 실행 확인, 신호 종목의 «금액으로 사기» 가능 여부 기록, 그리고 11월 중순 소액 실주문 테스트 전에 환전 금액과 환전 비용(10bp는 아직 가정값)을 정하는 일입니다. 이 실주문의 목적은 수익 검증이 아니라 <b>실행 경로 확인</b>입니다."
+        ],
+        "en": [
+          "As of 3 November it is in the <b>paper-trading (PAPER) stage</b>. For the first time the whole pipeline — collect, transfer, load, candidates, paper, Telegram report — ran end to end on its own, and 166 tests pass.",
+          "Candidates stand at 1 breakout, 1 expired and 23 invalid. The one breakout was caught late and was kept out of the paper account, so <b>the paper account has made no trades yet</b>. It is too early to talk about performance.",
+          "Next: confirm the first scheduled run at 07:00 on 4 November, record whether each signalled stock can be bought by amount, and settle the FX amount and FX cost (10 bp is still an assumption) before a small real-order test in mid-November. That test is meant to <b>confirm the execution path</b>, not to prove profit."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "중요하게 생각한 점",
+        "en": "What mattered most"
+      },
+      "body": {
+        "ko": [
+          "수익이 약하다는 걸 알았을 때 시스템 전체를 갈아엎고 싶었지만, 약했던 것은 <b>전략</b>이지 환경이 아니었습니다. 환경은 이미 재고 고쳐서 믿을 수 있게 만든 부분이었고, 거기까지 새로 쓰면 새 전략의 실패 원인이 전략인지 인프라인지 가려낼 수 없게 됩니다.",
+          "- 바꾼 것과 바꾸지 않은 것을 분리한다. 한 번에 하나만 바꿔야 결과의 원인을 알 수 있다",
+          "- 증명된 부분은 다시 증명하지 않고 가져온다. 그 시간으로 새 가설을 잰다",
+          "- 아직 모르는 것은 모른다고 적는다. 환전 비용 10bp는 가정값이고 모의 계좌는 거래 0건이다"
+        ],
+        "en": [
+          "When I learned the returns were weak, the temptation was to tear everything down. But what was weak was the <b>strategy</b>, not the environment. The environment was the part I had already measured, fixed and learned to trust, and rewriting it too would make it impossible to tell whether a failure of the new strategy came from the strategy or the infrastructure.",
+          "- Separate what changed from what did not. Change one thing at a time or the cause of a result is unknowable",
+          "- Carry over what is already proven instead of proving it again, and spend that time measuring the new hypothesis",
+          "- Write down what is not yet known. The 10 bp FX cost is an assumption and the paper account has made zero trades"
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "고지",
+        "en": "Disclaimer"
+      },
+      "body": {
+        "ko": [
+          "개인 학습·연구 목적의 실험입니다. 현재는 모의매매만 수행하며 실제 주문은 내지 않습니다. 문서에 기재된 어떤 전략·신호도 <b>투자 권유나 투자 자문이 아닙니다.</b> 모의 결과는 가정한 비용과 체결 조건에 기반하며 실제 성과를 보장하지 않습니다."
+        ],
+        "en": [
+          "This is a personal learning and research experiment. It currently runs paper trading only and places no real orders. No strategy or signal described here is <b>investment advice or a recommendation</b>. Simulated results rest on assumed costs and fills and guarantee nothing about real performance."
+        ]
+      }
+    }
+  ]
+}

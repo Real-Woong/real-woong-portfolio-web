@@ -558,7 +558,8 @@
           "10월 10일 판독에서 10월 8일 IWM 일부 매도(0.013631주)를 찾아 토스 체결 내역으로 확정했습니다. 원인은 추세 신뢰도 할인으로 하루만 낮아진 신호이고 장부와 실계좌는 일치했습니다. 이 체결이 슬리피지 표본에 들어갔는지는 아직 확인하지 않았습니다.",
           "10월 13~14일에는 보고서의 실계좌 손익에 원화를 붙였습니다. 달러 손익에 오늘 환율을 곱하면 VTI가 토스 앱과 부호가 반대로 나와, 앱 기준환율 × 평가 USD − 원화 매입금으로 고쳤습니다. 전략·한도·관문은 건드리지 않았습니다.",
           "10월 1일 재검토에서 감성 표본의 74%가 7일 넘은 기사임을 확인했습니다. 10월 30일 60거래일 관측을 마치더라도 감성 가중치는 0으로 유지하고, 식별 불가로 미채택합니다.",
-          "대사 무중단 관측은 10월 1일 기준 20/60거래일이며 다음 판독 목표일은 11월 25일입니다. 첫 배당 입금·원천징수 확인은 10월 3일까지의 기록에 없어 확인 과제로 남아 있습니다."
+          "대사 무중단 관측은 10월 1일 기준 20/60거래일이며 다음 판독 목표일은 11월 25일입니다. 첫 배당 입금·원천징수 확인은 10월 3일까지의 기록에 없어 확인 과제로 남아 있습니다.",
+          "이 시스템의 한계 — 정적 배분 대비 수익이 없다는 것 — 를 풀기 위해 전략을 바꾼 후속작 <b>TAPIoca Ver2</b>를 따로 만들었습니다. 이 프로젝트에서 해결하고 증명한 환경(토스 API 읽기 전용, Oracle·텔레그램 운영, 외부 패키지 0개, 원본 불변 기록, PAPER 먼저 검증)은 그대로 재사용했고, 두 시스템의 코드와 데이터는 완전히 분리돼 있습니다."
         ],
         "en": [
           "A cycle runs every 15 minutes on an Oracle Cloud systemd timer, with daily Telegram reports. It uses only the Node standard library, with no external runtime packages. <b>455 tests passed on the production server on 19 September.</b>",
@@ -569,7 +570,8 @@
           "The 10 October read found a partial IWM sale on 8 October (0.013631 shares) and confirmed it against Toss's fill history. The cause was a signal lowered for a single day by the trend-confidence discount, and the ledger matched the live account. Whether that fill has entered the slippage sample is not yet checked.",
           "On 13–14 October the report's live P&L gained a KRW figure. Multiplying the dollar P&L by today's exchange rate gave VTI the opposite sign to the Toss app, so it is now the app's reference rate × valued USD − KRW cost basis. Strategy, caps and gates were not touched.",
           "The 1 October review found that 74% of sentiment samples came from articles more than seven days old. Even after the 60-trading-day observation ends on 30 October, sentiment will retain a zero weight and be rejected as unidentifiable.",
-          "Uninterrupted reconciliation stood at 20 of 60 trading days on 1 October, with the next review targeted for 25 November. The first dividend and withholding remain unconfirmed in records through 3 October."
+          "Uninterrupted reconciliation stood at 20 of 60 trading days on 1 October, with the next review targeted for 25 November. The first dividend and withholding remain unconfirmed in records through 3 October.",
+          "To get past this system's limit — no return advantage over a static allocation — I built a successor with a different strategy, <b>TAPIoca Ver2</b>. The environment solved and proven here (read-only Toss API, Oracle and Telegram operations, zero external packages, immutable records, PAPER first) was reused unchanged, and the two systems share no code or data."
         ]
       }
     },
