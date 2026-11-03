@@ -44,643 +44,543 @@
 }
 </script>
 <style>
-  /* ---------------------------------------------------------
-     TOKENS
-     Ground: cinematic near-black / warm paper (light)
-     Single accent: schematic amber — used sparingly (numerals,
-     link states, corner ticks, one gradient moment).
-     --ok / --wip are the semantic status colours ("running", "in
-     progress"). Both must stay legible on either ground, so light mode
-     darkens them rather than reusing the dark-mode tints, which measure
-     1.52:1 and 1.84:1 on paper — effectively invisible.
-  --------------------------------------------------------- */
+/* Hallmark · shape: Ledger · genre: editorial · theme: custom · redesign: full · job: hire · idea: "The five projects are the headline, set as a ledger whose marker follows the reader." · vibe: "ink on paper, one signal colour, proof first"
+ * paper: oklch(0.94 0.012 85) · accent: oklch(0.55 0.17 40) · display: system heavy sans (Apple SD Gothic Neo, Pretendard when installed) · body: same family regular · hero: name and one sentence on the left, the five-project ledger on the right, both above the fold · nav: wordmark, text links, language switch; a scrolling strip under 820px · footer: one line of links · imagery: none yet (no product screenshots exist in the repo; typeset evidence stands in) · signature: the ledger marker that glides between projects and the curtain that lifts off the name
+ * axes: light/grotesk-heavy/warm · posture: Settled · contrast: pass · fold: pass · waive 19: the <title> and og:title keep their original dash for SEO · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V3 · weakest: V, no real product screenshots exist, so the proof is typeset (a logged defect, five-project ledger); the owner supplies screens and the slots are listed in the handoff */
+
+/* ---------------------------------------------------------
+   TOKENS
+   Ground and ink come from a warm paper / near-black pair.
+   One signal colour, and it has a job: it marks what is
+   being read or checked (the active ledger row, a documented
+   fix, focus). It is never decoration.
+   --ok / --wip are the status colours; both must stay legible
+   on either ground, so light mode darkens them.
+--------------------------------------------------------- */
+:root{
+  --bg:#0d0d0c; --bg-2:#161614; --text:#f1eee6; --muted:#a39e92;
+  --line:rgba(241,238,230,0.12); --line-strong:rgba(241,238,230,0.28);
+  --signal:#ff7a45; --on-signal:#0d0d0c;
+  --ok:#7fd6a4; --ok-line:rgba(127,214,164,0.42);
+  --wip:#9db4d8; --wip-line:rgba(157,180,216,0.40);
+  --scrim:rgba(8,8,7,0.8);
+  --ch-gitwoot:#6de39a; --ch-raglance:#f1eee6;
+  --font-display:'SF Pro Display','Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR','Segoe UI',system-ui,sans-serif;
+  --font-body:-apple-system,'SF Pro Text','Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR','Segoe UI',system-ui,sans-serif;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px; --sp-10:128px;
+  --gutter:clamp(16px,4vw,48px);
+  --gap-col:var(--sp-7);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+@media (prefers-color-scheme: light){
   :root{
-    --bg:#070707; --bg-raised:#111110; --bg-raised-2:#181109;
-    --text:#f3f0e9; --muted:#8f8c84;
-    --line:rgba(243,240,233,0.10); --line-strong:rgba(243,240,233,0.22);
-    --amber:#ffb84c; --amber-dim:#c98a2c;
-    --ok:#7fd6a4; --ok-line:rgba(127,214,164,0.42);
-    --wip:#9db4d8; --wip-line:rgba(157,180,216,0.40);
-    --metal-1:#efece3; --metal-2:#77746c;
-    --font-display:Georgia,'Iowan Old Style','Palatino Linotype',Palatino,serif;
-    --font-body:-apple-system,'SF Pro Text','Pretendard Variable',Pretendard,'Helvetica Neue',sans-serif;
-    --font-mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+    --bg:#f1eee6; --bg-2:#e7e3d8; --text:#14130f; --muted:#5b574d;
+    --line:rgba(20,19,15,0.14); --line-strong:rgba(20,19,15,0.34);
+    --signal:#c2410c; --on-signal:#f1eee6;
+    --ok:#17784a; --ok-line:rgba(23,120,74,0.45);
+    --wip:#45689f; --wip-line:rgba(69,104,159,0.45);
+    --scrim:rgba(241,238,230,0.86);
+    --ch-gitwoot:var(--ok); --ch-raglance:#14130f;
   }
-  @media (prefers-color-scheme: light){
-    :root{
-      --bg:#f2efe7; --bg-raised:#e8e4d7; --bg-raised-2:#e1dccb;
-      --text:#151410; --muted:#68655b;
-      --line:rgba(21,20,16,0.12); --line-strong:rgba(21,20,16,0.22);
-      --amber:#b3660a; --amber-dim:#8f5308;
-      --ok:#17784a; --ok-line:rgba(23,120,74,0.45);
-      --wip:#45689f; --wip-line:rgba(69,104,159,0.45);
-      --metal-1:#1c1b17; --metal-2:#56534a;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#070707;--bg-raised:#111110;--bg-raised-2:#181109;--text:#f3f0e9;--muted:#8f8c84;
-    --line:rgba(243,240,233,0.10);--line-strong:rgba(243,240,233,0.22);
-    --amber:#ffb84c;--amber-dim:#c98a2c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);--wip:#9db4d8;--wip-line:rgba(157,180,216,0.40);
-    --metal-1:#efece3;--metal-2:#77746c;
-  }
-  :root[data-theme="light"]{
-    --bg:#f2efe7;--bg-raised:#e8e4d7;--bg-raised-2:#e1dccb;--text:#151410;--muted:#68655b;
-    --line:rgba(21,20,16,0.12);--line-strong:rgba(21,20,16,0.22);
-    --amber:#b3660a;--amber-dim:#8f5308;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);--wip:#45689f;--wip-line:rgba(69,104,159,0.45);
-    --metal-1:#1c1b17;--metal-2:#56534a;
-  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d0d0c;--bg-2:#161614;--text:#f1eee6;--muted:#a39e92;
+  --line:rgba(241,238,230,0.12);--line-strong:rgba(241,238,230,0.28);
+  --signal:#ff7a45;--on-signal:#0d0d0c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);--wip:#9db4d8;--wip-line:rgba(157,180,216,0.40);
+  --scrim:rgba(8,8,7,0.8);--ch-gitwoot:#6de39a;--ch-raglance:#f1eee6;
+}
+:root[data-theme="light"]{
+  --bg:#f1eee6;--bg-2:#e7e3d8;--text:#14130f;--muted:#5b574d;
+  --line:rgba(20,19,15,0.14);--line-strong:rgba(20,19,15,0.34);
+  --signal:#c2410c;--on-signal:#f1eee6;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);--wip:#45689f;--wip-line:rgba(69,104,159,0.45);
+  --scrim:rgba(241,238,230,0.86);--ch-gitwoot:var(--ok);--ch-raglance:#14130f;
+}
 
-  *,*::before,*::after{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  ::selection{background:var(--amber);color:#0a0a0a;}
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px;}
-  .wrap{max-width:1320px;margin:0 auto;padding-inline:clamp(20px,5vw,64px);}
-  .tnum{font-variant-numeric:tabular-nums;}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{overflow-x:clip;}
+html{scroll-behavior:smooth;scroll-padding-top:var(--sp-9);scrollbar-color:var(--line-strong) var(--bg);}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;caret-color:var(--signal);}
+::selection{background:var(--signal);color:var(--on-signal);}
+a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:1px;}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px;}
+button{font:inherit;color:inherit;}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:var(--gutter);}
+.tnum{font-variant-numeric:tabular-nums;}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;margin:0;text-wrap:balance;overflow-wrap:break-word;min-width:0;}
+h1,h2,h3,p,li,dd{word-break:keep-all;overflow-wrap:break-word;}
+p{margin:0;max-width:60ch;color:var(--muted);text-wrap:pretty;}
+[hidden]{display:none !important;}
+.reveal{/* kept: tests/rendered-html.test.mjs matches archive cards by this class */}
 
-  .grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.045;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
-  .spotlight{position:fixed;inset:0;pointer-events:none;z-index:5;opacity:0;transition:opacity .3s ease;
-    background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%), rgba(255,184,76,0.05), transparent 60%);}
-  .spotlight.active{opacity:1;}
-  .progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--amber);z-index:100;}
+/* ---------------- CURTAIN (first impression) ----------------
+   A paper-coloured sheet carries the name for about a second, then lifts.
+   It never gates anything: any scroll, click, key or touch removes it, and
+   with scripting off or reduced motion it is not shown at all. */
+.intro{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:center;justify-content:flex-start;
+  padding-inline:var(--gutter);transition:transform .5s var(--ease);}
+.intro.hide{transform:translateY(-100%);pointer-events:none;}
+.intro[hidden]{display:none;}
+.intro-stage{position:relative;width:min(1280px,100%);margin-inline:auto;}
+.boot{font-size:clamp(14px,1.6vw,18px);line-height:1.9;color:var(--muted);min-height:5.7em;}
+.boot .ln.ready{color:var(--signal);}
+.boot .cursor{display:none;}
+.intro-mark{font-family:var(--font-display);font-weight:800;letter-spacing:-.04em;line-height:1;margin-top:var(--sp-4);
+  font-size:clamp(2.4rem,9vw,7rem);color:var(--text);animation:markin .4s var(--ease) both;}
+.intro-sweep{height:2px;margin-top:var(--sp-4);background:var(--signal);transform:scaleX(0);transform-origin:left;}
+.intro-sweep.on{animation:introsweep .22s var(--ease) forwards;}
+@keyframes markin{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@keyframes introsweep{to{transform:scaleX(1);}}
+@media (prefers-reduced-motion: reduce){.intro{display:none;}}
 
-  /* ---------------- INTRO (signature boot sequence) ----------------
-     Deliberately short and never blocking: the page underneath stays
-     scrollable, and any scroll/click/key dismisses the overlay. A first
-     impression is worth ~1s of animation, not four. */
-  .intro{position:fixed;inset:0;z-index:200;background:#050505;display:flex;align-items:center;justify-content:center;
-    opacity:1;transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);}
-  .intro.hide{opacity:0;transform:scale(1.03);pointer-events:none;}
-  .intro[hidden]{display:none;}
-  .intro-stage{position:relative;width:min(560px,86vw);text-align:left;}
-  .boot{font-family:var(--font-mono);font-size:12.5px;line-height:2.1;color:#948a78;min-height:4.4em;}
-  .boot .ln.ready{color:#ffb84c;}
-  .boot .cursor{display:inline-block;width:7px;height:12px;background:#ffb84c;margin-left:2px;animation:blink 1s steps(1) infinite;vertical-align:-1px;}
-  .intro-mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:var(--font-display);font-style:italic;font-size:clamp(2.4rem,7vw,4.2rem);
-    background:linear-gradient(160deg,#efece3 15%,#77746c 70%);-webkit-background-clip:text;background-clip:text;color:transparent;
-    opacity:0;transform:scale(.92);filter:blur(4px);transition:opacity .26s ease,transform .26s ease,filter .26s ease;}
-  .intro-mark.on{opacity:1;transform:scale(1);filter:blur(0);}
-  .intro-sweep{position:absolute;left:0;right:0;top:50%;height:1px;background:#ffb84c;transform:scaleX(0);transform-origin:left;box-shadow:0 0 16px 1px #ffb84c;}
-  .intro-sweep.on{animation:introsweep .22s cubic-bezier(.4,0,.2,1) forwards;}
-  .intro-skip{position:absolute;bottom:36px;left:0;right:0;text-align:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#524e44;opacity:0;transition:opacity .3s ease .2s;}
-  .intro:not(.hide) .intro-skip{opacity:1;}
-  @keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
-  @keyframes introsweep{to{transform:scaleX(1);}}
-  @media (prefers-reduced-motion: reduce){ .intro{display:none;} }
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--signal);transform:scaleX(0);transform-origin:left;z-index:100;}
 
-  header.nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:18px clamp(20px,5vw,64px) 16px;
-    display:flex;align-items:center;justify-content:space-between;gap:24px;
-    backdrop-filter:blur(14px) saturate(140%);background:color-mix(in srgb, var(--bg) 68%, transparent);
-    border-bottom:1px solid var(--line);}
-  .brand{display:flex;align-items:center;gap:10px;}
-  .brand .mono-mark{width:30px;height:30px;border:1px solid var(--line-strong);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.02em;}
-  .brand .who{display:flex;flex-direction:column;line-height:1.15;}
-  .brand .who b{font-size:14px;font-weight:600;}
-  .brand .who span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
-  nav.links{display:flex;gap:26px;font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;}
-  nav.links a{text-decoration:none;color:var(--muted);position:relative;padding-bottom:3px;transition:color .25s ease;}
-  nav.links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--amber);transition:width .3s ease;}
-  nav.links a:hover{color:var(--text);}
-  nav.links a:hover::after{width:100%;}
-  @media (max-width:820px){nav.links{display:none;}}
+/* ---------------- NAV ---------------- */
+header.nav{position:sticky;top:0;z-index:90;background:var(--bg);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1280px;margin-inline:auto;padding:var(--sp-3) var(--gutter);display:flex;align-items:center;gap:var(--sp-5);}
+.brand{display:flex;align-items:baseline;gap:var(--sp-3);text-decoration:none;margin-right:auto;white-space:nowrap;}
+.brand b{font-family:var(--font-display);font-weight:800;font-size:17px;letter-spacing:-.02em;}
+.brand span{font-size:14px;color:var(--muted);}
+nav.links{display:flex;gap:var(--sp-5);font-size:15px;}
+nav.links a{text-decoration:none;color:var(--muted);padding-block:var(--sp-2);border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;white-space:nowrap;}
+nav.links a:hover{color:var(--text);border-bottom-color:var(--signal);}
+.nav-actions{display:flex;align-items:center;gap:var(--sp-3);}
+.lang-toggle{display:inline-flex;align-items:center;gap:var(--sp-1);background:transparent;cursor:pointer;border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);padding:var(--sp-2) var(--sp-3);font-size:14px;transition:border-color .2s ease,color .2s ease;}
+.lang-toggle:hover{border-color:var(--text);color:var(--text);}
+.lang-toggle:active{transform:translateY(1px);}
+.lang-toggle .sep{opacity:.4;}
+html[lang="ko"] .lang-toggle span[data-lang-on="ko"],
+html[lang="en"] .lang-toggle span[data-lang-on="en"]{color:var(--text);font-weight:600;}
+@media (max-width:820px){
+  .nav-inner{flex-wrap:wrap;row-gap:0;}
+  nav.links{order:3;flex:1 0 100%;gap:var(--sp-5);overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);}
+  nav.links::-webkit-scrollbar{display:none;}
+  .nav-actions .btn{display:none;}
+}
 
-  .rail{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:16px;}
-  .rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;justify-content:flex-end;}
-  .rail .dot{width:6px;height:6px;border-radius:50%;background:var(--line-strong);transition:all .3s ease;}
-  .rail .label{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);opacity:0;transform:translateX(6px);transition:all .3s ease;white-space:nowrap;}
-  .rail button.active .dot{background:var(--amber);transform:scale(1.6);box-shadow:0 0 12px 1px var(--amber);}
-  .rail button.active .label{opacity:1;transform:translateX(0);color:var(--text);}
-  @media (max-width:960px){.rail{display:none;}}
+/* ---------------- BUTTONS ---------------- */
+.btn{font-size:15px;font-weight:600;padding:var(--sp-3) var(--sp-5);border-radius:2px;cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-2);text-decoration:none;border:1px solid transparent;transition:transform .2s var(--ease),background .2s ease,color .2s ease,border-color .2s ease;}
+.btn.primary{background:var(--text);color:var(--bg);}
+.btn.primary:hover{background:var(--signal);color:var(--on-signal);}
+.btn.ghost{border-color:var(--line-strong);color:var(--text);background:transparent;}
+.btn.ghost:hover{border-color:var(--text);}
+.btn:active{transform:translateY(1px);}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;}
+.link{font-size:15px;font-weight:600;color:var(--text);text-decoration:underline;text-decoration-color:var(--line-strong);transition:text-decoration-color .2s ease,color .2s ease;}
+.link:hover{text-decoration-color:var(--signal);color:var(--signal);}
+.link:active{opacity:.7;}
 
-  section{position:relative;padding-block:clamp(80px,12vw,130px);border-bottom:1px solid var(--line);}
-  section:last-of-type{border-bottom:none;}
+/* ---------------- HERO ---------------- */
+.hero{padding-block:var(--sp-8) var(--sp-9);}
+.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--gap-col);align-items:start;}
+.hero h1{font-size:clamp(3.4rem,9.4vw,8.25rem);line-height:.92;letter-spacing:-.045em;padding-bottom:.06em;}
+.hero .tagline{margin-top:var(--sp-6);font-size:clamp(18px,1.9vw,22px);line-height:1.55;color:var(--text);max-width:34ch;}
+.hero .tagline em{font-style:normal;font-weight:600;box-shadow:inset 0 -.38em 0 color-mix(in srgb,var(--signal) 28%,transparent);}
+.cta-row{display:flex;align-items:center;gap:var(--sp-5);margin-top:var(--sp-6);flex-wrap:wrap;}
+.hero-avail{display:flex;gap:var(--sp-3);flex-wrap:wrap;align-items:baseline;margin-top:var(--sp-6);font-size:15px;max-width:none;}
+.hero-avail b{color:var(--ok);font-weight:600;}
+.hero-avail span{color:var(--muted);}
+.hero-where{margin-top:var(--sp-2);font-size:14px;}
 
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-  .eyebrow .pip{width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px 1px var(--amber);animation:pulse 2.4s ease-in-out infinite;}
-  h1,h2,h3{font-weight:700;text-wrap:balance;margin:0;letter-spacing:-.01em;}
-  p{line-height:1.7;color:var(--muted);max-width:60ch;margin:0;}
-  h1,h2,h3,p,.tl-item li{word-break:keep-all;overflow-wrap:break-word;}
+/* The ledger: five projects, each one a door to its write-up. The marker is
+   the only moving part. It moves to whichever row you point at or focus, and
+   stays on the last one, so the list always shows where you are. */
+.ledger{position:relative;border-top:2px solid var(--text);margin-top:var(--sp-2);}
+.ledger-head{display:flex;justify-content:space-between;align-items:baseline;padding-block:var(--sp-3);}
+.ledger-head h2{font-size:16px;font-weight:700;letter-spacing:-.01em;}
+.ledger-head span{font-size:14px;color:var(--muted);}
+.ledger-list{position:relative;}
+.ledger-mark{position:absolute;left:0;top:0;width:3px;height:var(--h,0px);background:var(--signal);transform:translateY(var(--y,0px));transition:transform .38s var(--ease);pointer-events:none;}
+.ledger-row{position:relative;display:grid;grid-template-columns:var(--sp-6) minmax(0,1fr) auto;column-gap:var(--sp-3);row-gap:2px;padding:var(--sp-3) var(--sp-2) var(--sp-3) var(--sp-4);border-top:1px solid var(--line);cursor:pointer;transition:background .2s ease;}
+.ledger-row:hover,.ledger-row.is-active{background:var(--bg-2);}
+.ledger-row:active{background:color-mix(in srgb,var(--bg-2) 70%,var(--signal) 8%);}
+.ledger-row .no{font-size:14px;color:var(--muted);padding-top:var(--sp-1);}
+.ledger-row .title{font-family:var(--font-display);font-weight:800;font-size:clamp(1.25rem,1.9vw,1.6rem);letter-spacing:-.03em;line-height:1.2;transition:transform .25s var(--ease);}
+.ledger-row:hover .title{transform:translateX(4px);}
+.ledger-row .year{font-size:14px;color:var(--muted);text-align:right;padding-top:var(--sp-1);}
+.ledger-row .cap{grid-column:2 / 3;font-size:14px;line-height:1.5;color:var(--muted);max-width:none;}
+.ledger-row .state{grid-column:3;grid-row:2;font-size:13px;text-align:right;color:var(--muted);white-space:nowrap;}
+.ledger-row .state.live{color:var(--ok);}
+.ledger-row .state.win{color:var(--signal);font-weight:600;}
+.ledger-foot{border-top:1px solid var(--line);padding-top:var(--sp-3);font-size:14px;}
+@media (max-width:960px){
+  .hero{padding-block:var(--sp-6) var(--sp-8);}
+  .hero-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-7);}
+  .hero .tagline{max-width:40ch;}
+}
+@media (max-height:760px) and (min-width:961px){
+  .hero{padding-block:var(--sp-5) var(--sp-7);}
+  .ledger-row{padding-block:var(--sp-2);}
+  .ledger-row .cap{font-size:13px;}
+}
 
-  /* section chapter number */
-  .chapter-no{position:absolute;top:clamp(70px,10vw,110px);right:clamp(20px,5vw,64px);font-family:var(--font-mono);font-size:clamp(3rem,7vw,6rem);color:var(--line-strong);line-height:1;user-select:none;z-index:0;}
-  /* parallax transform is applied inline via JS on every scroll frame — the transform
-     transition would otherwise fight it and make the parallax lag behind the scroll. */
-  .chapter-no.reveal{transition:opacity .8s cubic-bezier(.16,1,.3,1);}
+/* entrance: runs once, only after the curtain is gone, and only on what is on screen */
+@media (prefers-reduced-motion:no-preference){
+  html.intro-done .hero h1,html.intro-done .hero .tagline,html.intro-done .hero .cta-row{animation:rise .7s var(--ease) backwards;}
+  html.intro-done .hero .tagline{animation-delay:.08s;}
+  html.intro-done .hero .cta-row{animation-delay:.16s;}
+  html.intro-done .ledger-row{animation:rise .6s var(--ease) backwards;}
+  html.intro-done .ledger-row:nth-child(2){animation-delay:.1s;}
+  html.intro-done .ledger-row:nth-child(3){animation-delay:.16s;}
+  html.intro-done .ledger-row:nth-child(4){animation-delay:.22s;}
+  html.intro-done .ledger-row:nth-child(5){animation-delay:.28s;}
+  html.intro-done .ledger-row:nth-child(6){animation-delay:.34s;}
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 
-  /* ---------------- MARQUEE DIVIDER ---------------- */
-  .marquee-divider{width:100%;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:11px;background:var(--bg-raised);}
-  .marquee-divider .mtrack{display:flex;gap:0;width:max-content;animation:mscroll 34s linear infinite;}
-  .marquee-divider span{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-inline:18px;display:flex;align-items:center;gap:18px;}
-  .marquee-divider span b{color:var(--text);font-weight:500;}
-  .marquee-divider span::after{content:"—";color:var(--amber);}
+/* ---------------- SECTIONS ---------------- */
+section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--line);}
+.sec-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:var(--gap-col);row-gap:var(--sp-7);align-items:start;}
+.sec-head{position:sticky;top:var(--sp-9);}
+.sec-head h2{font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1.12;letter-spacing:-.035em;}
+.sec-head p{margin-top:var(--sp-4);font-size:16px;}
+.sec-head .legend{font-size:15px;color:var(--text);border-left:2px solid var(--signal);padding-left:var(--sp-4);}
+.sec-head .legend b{font-weight:600;}
+.sec-flow{grid-template-columns:minmax(0,1fr);}
+.sec-flow .sec-head{position:static;max-width:62ch;}
+@media (max-width:960px){
+  section{padding-block:var(--sp-8);}
+  .sec-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-6);}
+  .sec-head{position:static;}
+}
 
-  /* ---------------- HERO ---------------- */
-  .hero{padding-top:clamp(150px,20vw,210px);}
-  .hero .wrap{position:relative;}
-  .hero h1{font-family:var(--font-display);font-style:italic;font-weight:400;
-    font-size:clamp(3.55rem,13vw,10.5rem);line-height:.96;letter-spacing:-.025em;
-    white-space:nowrap;padding-bottom:.12em;overflow:visible;
-    background:linear-gradient(160deg,var(--metal-1) 15%,var(--metal-2) 65%,var(--metal-1) 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    opacity:0;transform:translateY(20px) scale(.985);
-    filter:blur(6px) drop-shadow(0 8px 30px rgba(0,0,0,0.25));
-    transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter .9s ease;
-  }
-  html.intro-done .hero h1{opacity:1;transform:translateY(0) scale(1);filter:blur(0) drop-shadow(0 8px 30px rgba(0,0,0,0.25));}
-  .hero .byline{font-family:var(--font-mono);font-size:12px;line-height:1.6;letter-spacing:.075em;text-transform:uppercase;color:var(--muted);margin-top:20px;
-    opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .35s,transform .8s cubic-bezier(.16,1,.3,1) .35s;}
-  .hero .byline b{color:var(--text);}
-  .hero .tagline{margin-top:30px;font-size:clamp(16px,1.7vw,19px);max-width:52ch;color:var(--text);
-    opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .5s,transform .8s cubic-bezier(.16,1,.3,1) .5s;}
-  .hero .tagline em{font-style:normal;color:var(--amber);}
-  .hero .cta-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;
-    opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) .65s,transform .8s cubic-bezier(.16,1,.3,1) .65s;}
-  html.intro-done .hero .byline,html.intro-done .hero .tagline,html.intro-done .hero .cta-row,html.intro-done .hero .scroll-cue{opacity:1;transform:translateY(0);}
+/* ---------------- WORK ---------------- */
+.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--sp-5);padding-bottom:var(--sp-6);border-bottom:1px solid var(--line);}
+.figures .st{display:flex;flex-direction:column;gap:var(--sp-1);}
+.figures .st b{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,4vw,3.25rem);line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
+.figures .st b em{font-style:normal;color:var(--signal);}
+.figures .st span{font-size:14px;color:var(--muted);}
 
-  .btn{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;padding:14px 24px;border-radius:2px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease;}
-  .btn.primary{background:var(--text);color:var(--bg);}
-  .btn.primary:hover{box-shadow:0 12px 26px -10px rgba(255,184,76,0.4);}
-  .btn.ghost{border:1px solid var(--line-strong);color:var(--text);}
-  .btn.ghost:hover{border-color:var(--amber);color:var(--amber);}
+/* One defect, opened up on the page. The Fixed ×N counts are a claim; this
+   is the specimen that backs it without asking for a click. */
+.fix-specimen{margin-top:var(--sp-6);border-top:2px solid var(--signal);background:var(--bg-2);padding:var(--sp-5) var(--sp-5) var(--sp-4);cursor:pointer;position:relative;transition:background .2s ease;}
+.fix-specimen:hover{background:color-mix(in srgb,var(--bg-2) 82%,var(--signal) 8%);}
+.fs-head{display:flex;align-items:baseline;gap:var(--sp-3);flex-wrap:wrap;font-size:14px;}
+.fs-tag{color:var(--signal);font-weight:600;}
+.fs-proj{color:var(--text);font-weight:600;}
+.fs-of{margin-left:auto;display:flex;align-items:baseline;gap:var(--sp-1);color:var(--muted);}
+.fs-of b{color:var(--text);font-weight:600;}
+.fs-title{font-size:clamp(1.2rem,2.1vw,1.6rem);line-height:1.35;letter-spacing:-.02em;margin:var(--sp-3) 0 var(--sp-5);max-width:36ch;}
+.fs-grid{margin:0;display:flex;flex-direction:column;}
+.fs-grid > div{display:grid;grid-template-columns:var(--sp-8) minmax(0,1fr);gap:var(--sp-4);padding:var(--sp-3) 0;border-top:1px solid var(--line);}
+.fs-grid dt{font-size:14px;font-weight:600;color:var(--signal);padding-top:2px;}
+.fs-grid dd{margin:0;font-size:15px;line-height:1.7;color:var(--muted);}
+.fs-grid > div:last-child dd{color:var(--text);}
+.fs-foot{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-4);padding-top:var(--sp-3);border-top:1px solid var(--line);font-size:14px;font-weight:600;color:var(--muted);transition:color .2s ease;}
+.fix-specimen:hover .fs-foot{color:var(--text);}
+.fs-arrow{transition:transform .25s var(--ease);}
+.fix-specimen:hover .fs-arrow{transform:translate(3px,-3px);}
+@media (max-width:620px){
+  .fix-specimen{padding:var(--sp-4);}
+  .fs-grid > div{grid-template-columns:minmax(0,1fr);gap:var(--sp-1);}
+  .fs-of{margin-left:0;width:100%;}
+}
 
-  .focus-marquee{margin-top:70px;opacity:0;transition:opacity 1s ease 1.65s;}
-  html.intro-done .focus-marquee{opacity:1;}
+.work-detail{margin-top:var(--sp-7);padding-top:var(--sp-5);border-top:1px solid var(--line-strong);}
+.work-detail h3{font-size:1.4rem;letter-spacing:-.02em;margin-top:var(--sp-1);}
+.work-detail p{margin-top:var(--sp-3);color:var(--text);}
+.work-detail .where{font-size:14px;color:var(--muted);}
+.stack{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-4);}
+.stack span,.pm-stack span{font-size:14px;padding:var(--sp-1) var(--sp-3);border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);}
 
-  .scroll-cue{position:relative;margin-top:56px;display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
-    opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1) 1.85s,transform .8s cubic-bezier(.16,1,.3,1) 1.85s;}
-  .scroll-cue .bar{width:1px;height:30px;background:linear-gradient(var(--amber),transparent);animation:scrollcue 1.8s ease-in-out infinite;}
+/* ---------------- ARCHIVE ---------------- */
+.archive-controls{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-6);}
+.filters{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
+.filters button,.view-toggle button{cursor:pointer;background:transparent;font-size:14px;padding:var(--sp-2) var(--sp-4);border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);transition:color .2s ease,border-color .2s ease,background .2s ease;}
+.filters button:hover,.view-toggle button:hover{color:var(--text);border-color:var(--text);}
+.filters button:active,.view-toggle button:active{transform:translateY(1px);}
+.filters button.active,.view-toggle button.active{background:var(--text);border-color:var(--text);color:var(--bg);}
+.view-toggle{display:flex;gap:var(--sp-1);}
+.archive-more{display:flex;justify-content:flex-start;margin-top:var(--sp-6);}
+.archive-more button{white-space:nowrap;cursor:pointer;background:transparent;display:inline-flex;align-items:center;gap:var(--sp-3);font-size:15px;font-weight:600;padding:var(--sp-3) var(--sp-5);border:1px solid var(--line-strong);border-radius:2px;color:var(--text);transition:border-color .2s ease,background .2s ease;}
+.archive-more button:hover{border-color:var(--text);}
+.archive-more button:active{transform:translateY(1px);}
+.archive-more .am-count{color:var(--muted);font-weight:400;}
+.archive-more .am-count b{color:var(--text);font-weight:600;}
 
-  .reveal{--rx:0px;--ry:24px;opacity:0;transform:translate(var(--rx),var(--ry));transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
-  .reveal.in-view{opacity:1;transform:translate(0,0);}
-  .reveal-l{--rx:-30px;--ry:0px;}
-  .reveal-r{--rx:30px;--ry:0px;}
+.archive-list.mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-col);}
+.archive-list.mode-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+@media (max-width:980px){.archive-list.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:640px){
+  .archive-list.mode-grid{grid-template-columns:minmax(0,1fr);}
+  .mode-list .a-item{grid-template-columns:var(--sp-6) minmax(0,1fr) var(--sp-8);}
+  .mode-list .a-cat{display:none;}
+}
+.a-item{cursor:pointer;transition:background .2s ease;}
+.archive-list .a-item[hidden]{display:none;}
+.mode-grid .a-item{padding:var(--sp-4) 0 var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-2);border-top:1px solid var(--line-strong);}
+.mode-grid .a-item:hover .a-title{color:var(--signal);}
+.mode-list .a-item{display:grid;grid-template-columns:var(--sp-7) 160px minmax(0,1fr) var(--sp-8);align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-1);border-bottom:1px solid var(--line);}
+.mode-list .a-item:hover{background:var(--bg-2);}
+.mode-list .a-desc,.mode-list .a-glyph,.mode-list .badges{display:none;}
+.a-top{display:flex;justify-content:space-between;align-items:baseline;}
+.a-item .a-no{font-size:14px;color:var(--muted);}
+.a-item .a-cat{font-size:14px;color:var(--muted);}
+.a-item .a-title{font-family:var(--font-display);font-weight:800;font-size:1.3rem;letter-spacing:-.03em;line-height:1.25;transition:color .2s ease;}
+.a-item .a-desc{font-size:15px;color:var(--muted);line-height:1.6;}
+.a-item .a-year{font-size:14px;color:var(--muted);}
+.mode-grid .a-item .a-glyph{font-size:13px;color:var(--muted);}
+.mode-grid .a-item .badges{margin-top:auto;padding-top:var(--sp-2);}
 
-  .section-head{margin-bottom:56px;max-width:62ch;position:relative;z-index:1;}
-  .section-head .eyebrow{margin-bottom:20px;}
-  .section-head h2{font-size:clamp(2rem,4.6vw,3.4rem);}
-  .section-head p{margin-top:18px;font-size:15.5px;}
+/* ---------------- BADGES ----------------
+   Two orthogonal signals: status (where the project stands) and fixed
+   (documented defects found and repaired). Only the second uses the signal
+   colour, because it is the claim this portfolio makes. */
+.badges{display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;}
+.badge{font-size:13px;padding:1px var(--sp-2);border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);white-space:nowrap;line-height:1.5;}
+.badge.live{color:var(--ok);border-color:var(--ok-line);}
+.badge.mvp{color:var(--text);}
+.badge.wip{color:var(--wip);border-color:var(--wip-line);}
+.badge.done,.badge.lab{color:var(--muted);}
+.badge.fixed{color:var(--signal);border-color:var(--signal);font-weight:600;}
+.badge.award{color:var(--on-signal);background:var(--signal);border-color:var(--signal);font-weight:600;}
 
-  /* ---------------- SELECTED WORK (index list + hover preview) ---------------- */
-  .work-index{border-top:1px solid var(--line);position:relative;z-index:1;}
-  .work-row{display:grid;grid-template-columns:56px 1.3fr 1fr 90px 40px;align-items:center;gap:20px;
-    padding:26px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .3s ease;position:relative;}
-  .work-row:hover{background:var(--bg-raised);}
-  .work-row .no{font-family:var(--font-mono);font-size:12px;color:var(--muted);}
-  .work-row .title{font-size:clamp(1.15rem,2.4vw,1.7rem);font-weight:600;transition:color .25s ease,transform .25s ease;}
-  .work-row:hover .title{color:var(--amber);transform:translateX(6px);}
-  .work-row .cat{font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
-  .work-row .year{font-family:var(--font-mono);font-size:12px;color:var(--muted);text-align:right;}
-  .work-row .arrow{font-size:16px;color:var(--muted);transition:transform .3s ease,color .3s ease;}
-  .work-row:hover .arrow{transform:translate(4px,-4px);color:var(--amber);}
-  @media (max-width:720px){.work-row{grid-template-columns:32px 1fr 34px;}.work-row .cat,.work-row .year{display:none;}}
+/* ---------------- PROCESS ---------------- */
+.process-list{border-top:2px solid var(--text);}
+.p-row{display:grid;grid-template-columns:var(--sp-8) minmax(0,1fr) minmax(0,1.6fr);gap:var(--sp-5);padding:var(--sp-5) 0;border-bottom:1px solid var(--line);}
+.p-row .p-no{font-family:var(--font-display);font-weight:800;font-size:2rem;line-height:1;letter-spacing:-.04em;color:var(--signal);}
+.p-row .p-title{font-family:var(--font-display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;}
+.p-row .p-title span{display:block;font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--muted);margin-bottom:var(--sp-1);}
+.p-row p{font-size:15px;color:var(--muted);}
+@media (max-width:760px){.p-row{grid-template-columns:minmax(0,1fr);gap:var(--sp-2);}}
 
-  .preview-panel{position:fixed;z-index:70;width:280px;pointer-events:none;opacity:0;transition:opacity .25s ease;
-    transform:translate(-50%,-120%);top:0;left:0;}
-  .preview-panel.active{opacity:1;}
-  .preview-panel .swatch{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--line-strong);background:var(--bg-raised-2);overflow:hidden;
-    background-image:
-      linear-gradient(var(--line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:14px 14px;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);}
-  .preview-panel .swatch .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--amber);opacity:.85;text-transform:uppercase;}
-  .preview-panel .swatch::before,.preview-panel .swatch::after{content:"";position:absolute;width:14px;height:14px;border:1.5px solid var(--amber);opacity:.8;}
-  .preview-panel .swatch::before{top:6px;left:6px;border-right:none;border-bottom:none;}
-  .preview-panel .swatch::after{bottom:6px;right:6px;border-left:none;border-top:none;}
-  .preview-panel .cap{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.5;}
-  @media (max-width:820px){.preview-panel{display:none;}}
+/* ---------------- COMMUNITY TIMELINE ---------------- */
+.timeline{--tl-prog:0;position:relative;padding-left:var(--sp-6);}
+.timeline::before,.timeline::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line);}
+.timeline::after{background:var(--signal);transform:scaleY(var(--tl-prog));transform-origin:top;}
+.tl-item{position:relative;padding-bottom:var(--sp-7);}
+.tl-item:last-child{padding-bottom:0;}
+.tl-year{font-family:var(--font-display);font-weight:800;font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
+.tl-item h3{font-size:1.15rem;letter-spacing:-.02em;margin-top:var(--sp-1);}
+.tl-item ul{margin:var(--sp-3) 0 0;padding-left:var(--sp-5);color:var(--muted);font-size:15px;line-height:1.7;}
+.tl-item a{color:var(--text);text-decoration-color:var(--signal);transition:color .2s ease;}
+.tl-item a:hover{color:var(--signal);}
+.tl-creds{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-4);}
+.cred{display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-1) var(--sp-4) var(--sp-1) var(--sp-1);background:transparent;border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);font-size:14px;cursor:pointer;transition:border-color .2s ease,color .2s ease;}
+.cred img{width:auto;height:36px;max-width:52px;object-fit:cover;display:block;}
+.cred:hover{border-color:var(--text);color:var(--text);}
+.cred:active{transform:translateY(1px);}
 
-  .work-detail{max-width:60ch;margin-top:52px;padding-top:32px;border-top:1px dashed var(--line-strong);position:relative;z-index:1;}
-  .work-detail .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
-  .work-detail .stack span{font-family:var(--font-mono);font-size:10.5px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--muted);}
+/* ---------------- CHANNELS ---------------- */
+.ch-grid{display:flex;flex-wrap:wrap;gap:var(--sp-7);}
+.ch{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:var(--sp-1);width:min(240px,100%);}
+.ch[data-channel="gitwoot"]{--ch:var(--ch-gitwoot);}
+.ch[data-channel="raglance"]{--ch:var(--ch-raglance);}
+.ch:focus-visible .ch-ring{outline:2px solid var(--signal);outline-offset:6px;}
+.ch-ring{display:block;width:172px;height:172px;border-radius:50%;padding:var(--sp-2);margin-bottom:var(--sp-3);border:2px solid var(--ch);transition:transform .35s var(--ease);}
+.ch-ring img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--bg-2);}
+.ch:hover .ch-ring{transform:translateY(-4px);}
+.ch:active .ch-ring{transform:translateY(0);}
+.ch-name{font-family:var(--font-display);font-weight:800;font-size:1.25rem;letter-spacing:-.02em;}
+.ch-sub{font-size:14px;color:var(--muted);}
+.ch-state{font-size:14px;color:var(--text);text-decoration:underline;text-decoration-color:var(--line-strong);margin-top:var(--sp-1);transition:text-decoration-color .2s ease;}
+.ch:hover .ch-state{text-decoration-color:var(--signal);}
 
-  /* ---------------- ARCHIVE ---------------- */
-  .archive-controls{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:36px;position:relative;z-index:1;}
-  .filters{display:flex;gap:8px;flex-wrap:wrap;}
-  .filters button{all:unset;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line-strong);color:var(--muted);transition:all .25s ease;}
-  .filters button:hover{color:var(--text);border-color:var(--text);}
-  .filters button.active{background:var(--amber);border-color:var(--amber);color:#100b03;}
-  .archive-more{display:flex;justify-content:center;margin-top:34px;position:relative;z-index:1;}
-  .archive-more[hidden]{display:none;}
-  .archive-more button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:12px;
-                       font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
-                       padding:13px 22px;border:1px solid var(--line-strong);color:var(--muted);
-                       transition:color .25s ease,border-color .25s ease;}
-  .archive-more button:hover{color:var(--amber);border-color:var(--amber);}
-  .archive-more button:focus-visible{outline:1px solid var(--amber);outline-offset:3px;}
-  .archive-more .am-label[hidden]{display:none;}
-  .archive-more .am-count{color:var(--line-strong);}
-  .archive-more .am-count b{color:var(--amber);font-weight:500;}
-  .view-toggle{display:flex;gap:2px;border:1px solid var(--line-strong);}
-  .view-toggle button{all:unset;cursor:pointer;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--muted);}
-  .view-toggle button.active{background:var(--text);color:var(--bg);}
+/* ---------------- SKILLS ---------------- */
+.skill-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-col);row-gap:var(--sp-6);}
+@media (max-width:820px){.skill-groups{grid-template-columns:minmax(0,1fr);}}
+.skill-group{border-top:1px solid var(--line-strong);padding-top:var(--sp-4);}
+.skill-group h3{font-size:1.05rem;letter-spacing:-.01em;margin-bottom:var(--sp-3);}
+.skill-group .chips{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);}
+.skill-group .chips span{font-size:15px;color:var(--muted);}
 
-  .archive-list{position:relative;z-index:1;}
-  .archive-list.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
-  .archive-list.mode-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
-  @media (max-width:980px){.archive-list.mode-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:640px){
-    .archive-list.mode-grid{grid-template-columns:1fr;}
-    .mode-list .a-item{grid-template-columns:28px 1fr 44px;}
-    .mode-list .a-cat{display:none;}
-  }
+/* ---------------- CONTACT ---------------- */
+.contact h2{font-size:clamp(2.8rem,8.6vw,7.5rem);line-height:.96;letter-spacing:-.045em;}
+.contact .sub{margin-top:var(--sp-5);font-size:18px;color:var(--text);}
+.contact .cta-row{margin-top:var(--sp-6);}
+.contact .others{display:flex;flex-wrap:wrap;gap:var(--sp-5);margin-top:var(--sp-5);}
+.contact .note{margin-top:var(--sp-8);border-top:1px solid var(--line);padding-top:var(--sp-5);font-size:15px;max-width:64ch;}
+footer{padding:var(--sp-5) var(--gutter) var(--sp-7);max-width:1280px;margin-inline:auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);font-size:14px;color:var(--muted);border-top:1px solid var(--line);}
+footer .socials{display:flex;gap:var(--sp-5);flex-wrap:wrap;}
+footer a{text-decoration:none;color:var(--muted);transition:color .2s ease;}
+footer a:hover{color:var(--text);text-decoration:underline;}
 
-  .a-item{background:var(--bg);transition:background .3s ease;}
-  .archive-list .a-item[hidden]{display:none;}
-  .mode-grid .a-item{padding:26px;display:flex;flex-direction:column;gap:14px;min-height:220px;}
-  .mode-grid .a-item:hover{background:var(--bg-raised);}
-  .mode-list .a-item{display:grid;grid-template-columns:44px 150px 1fr 50px;align-items:center;gap:18px;padding:18px 4px;border-bottom:1px solid var(--line);}
-  .mode-list .a-item:hover{background:var(--bg-raised);}
-  .mode-list .a-desc{display:none;}
-  .mode-list .a-glyph{display:none;}
-  .a-item .a-no{font-family:var(--font-mono);font-size:11px;color:var(--muted);}
-  .a-item .a-cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);}
-  .a-item .a-title{font-size:1.02rem;font-weight:600;}
-  .a-item .a-desc{font-size:13px;color:var(--muted);line-height:1.55;}
-  .a-item .a-year{font-family:var(--font-mono);font-size:11px;color:var(--muted);}
-  .mode-grid .a-item .a-glyph{align-self:flex-start;font-family:var(--font-mono);font-size:10px;color:var(--muted);border:1px solid var(--line-strong);padding:3px 7px;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .ledger-mark,.ledger-row .title,.ch-ring,.fs-arrow{transition:none;}
+}
 
-  /* ---------------- BADGES ----------------
-     Two orthogonal signals, deliberately styled apart:
-     - status  : where the project stands (hollow, quiet)
-     - fixed   : documented defects found and repaired (amber, loud)
-     The second one is the differentiator, so it is the one that glows.
-  ------------------------------------------ */
-  /* ---------------- LANGUAGE TOGGLE ---------------- */
-  .nav-actions{display:flex;align-items:center;gap:12px;}
-  .lang-toggle{display:inline-flex;align-items:center;gap:5px;background:transparent;cursor:pointer;
-               border:1px solid var(--line-strong);color:var(--muted);padding:8px 12px;
-               font-family:var(--font-mono);font-size:10.5px;letter-spacing:.09em;
-               transition:border-color .25s ease;}
-  .lang-toggle:hover{border-color:var(--amber);}
-  .lang-toggle .sep{opacity:.35;}
-  .lang-toggle span[data-lang-on]{transition:color .25s ease;}
-  html[lang="ko"] .lang-toggle span[data-lang-on="ko"],
-  html[lang="en"] .lang-toggle span[data-lang-on="en"]{color:var(--amber);}
-  @media (max-width:860px){.lang-toggle{padding:7px 9px;}}
+/* ---------------- PROJECT DETAIL MODAL ---------------- */
+html.pm-lock,html.pm-lock body{overflow:hidden;}
+.pm-overlay{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-start;justify-content:center;
+  padding:min(9vh,88px) var(--sp-5) var(--sp-8);opacity:0;pointer-events:none;background:var(--scrim);
+  transition:opacity .3s var(--ease);}
+.pm-overlay.open{opacity:1;pointer-events:auto;}
+.pm-overlay[hidden]{display:none;}
+.pm-panel{position:relative;width:min(760px,100%);max-height:calc(100vh - min(9vh,88px) - var(--sp-8));overflow-y:auto;
+  background:var(--bg);border:1px solid var(--line-strong);border-top:3px solid var(--signal);
+  padding:clamp(24px,4.4vw,52px);transform:translateY(24px);opacity:0;
+  transition:transform .38s var(--ease),opacity .3s ease;}
+.pm-overlay.open .pm-panel{transform:translateY(0);opacity:1;}
+.pm-close{position:sticky;top:var(--sp-1);float:right;margin:calc(var(--sp-2) * -1) calc(var(--sp-2) * -1) 0 var(--sp-3);width:40px;height:40px;border:1px solid var(--line-strong);border-radius:2px;
+  background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;line-height:1;transition:border-color .2s ease,background .2s ease;z-index:2;}
+.pm-close:hover{border-color:var(--text);}
+.pm-close:active{background:var(--bg-2);}
+.pm-meta{display:flex;align-items:center;gap:var(--sp-3);font-size:14px;color:var(--muted);margin-bottom:var(--sp-3);flex-wrap:wrap;}
+.pm-meta .pm-no{color:var(--signal);font-weight:600;}
+.pm-meta .pm-dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong);}
+.pm-title{font-weight:800;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.04em;margin:0 0 var(--sp-3);}
+.pm-tagline{font-size:17px;line-height:1.65;color:var(--muted);max-width:56ch;margin:0 0 var(--sp-5);}
+.pm-links{display:flex;flex-wrap:wrap;gap:var(--sp-3);margin-bottom:var(--sp-7);}
+.pm-links .btn{padding:var(--sp-2) var(--sp-4);font-size:14px;}
+.pm-body{border-top:1px solid var(--line);padding-top:var(--sp-6);display:flex;flex-direction:column;gap:var(--sp-6);}
+.pm-section h3{font-size:1.05rem;letter-spacing:-.01em;color:var(--signal);margin:0 0 var(--sp-3);}
+.pm-section p{font-size:15.5px;line-height:1.75;color:var(--text);margin:0 0 var(--sp-3);max-width:none;}
+.pm-section p:last-child{margin-bottom:0;}
+.pm-section ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--sp-2);}
+.pm-section ul li{position:relative;padding-left:var(--sp-5);font-size:15.5px;line-height:1.7;color:var(--text);}
+.pm-section ul li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:2px;background:var(--signal);}
+.pm-stack{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
+.pm-section a{color:var(--text);text-decoration-color:var(--signal);}
+.pm-langnote{margin:var(--sp-4) 0 0;padding:var(--sp-3) var(--sp-4);border-left:2px solid var(--line-strong);font-size:14px;line-height:1.6;color:var(--muted);}
+@media (max-width:600px){
+  .pm-overlay{padding:0;}
+  .pm-panel{max-height:100vh;height:100vh;width:100%;padding:var(--sp-5) var(--sp-4) var(--sp-7);border-top-width:3px;}
+}
 
-  .pm-langnote{margin:16px 0 0;padding:11px 14px;border:1px dashed var(--line-strong);
-               font-family:var(--font-mono);font-size:10.5px;line-height:1.6;color:var(--muted);}
+/* Fixed-defect log inside the modal */
+.pm-fixlog{margin:0;padding:0;list-style:none;counter-reset:fix;}
+.pm-fixlog li{position:relative;padding:var(--sp-4) 0 var(--sp-4) var(--sp-8);border-top:1px solid var(--line);font-size:15px;line-height:1.65;color:var(--text);}
+.pm-fixlog li::before{counter-increment:fix;content:"Fix " counter(fix,decimal-leading-zero);position:absolute;left:0;top:var(--sp-4);font-size:14px;font-weight:600;color:var(--signal);}
+.pm-lognote{margin:calc(var(--sp-1) * -1) 0 var(--sp-3);font-size:14.5px;line-height:1.6;color:var(--muted);}
+.pm-log{border-top:1px solid var(--line);}
+.pm-log:last-of-type{border-bottom:1px solid var(--line);}
+.pm-log > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-4) 2px;font-size:15px;font-weight:600;color:var(--muted);transition:color .2s ease;}
+.pm-log > summary::-webkit-details-marker{display:none;}
+.pm-log > summary::before{content:"+";flex:none;width:var(--sp-4);color:var(--signal);font-size:18px;line-height:1;}
+.pm-log[open] > summary::before{content:"–";}
+.pm-log > summary:hover,.pm-log[open] > summary{color:var(--text);}
+.pm-log .pm-log-h{flex:1 1 auto;}
+.pm-log .pm-log-n{flex:none;color:var(--muted);font-weight:400;}
+.pm-log-body{padding:2px 0 var(--sp-5) var(--sp-5);animation:log-in .3s var(--ease) both;}
+@keyframes log-in{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.pm-log-body{animation:none;}}
+.pm-log-body .pm-fixlog li:first-child{border-top:0;padding-top:0;}
+.pm-log-body .pm-fixlog li:first-child::before{top:2px;}
+.pm-loglist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;}
+.pm-loglist li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:2px var(--sp-3);padding:var(--sp-3) 0;border-top:1px solid var(--line);}
+.pm-loglist li:first-child{border-top:0;padding-top:0;}
+.pm-log-when{font-size:14px;color:var(--signal);font-weight:600;padding-top:2px;}
+.pm-log-what{font-size:15px;line-height:1.55;color:var(--text);}
+.pm-log-learn{grid-column:2;font-size:14.5px;line-height:1.6;color:var(--muted);}
+.pm-loglist li.key .pm-log-what{font-weight:600;}
+@media (max-width:600px){
+  .pm-log-body{padding-left:0;}
+  .pm-loglist li{grid-template-columns:minmax(0,1fr);gap:var(--sp-1);}
+  .pm-log-learn{grid-column:1;}
+}
 
-  .section-head .legend{font-size:13.5px;color:var(--muted);border-left:2px solid rgba(255,184,76,0.5);padding-left:14px;margin-top:18px;}
-  .section-head .legend b{color:var(--amber);font-weight:500;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;}
-  .badges{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-  .badge{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-         padding:3px 7px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap;line-height:1.4;}
-  .badge.live{color:var(--ok);border-color:var(--ok-line);}
-  .badge.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
-                      background:var(--ok);margin-right:6px;vertical-align:1px;animation:pulse-dot 2.4s ease-in-out infinite;}
-  .badge.mvp{color:var(--amber);border-color:rgba(255,184,76,0.42);}
-  .badge.wip{color:var(--wip);border-color:var(--wip-line);}
-  .badge.done{color:var(--muted);}
-  .badge.lab{color:var(--muted);border-style:dashed;}
-  .badge.fixed{color:var(--amber);border-color:rgba(255,184,76,0.55);background:rgba(255,184,76,0.07);font-weight:500;}
-  /* An award is the one badge nobody awards themselves, so it carries the mark. */
-  .badge.award{color:var(--amber);border-color:var(--amber);background:rgba(255,184,76,0.14);font-weight:500;}
-  .badge.award::before{content:"\2605";margin-right:5px;}
-  @keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:.25;}}
-  @media (prefers-reduced-motion:reduce){.badge.live::before{animation:none;}}
+.cred-panel{width:min(560px,100%);}
+.cred-panel.wide{width:min(820px,100%);}
+.cred-panel .pm-title{font-size:clamp(1.5rem,3.6vw,2.1rem);}
+.cred-image{display:block;width:100%;height:auto;margin:0 0 var(--sp-5);border:1px solid var(--line);}
+.ch-panel{width:min(600px,100%);}
+.ch-head{display:flex;align-items:center;gap:var(--sp-5);margin:0 0 var(--sp-5);}
+.ch-head img{width:96px;height:96px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--ch);background:var(--bg-2);}
+.ch-head .pm-meta{margin-bottom:var(--sp-2);}
+.ch-head .pm-title{margin:0;font-size:clamp(1.6rem,4vw,2.3rem);}
+.ch-note{font-size:14px;color:var(--muted);margin:calc(var(--sp-5) * -1) 0 var(--sp-6);}
+.ch-panel .pm-links .btn{background:var(--ch);color:var(--on-signal);border-color:var(--ch);}
+@media (max-width:600px){.ch-head{flex-direction:column;align-items:flex-start;}}
 
-  /* Badges live inside the category cell so the 5-column grid stays intact. */
-  .work-row .cat{display:flex;flex-direction:column;align-items:flex-start;gap:9px;}
-  @media (max-width:720px){.work-row .badges{display:none;}}
-  .mode-list .a-item .badges{display:none;}
-  .mode-grid .a-item .badges{margin-top:auto;}
-
-  /* Fixed-defect log inside the project modal */
-  .pm-fixlog{margin:0;padding:0;list-style:none;counter-reset:fix;}
-  .pm-fixlog li{position:relative;padding:14px 0 14px 46px;border-top:1px solid var(--line);
-                font-size:14px;line-height:1.62;color:var(--text);}
-  .pm-fixlog li::before{counter-increment:fix;content:"FIX " counter(fix,decimal-leading-zero);
-                        position:absolute;left:0;top:16px;font-family:var(--font-mono);font-size:9.5px;
-                        letter-spacing:.06em;color:var(--amber);}
-
-  /* One defect, opened up on the page. The Fixed ×N badges are a claim; this
-     is the specimen that backs it without asking for a click. */
-  .fix-specimen{margin-top:44px;border:1px solid var(--line);padding:26px 28px 22px;
-                cursor:pointer;position:relative;z-index:1;background:var(--bg-raised);
-                transition:border-color .3s ease,transform .3s ease;}
-  .fix-specimen:hover{border-color:var(--amber);}
-  .fix-specimen:focus-visible{outline:1px solid var(--amber);outline-offset:3px;}
-  .fs-head{display:flex;align-items:center;gap:11px;flex-wrap:wrap;
-           font-family:var(--font-mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;}
-  .fs-tag{color:var(--amber);border:1px solid var(--amber);padding:3px 7px;}
-  .fs-proj{color:var(--text);}
-  .fs-of{margin-left:auto;display:flex;align-items:center;gap:5px;color:var(--muted);}
-  .fs-of b{color:var(--amber);font-weight:500;}
-  .fs-title{font-size:clamp(1.05rem,1.9vw,1.32rem);line-height:1.45;margin:16px 0 22px;max-width:44ch;}
-  .fs-grid{margin:0;display:flex;flex-direction:column;gap:0;}
-  .fs-grid > div{display:grid;grid-template-columns:64px 1fr;gap:16px;
-                 padding:13px 0;border-top:1px solid var(--line);}
-  .fs-grid dt{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-              color:var(--amber);padding-top:3px;}
-  .fs-grid dd{margin:0;font-size:14px;line-height:1.7;color:var(--muted);}
-  .fs-grid > div:last-child dd{color:var(--text);}
-  .fs-foot{display:flex;align-items:center;gap:8px;margin-top:20px;padding-top:16px;
-           border-top:1px solid var(--line);font-family:var(--font-mono);font-size:10.5px;
-           letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-           transition:color .25s ease;}
-  .fix-specimen:hover .fs-foot{color:var(--amber);}
-  .fs-arrow{transition:transform .3s cubic-bezier(.16,1,.3,1);}
-  .fix-specimen:hover .fs-arrow{transform:translate(3px,-3px);}
-  @media (max-width:620px){
-    .fix-specimen{padding:20px 18px 18px;}
-    .fs-grid > div{grid-template-columns:1fr;gap:5px;}
-    .fs-of{margin-left:0;width:100%;}
-  }
-
-  /* Collapsible log records — used only where a project ships a dated log. */
-  .pm-lognote{margin:-4px 0 12px;font-size:13.5px;line-height:1.6;color:var(--muted);}
-  .pm-log{border-top:1px solid var(--line);}
-  .pm-log:last-of-type{border-bottom:1px solid var(--line);}
-  .pm-log > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;
-                    padding:14px 2px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
-                    text-transform:uppercase;color:var(--muted);transition:color .25s ease;}
-  .pm-log > summary::-webkit-details-marker{display:none;}
-  .pm-log > summary::before{content:"+";flex:none;width:13px;color:var(--amber);font-size:14px;line-height:1;}
-  .pm-log[open] > summary::before{content:"–";}
-  .pm-log > summary:hover,.pm-log[open] > summary{color:var(--text);}
-  .pm-log > summary:focus-visible{outline:1px solid var(--amber);outline-offset:2px;}
-  .pm-log .pm-log-h{flex:1 1 auto;}
-  .pm-log .pm-log-n{flex:none;color:var(--line-strong);}
-  .pm-log-body{padding:2px 0 20px 25px;animation:log-in .32s ease both;}
-  @keyframes log-in{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
-  @media (prefers-reduced-motion:reduce){.pm-log-body{animation:none;}}
-  .pm-log-body .pm-fixlog li:first-child{border-top:0;padding-top:0;}
-  .pm-log-body .pm-fixlog li:first-child::before{top:2px;}
-
-  .pm-loglist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;}
-  .pm-loglist li{display:grid;grid-template-columns:74px 1fr;gap:2px 14px;padding:12px 0;
-                 border-top:1px solid var(--line);}
-  .pm-loglist li:first-child{border-top:0;padding-top:0;}
-  .pm-log-when{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--amber);
-               padding-top:3px;}
-  .pm-log-what{font-size:14px;line-height:1.55;color:var(--text);}
-  .pm-log-learn{grid-column:2;font-size:13.5px;line-height:1.6;color:var(--muted);}
-  .pm-loglist li.key .pm-log-what{color:var(--amber);}
-  .pm-loglist li.key .pm-log-learn{color:var(--text);}
-  @media (max-width:600px){
-    .pm-log-body{padding-left:0;}
-    .pm-loglist li{grid-template-columns:1fr;gap:4px;}
-    .pm-log-learn{grid-column:1;}
-  }
-
-  /* ---------------- HERO STATS ---------------- */
-  .hero-stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px;
-              opacity:0;transform:translateY(16px);transition:opacity .8s ease .9s,transform .8s ease .9s;}
-  html.intro-done .hero-stats{opacity:1;transform:translateY(0);}
-
-  /* Availability: the first thing a recruiter checks, so it sits above the
-     stats rather than inside the contact section at the bottom. */
-  .hero-avail{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:26px 0 0;
-              font-family:var(--font-mono);font-size:11.5px;line-height:1.6;color:var(--muted);
-              opacity:0;transform:translateY(16px);transition:opacity .8s ease .78s,transform .8s ease .78s;}
-  html.intro-done .hero-avail{opacity:1;transform:translateY(0);}
-  .hero-avail span{text-wrap:balance;}
-  .hero-avail b{display:inline-flex;align-items:center;gap:7px;flex:none;font-weight:500;
-                letter-spacing:.09em;text-transform:uppercase;color:var(--ok);
-                border:1px solid var(--ok-line);padding:4px 9px;}
-  .hero-avail b::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ok);
-                        animation:pulse-dot 2.4s ease-in-out infinite;}
-  @media (prefers-reduced-motion:reduce){.hero-avail b::before{animation:none;}}
-  @media (max-width:620px){.hero-avail{font-size:11px;gap:9px;}}
-  .hero-stats .st{display:flex;flex-direction:column;gap:5px;}
-  .hero-stats .st b{font-family:var(--font-display);font-style:italic;font-weight:400;
-                    font-size:clamp(1.5rem,3vw,2.1rem);line-height:1;color:var(--text);}
-  .hero-stats .st span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;
-                       text-transform:uppercase;color:var(--muted);}
-  .hero-stats .st b em{font-style:normal;color:var(--amber);}
-
-  /* ---------------- PROCESS ---------------- */
-  .process-list{border-top:1px solid var(--line);position:relative;z-index:1;}
-  .p-row{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:28px;padding:36px 4px;border-bottom:1px solid var(--line);}
-  .p-row .p-no{font-family:var(--font-display);font-style:italic;font-size:2.2rem;color:var(--line-strong);}
-  .p-row .p-title{font-size:1.3rem;font-weight:700;}
-  .p-row .p-title span{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:8px;font-weight:400;}
-  .p-row p{font-size:14.5px;}
-  @media (max-width:760px){.p-row{grid-template-columns:1fr;gap:10px;}}
-
-  /* ---------------- COMMUNITY TIMELINE ---------------- */
-  .timeline{--tl-prog:0;position:relative;margin-left:6px;padding-left:34px;border-left:1px solid var(--line);z-index:1;}
-  .timeline::after{content:"";position:absolute;left:-1px;top:0;width:1px;background:var(--amber);height:calc(var(--tl-prog)*100%);box-shadow:0 0 8px 0 var(--amber);pointer-events:none;}
-  .tl-item{position:relative;padding-bottom:44px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{content:"";position:absolute;left:-39.5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--amber);}
-  .tl-year{font-family:var(--font-mono);font-size:12px;color:var(--amber);letter-spacing:.06em;}
-  .tl-item h3{font-size:1.15rem;margin-top:6px;}
-  .tl-item ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.7;}
-  .tl-item a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;transition:opacity .25s ease;}
-  .tl-item a:hover{opacity:.7;}
-  /* Certificates hang off the activity they came from instead of a list of their own. */
-  .tl-creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
-  .cred{display:inline-flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;background:transparent;border:1px solid var(--line-strong);
-    color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;cursor:pointer;transition:border-color .2s ease,color .2s ease;}
-  .cred img{width:auto;height:37px;max-width:52px;object-fit:cover;display:block;filter:grayscale(1) contrast(.9);opacity:.75;transition:filter .2s ease,opacity .2s ease;}
-  .cred:hover,.cred:focus-visible{border-color:var(--amber);color:var(--amber);}
-  .cred:hover img,.cred:focus-visible img{filter:none;opacity:1;}
-
-  /* ---------------- SKILLS ---------------- */
-  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);position:relative;z-index:1;}
-  @media (max-width:820px){.skill-groups{grid-template-columns:1fr;}}
-  .skill-group{background:var(--bg);padding:26px;}
-  .skill-group h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:500;margin-bottom:16px;}
-  .skill-group .chips{display:flex;flex-wrap:wrap;gap:8px;}
-  .skill-group .chips span{font-size:13px;padding:6px 11px;border:1px solid var(--line-strong);color:var(--muted);}
-
-  /* ---------------- CONTACT ---------------- */
-  .contact h2{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(2.6rem,7vw,5.6rem);line-height:1.02;
-    background:linear-gradient(160deg,var(--metal-1) 15%,var(--metal-2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .contact .sub{margin-top:22px;font-size:16px;}
-  .contact .cta-row{margin-top:34px;}
-  .contact .note{margin-top:60px;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:22px;max-width:64ch;line-height:1.7;}
-
-  footer{padding:28px clamp(20px,5vw,64px) 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);}
-  footer .socials{display:flex;gap:18px;}
-  footer a{text-decoration:none;color:var(--muted);transition:color .25s ease;}
-  footer a:hover{color:var(--amber);}
-
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-  @keyframes scrollcue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
-  @keyframes mscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .reveal{opacity:1;transform:none;transition:none;}
-    .mtrack,.scroll-cue .bar,.eyebrow .pip{animation:none !important;}
-  }
-
-  /* ---------------- PROJECT DETAIL MODAL ---------------- */
-  .work-row,.a-item{cursor:pointer;}
-  html.pm-lock,html.pm-lock body{overflow:hidden;}
-  .pm-overlay{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-start;justify-content:center;
-    padding:min(9vh,88px) 20px 60px;opacity:0;pointer-events:none;
-    background:color-mix(in srgb, #050504 78%, transparent);backdrop-filter:blur(10px) saturate(120%);
-    transition:opacity .35s cubic-bezier(.16,1,.3,1);}
-  .pm-overlay.open{opacity:1;pointer-events:auto;}
-  .pm-overlay[hidden]{display:none;}
-  .pm-panel{position:relative;width:min(760px,100%);max-height:calc(100vh - min(9vh,88px) - 60px);overflow-y:auto;
-    background:var(--bg-raised);border:1px solid var(--line-strong);box-shadow:0 40px 90px -30px rgba(0,0,0,0.6);
-    padding:clamp(28px,4.4vw,52px);transform:translateY(28px) scale(.98);opacity:0;
-    transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .35s ease;}
-  .pm-overlay.open .pm-panel{transform:translateY(0) scale(1);opacity:1;}
-  .pm-close{position:sticky;top:0;float:right;margin:-6px -6px 0 12px;width:34px;height:34px;border:1px solid var(--line-strong);
-    background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;
-    font-family:var(--font-mono);font-size:16px;line-height:1;transition:border-color .2s ease,color .2s ease;z-index:2;}
-  .pm-close:hover{border-color:var(--amber);color:var(--amber);}
-  .pm-meta{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
-  .pm-meta .pm-no{color:var(--amber);}
-  .pm-meta .pm-dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong);}
-  .pm-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(1.8rem,4.4vw,2.7rem);line-height:1.06;margin:0 0 14px;}
-  .pm-tagline{font-size:15.5px;line-height:1.65;color:var(--muted);max-width:56ch;margin:0 0 22px;}
-  .pm-links{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
-  .pm-links .btn{padding:11px 20px;font-size:11.5px;}
-  .pm-body{border-top:1px solid var(--line);padding-top:28px;display:flex;flex-direction:column;gap:26px;}
-  .pm-section h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:0 0 12px;}
-  .pm-section p{font-size:14.5px;line-height:1.7;color:var(--text);margin:0 0 10px;}
-  .pm-section p:last-child{margin-bottom:0;}
-  .pm-section ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
-  .pm-section ul li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.65;color:var(--text);}
-  .pm-section ul li::before{content:"—";position:absolute;left:0;color:var(--amber);font-size:12px;}
-  .pm-stack{display:flex;gap:8px;flex-wrap:wrap;}
-  .pm-stack span{font-family:var(--font-mono);font-size:10.5px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--muted);}
-  .pm-section a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;}
-  @media (max-width:600px){.pm-overlay{padding:0;}
-    .pm-panel{max-height:100vh;height:100vh;width:100%;padding:22px 20px 40px;}}
-  .cred-panel{width:min(560px,100%);}
-  .cred-panel.wide{width:min(820px,100%);}
-  .cred-panel .pm-title{font-size:clamp(1.5rem,3.6vw,2.1rem);}
-  .cred-image{display:block;width:100%;height:auto;margin:0 0 22px;border:1px solid var(--line);}
-  /* Channels: two round profile images that open a channel modal */
-  .ch-grid{display:flex;flex-wrap:wrap;gap:clamp(36px,8vw,96px);justify-content:center;padding-top:8px;}
-  .ch{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;width:min(240px,100%);position:relative;z-index:1;}
-  .ch:focus-visible .ch-ring{outline:2px solid var(--amber);outline-offset:6px;}
-  .ch-ring{position:relative;display:block;width:172px;height:172px;border-radius:50%;padding:8px;margin-bottom:14px;
-    background:conic-gradient(from 0deg,var(--ch),transparent 28%,var(--ch) 56%,transparent 84%,var(--ch));
-    transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;}
-  .ch-ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--bg);}
-  .ch-ring img{position:relative;display:block;width:156px;height:156px;border-radius:50%;object-fit:cover;background:#0b0d0c;}
-  .ch:hover .ch-ring,.ch:focus-visible .ch-ring{transform:translateY(-6px) scale(1.04);box-shadow:0 26px 50px -22px var(--ch);}
-  .ch-name{font-size:19px;font-weight:700;letter-spacing:-.01em;color:var(--text);}
-  .ch-sub{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--muted);}
-  .ch-state{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:5px 11px;border:1px solid var(--line-strong);border-radius:99px;transition:color .2s ease,border-color .2s ease;}
-  .ch-state i{width:5px;height:5px;border-radius:50%;background:var(--wip);}
-  .ch:hover .ch-state,.ch:focus-visible .ch-state{color:var(--amber);border-color:var(--amber);}
-  @media (prefers-reduced-motion:no-preference){.ch-ring{animation:chspin 14s linear infinite;}.ch-ring img{animation:chspin 14s linear infinite reverse;}
-    .ch:hover .ch-ring,.ch:hover .ch-ring img{animation-play-state:paused;}}
-  @keyframes chspin{to{transform:rotate(360deg);}}
-  .ch-panel{width:min(600px,100%);}
-  .ch-head{display:flex;align-items:center;gap:20px;margin:0 0 22px;}
-  .ch-head img{width:96px;height:96px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--ch);background:#0b0d0c;}
-  .ch-head .pm-meta{margin-bottom:8px;}
-  .ch-head .pm-title{margin:0;font-size:clamp(1.6rem,4vw,2.3rem);}
-  .ch-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--muted);margin:-18px 0 30px;}
-  .ch-panel .pm-links .btn{background:var(--ch);color:#0b0d0c;border-color:var(--ch);}
-  @media (max-width:600px){.ch-head{flex-direction:column;align-items:flex-start;}}
 </style>
+<noscript><style>.intro{display:none;}</style></noscript>
 </head>
 <body>
 
-<div class="intro" id="intro">
+<div class="intro" id="intro" aria-hidden="true">
   <div class="intro-stage">
     <div class="boot" id="boot"></div>
-    <div class="intro-mark" id="intro-mark">Real Woong</div>
+    <div class="intro-mark" id="intro-mark">Kim JinWoong</div>
     <div class="intro-sweep" id="intro-sweep"></div>
   </div>
-  <div class="intro-skip">Click or press any key to skip</div>
 </div>
 
-<div class="grain"></div>
-<div class="spotlight" id="spotlight"></div>
 <div class="progress" id="progress"></div>
 
 <header class="nav">
-  <div class="brand">
-    <span class="mono-mark">JW</span>
-    <span class="who"><b>Kim JinWoong</b><span>Builder · Real-Woong</span></span>
-  </div>
-  <nav class="links">
-    <a href="#work">Work</a>
-    <a href="#archive">Archive</a>
-    <a href="#process">Process</a>
-    <a href="#community">Community</a>
-    <a href="#channels">Channels</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="nav-actions">
-    <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language" aria-pressed="false">
-      <span data-lang-on="ko">KO</span><span class="sep">/</span><span data-lang-on="en">EN</span>
-    </button>
-    <a class="btn ghost" href="#contact" style="padding:10px 18px;">Say hello</a>
+  <div class="nav-inner">
+    <a class="brand" href="#hero"><b>Kim JinWoong</b><span>Builder, Real-Woong</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#archive">Archive</a>
+      <a href="#process">Process</a>
+      <a href="#community">Community</a>
+      <a href="#channels">Channels</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language" aria-pressed="false">
+        <span data-lang-on="ko">KO</span><span class="sep">/</span><span data-lang-on="en">EN</span>
+      </button>
+      <a class="btn ghost" href="#contact">Say hello</a>
+    </div>
   </div>
 </header>
 
-<div class="rail" id="rail">
-  <button data-target="hero"><span class="dot"></span><span class="label">Home</span></button>
-  <button data-target="work"><span class="dot"></span><span class="label">Work</span></button>
-  <button data-target="archive"><span class="dot"></span><span class="label">Archive</span></button>
-  <button data-target="process"><span class="dot"></span><span class="label">Process</span></button>
-  <button data-target="community"><span class="dot"></span><span class="label">Community</span></button>
-  <button data-target="channels"><span class="dot"></span><span class="label">Channels</span></button>
-  <button data-target="skills"><span class="dot"></span><span class="label">Skills</span></button>
-  <button data-target="contact"><span class="dot"></span><span class="label">Contact</span></button>
-</div>
-
 <main>
   <section class="hero" id="hero">
-    <div class="wrap">
-      <div class="eyebrow"><span class="pip"></span>Seoul, Korea — Yonsei Univ. CS '23</div>
-      <h1>Real Woong</h1>
-      <div class="byline"><b>Kim JinWoong</b> · Builder — Blockchain / AI / Full-Stack / Brand</div>
-      <p class="tagline">스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지. <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
-      <div class="cta-row">
-        <a class="btn primary magnetic" href="#work">Selected Work</a>
-        <a class="btn ghost magnetic" href="#contact">Get in touch</a>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Kim<br>JinWoong</h1>
+        <p class="tagline">스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지. <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#selected">Selected Work</a>
+          <a class="link" href="/resume.html">Resume</a>
+          <a class="link" href="#contact">Get in touch</a>
+        </div>
+        <p class="hero-avail"><b>Open to work</b><span>블록체인, AI 에이전트, 풀스택 신입/인턴. 2026 하반기 합류 가능</span></p>
+        <p class="hero-where">Seoul, Korea. Yonsei Univ. CS '23</p>
       </div>
-      <p class="hero-avail"><b>Open to work</b><span>블록체인 · AI 에이전트 · 풀스택 신입/인턴 — 2026 하반기 합류 가능</span></p>
-      <div class="hero-stats">
-        <div class="st"><b class="tnum" data-uptime-days>—</b><span>Marvis 연속 운영 (일)</span></div>
-        <div class="st"><b class="tnum">6</b><span>배포·운영 중인 서비스</span></div>
-        <div class="st"><b class="tnum"><em data-fix-total>45</em></b><span>문서화한 장애 수정</span></div>
-        <div class="st"><b class="tnum">374</b><span>TAPIoca 자동 테스트</span></div>
-      </div>
+      <aside class="ledger" id="selected" aria-labelledby="ledger-h">
+        <div class="ledger-head"><h2 id="ledger-h">Selected Work</h2></div>
+        <div class="ledger-list">
+          <span class="ledger-mark" aria-hidden="true"></span>
+          <div class="ledger-row" data-project="agora">
+            <span class="no tnum">01</span><span class="title">Agora</span><span class="year tnum">2026</span>
+            <span class="cap">Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임</span><span class="state win">BlockThon 3위</span>
+          </div>
+          <div class="ledger-row" data-project="cryptofunding">
+            <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="year tnum">2025</span>
+            <span class="cap">Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지</span><span class="state ">완료</span>
+          </div>
+          <div class="ledger-row" data-project="sogonzip">
+            <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="year tnum">2026</span>
+            <span class="cap">소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함</span><span class="state live">운영 중</span>
+          </div>
+          <div class="ledger-row" data-project="tapioca">
+            <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="year tnum">2026</span>
+            <span class="cap">거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트, 20년 실데이터로 각 층을 검증</span><span class="state live">운영 중</span>
+          </div>
+          <div class="ledger-row" data-project="healeat">
+            <span class="no tnum">05</span><span class="title">HealEat</span><span class="year tnum">2024</span>
+            <span class="cap">건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift</span><span class="state ">완료</span>
+          </div>
+        </div>
+        <p class="ledger-foot"><a class="link" href="#archive">Full archive</a></p>
+      </aside>
     </div>
-    <div class="marquee-divider focus-marquee">
-      <div class="mtrack">
-        <span><b>Blockchain</b> Sui · Move</span>
-        <span><b>AI Agents</b> Python · Gemini</span>
-        <span><b>Full-Stack</b> React · Node</span>
-        <span><b>iOS</b> Swift · RxSwift</span>
-        <span><b>Brand &amp; Identity</b> Figma</span>
-        <span><b>Video Editing</b></span>
-        <span><b>Team Leadership</b></span>
-        <span><b>Blockchain</b> Sui · Move</span>
-        <span><b>AI Agents</b> Python · Gemini</span>
-        <span><b>Full-Stack</b> React · Node</span>
-        <span><b>iOS</b> Swift · RxSwift</span>
-        <span><b>Brand &amp; Identity</b> Figma</span>
-        <span><b>Video Editing</b></span>
-        <span><b>Team Leadership</b></span>
-      </div>
-    </div>
-    <div class="wrap"><div class="scroll-cue"><div class="bar"></div>Scroll</div></div>
   </section>
 
   <section id="work">
-    <span class="chapter-no reveal" data-d="0">01</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>Selected Work</div>
+    <div class="wrap sec-grid">
+      <div class="sec-head">
         <h2>다섯 개의 프로젝트로 보는 작업 방식.</h2>
         <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
         <p class="legend"><b>Fixed ×N</b>은 운영 중 직접 겪고 원인까지 밝혀 고친 결함의 수입니다. 카드를 열면 각 건의 증상과 수정 내용을 볼 수 있습니다. 진행 상태는 숨기지 않고 그대로 표기합니다.</p>
       </div>
+      <div class="sec-body">
+        <div class="figures">
+          <div class="st"><b class="tnum" data-uptime-days>0</b><span>Marvis 연속 운영 (일)</span></div>
+          <div class="st"><b class="tnum">6</b><span>배포·운영 중인 서비스</span></div>
+          <div class="st"><b class="tnum"><em data-fix-total>45</em></b><span>문서화한 장애 수정</span></div>
+          <div class="st"><b class="tnum">374</b><span>TAPIoca 자동 테스트</span></div>
+        </div>
 
-      <!-- One defect shown in full, so the Fixed xN claim is evidence on the
-           page rather than a number you have to click to verify. -->
-      <div class="fix-specimen reveal" data-project="tapioca" data-d="1">
+        <!-- One defect shown in full, so the Fixed xN claim is evidence on the
+             page rather than a number you have to click to verify. -->
+      <div class="fix-specimen" data-project="tapioca">
         <div class="fs-head">
           <span class="fs-tag">FIX 07</span>
           <span class="fs-proj">TAPIoca</span>
@@ -704,62 +604,30 @@
         <div class="fs-foot"><span>이 프로젝트의 수정 기록 전체 보기</span><span class="fs-arrow">↗</span></div>
       </div>
 
-      <div class="work-index" id="work-index">
-        <div class="work-row reveal" data-project="agora" data-d="1" data-glyph="SUI · AI" data-cap="Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임">
-          <span class="no tnum">01</span><span class="title">Agora</span><span class="cat">Blockchain · Startup<span class="badges"><span class="badge live">운영 중</span><span class="badge award">BlockThon 3위</span><span class="badge fixed">Fixed &times;1</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
+        <div class="work-detail">
+          <p class="where">Agora, project 01 of 05</p>
+          <h3>Delegated Investment Vault on Sui</h3>
+          <p>사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, DeepBook v3 Testnet BUY·SELL E2E와 x402 결제 검증을 마친 뒤 2026년 8월 웹 서비스를 런칭했습니다. 2026년 9월 19일 BlockThon Seoul 2026 Demo Day에서 3위에 올랐습니다.</p>
+          <div class="stack"><span>Sui Move</span><span>DeepBook v3</span><span>x402</span><span>GraphQL</span><span>Next.js</span></div>
         </div>
-        <div class="work-row reveal" data-project="cryptofunding" data-d="2" data-glyph="SUI · FULLSTACK" data-cap="Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지">
-          <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="cat">Blockchain · Full-Stack<span class="badges"><span class="badge done">완료</span></span></span><span class="year tnum">2025</span><span class="arrow">↗</span>
-        </div>
-        <div class="work-row reveal" data-project="sogonzip" data-d="3" data-glyph="PRODUCT" data-cap="소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함">
-          <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="cat">Product · Personal<span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;5</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
-        </div>
-        <div class="work-row reveal" data-project="tapioca" data-d="4" data-glyph="AI AGENT" data-cap="거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트, 20년 실데이터로 각 층을 검증">
-          <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cat">AI Agent<span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;10</span></span></span><span class="year tnum">2026</span><span class="arrow">↗</span>
-        </div>
-        <div class="work-row reveal" data-project="healeat" data-d="5" data-glyph="iOS · TEAM" data-cap="건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift">
-          <span class="no tnum">05</span><span class="title">HealEat</span><span class="cat">iOS · Team<span class="badges"><span class="badge done">완료</span></span></span><span class="year tnum">2024</span><span class="arrow">↗</span>
-        </div>
-      </div>
-
-      <div class="preview-panel" id="preview-panel">
-        <div class="swatch"><span class="glyph" id="preview-glyph">SUI · AI</span></div>
-        <p class="cap" id="preview-cap">Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임</p>
-      </div>
-
-      <div class="work-detail reveal" data-d="2">
-        <div class="eyebrow" style="margin-bottom:8px;">01 / 05 — Agora</div>
-        <h3 style="font-size:1.4rem;">Delegated Investment Vault on Sui</h3>
-        <p style="margin-top:12px;">사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, DeepBook v3 Testnet BUY·SELL E2E와 x402 결제 검증을 마친 뒤 2026년 8월 웹 서비스를 런칭했습니다. 2026년 9월 19일 BlockThon Seoul 2026 Demo Day에서 3위에 올랐습니다.</p>
-        <div class="stack"><span>Sui Move</span><span>DeepBook v3</span><span>x402</span><span>GraphQL</span><span>Next.js</span></div>
       </div>
     </div>
   </section>
 
-  <div class="marquee-divider">
-    <div class="mtrack">
-      <span>Project Archive — <b>23 Records</b></span><span>Blockchain · AI · Web · iOS · Brand</span>
-      <span>Source, Stack, Status</span><span>Project Archive — <b>23 Records</b></span>
-      <span>Blockchain · AI · Web · iOS · Brand</span><span>Source, Stack, Status</span>
-    </div>
-  </div>
-
   <section id="archive">
-    <span class="chapter-no reveal" data-d="0">02</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>Project Archive</div>
+    <div class="wrap sec-grid sec-flow">
+      <div class="sec-head">
         <h2>선정작 너머, 전체 기록.</h2>
         <p>Selected Work가 큐레이션한 다섯 개라면, 여기에는 지금까지 만든 작업을 모두 담았습니다. 기본은 대표작만 보여주고, 분야를 고르면 그 분야는 전부 펼칩니다.</p>
       </div>
 
-      <div class="archive-controls reveal" data-d="1">
+      <div class="archive-controls">
         <div class="filters" id="filters">
           <button class="active" data-filter="all">All</button>
           <button data-filter="blockchain">Blockchain</button>
           <button data-filter="ai">AI</button>
-          <button data-filter="web">Web · iOS</button>
-          <button data-filter="brand">Design · Brand</button>
+          <button data-filter="web">Web, iOS</button>
+          <button data-filter="brand">Design, Brand</button>
           <button data-filter="tooling">Tooling</button>
         </div>
         <div class="view-toggle" id="view-toggle">
@@ -770,126 +638,126 @@
 
       <div class="archive-list mode-grid" id="archive-list">
         <article class="a-item reveal" data-featured data-project="agora" data-cat="blockchain">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">01</span><span class="a-glyph">SUI</span></div>
+          <div class="a-top"><span class="a-no tnum">01</span><span class="a-glyph">Sui</span></div>
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
           <span class="a-desc">거래 권한만 위임하는 Sui 온체인 투자 Vault. x402 결제 계층 포함.</span>
           <span class="a-year tnum">2026</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge award">BlockThon 3위</span><span class="badge fixed">Fixed &times;1</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="cryptofunding" data-cat="blockchain">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">02</span><span class="a-glyph">SUI</span></div>
+          <div class="a-top"><span class="a-no tnum">02</span><span class="a-glyph">Sui</span></div>
           <span class="a-cat">Blockchain · Full-Stack</span><span class="a-title">CryptoFunding</span>
           <span class="a-desc">Sui 크라우드펀딩. 컨트랙트, 백엔드, 배포 전 과정을 직접 설계.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="bubblebreak" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">03</span><span class="a-glyph">WEB</span></div>
+          <div class="a-top"><span class="a-no tnum">03</span><span class="a-glyph">Web</span></div>
           <span class="a-cat">Product · Social</span><span class="a-title">BubbleBreak</span>
           <span class="a-desc">방 코드로 입장해 관심사 버블을 pop하는 오프라인 아이스브레이킹. Cloudflare Workers+D1로 실사용 운영 중.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;4</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="healeat" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">04</span><span class="a-glyph">iOS</span></div>
+          <div class="a-top"><span class="a-no tnum">04</span><span class="a-glyph">iOS</span></div>
           <span class="a-cat">iOS · Team</span><span class="a-title">HealEat</span>
           <span class="a-desc">건강 정보 기반 외식 추천 앱. MVVM과 RxSwift를 처음으로 실전에 적용.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="sogonzip" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">05</span><span class="a-glyph">PRODUCT</span></div>
+          <div class="a-top"><span class="a-no tnum">05</span><span class="a-glyph">Product</span></div>
           <span class="a-cat">Product · Personal</span><span class="a-title">Sogon.zip</span>
           <span class="a-desc">소곤파일 예약공개와 계정 코드 기반 1:1 연결. 웹 베타 + Expo 모바일 MVP.</span>
           <span class="a-year tnum">2026</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;5</span></span>
         </article>
         <article class="a-item reveal" data-project="unimade" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">06</span><span class="a-glyph">WEB</span></div>
+          <div class="a-top"><span class="a-no tnum">06</span><span class="a-glyph">Web</span></div>
           <span class="a-cat">Web · Team</span><span class="a-title">UNI-MADE</span>
           <span class="a-desc">대학생 셀러 커머스 플랫폼. 첫 팀 단위 React 프로젝트.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="aispoc" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">07</span><span class="a-glyph">NLP</span></div>
+          <div class="a-top"><span class="a-no tnum">07</span><span class="a-glyph">Nlp</span></div>
           <span class="a-cat">AI · Public Sector</span><span class="a-title">AI-Spoc</span>
           <span class="a-desc">RoBERTa 기반 전자민원 자동 라우팅 시스템 설계.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="blocktroll" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">08</span><span class="a-glyph">NLP</span></div>
+          <div class="a-top"><span class="a-no tnum">08</span><span class="a-glyph">Nlp</span></div>
           <span class="a-cat">AI · Chrome Ext.</span><span class="a-title">BlockTroll</span>
           <span class="a-desc">악성 댓글을 로컬 서버에서 분류해 블러·숨김 처리하는 브라우저 확장.</span>
           <span class="a-year tnum">2026</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;2</span></span>
         </article>
         <article class="a-item reveal" data-project="cvprojects" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">09</span><span class="a-glyph">CV</span></div>
+          <div class="a-top"><span class="a-no tnum">09</span><span class="a-glyph">Cv</span></div>
           <span class="a-cat">AI · Computer Vision</span><span class="a-title">CV Projects</span>
           <span class="a-desc">손 제스처와 표정 인식 등 OpenCV 기반 실험 프로젝트 모음.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge lab">학습용</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="marvis" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">10</span><span class="a-glyph">AGENT</span></div>
+          <div class="a-top"><span class="a-no tnum">10</span><span class="a-glyph">Agent</span></div>
           <span class="a-cat">AI · Telegram</span><span class="a-title">Marvis</span>
           <span class="a-desc">텔레그램 기반 개인 AI 비서. 기억과 사이드 프로젝트를 자연어로 관리하고, 요일별 능동 브리핑과 Siri 음성 캡처를 제공.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;3</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="tapioca" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">11</span><span class="a-glyph">AGENT</span></div>
+          <div class="a-top"><span class="a-no tnum">11</span><span class="a-glyph">Agent</span></div>
           <span class="a-cat">AI · Investment</span><span class="a-title">TAPIoca</span>
           <span class="a-desc">거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트. 20년 실데이터로 각 신호 층을 따로 검증.</span>
           <span class="a-year tnum">2026</span>
           <span class="badges"><span class="badge live">운영 중</span><span class="badge fixed">Fixed &times;10</span></span>
         </article>
         <article class="a-item reveal" data-project="textro" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">12</span><span class="a-glyph">OCR</span></div>
+          <div class="a-top"><span class="a-no tnum">12</span><span class="a-glyph">OCR</span></div>
           <span class="a-cat">AI · Tool</span><span class="a-title">Textro</span>
           <span class="a-desc">보안 환경을 위한 오프라인 스캔 PDF OCR 도구.</span>
           <span class="a-year tnum">2025</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-featured data-project="daedongje2023" data-cat="brand">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">13</span><span class="a-glyph">BR</span></div>
+          <div class="a-top"><span class="a-no tnum">13</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Goods</span><span class="a-title">2023 대동제(새벽)</span>
           <span class="a-desc">대형 행사 브랜딩. 인생네컷 프레임과 반다나를 단독 디자인.</span>
           <span class="a-year tnum">2023</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="yonsei-korea-exchange" data-cat="brand">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">14</span><span class="a-glyph">BR</span></div>
+          <div class="a-top"><span class="a-no tnum">14</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Web · Branding</span><span class="a-title">연세 X 고려대 대동단결</span>
           <span class="a-desc">양교 동아리 교류제 웹사이트 제작 및 브랜딩.</span>
           <span class="a-year tnum">2023</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="harang" data-cat="brand">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">15</span><span class="a-glyph">BR</span></div>
+          <div class="a-top"><span class="a-no tnum">15</span><span class="a-glyph">BR</span></div>
           <span class="a-cat">Branding · Leadership</span><span class="a-title">하랑 (24대 컴과 학생회)</span>
           <span class="a-desc">학생회 로고, 하키티와 카드뉴스 제작 및 브랜딩 총괄.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="birthrate-bm" data-cat="brand">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">16</span><span class="a-glyph">BM</span></div>
+          <div class="a-top"><span class="a-no tnum">16</span><span class="a-glyph">Bm</span></div>
           <span class="a-cat">Planning · Strategy</span><span class="a-title">출산율 저하 해결 BM</span>
           <span class="a-desc">저출산 문제 비즈니스 모델 설계. 교양 기말 만점.</span>
           <span class="a-year tnum">2024</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="gongppung" data-cat="brand">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">17</span><span class="a-glyph">3D</span></div>
+          <div class="a-top"><span class="a-no tnum">17</span><span class="a-glyph">3d</span></div>
           <span class="a-cat">Planning · UI</span><span class="a-title">공뽕</span>
           <span class="a-desc">폐컨테이너 공간 대여 플랫폼. 설계부터 법률 자문까지.</span>
           <span class="a-year tnum">2023</span>
           <span class="badges"><span class="badge done">완료</span></span>
         </article>
         <article class="a-item reveal" data-project="prefer-codingtest" data-cat="tooling">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">18</span><span class="a-glyph">LOG</span></div>
+          <div class="a-top"><span class="a-no tnum">18</span><span class="a-glyph">Log</span></div>
           <span class="a-cat">Automation · Study</span><span class="a-title">Prefer for CodingTest</span>
           <span class="a-desc">주 5문제를 지키는지 커밋 히스토리에서 계산하는 학습 로그. 손으로 적는 숫자가 없습니다.</span>
           <span class="a-year tnum">2026</span>
@@ -897,7 +765,7 @@
         </article>
 
         <article class="a-item reveal" data-project="blockthon2026" data-cat="blockchain">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">19</span><span class="a-glyph">SUI · AI</span></div>
+          <div class="a-top"><span class="a-no tnum">19</span><span class="a-glyph">Sui, AI</span></div>
           <span class="a-cat">Blockchain · Education</span><span class="a-title">2026 BlockThon Hacker House</span>
           <span class="a-desc">Sui·Walrus·AI 기술 스택을 참가자 앞에서 발표하고, 교육자료와 행사 랜딩페이지를 제작.</span>
           <span class="a-year tnum">2026</span>
@@ -905,7 +773,7 @@
         </article>
 
         <article class="a-item reveal" data-project="buildtrace" data-cat="blockchain">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">20</span><span class="a-glyph">BIM</span></div>
+          <div class="a-top"><span class="a-no tnum">20</span><span class="a-glyph">Bim</span></div>
           <span class="a-cat">Blockchain · BIM</span><span class="a-title">BuildTrace</span>
           <span class="a-desc">BIM 변경·검토·승인 이력을 여러 조직이 공동 검증하는 provenance 인프라.</span>
           <span class="a-year tnum">2026</span>
@@ -913,7 +781,7 @@
         </article>
 
         <article class="a-item reveal" data-featured data-project="blockthon-landing" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">21</span><span class="a-glyph">PIXEL</span></div>
+          <div class="a-top"><span class="a-no tnum">21</span><span class="a-glyph">Pixel</span></div>
           <span class="a-cat">Web · Infra</span><span class="a-title">BlockThon 2026 Landing Page</span>
           <span class="a-desc">2026 BlockThon 공식 랜딩페이지. 참가 신청이 이 페이지로 들어옵니다. 디자인 시스템부터 픽셀아트 렌더링, AWS 도메인·S3·CloudFront 배포까지 주도.</span>
           <span class="a-year tnum">2026</span>
@@ -921,7 +789,7 @@
         </article>
 
         <article class="a-item reveal" data-project="ilque" data-cat="web">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">22</span><span class="a-glyph">HUD</span></div>
+          <div class="a-top"><span class="a-no tnum">22</span><span class="a-glyph">Hud</span></div>
           <span class="a-cat">Desktop &middot; Product</span><span class="a-title">Il-Que</span>
           <span class="a-desc">할 일을 게임의 퀘스트 헬퍼로 바꿔 데스크톱에 띄우는 macOS 위젯. 할 일 앱에 게임 스킨을 씌우지 않는 것이 기준입니다.</span>
           <span class="a-year tnum">2026</span>
@@ -929,7 +797,7 @@
         </article>
 
         <article class="a-item reveal" data-project="tapioca-ver2" data-cat="ai">
-          <div style="display:flex;justify-content:space-between;"><span class="a-no tnum">23</span><span class="a-glyph">SCREEN</span></div>
+          <div class="a-top"><span class="a-no tnum">23</span><span class="a-glyph">Screen</span></div>
           <span class="a-cat">AI · Quant</span><span class="a-title">TAPIoca Ver2</span>
           <span class="a-desc">기존 TAPIoca의 수익성 한계를 전략 교체로 푼 NASDAQ 스크리너. 이미 증명된 환경(토스 API·Oracle·텔레그램·검증 규율)은 그대로 재사용.</span>
           <span class="a-year tnum">2026</span>
@@ -940,7 +808,7 @@
              that carry the most weight. Category filters ignore the cap. -->
       </div>
 
-      <div class="archive-more reveal" data-d="1">
+      <div class="archive-more">
         <button type="button" id="archive-more">
           <span class="am-label" data-am-collapsed>전체 아카이브 보기</span>
           <span class="am-label" data-am-expanded hidden>대표작만 보기</span>
@@ -950,22 +818,13 @@
     </div>
   </section>
 
-  <div class="marquee-divider">
-    <div class="mtrack">
-      <span>How I Work — <b>Discover / Design / Build / Verify</b></span><span>Structure Before Features</span>
-      <span>How I Work — <b>Discover / Design / Build / Verify</b></span><span>Structure Before Features</span>
-    </div>
-  </div>
-
   <section id="process">
-    <span class="chapter-no reveal" data-d="0">03</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>How I Work</div>
+    <div class="wrap sec-grid">
+      <div class="sec-head">
         <h2>불편함을 발견하고, 구조를 먼저 그립니다.</h2>
         <p>Textro의 스캔 PDF 문제, AI-Spoc의 민원 재이첩 문제처럼 실제 불편함에서 시작해, 검증 가능한 형태로 끝까지 만드는 네 단계입니다.</p>
       </div>
-      <div class="process-list reveal" data-d="1">
+      <div class="process-list">
         <div class="p-row">
           <div class="p-no tnum">01</div>
           <div class="p-title"><span>Discover</span>발견</div>
@@ -991,15 +850,13 @@
   </section>
 
   <section id="community">
-    <span class="chapter-no reveal" data-d="0">04</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>Community &amp; Leadership</div>
+    <div class="wrap sec-grid">
+      <div class="sec-head">
         <h2>만드는 사람이자, 이끄는 사람.</h2>
         <p>2023년부터 학생회·동아리·연합 프로그램에서 홍보와 브랜딩을 맡았고, 2026년에는 개발팀을 이끌었습니다. 2026년 하반기에는 Google Developer Groups on Campus Yonsei AI/ML과 SOPT 서버 파트로 활동합니다.</p>
       </div>
       <div class="timeline">
-        <div class="tl-item reveal reveal-l">
+        <div class="tl-item">
           <div class="tl-year tnum">2026</div>
           <h3>GDGoC Yonsei AI/ML · SOPT 서버 파트</h3>
           <ul><li><a href="https://gdgoc.yonsei.ac.kr/ko/member/26-27" target="_blank" rel="noopener">Google Developer Groups on Campus Yonsei</a> AI/ML 트랙 — 2026년 하반기 활동 중</li><li><a href="https://www.sopt.org/" target="_blank" rel="noopener">SOPT</a> 서버 파트 — 2026년 하반기 활동 중</li><li>연세 블록체인 동아리 블록블록 개발팀장 — 2026년 2학기까지</li><li>2026 BlockThon Sui·Walrus·AI 해커하우스 — 참가자 대상 기술 스택 발표, 교육자료·랜딩페이지 제작</li><li>2026 BlockThon Seoul Demo Day — THE ZONE AGORA로 3위 (진출 9팀)</li></ul>
@@ -1007,7 +864,7 @@
             <button type="button" class="cred" data-cred="blockthon2026-3rd"><img src="/credentials/blockthon2026-3rd-place.jpg" alt="" width="41" height="37" loading="lazy"><span>BlockThon 2026 3위 상패</span></button>
           </div>
         </div>
-        <div class="tl-item reveal reveal-r">
+        <div class="tl-item">
           <div class="tl-year tnum">2025</div>
           <h3>블록블록 활동·CryptoFunding·Textro</h3>
           <ul><li>연세 블록체인 동아리 “블록블록” 활동</li><li>CryptoFunding, Textro 개발</li></ul>
@@ -1015,7 +872,7 @@
             <button type="button" class="cred" data-cred="blockblock7-completion"><img src="/credentials/blockblock7-completion.jpg" alt="" width="37" height="26" loading="lazy"><span>블록블록 7기 수료증</span></button>
           </div>
         </div>
-        <div class="tl-item reveal reveal-l">
+        <div class="tl-item">
           <div class="tl-year tnum">2024</div>
           <h3>하랑 홍보부장·UMC 부회장</h3>
           <ul><li>24대 컴퓨터과학과 학생회 “하랑” 홍보부장·브랜딩 총괄</li><li>2024 UMC 연세 지부 부회장</li><li>Uni-Made, HealEat 팀 프로젝트</li></ul>
@@ -1024,7 +881,7 @@
             <button type="button" class="cred" data-cred="umc7-award"><img src="/credentials/umc7-award.jpg" alt="" width="26" height="37" loading="lazy"><span>UMC 7기 운영진 공로장</span></button>
           </div>
         </div>
-        <div class="tl-item reveal reveal-r">
+        <div class="tl-item">
           <div class="tl-year tnum">2023</div>
           <h3>총동아리연합회 홍보처·학생회 홍보처</h3>
           <ul><li>총동아리연합회 홍보처</li><li>컴퓨터과학과 학생회(온새미로) 홍보처</li><li>대동제, 연고 동아리 교류전 웹사이트 제작</li></ul>
@@ -1034,24 +891,22 @@
   </section>
 
   <section id="channels">
-    <span class="chapter-no reveal" data-d="0">05</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>Channels</div>
+    <div class="wrap sec-grid">
+      <div class="sec-head">
         <h2>만드는 데서 끝내지 않고, 알립니다.</h2>
         <p>브랜딩과 마케팅을 직접 해 보려고 SNS 채널 두 개를 열었습니다. 하나는 직접 만드는 쇼츠, 하나는 AI가 만드는 카드뉴스입니다. 동그라미를 눌러 보세요.</p>
       </div>
-      <div class="ch-grid reveal" data-d="1">
-        <button type="button" class="ch" data-channel="gitwoot" style="--ch:#6de39a">
+      <div class="ch-grid">
+        <button type="button" class="ch" data-channel="gitwoot">
           <span class="ch-ring"><img src="/channels/gitwoot.jpg" alt="깃웃깃웃 채널 프로필: 노트북 너머로 내다보는 검은 강아지" width="156" height="156" loading="lazy"></span>
           <span class="ch-name">깃웃깃웃</span>
-          <span class="ch-sub">YouTube Shorts · 오픈소스 소개</span>
+          <span class="ch-sub">YouTube Shorts, 오픈소스 소개</span>
           <span class="ch-state"><i></i>영상 공개 중</span>
         </button>
-        <button type="button" class="ch" data-channel="raglance" style="--ch:#f3f0e9">
+        <button type="button" class="ch" data-channel="raglance">
           <span class="ch-ring"><img src="/channels/r-a-glance.jpg" alt="R_A_Glance 채널 프로필: 눈 모양 로고" width="156" height="156" loading="lazy"></span>
           <span class="ch-name">R_A_Glance</span>
-          <span class="ch-sub">Instagram · AI·블록체인 카드뉴스</span>
+          <span class="ch-sub">Instagram, AI·블록체인 카드뉴스</span>
           <span class="ch-state"><i></i>게시 전 검수 단계</span>
         </button>
       </div>
@@ -1059,13 +914,11 @@
   </section>
 
   <section id="skills">
-    <span class="chapter-no reveal" data-d="0">06</span>
-    <div class="wrap">
-      <div class="section-head reveal" data-d="0">
-        <div class="eyebrow"><span class="pip"></span>Skills</div>
+    <div class="wrap sec-grid sec-flow">
+      <div class="sec-head">
         <h2>여섯 영역을 넘나드는 도구들.</h2>
       </div>
-      <div class="skill-groups reveal" data-d="1">
+      <div class="skill-groups">
         <div class="skill-group"><h3>Blockchain</h3><div class="chips"><span>Sui</span><span>Move</span><span>Sui dApp Kit</span><span>PTB</span><span>Walrus</span><span>DeepBook v3</span><span>x402</span><span>Hyperledger Fabric</span></div></div>
         <div class="skill-group"><h3>AI / ML</h3><div class="chips"><span>Python</span><span>PyTorch</span><span>HuggingFace</span><span>RoBERTa</span><span>KoELECTRA</span><span>Gemini</span><span>OpenCV</span><span>MediaPipe</span></div></div>
         <div class="skill-group"><h3>Frontend</h3><div class="chips"><span>React</span><span>TypeScript</span><span>Next.js</span><span>Vite</span><span>TailwindCSS</span><span>Radix UI</span><span>Framer Motion</span></div></div>
@@ -1078,17 +931,18 @@
 
   <section id="contact" class="contact">
     <div class="wrap">
-      <div class="eyebrow reveal" data-d="0"><span class="pip"></span>Next Chapter</div>
-      <h2 class="reveal" data-d="1">Let's build<br/>the next thing.</h2>
-      <p class="sub reveal" data-d="2">새로운 프로젝트, 팀, 채용 제안 모두 환영합니다. 이메일이 가장 빠릅니다.</p>
-      <div class="cta-row reveal" data-d="3">
-        <a class="btn primary magnetic" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
-        <a class="btn ghost magnetic" href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="btn ghost magnetic" href="https://www.youtube.com/@%EA%B9%83%EC%9B%83%EA%B9%83%EC%9B%83" target="_blank" rel="noopener">YouTube ↗</a>
-        <a class="btn ghost magnetic" href="https://www.instagram.com/r_a_glance/" target="_blank" rel="noopener">Instagram ↗</a>
-        <a class="btn ghost magnetic" href="/resume.html">Resume ↗</a>
+      <h2>Let’s build<br>the next thing.</h2>
+      <p class="sub">새로운 프로젝트, 팀, 채용 제안 모두 환영합니다. 이메일이 가장 빠릅니다.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
+        <a class="btn ghost" href="/resume.html">Resume</a>
       </div>
-      <p class="note reveal" data-d="4">문제를 발견하고, 구조를 설계하고, 실제로 동작하는 제품까지 만듭니다. 블록체인·AI·풀스택·iOS·브랜드를 잇는 다음 작업을 기다립니다.</p>
+      <div class="others">
+        <a class="link" href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub</a>
+        <a class="link" href="https://www.youtube.com/@%EA%B9%83%EC%9B%83%EA%B9%83%EC%9B%83" target="_blank" rel="noopener">YouTube</a>
+        <a class="link" href="https://www.instagram.com/r_a_glance/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="note">문제를 발견하고, 구조를 설계하고, 실제로 동작하는 제품까지 만듭니다. 블록체인·AI·풀스택·iOS·브랜드를 잇는 다음 작업을 기다립니다.</p>
     </div>
   </section>
 </main>
@@ -1101,7 +955,7 @@
     <a href="https://www.instagram.com/r_a_glance/" target="_blank" rel="noopener">Instagram</a>
     <a href="mailto:jinung344@gmail.com">Email</a>
     <a href="/resume.html">Resume</a>
-    <a href="#hero">Back to top ↑</a>
+    <a href="#hero">Back to top</a>
   </div>
 </footer>
 
@@ -1132,7 +986,11 @@
     '금액 주문은 주식 수량 단위 때문에 항상 요청액보다 조금 적게 체결됩니다. 10달러를 요청하면 9.98달러가 체결되는 식입니다. 엔진은 잔액으로 주문 상태를 추정하면서 이 0.01달러 차이를 부분 체결로 읽었고, 부분 체결은 미결로 남습니다. 미결 주문이 하나라도 있으면 다음 주문을 내지 않도록 설계했으므로, 그 주문이 결말나지 않는 한 에이전트는 멈춘 채로 있게 됩니다.':'A notional order always fills slightly under the amount requested, because shares come in discrete units: ask for $10 and $9.98 fills. The engine inferred order state from the cash balance, read that $0.01 gap as a partial fill, and partial fills stay open. Since it refuses to place an order while any order is still open, and that one would never resolve, the agent stayed frozen.',
     '수량 단위에서 나오는 체결 오차를 허용해 완전 체결로 판정하도록 고쳤습니다. 가짜 브로커는 항상 요청액 그대로 체결시켜 이 조건을 재현하지 못했기 때문에, 같은 상황을 계약 테스트에 추가했습니다.':'Fills are now judged complete within the tolerance that share granularity implies. The fake broker had always filled the exact amount requested and so could never reproduce this, which is why the same case now lives in the contract tests.',
     '이 프로젝트의 수정 기록 전체 보기':'Read the full fix log for this project',
-    '블록체인 · AI 에이전트 · 풀스택 신입/인턴 — 2026 하반기 합류 가능':'New-grad and internship roles in blockchain, AI agents and full-stack — available from H2 2026',
+    '블록체인, AI 에이전트, 풀스택 신입/인턴. 2026 하반기 합류 가능':'New-grad and internship roles in blockchain, AI agents and full-stack. Available from H2 2026',
+    'Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지':'Sui crowdfunding, from the contract to deployment on AWS and Vercel',
+    '소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함':'A relationship archive that schedules private files for release, with date matching',
+    '거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트, 20년 실데이터로 각 층을 검증':'An ETF investing agent that fuses macro, news, trend and volatility, with each layer validated on 20 years of real data',
+    '건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift':'A health-aware dining recommendation iOS app, built with MVVM and RxSwift',
 
     /* work */
     '다섯 개의 프로젝트로 보는 작업 방식.':'Five projects that show how I work.',
@@ -1180,9 +1038,9 @@
     '만드는 데서 끝내지 않고, 알립니다.':'I don’t stop at making it — I tell people.',
     '브랜딩과 마케팅을 직접 해 보려고 SNS 채널 두 개를 열었습니다. 하나는 직접 만드는 쇼츠, 하나는 AI가 만드는 카드뉴스입니다. 동그라미를 눌러 보세요.':'I opened two social channels to practise branding and marketing first-hand: one of Shorts I make myself, one of carousels the AI makes. Tap a circle.',
     '깃웃깃웃':'GitWoot GitWoot',
-    'YouTube Shorts · 오픈소스 소개':'YouTube Shorts · open-source tours',
+    'YouTube Shorts, 오픈소스 소개':'YouTube Shorts, open-source tours',
     '영상 공개 중':'Videos going live',
-    'Instagram · AI·블록체인 카드뉴스':'Instagram · AI & blockchain carousels',
+    'Instagram, AI·블록체인 카드뉴스':'Instagram, AI & blockchain carousels',
     '게시 전 검수 단계':'Pre-publish review stage',
 
     /* process */
@@ -1348,15 +1206,15 @@
     var markEl = document.getElementById('intro-mark');
     var sweepEl = document.getElementById('intro-sweep');
     var lines = [
-      'booting real-woong.sys',
-      'blockchain · ai · full-stack · brand',
-      'READY'
+      'Builder portfolio',
+      'Blockchain, AI, full-stack, brand',
+      'Selected work'
     ];
     var lineEls = lines.map(function(text, idx){
       var d = document.createElement('div');
       d.className = 'ln' + (idx === lines.length - 1 ? ' ready' : '');
       bootEl.appendChild(d);
-      return { el: d, text: idx === lines.length - 1 ? text : '> ' + text };
+      return { el: d, text: text };
     });
 
     var li = 0, ci = 0;
@@ -1388,125 +1246,49 @@
   })();
 
   var progress = document.getElementById('progress');
-  var mtracks = document.querySelectorAll('.mtrack');
-  var chapterNos = document.querySelectorAll('.chapter-no');
   var timelineEl = document.querySelector('.timeline');
-  var lastY = window.scrollY, lastTs = (window.performance && performance.now) ? performance.now() : Date.now();
-  var marqueeResetTimer = null;
+  var scrollQueued = false;
 
   function onScroll(){
+    scrollQueued = false;
     var h = document.documentElement;
-    var y = window.scrollY;
-    var now = (window.performance && performance.now) ? performance.now() : Date.now();
-    var dt = Math.max(now - lastTs, 1);
-    var speed = Math.abs(y - lastY) / dt;
-    lastY = y; lastTs = now;
-
-    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = pct + '%';
-
-    if(!reduceMotion){
-      var vh = window.innerHeight;
-      chapterNos.forEach(function(el){
-        var r = el.getBoundingClientRect();
-        var prog = (vh / 2 - (r.top + r.height / 2)) / vh;
-        el.style.transform = 'translateY(' + (prog * 36).toFixed(1) + 'px)';
-      });
-
-      var boost = Math.min(speed * 16, 3);
-      if(boost > 0.05){
-        var dur = Math.max(34 / (1 + boost), 5);
-        mtracks.forEach(function(t){ t.style.animationDuration = dur + 's'; });
-        clearTimeout(marqueeResetTimer);
-        marqueeResetTimer = setTimeout(function(){
-          mtracks.forEach(function(t){ t.style.animationDuration = '34s'; });
-        }, 450);
-      }
-    }
-
+    var max = h.scrollHeight - h.clientHeight;
+    if(progress) progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(h.scrollTop / max, 1) : 0).toFixed(4) + ')';
     if(timelineEl){
       var tr = timelineEl.getBoundingClientRect();
       var p = (window.innerHeight * 0.82 - tr.top) / tr.height;
-      p = Math.max(0, Math.min(1, p));
-      timelineEl.style.setProperty('--tl-prog', p);
+      timelineEl.style.setProperty('--tl-prog', Math.max(0, Math.min(1, p)));
     }
   }
-  document.addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, {passive:true});
+  document.addEventListener('scroll', function(){
+    if(!scrollQueued){ scrollQueued = true; requestAnimationFrame(onScroll); }
+  }, {passive:true});
   onScroll();
 
-  function scrambleNumber(el){
-    var final = el.textContent.trim();
-    var digits = '0123456789';
-    var frame = 0, maxFrames = 9;
-    var iv = setInterval(function(){
-      var out = '';
-      for(var i=0;i<final.length;i++){
-        out += (frame >= maxFrames) ? final[i] : digits[Math.floor(Math.random()*digits.length)];
-      }
-      el.textContent = out;
-      frame++;
-      if(frame > maxFrames){ el.textContent = final; clearInterval(iv); }
-    }, 45);
-  }
-
-  var revealEls = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          var el = entry.target;
-          var d = parseInt(el.getAttribute('data-d')||'0',10);
-          el.style.transitionDelay = (d*90)+'ms';
-          el.classList.add('in-view');
-          if(el.classList.contains('chapter-no') && !reduceMotion){
-            setTimeout(function(){ scrambleNumber(el); }, d*90);
-          }
-          io.unobserve(el);
-        }
-      });
-    },{threshold:0.12});
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else {
-    revealEls.forEach(function(el){ el.classList.add('in-view'); });
-  }
-
-  var railButtons = document.querySelectorAll('.rail button');
-  var sections = Array.prototype.map.call(railButtons, function(b){ return document.getElementById(b.getAttribute('data-target')); });
-  railButtons.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var target = document.getElementById(btn.getAttribute('data-target'));
-      if(target) target.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth'});
+  /* Selected-work ledger: one marker that glides to the row you point at or
+     focus, and stays on the last one. Pointer, keyboard and touch all reach
+     the same rows; the marker only reports where you are. */
+  (function(){
+    var ledger = document.getElementById('ledger') || document.getElementById('selected');
+    if(!ledger) return;
+    var mark = ledger.querySelector('.ledger-mark');
+    var rows = ledger.querySelectorAll('.ledger-row');
+    if(!mark || !rows.length) return;
+    var current = rows[0];
+    function place(row){
+      current = row;
+      rows.forEach(function(r){ r.classList.toggle('is-active', r === row); });
+      mark.style.setProperty('--y', row.offsetTop + 'px');
+      mark.style.setProperty('--h', row.offsetHeight + 'px');
+    }
+    rows.forEach(function(row){
+      row.addEventListener('pointerenter', function(){ place(row); });
+      row.addEventListener('focus', function(){ place(row); });
     });
-  });
-  if('IntersectionObserver' in window){
-    var railIO = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        var idx = sections.indexOf(entry.target);
-        if(idx === -1) return;
-        if(entry.isIntersecting){
-          railButtons.forEach(function(b){ b.classList.remove('active'); });
-          railButtons[idx].classList.add('active');
-        }
-      });
-    },{threshold:0.5});
-    sections.forEach(function(s){ if(s) railIO.observe(s); });
-  }
-
-  /* work index hover preview */
-  var panel = document.getElementById('preview-panel');
-  var pGlyph = document.getElementById('preview-glyph');
-  var pCap = document.getElementById('preview-cap');
-  document.querySelectorAll('.work-row').forEach(function(row){
-    row.addEventListener('mousemove', function(e){
-      if(!fineHover) return;
-      pGlyph.textContent = row.getAttribute('data-glyph');
-      pCap.textContent = row.getAttribute('data-cap');
-      panel.style.left = e.clientX + 'px';
-      panel.style.top = (e.clientY - 20) + 'px';
-      panel.classList.add('active');
-    });
-    row.addEventListener('mouseleave', function(){ panel.classList.remove('active'); });
-  });
+    place(current);
+    window.addEventListener('resize', function(){ place(current); });
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ place(current); }); }
+  })();
 
   /* archive filter + view toggle + featured cap */
   var filterBtns = document.querySelectorAll('#filters button');
@@ -1567,25 +1349,6 @@
     });
   });
 
-  if(fineHover && !reduceMotion){
-    var spotlight = document.getElementById('spotlight');
-    document.addEventListener('mousemove', function(e){
-      spotlight.style.setProperty('--mx', e.clientX+'px');
-      spotlight.style.setProperty('--my', e.clientY+'px');
-      spotlight.classList.add('active');
-    });
-    document.addEventListener('mouseleave', function(){ spotlight.classList.remove('active'); });
-
-    document.querySelectorAll('.magnetic').forEach(function(el){
-      el.addEventListener('mousemove', function(e){
-        var r = el.getBoundingClientRect();
-        var mx = (e.clientX - r.left - r.width/2) * 0.22;
-        var my = (e.clientY - r.top - r.height/2) * 0.3;
-        el.style.transform = 'translate('+mx+'px,'+my+'px)';
-      });
-      el.addEventListener('mouseleave', function(){ el.style.transform = 'translate(0,0)'; });
-    });
-  }
 })();
 </script>
 
