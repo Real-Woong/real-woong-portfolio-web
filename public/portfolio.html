@@ -492,6 +492,48 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
   .pm-panel{max-height:100vh;height:100vh;width:100%;padding:var(--sp-5) var(--sp-4) var(--sp-7);border-top-width:3px;}
 }
 
+/* ---------------- PROJECT MEDIA / FIGURES ---------------- */
+.pm-cover{margin:0 0 var(--sp-5);border:1px solid var(--line);background:var(--bg-2);}
+.pm-cover img{display:block;width:100%;height:auto;max-height:340px;object-fit:cover;}
+.pm-cover figcaption,.pm-fig figcaption,.pm-shot figcaption{padding:var(--sp-2) var(--sp-3);font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);}
+.pm-shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-3);}
+.pm-shot{margin:0;border:1px solid var(--line);background:var(--bg-2);}
+.pm-shot img{display:block;width:100%;height:auto;}
+.pm-fig{margin:0;border:1px solid var(--line);background:var(--bg-2);}
+.pm-fig svg{display:block;width:100%;height:auto;color:var(--text);}
+.pm-fig .f-box{fill:none;stroke:var(--line-strong);stroke-width:1.2;}
+.pm-fig .f-reuse{fill:color-mix(in srgb,var(--signal) 16%,transparent);stroke:var(--signal);stroke-width:1.6;}
+.pm-fig .f-new{fill:var(--bg);stroke:var(--text);stroke-width:1.2;}
+.pm-fig .f-t{fill:currentColor;font:600 13px var(--font-body,system-ui),sans-serif;}
+.pm-fig .f-s{fill:var(--muted);font:500 11px var(--font-body,system-ui),sans-serif;}
+.pm-fig .f-h{fill:var(--muted);font:600 11px var(--font-body,system-ui),sans-serif;letter-spacing:.08em;}
+.pm-fig .f-a{stroke:var(--muted);stroke-width:1.4;fill:none;}
+.pm-fig .f-ah{fill:var(--muted);}
+.a-thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);margin-bottom:var(--sp-2);}
+.mode-list .a-thumb{display:none;}
+@media (max-width:600px){.pm-cover img{max-height:220px;}}
+
+/* ---------------- GENERATED COVER ART ----------------
+   Monochrome on purpose: the signal colour marks what is being read or
+   checked, so it never appears in decoration. Strokes come from text/line
+   tokens and follow the theme. */
+.art{display:block;width:100%;height:auto;background:var(--bg-2);color:var(--text);}
+.art .ar-l{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.62;vector-effect:non-scaling-stroke;}
+.art .ar-e{fill:none;stroke:currentColor;stroke-width:1;opacity:.2;vector-effect:non-scaling-stroke;}
+.art .ar-f{fill:currentColor;opacity:.9;}
+.art .ar-t{fill:currentColor;opacity:.16;}
+.art .ar-s{fill:var(--bg-2);stroke:currentColor;stroke-width:1.3;opacity:1;vector-effect:non-scaling-stroke;}
+.a-art{overflow:hidden;border:1px solid var(--line);margin-bottom:var(--sp-2);}
+.a-art .art{transition:transform .6s var(--ease);}
+.mode-grid .a-item:hover .a-art .art{transform:scale(1.04);}
+.mode-list .a-art{display:none;}
+.pm-cover.pm-art{border:1px solid var(--line);}
+.pm-cover.pm-art .art{height:200px;}
+@media (max-width:600px){.pm-cover.pm-art .art{height:140px;}}
+@media (prefers-reduced-motion:reduce){.a-art .art{transition:none;}}
+.p-row{position:relative;}
+.p-row .p-ic{position:absolute;right:0;top:var(--sp-4);width:40px;height:40px;fill:none;stroke:var(--text);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.75;}
+
 /* Fixed-defect log inside the modal */
 .pm-fixlog{margin:0;padding:0;list-style:none;counter-reset:fix;}
 .pm-fixlog li{position:relative;padding:var(--sp-4) 0 var(--sp-4) var(--sp-8);border-top:1px solid var(--line);font-size:15px;line-height:1.65;color:var(--text);}
@@ -684,12 +726,12 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
           <button data-filter="tooling">Tooling</button>
         </div>
         <div class="view-toggle" id="view-toggle">
-          <button data-view="grid">Grid</button>
-          <button class="active" data-view="list">List</button>
+          <button class="active" data-view="grid">Grid</button>
+          <button data-view="list">List</button>
         </div>
       </div>
 
-      <div class="archive-list mode-list" id="archive-list">
+      <div class="archive-list mode-grid" id="archive-list">
         <article class="a-item reveal" data-featured data-project="agora" data-cat="blockchain">
           <div class="a-top"><span class="a-no tnum">01</span><span class="a-glyph">Sui</span></div>
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
@@ -879,22 +921,22 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       </div>
       <div class="process-list">
         <div class="p-row">
-          <div class="p-no tnum">01</div>
+          <svg class="p-ic" viewBox="0 0 40 40" aria-hidden="true"><circle cx="17" cy="17" r="9"/><path d="M24 24l10 10"/><path d="M13 17h8M17 13v8" opacity=".5"/></svg><div class="p-no tnum">01</div>
           <div class="p-title"><span>Discover</span>발견</div>
           <p>스캔 PDF 수기 타이핑(Textro), 민원 재이첩(AI-Spoc), 악성 댓글(BlockTroll)처럼 실제로 존재하는 불편함에서 프로젝트를 시작합니다.</p>
         </div>
         <div class="p-row">
-          <div class="p-no tnum">02</div>
+          <svg class="p-ic" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="6" width="28" height="28" rx="2"/><path d="M6 17h28M17 6v28"/><circle cx="26" cy="26" r="4"/></svg><div class="p-no tnum">02</div>
           <div class="p-title"><span>Design</span>설계</div>
           <p>기능보다 구조를 먼저 그립니다. Sui Move 리소스 모델, MVVM 아키텍처, 온체인·오프체인 동기화 구조를 코드 전에 설계합니다.</p>
         </div>
         <div class="p-row">
-          <div class="p-no tnum">03</div>
+          <svg class="p-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M14 11L5 20l9 9M26 11l9 9-9 9M23 8l-6 24"/></svg><div class="p-no tnum">03</div>
           <div class="p-title"><span>Build</span>제작</div>
           <p>프론트엔드·백엔드·스마트 컨트랙트·iOS까지, 필요하면 혼자서도 처음부터 끝까지 만듭니다. 디자인은 Figma로 직접 설계합니다.</p>
         </div>
         <div class="p-row">
-          <div class="p-no tnum">04</div>
+          <svg class="p-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5l13 5v9c0 8-5.5 13.5-13 16C12.500 32.500 7 27 7 19v-9z"/><path d="M14 20l5 5 8-9"/></svg><div class="p-no tnum">04</div>
           <div class="p-title"><span>Verify &amp; Ship</span>검증·배포</div>
           <p>AWS·Vercel·Cloudflare·Oracle Cloud에 실제로 배포합니다. TAPIoca는 자동 테스트 374개와 PAPER 안전장치로 먼저 검증하고, 20년 실데이터로 각 신호가 값을 하는지 따로 잰 뒤에만 다음 단계로 넘어갑니다.</p>
         </div>
@@ -3692,6 +3734,21 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
         },
         {
           "h": {
+            "ko": "한눈에 보는 구조",
+            "en": "Architecture at a glance"
+          },
+          "type": "figure",
+          "svg": {
+            "ko": "<svg viewBox=\"0 0 760 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"presentation\"><defs><marker id=\"v2ah\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path class=\"f-ah\" d=\"M0 0L8 4L0 8z\"/></marker></defs><rect class=\"f-box\" x=\"14\" y=\"30\" width=\"236\" height=\"206\" rx=\"4\" stroke-dasharray=\"4 4\"/><text class=\"f-h\" x=\"26\" y=\"50\">MAC MINI · 받아 오는 쪽</text><rect class=\"f-new\" x=\"28\" y=\"64\" width=\"208\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"85\">① 유니버스</text><text class=\"f-s\" x=\"40\" y=\"102\">ETF·테스트 종목 제외</text><rect class=\"f-new\" x=\"28\" y=\"124\" width=\"208\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"145\">② 일봉 수집</text><text class=\"f-s\" x=\"40\" y=\"162\">Yahoo · 종목별 OHLCV</text><rect class=\"f-new\" x=\"28\" y=\"184\" width=\"208\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"213\">③ 배치 포장 + 매니페스트</text><path class=\"f-a\" d=\"M132 112V124\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M132 172V184\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M250 204H330\" marker-end=\"url(#v2ah)\"/><text class=\"f-s\" x=\"258\" y=\"196\">rsync</text><rect class=\"f-reuse\" x=\"330\" y=\"30\" width=\"416\" height=\"282\" rx=\"4\" stroke-dasharray=\"5 4\" style=\"fill:none\"/><text class=\"f-h\" x=\"342\" y=\"50\">ORACLE · 기록하고 판단하는 쪽 (기존 TAPIoca 환경)</text><rect class=\"f-new\" x=\"346\" y=\"64\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"85\">④ 검수</text><text class=\"f-s\" x=\"358\" y=\"102\">하나라도 어긋나면 배치 통째 거부</text><rect class=\"f-reuse\" x=\"552\" y=\"64\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"85\">⑤ 원본 보관</text><text class=\"f-s\" x=\"564\" y=\"102\">추가만, 고치지 않음</text><rect class=\"f-new\" x=\"346\" y=\"124\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"145\">⑥ 계산</text><text class=\"f-s\" x=\"358\" y=\"162\">RVOL · 박스 · ATR</text><rect class=\"f-new\" x=\"552\" y=\"124\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"145\">⑦ 후보 상태</text><text class=\"f-s\" x=\"564\" y=\"162\">확인 → 돌파 / 무효 / 만료</text><rect class=\"f-new\" x=\"346\" y=\"184\" width=\"184\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"213\">⑧ 모의매매 (PAPER)</text><rect class=\"f-reuse\" x=\"552\" y=\"184\" width=\"184\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"213\">⑨ 텔레그램 보고</text><path class=\"f-a\" d=\"M530 88H552\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M644 112V118H438V124\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M530 148H552\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M644 172V178H438V184\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M530 204H552\" marker-end=\"url(#v2ah)\"/><rect class=\"f-reuse\" x=\"346\" y=\"258\" width=\"390\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"287\">토스 Open API · 읽기 전용</text><path class=\"f-a\" d=\"M438 258V224\" marker-end=\"url(#v2ah)\"/><text class=\"f-s\" x=\"448\" y=\"246\">수수료·장 일정</text><rect class=\"f-reuse\" x=\"20\" y=\"316\" width=\"16\" height=\"12\" rx=\"2\"/><text class=\"f-s\" x=\"42\" y=\"326\">기존 TAPIoca에서 그대로 가져온 환경</text><rect class=\"f-new\" x=\"330\" y=\"316\" width=\"16\" height=\"12\" rx=\"2\"/><text class=\"f-s\" x=\"352\" y=\"326\">Ver2에서 새로 만든 부분</text></svg>",
+            "en": "<svg viewBox=\"0 0 760 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"presentation\"><defs><marker id=\"v2ah\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path class=\"f-ah\" d=\"M0 0L8 4L0 8z\"/></marker></defs><rect class=\"f-box\" x=\"14\" y=\"30\" width=\"236\" height=\"206\" rx=\"4\" stroke-dasharray=\"4 4\"/><text class=\"f-h\" x=\"26\" y=\"50\">MAC MINI · fetches</text><rect class=\"f-new\" x=\"28\" y=\"64\" width=\"208\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"85\">① Universe</text><text class=\"f-s\" x=\"40\" y=\"102\">ETFs and test tickers removed</text><rect class=\"f-new\" x=\"28\" y=\"124\" width=\"208\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"145\">② Daily bars</text><text class=\"f-s\" x=\"40\" y=\"162\">Yahoo · OHLCV per stock</text><rect class=\"f-new\" x=\"28\" y=\"184\" width=\"208\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"40\" y=\"213\">③ Pack batch + manifest</text><path class=\"f-a\" d=\"M132 112V124\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M132 172V184\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M250 204H330\" marker-end=\"url(#v2ah)\"/><text class=\"f-s\" x=\"258\" y=\"196\">rsync</text><rect class=\"f-reuse\" x=\"330\" y=\"30\" width=\"416\" height=\"282\" rx=\"4\" stroke-dasharray=\"5 4\" style=\"fill:none\"/><text class=\"f-h\" x=\"342\" y=\"50\">ORACLE · records and decides (the original TAPIoca environment)</text><rect class=\"f-new\" x=\"346\" y=\"64\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"85\">④ Validate</text><text class=\"f-s\" x=\"358\" y=\"102\">any mismatch rejects the whole batch</text><rect class=\"f-reuse\" x=\"552\" y=\"64\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"85\">⑤ Raw archive</text><text class=\"f-s\" x=\"564\" y=\"102\">append only, never edited</text><rect class=\"f-new\" x=\"346\" y=\"124\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"145\">⑥ Compute</text><text class=\"f-s\" x=\"358\" y=\"162\">RVOL · box · ATR</text><rect class=\"f-new\" x=\"552\" y=\"124\" width=\"184\" height=\"48\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"145\">⑦ Candidate state</text><text class=\"f-s\" x=\"564\" y=\"162\">confirm → breakout / invalid / expired</text><rect class=\"f-new\" x=\"346\" y=\"184\" width=\"184\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"213\">⑧ Paper trading (PAPER)</text><rect class=\"f-reuse\" x=\"552\" y=\"184\" width=\"184\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"564\" y=\"213\">⑨ Telegram report</text><path class=\"f-a\" d=\"M530 88H552\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M644 112V118H438V124\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M530 148H552\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M644 172V178H438V184\" marker-end=\"url(#v2ah)\"/><path class=\"f-a\" d=\"M530 204H552\" marker-end=\"url(#v2ah)\"/><rect class=\"f-reuse\" x=\"346\" y=\"258\" width=\"390\" height=\"40\" rx=\"3\"/><text class=\"f-t\" x=\"358\" y=\"287\">Toss Open API · read-only</text><path class=\"f-a\" d=\"M438 258V224\" marker-end=\"url(#v2ah)\"/><text class=\"f-s\" x=\"448\" y=\"246\">fees and market calendar</text><rect class=\"f-reuse\" x=\"20\" y=\"316\" width=\"16\" height=\"12\" rx=\"2\"/><text class=\"f-s\" x=\"42\" y=\"326\">Carried over unchanged from the original TAPIoca</text><rect class=\"f-new\" x=\"330\" y=\"316\" width=\"16\" height=\"12\" rx=\"2\"/><text class=\"f-s\" x=\"352\" y=\"326\">Newly built in Ver2</text></svg>"
+          },
+          "caption": {
+            "ko": "주황색이 기존 TAPIoca에서 이미 증명돼 그대로 가져온 환경이고, 흰색 테두리만 Ver2에서 새로 만든 부분입니다. 새 전략을 시험하는 데 필요한 것만 새로 만들었습니다.",
+            "en": "Orange marks the environment already proven in the original TAPIoca and carried over as is; only the outlined boxes are new in Ver2. Only what the new strategy needs was built from scratch."
+          }
+        },
+        {
+          "h": {
             "ko": "기존 TAPIoca에서 그대로 가져온 것",
             "en": "What carried over from the original TAPIoca"
           },
@@ -4145,16 +4202,32 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
         }
         return '<div class="pm-section"><h3>'+esc(L(s.h))+'</h3>'+log+'</div>';
       }
+      if(s.svg){
+        return '<div class="pm-section"><h3>'+esc(L(s.h))+'</h3><figure class="pm-fig" role="img" aria-label="'+esc(L(s.h))+'">'+L(s.svg)+
+               (s.caption ? '<figcaption>'+esc(L(s.caption))+'</figcaption>' : '')+'</figure></div>';
+      }
       return '<div class="pm-section"><h3>'+esc(L(s.h))+'</h3>'+renderBody(L(s.body))+'</div>';
     }).join('');
+    var cover = '', shots = '';
+    if(!(p.media && p.media.length)){ cover = '<div class="pm-cover pm-art" aria-hidden="true">'+artSVG(slug, p.cat, p.title)+'</div>'; }
+    if(p.media && p.media.length){
+      var m0 = p.media[0];
+      cover = '<figure class="pm-cover"><img src="'+esc(m0.src)+'" alt="'+esc(L(m0.alt))+'" loading="lazy">'+(m0.caption ? '<figcaption>'+esc(L(m0.caption))+'</figcaption>' : '')+'</figure>';
+      if(p.media.length > 1){
+        shots = '<div class="pm-section"><div class="pm-shots">'+p.media.slice(1).map(function(m){
+          return '<figure class="pm-shot"><img src="'+esc(m.src)+'" alt="'+esc(L(m.alt))+'" loading="lazy">'+(m.caption ? '<figcaption>'+esc(L(m.caption))+'</figcaption>' : '')+'</figure>';
+        }).join('')+'</div></div>';
+      }
+    }
     var stack = (p.stack && p.stack.length) ? '<div class="pm-section"><h3>'+esc(L(UI.stack))+'</h3><div class="pm-stack">'+p.stack.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div></div>' : '';
     contentEl.innerHTML =
       '<div class="pm-meta"><span class="pm-no tnum">'+esc(p.no)+'</span><span class="pm-dot"></span><span>'+esc(p.cat)+'</span><span class="pm-dot"></span><span class="tnum">'+esc(p.year)+'</span></div>'+
+      cover+
       '<h2 class="pm-title" id="pm-title">'+esc(p.title)+'</h2>'+
       renderBadges(slug)+
       '<p class="pm-tagline">'+esc(L(p.tagline))+'</p>'+
       (links ? '<div class="pm-links">'+links+'</div>' : '')+
-      '<div class="pm-body">'+sections+stack+'</div>';
+      '<div class="pm-body">'+sections+shots+stack+'</div>';
 
     // Accordion, not just a pile of <details>: opening one record closes the
     // others in the same group so the panel never scrolls away under you.
@@ -4188,6 +4261,111 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
     var keepScroll = panel.scrollTop;
     render(PROJECTS[openSlug], openSlug);
     panel.scrollTop = keepScroll;
+  });
+
+  // Generated cover art. Deterministic per slug, so a card never changes
+  // between visits. Real screenshots (project.media) always win over it.
+  function seedOf(str){ var h = 1779033703 ^ str.length; for(var i = 0; i < str.length; i++){ h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); } return h >>> 0; }
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function catKey(cat){
+    var c = String(cat || '').toLowerCase();
+    if(c.indexOf('blockchain') === 0) return 'blockchain';
+    if(c.indexOf('ai') === 0) return 'ai';
+    if(c.indexOf('brand') === 0 || c.indexOf('design') === 0) return 'brand';
+    if(c.indexOf('web') === 0 || c.indexOf('ios') === 0 || c.indexOf('desktop') === 0 || c.indexOf('product') === 0) return 'web';
+    return 'tooling';
+  }
+  var ART = {
+    blockchain: function(r){
+      var o = '', rows = 3, cols = 5, pts = [];
+      for(var y = 0; y < rows; y++){ for(var x = 0; x < cols; x++){
+        var px = 50 + x * 120 + (r() - .5) * 26, py = 46 + y * 100 + (r() - .5) * 22; pts.push([px, py, y]);
+      } }
+      pts.forEach(function(p, i){
+        var n = pts[i + 1];
+        if(n && n[2] === p[2]) o += '<path class="ar-e" d="M'+(p[0]+60)+' '+(p[1]+30)+'L'+n[0]+' '+(n[1]+30)+'"/>';
+        var below = pts[i + cols]; if(below && r() > .45) o += '<path class="ar-e" d="M'+(p[0]+30)+' '+(p[1]+60)+'L'+(below[0]+30)+' '+below[1]+'"/>';
+      });
+      pts.forEach(function(p){
+        var solid = r() > .72;
+        o += '<rect class="'+(solid ? 'ar-f' : 'ar-l')+'" x="'+p[0].toFixed(1)+'" y="'+p[1].toFixed(1)+'" width="60" height="60" rx="4"'+(solid ? ' style="opacity:.14"' : '')+'/>';
+        for(var k = 0; k < 3; k++) o += '<rect class="ar-t" x="'+(p[0]+10).toFixed(1)+'" y="'+(p[1]+14+k*14)+'" width="'+(14+r()*30).toFixed(1)+'" height="4" rx="2" style="opacity:.3"/>';
+      });
+      return o;
+    },
+    ai: function(r){
+      var layers = [3, 5, 5, 2], xs = [90, 250, 410, 570], nodes = [], o = '';
+      layers.forEach(function(n, li){
+        var col = []; for(var i = 0; i < n; i++) col.push([xs[li] + (r() - .5) * 20, 40 + (280 / (n + 1)) * (i + 1) + (r() - .5) * 14]);
+        nodes.push(col);
+      });
+      for(var l = 0; l < nodes.length - 1; l++) nodes[l].forEach(function(a){ nodes[l+1].forEach(function(b){
+        o += '<path class="ar-e" d="M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+'L'+b[0].toFixed(1)+' '+b[1].toFixed(1)+'"'+(r() > .8 ? ' style="opacity:.55"' : '')+'/>';
+      }); });
+      nodes.forEach(function(col){ col.forEach(function(p){
+        var on = r() > .65;
+        o += '<circle class="'+(on ? 'ar-f' : 'ar-s')+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(on ? 9 : 7)+'"/>';
+      }); });
+      return o;
+    },
+    web: function(r){
+      var o = '', wins = [[40, 36], [150 + r() * 40, 96 + r() * 20], [270 + r() * 40, 60 + r() * 30]];
+      wins.forEach(function(w, i){
+        var x = w[0].toFixed(1), y = w[1].toFixed(1);
+        o += '<rect class="ar-s" x="'+x+'" y="'+y+'" width="'+(250 - i * 10)+'" height="'+(170 - i * 8)+'" rx="6"/>';
+        o += '<path class="ar-l" d="M'+x+' '+(w[1]+26)+'h'+(250 - i * 10)+'"/>';
+        for(var d = 0; d < 3; d++) o += '<circle class="ar-f" cx="'+(w[0]+16+d*14).toFixed(1)+'" cy="'+(w[1]+13).toFixed(1)+'" r="3" style="opacity:.55"/>';
+        o += '<rect class="ar-t" x="'+(w[0]+16).toFixed(1)+'" y="'+(w[1]+42).toFixed(1)+'" width="'+(70+r()*60).toFixed(1)+'" height="40" rx="3" style="opacity:.22"/>';
+        for(var b = 0; b < 4; b++) o += '<rect class="ar-t" x="'+(w[0]+16).toFixed(1)+'" y="'+(w[1]+94+b*14).toFixed(1)+'" width="'+(60+r()*130).toFixed(1)+'" height="6" rx="3" style="opacity:'+(b === 0 ? .5 : .24)+'"/>';
+      });
+      return o;
+    },
+    brand: function(r){
+      var o = '', i;
+      for(i = 0; i < 5; i++){
+        var cx = 80 + r() * 480, cy = 60 + r() * 240, rad = 30 + r() * 90;
+        o += '<circle class="'+(i === 0 ? 'ar-f' : 'ar-l')+'" cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="'+rad.toFixed(1)+'"'+(i === 0 ? ' style="opacity:.14"' : '')+'/>';
+      }
+      for(i = 0; i < 3; i++){
+        var a = 60 + r() * 520, b = 40 + r() * 280, rr = 18 + r() * 40;
+        o += '<path class="ar-l" d="M'+(a-rr).toFixed(1)+' '+b.toFixed(1)+'a'+rr.toFixed(1)+' '+rr.toFixed(1)+' 0 0 1 '+(rr*2).toFixed(1)+' 0"/>';
+      }
+      o += '<circle class="ar-f" cx="'+(100+r()*440).toFixed(1)+'" cy="'+(70+r()*220).toFixed(1)+'" r="10"/>';
+      return o;
+    },
+    tooling: function(r){
+      var o = '', indent = 0;
+      for(var i = 0; i < 14; i++){
+        if(r() > .6) indent = Math.min(4, Math.max(0, indent + (r() > .5 ? 1 : -1)));
+        var y = 28 + i * 22, w = 60 + r() * 220;
+        o += '<rect class="ar-t" x="40" y="'+y+'" width="14" height="6" rx="3" style="opacity:.3"/>';
+        o += '<rect class="ar-f" x="'+(76 + indent * 22)+'" y="'+y+'" width="'+w.toFixed(1)+'" height="6" rx="3" style="opacity:'+(r() > .75 ? .75 : .3)+'"/>';
+        if(r() > .55) o += '<rect class="ar-l" x="'+(76 + indent * 22 + w + 10).toFixed(1)+'" y="'+y+'" width="'+(30+r()*80).toFixed(1)+'" height="6" rx="3"/>';
+      }
+      o += '<rect class="ar-f" x="'+(420+r()*100).toFixed(1)+'" y="'+(28+Math.floor(r()*13)*22)+'" width="10" height="14"/>';
+      return o;
+    }
+  };
+  function artSVG(slug, cat, label){
+    var r = rng(seedOf(slug)), k = catKey(cat);
+    return '<svg class="art" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'+esc(label || slug)+'">'+ART[k](r)+'</svg>';
+  }
+
+  // Archive thumbnails: a real image when the project has media, otherwise the
+  // generated cover, so every card has a picture and none is a blank box.
+  Array.prototype.forEach.call(document.querySelectorAll('#archive-list .a-item[data-project]'), function(card){
+    var slug = card.getAttribute('data-project'), pr = PROJECTS[slug];
+    if(!pr) return;
+    var holder;
+    if(pr.media && pr.media.length){
+      holder = document.createElement('img');
+      holder.className = 'a-thumb'; holder.src = pr.media[0].src; holder.alt = ''; holder.loading = 'lazy';
+    } else {
+      holder = document.createElement('div');
+      holder.className = 'a-art'; holder.setAttribute('aria-hidden', 'true');
+      holder.innerHTML = artSVG(slug, pr.cat, pr.title);
+    }
+    card.insertBefore(holder, card.firstChild);
   });
 
   function openProject(slug, trigger){

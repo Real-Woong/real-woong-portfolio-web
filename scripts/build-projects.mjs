@@ -79,6 +79,18 @@ function buildProject(doc) {
     // embed a player — the portfolio is the root document and carries no
     // iframes — so this is a link out, not a frame.
     video: doc.video ?? null,
+    // Pictures of the thing itself. Files come from img-source/<slug>/ via
+    // scripts/prep-images.mjs and live under /projects/<slug>/. The first one
+    // is the cover (modal head + archive thumbnail); the rest form a gallery.
+    ...(doc.media?.length
+      ? {
+          media: doc.media.map((m, i) => ({
+            src: m.src,
+            alt: tr(m.alt, `${doc.slug}.media[${i}].alt`),
+            ...(m.caption ? { caption: tr(m.caption, `${doc.slug}.media[${i}].caption`) } : {}),
+          })),
+        }
+      : {}),
     stack: doc.stack ?? [],
     sections: doc.sections.map((s, i) => {
       const at = `${doc.slug}.sections[${i}]`;
@@ -87,6 +99,10 @@ function buildProject(doc) {
       if (s.collapsed) sec.collapsed = true;
       if (s.note) sec.note = tr(s.note, `${at}.note`);
       if (s.body) sec.body = tr(s.body, `${at}.body`);
+      // A drawn figure: inline SVG written in the data, so it follows the
+      // theme tokens and the language toggle instead of being a flat image.
+      if (s.svg) sec.svg = tr(s.svg, `${at}.svg`);
+      if (s.caption) sec.caption = tr(s.caption, `${at}.caption`);
       if (s.groups) {
         sec.groups = s.groups.map((g, j) => {
           const grp = { h: tr(g.h, `${at}.groups[${j}].h`) };
