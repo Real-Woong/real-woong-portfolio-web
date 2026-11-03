@@ -44,8 +44,8 @@
 }
 </script>
 <style>
-/* Hallmark · shape: Ledger · genre: editorial · theme: custom · redesign: full · job: hire · idea: "The five projects are the headline, set as a ledger whose marker follows the reader." · vibe: "ink on paper, one signal colour, proof first"
- * paper: oklch(0.94 0.012 85) · accent: oklch(0.55 0.17 40) · display: system heavy sans (Apple SD Gothic Neo, Pretendard when installed) · body: same family regular · hero: name and one sentence on the left, the five-project ledger on the right, both above the fold · nav: wordmark, text links, language switch; a scrolling strip under 820px · footer: one line of links · imagery: none yet (no product screenshots exist in the repo; typeset evidence stands in) · signature: the ledger marker that glides between projects and the curtain that lifts off the name
+/* Hallmark · shape: Poster ledger · genre: editorial · theme: custom · redesign: full · job: hire · idea: "The five project names are the page, set poster-size, with a signal plate that follows the reader." · vibe: "ink on paper, one signal colour, proof first"
+ * paper: oklch(0.94 0.012 85) · accent: oklch(0.55 0.17 40) · display: system heavy sans (Apple SD Gothic Neo, Pretendard when installed) · body: same family regular · hero: name, one sentence and actions on one band, then the five projects as poster-size rows filling the rest of the fold · nav: wordmark, text links, language switch; a scrolling strip under 820px · footer: one line of links · imagery: none yet (no product screenshots exist in the repo; typeset evidence stands in) · signature: the signal-colour plate that slides between the five project rows, and the paper curtain that lifts off the name
  * axes: light/grotesk-heavy/warm · posture: Settled · contrast: pass · fold: pass · waive 19: the <title> and og:title keep their original dash for SEO · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V3 · weakest: V, no real product screenshots exist, so the proof is typeset (a logged defect, five-project ledger); the owner supplies screens and the slots are listed in the handoff */
 
@@ -64,6 +64,7 @@
   --signal:#ff7a45; --on-signal:#0d0d0c;
   --ok:#7fd6a4; --ok-line:rgba(127,214,164,0.42);
   --wip:#9db4d8; --wip-line:rgba(157,180,216,0.40);
+  --inv-bg:#f1eee6; --inv-text:#14130f; --inv-muted:#5b574d; --inv-line:rgba(20,19,15,0.16); --inv-line-strong:rgba(20,19,15,0.4); --inv-signal:#c2410c; --inv-bg-2:#e7e3d8;
   --scrim:rgba(8,8,7,0.8);
   --ch-gitwoot:#6de39a; --ch-raglance:#f1eee6;
   --font-display:'SF Pro Display','Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR','Segoe UI',system-ui,sans-serif;
@@ -80,6 +81,7 @@
     --signal:#c2410c; --on-signal:#f1eee6;
     --ok:#17784a; --ok-line:rgba(23,120,74,0.45);
     --wip:#45689f; --wip-line:rgba(69,104,159,0.45);
+    --inv-bg:#0d0d0c; --inv-text:#f1eee6; --inv-muted:#a39e92; --inv-line:rgba(241,238,230,0.14); --inv-line-strong:rgba(241,238,230,0.4); --inv-signal:#ff7a45; --inv-bg-2:#161614;
     --scrim:rgba(241,238,230,0.86);
     --ch-gitwoot:var(--ok); --ch-raglance:#14130f;
   }
@@ -88,12 +90,14 @@
   --bg:#0d0d0c;--bg-2:#161614;--text:#f1eee6;--muted:#a39e92;
   --line:rgba(241,238,230,0.12);--line-strong:rgba(241,238,230,0.28);
   --signal:#ff7a45;--on-signal:#0d0d0c;--ok:#7fd6a4;--ok-line:rgba(127,214,164,0.42);--wip:#9db4d8;--wip-line:rgba(157,180,216,0.40);
+  --inv-bg:#f1eee6;--inv-text:#14130f;--inv-muted:#5b574d;--inv-line:rgba(20,19,15,0.16);--inv-line-strong:rgba(20,19,15,0.4);--inv-signal:#c2410c;--inv-bg-2:#e7e3d8;
   --scrim:rgba(8,8,7,0.8);--ch-gitwoot:#6de39a;--ch-raglance:#f1eee6;
 }
 :root[data-theme="light"]{
   --bg:#f1eee6;--bg-2:#e7e3d8;--text:#14130f;--muted:#5b574d;
   --line:rgba(20,19,15,0.14);--line-strong:rgba(20,19,15,0.34);
   --signal:#c2410c;--on-signal:#f1eee6;--ok:#17784a;--ok-line:rgba(23,120,74,0.45);--wip:#45689f;--wip-line:rgba(69,104,159,0.45);
+  --inv-bg:#0d0d0c;--inv-text:#f1eee6;--inv-muted:#a39e92;--inv-line:rgba(241,238,230,0.14);--inv-line-strong:rgba(241,238,230,0.4);--inv-signal:#ff7a45;--inv-bg-2:#161614;
   --scrim:rgba(241,238,230,0.86);--ch-gitwoot:var(--ok);--ch-raglance:#14130f;
 }
 
@@ -170,127 +174,151 @@ html[lang="en"] .lang-toggle span[data-lang-on="en"]{color:var(--text);font-weig
 .link:hover{text-decoration-color:var(--signal);color:var(--signal);}
 .link:active{opacity:.7;}
 
-/* ---------------- HERO ---------------- */
-.hero{padding-block:var(--sp-8) var(--sp-9);}
-.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--gap-col);align-items:start;}
-.hero h1{font-size:clamp(3.4rem,9.4vw,8.25rem);line-height:.92;letter-spacing:-.045em;padding-bottom:.06em;}
-.hero .tagline{margin-top:var(--sp-6);font-size:clamp(18px,1.9vw,22px);line-height:1.55;color:var(--text);max-width:34ch;}
-.hero .tagline em{font-style:normal;font-weight:600;box-shadow:inset 0 -.38em 0 color-mix(in srgb,var(--signal) 28%,transparent);}
-.cta-row{display:flex;align-items:center;gap:var(--sp-5);margin-top:var(--sp-6);flex-wrap:wrap;}
-.hero-avail{display:flex;gap:var(--sp-3);flex-wrap:wrap;align-items:baseline;margin-top:var(--sp-6);font-size:15px;max-width:none;}
+/* ---------------- HERO ----------------
+   One band for who and what, then the five projects set poster-size. The
+   projects are the first screen's picture: nothing decorative sits beside them. */
+.hero{padding-block:var(--sp-5) 0;border-top:0;}
+.hero-top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:var(--gap-col);align-items:end;padding-bottom:var(--sp-5);}
+.hero h1{font-size:clamp(2.8rem,6.4vw,5.6rem);line-height:.95;letter-spacing:-.05em;}
+.hero-side .tagline{font-size:clamp(16px,1.5vw,19px);line-height:1.55;color:var(--text);max-width:44ch;}
+.hero-side .tagline em{font-style:normal;font-weight:600;box-shadow:inset 0 -.38em 0 color-mix(in srgb,var(--signal) 28%,transparent);}
+.cta-row{display:flex;align-items:center;gap:var(--sp-5);margin-top:var(--sp-4);flex-wrap:wrap;}
+.hero-avail{display:flex;gap:var(--sp-3);flex-wrap:wrap;align-items:baseline;margin-top:var(--sp-3);font-size:14px;max-width:none;}
 .hero-avail b{color:var(--ok);font-weight:600;}
 .hero-avail span{color:var(--muted);}
-.hero-where{margin-top:var(--sp-2);font-size:14px;}
+.hero-where{font-size:14px;}
 
-/* The ledger: five projects, each one a door to its write-up. The marker is
-   the only moving part. It moves to whichever row you point at or focus, and
+/* The ledger: five projects, each a door to its write-up. The plate is the
+   only moving part. It slides to whichever row you point at or focus, and
    stays on the last one, so the list always shows where you are. */
-.ledger{position:relative;border-top:2px solid var(--text);margin-top:var(--sp-2);}
-.ledger-head{display:flex;justify-content:space-between;align-items:baseline;padding-block:var(--sp-3);}
-.ledger-head h2{font-size:16px;font-weight:700;letter-spacing:-.01em;}
-.ledger-head span{font-size:14px;color:var(--muted);}
+.ledger{position:relative;border-top:2px solid var(--text);}
 .ledger-list{position:relative;}
-.ledger-mark{position:absolute;left:0;top:0;width:3px;height:var(--h,0px);background:var(--signal);transform:translateY(var(--y,0px));transition:transform .38s var(--ease);pointer-events:none;}
-.ledger-row{position:relative;display:grid;grid-template-columns:var(--sp-6) minmax(0,1fr) auto;column-gap:var(--sp-3);row-gap:2px;padding:var(--sp-3) var(--sp-2) var(--sp-3) var(--sp-4);border-top:1px solid var(--line);cursor:pointer;transition:background .2s ease;}
-.ledger-row:hover,.ledger-row.is-active{background:var(--bg-2);}
-.ledger-row:active{background:color-mix(in srgb,var(--bg-2) 70%,var(--signal) 8%);}
-.ledger-row .no{font-size:14px;color:var(--muted);padding-top:var(--sp-1);}
-.ledger-row .title{font-family:var(--font-display);font-weight:800;font-size:clamp(1.25rem,1.9vw,1.6rem);letter-spacing:-.03em;line-height:1.2;transition:transform .25s var(--ease);}
-.ledger-row:hover .title{transform:translateX(4px);}
-.ledger-row .year{font-size:14px;color:var(--muted);text-align:right;padding-top:var(--sp-1);}
-.ledger-row .cap{grid-column:2 / 3;font-size:14px;line-height:1.5;color:var(--muted);max-width:none;}
-.ledger-row .state{grid-column:3;grid-row:2;font-size:13px;text-align:right;color:var(--muted);white-space:nowrap;}
+.ledger-mark{position:absolute;left:calc(var(--gutter) * -1);right:calc(var(--gutter) * -1);top:0;height:var(--h,0px);background:var(--signal);transform:translateY(var(--y,0px));transition:transform .42s var(--ease);pointer-events:none;z-index:0;}
+.ledger-row{position:relative;z-index:1;display:grid;grid-template-columns:var(--sp-7) minmax(0,1fr) minmax(0,300px) 128px;column-gap:var(--sp-4);align-items:center;padding:var(--sp-2) 0;border-top:1px solid var(--line);cursor:pointer;transition:color .2s ease;}
+.ledger-row:first-of-type,.ledger-mark + .ledger-row{border-top:0;}
+.ledger-row.is-active{color:var(--on-signal);}
+.ledger-row .no{font-size:14px;color:var(--muted);transition:color .2s ease;}
+.ledger-row .title{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,min(5.6vw,9.4vh),5.5rem);letter-spacing:-.05em;line-height:1.02;transition:transform .35s var(--ease);}
+.ledger-row.is-active .title{transform:translateX(var(--sp-3));}
+.ledger-row .cap{font-size:14px;line-height:1.45;color:var(--muted);max-width:none;transition:color .2s ease;}
+.ledger-row .meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:14px;color:var(--muted);text-align:right;transition:color .2s ease;}
 .ledger-row .state.live{color:var(--ok);}
 .ledger-row .state.win{color:var(--signal);font-weight:600;}
-.ledger-foot{border-top:1px solid var(--line);padding-top:var(--sp-3);font-size:14px;}
+.ledger-row.is-active :is(.no,.cap,.meta,.state){color:inherit;}
+.ledger-row:active .title{transform:translateX(var(--sp-2));}
+.ledger-foot{border-top:1px solid var(--line);padding-block:var(--sp-3);font-size:14px;display:flex;justify-content:space-between;gap:var(--sp-4);flex-wrap:wrap;}
 @media (max-width:960px){
-  .hero{padding-block:var(--sp-6) var(--sp-8);}
-  .hero-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-7);}
-  .hero .tagline{max-width:40ch;}
+  .hero{padding-block:var(--sp-5) 0;}
+  .hero-top{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-4);}
+  .ledger-row{grid-template-columns:var(--sp-6) minmax(0,1fr) auto;row-gap:2px;padding:var(--sp-3) 0;}
+  .ledger-row .title{font-size:clamp(2.3rem,11vw,4rem);}
+  .ledger-row .cap{grid-column:2;grid-row:2;}
+  .ledger-row .meta{grid-column:3;grid-row:1;}
 }
 @media (max-height:760px) and (min-width:961px){
-  .hero{padding-block:var(--sp-5) var(--sp-7);}
-  .ledger-row{padding-block:var(--sp-2);}
-  .ledger-row .cap{font-size:13px;}
+  .hero{padding-block:var(--sp-3) 0;}
+  .hero-top{padding-bottom:var(--sp-3);}
 }
 
 /* entrance: runs once, only after the curtain is gone, and only on what is on screen */
 @media (prefers-reduced-motion:no-preference){
-  html.intro-done .hero h1,html.intro-done .hero .tagline,html.intro-done .hero .cta-row{animation:rise .7s var(--ease) backwards;}
-  html.intro-done .hero .tagline{animation-delay:.08s;}
-  html.intro-done .hero .cta-row{animation-delay:.16s;}
+  html.intro-done .hero h1,html.intro-done .hero-side{animation:rise .7s var(--ease) backwards;}
+  html.intro-done .hero-side{animation-delay:.08s;}
   html.intro-done .ledger-row{animation:rise .6s var(--ease) backwards;}
-  html.intro-done .ledger-row:nth-child(2){animation-delay:.1s;}
-  html.intro-done .ledger-row:nth-child(3){animation-delay:.16s;}
-  html.intro-done .ledger-row:nth-child(4){animation-delay:.22s;}
-  html.intro-done .ledger-row:nth-child(5){animation-delay:.28s;}
-  html.intro-done .ledger-row:nth-child(6){animation-delay:.34s;}
+  html.intro-done .ledger-row:nth-child(3){animation-delay:.12s;}
+  html.intro-done .ledger-row:nth-child(4){animation-delay:.18s;}
+  html.intro-done .ledger-row:nth-child(5){animation-delay:.24s;}
+  html.intro-done .ledger-row:nth-child(6){animation-delay:.3s;}
+  html.intro-done .ledger-mark{animation:fade .5s ease .1s backwards;}
 }
 @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
 
 /* ---------------- SECTIONS ---------------- */
 section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--line);}
+.hero + section{margin-top:var(--sp-8);}
 .sec-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:var(--gap-col);row-gap:var(--sp-7);align-items:start;}
 .sec-head{position:sticky;top:var(--sp-9);}
-.sec-head h2{font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1.12;letter-spacing:-.035em;}
+.sec-head h2{font-size:clamp(2.2rem,4.6vw,4rem);line-height:1.05;letter-spacing:-.045em;}
 .sec-head p{margin-top:var(--sp-4);font-size:16px;}
 .sec-head .legend{font-size:15px;color:var(--text);border-left:2px solid var(--signal);padding-left:var(--sp-4);}
 .sec-head .legend b{font-weight:600;}
 .sec-flow{grid-template-columns:minmax(0,1fr);}
-.sec-flow .sec-head{position:static;max-width:62ch;}
+.sec-flow .sec-head{position:static;max-width:none;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--gap-col);align-items:end;}
+.sec-flow .sec-head p{margin-top:0;}
 @media (max-width:960px){
   section{padding-block:var(--sp-8);}
   .sec-grid{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-6);}
   .sec-head{position:static;}
+  .sec-flow .sec-head{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-4);}
 }
 
-/* ---------------- WORK ---------------- */
-.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--sp-5);padding-bottom:var(--sp-6);border-bottom:1px solid var(--line);}
-.figures .st{display:flex;flex-direction:column;gap:var(--sp-1);}
-.figures .st b{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,4vw,3.25rem);line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
-.figures .st b em{font-style:normal;color:var(--signal);}
-.figures .st span{font-size:14px;color:var(--muted);}
+/* ---------------- WORK (the proof) ----------------
+   An inverted band: the page's one stretch of the opposite ground. It holds
+   the claim (documented fixes) and the single defect that backs it. */
+.proof{background:var(--inv-bg);color:var(--inv-text);border-top:0;
+  --bg:var(--inv-bg);--bg-2:var(--inv-bg-2);--text:var(--inv-text);--muted:var(--inv-muted);
+  --line:var(--inv-line);--line-strong:var(--inv-line-strong);--signal:var(--inv-signal);--on-signal:var(--inv-bg);}
+.proof-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--gap-col);align-items:end;margin-bottom:var(--sp-8);}
+.proof-head h2{font-size:clamp(2.2rem,4.6vw,4rem);line-height:1.05;letter-spacing:-.045em;}
+.proof-head p{font-size:16px;}
+.proof-head .legend{margin-top:var(--sp-3);font-size:15px;color:var(--text);border-left:2px solid var(--signal);padding-left:var(--sp-4);}
+.figures{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,3fr) minmax(0,3fr);column-gap:var(--gap-col);row-gap:var(--sp-5);padding-bottom:var(--sp-7);border-bottom:2px solid var(--text);}
+.figures .st{display:flex;flex-direction:column;gap:var(--sp-1);justify-content:flex-end;}
+.figures .st:has([data-fix-total]){grid-row:1 / span 2;}
+.figures .st b{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,5vw,4.5rem);line-height:.95;letter-spacing:-.05em;font-variant-numeric:tabular-nums;}
+.figures .st:has([data-fix-total]) b{font-size:clamp(7rem,19vw,17rem);color:var(--signal);line-height:.82;}
+.figures .st b em{font-style:normal;}
+.figures .st span{font-size:15px;color:var(--muted);}
+.figures .st:has([data-fix-total]) span{font-size:18px;color:var(--text);font-weight:600;}
+@media (max-width:760px){
+  .proof-head{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-4);}
+  .figures{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .figures .st:has([data-fix-total]){grid-column:1 / -1;grid-row:auto;}
+}
 
 /* One defect, opened up on the page. The Fixed ×N counts are a claim; this
    is the specimen that backs it without asking for a click. */
-.fix-specimen{margin-top:var(--sp-6);border-top:2px solid var(--signal);background:var(--bg-2);padding:var(--sp-5) var(--sp-5) var(--sp-4);cursor:pointer;position:relative;transition:background .2s ease;}
-.fix-specimen:hover{background:color-mix(in srgb,var(--bg-2) 82%,var(--signal) 8%);}
-.fs-head{display:flex;align-items:baseline;gap:var(--sp-3);flex-wrap:wrap;font-size:14px;}
+.fix-specimen{margin-top:var(--sp-7);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--gap-col);row-gap:var(--sp-3);align-content:start;cursor:pointer;position:relative;}
+.fs-head{grid-column:1;grid-row:1;display:flex;align-items:baseline;gap:var(--sp-3);flex-wrap:wrap;font-size:14px;}
 .fs-tag{color:var(--signal);font-weight:600;}
 .fs-proj{color:var(--text);font-weight:600;}
 .fs-of{margin-left:auto;display:flex;align-items:baseline;gap:var(--sp-1);color:var(--muted);}
 .fs-of b{color:var(--text);font-weight:600;}
-.fs-title{font-size:clamp(1.2rem,2.1vw,1.6rem);line-height:1.35;letter-spacing:-.02em;margin:var(--sp-3) 0 var(--sp-5);max-width:36ch;}
-.fs-grid{margin:0;display:flex;flex-direction:column;}
-.fs-grid > div{display:grid;grid-template-columns:var(--sp-8) minmax(0,1fr);gap:var(--sp-4);padding:var(--sp-3) 0;border-top:1px solid var(--line);}
+.fs-title{grid-column:1;grid-row:2;font-size:clamp(1.5rem,2.8vw,2.4rem);line-height:1.2;letter-spacing:-.04em;margin:0;}
+.fs-grid{grid-column:2;grid-row:1 / span 3;margin:0;display:flex;flex-direction:column;}
+.fs-grid > div{display:grid;grid-template-columns:var(--sp-8) minmax(0,1fr);gap:var(--sp-4);padding:var(--sp-4) 0;border-top:1px solid var(--line-strong);}
+.fs-grid > div:first-child{border-top:2px solid var(--signal);}
 .fs-grid dt{font-size:14px;font-weight:600;color:var(--signal);padding-top:2px;}
 .fs-grid dd{margin:0;font-size:15px;line-height:1.7;color:var(--muted);}
 .fs-grid > div:last-child dd{color:var(--text);}
-.fs-foot{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-4);padding-top:var(--sp-3);border-top:1px solid var(--line);font-size:14px;font-weight:600;color:var(--muted);transition:color .2s ease;}
-.fix-specimen:hover .fs-foot{color:var(--text);}
-.fs-arrow{transition:transform .25s var(--ease);}
+.fs-foot{grid-column:1;grid-row:3;align-self:end;display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-4);font-size:14px;font-weight:600;color:var(--text);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:.2em;transition:text-decoration-color .2s ease;}
+.fix-specimen:hover .fs-foot{text-decoration-color:var(--signal);}
+.fs-arrow{display:inline-block;transition:transform .25s var(--ease);}
 .fix-specimen:hover .fs-arrow{transform:translate(3px,-3px);}
-@media (max-width:620px){
-  .fix-specimen{padding:var(--sp-4);}
+@media (max-width:900px){
+  .fix-specimen{grid-template-columns:minmax(0,1fr);}
+  .fs-head,.fs-title,.fs-grid,.fs-foot{grid-column:1;grid-row:auto;}
   .fs-grid > div{grid-template-columns:minmax(0,1fr);gap:var(--sp-1);}
-  .fs-of{margin-left:0;width:100%;}
 }
 
-.work-detail{margin-top:var(--sp-7);padding-top:var(--sp-5);border-top:1px solid var(--line-strong);}
-.work-detail h3{font-size:1.4rem;letter-spacing:-.02em;margin-top:var(--sp-1);}
-.work-detail p{margin-top:var(--sp-3);color:var(--text);}
-.work-detail .where{font-size:14px;color:var(--muted);}
-.stack{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-4);}
+.work-detail{margin-top:var(--sp-8);padding-top:var(--sp-5);border-top:2px solid var(--text);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--gap-col);row-gap:var(--sp-3);}
+.work-detail .where{grid-column:1;font-size:14px;color:var(--muted);}
+.work-detail h3{grid-column:1;font-size:clamp(1.5rem,2.6vw,2.2rem);letter-spacing:-.04em;line-height:1.15;}
+.work-detail p:not(.where){grid-column:2;grid-row:1 / span 3;color:var(--text);font-size:16px;line-height:1.75;max-width:none;}
+.work-detail .stack{grid-column:1;margin-top:var(--sp-2);}
+@media (max-width:900px){.work-detail{grid-template-columns:minmax(0,1fr);}.work-detail > *{grid-column:1 !important;grid-row:auto !important;}}
+.stack{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
 .stack span,.pm-stack span{font-size:14px;padding:var(--sp-1) var(--sp-3);border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);}
 
 /* ---------------- ARCHIVE ---------------- */
-.archive-controls{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-6);}
-.filters{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
-.filters button,.view-toggle button{cursor:pointer;background:transparent;font-size:14px;padding:var(--sp-2) var(--sp-4);border:1px solid var(--line-strong);border-radius:2px;color:var(--muted);transition:color .2s ease,border-color .2s ease,background .2s ease;}
-.filters button:hover,.view-toggle button:hover{color:var(--text);border-color:var(--text);}
+.archive-controls{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-5);flex-wrap:wrap;margin-bottom:var(--sp-5);}
+.filters{display:flex;gap:var(--sp-5);flex-wrap:wrap;}
+.filters button,.view-toggle button{cursor:pointer;background:transparent;font-size:15px;padding:var(--sp-1) 0;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--muted);transition:color .2s ease,border-color .2s ease;}
+.filters button:hover,.view-toggle button:hover{color:var(--text);}
 .filters button:active,.view-toggle button:active{transform:translateY(1px);}
-.filters button.active,.view-toggle button.active{background:var(--text);border-color:var(--text);color:var(--bg);}
-.view-toggle{display:flex;gap:var(--sp-1);}
+.filters button.active,.view-toggle button.active{color:var(--text);border-bottom-color:var(--signal);font-weight:600;}
+.view-toggle{display:flex;gap:var(--sp-5);}
 .archive-more{display:flex;justify-content:flex-start;margin-top:var(--sp-6);}
 .archive-more button{white-space:nowrap;cursor:pointer;background:transparent;display:inline-flex;align-items:center;gap:var(--sp-3);font-size:15px;font-weight:600;padding:var(--sp-3) var(--sp-5);border:1px solid var(--line-strong);border-radius:2px;color:var(--text);transition:border-color .2s ease,background .2s ease;}
 .archive-more button:hover{border-color:var(--text);}
@@ -299,28 +327,36 @@ section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--l
 .archive-more .am-count b{color:var(--text);font-weight:600;}
 
 .archive-list.mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-col);}
-.archive-list.mode-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+.archive-list.mode-list{display:flex;flex-direction:column;border-top:2px solid var(--text);}
 @media (max-width:980px){.archive-list.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media (max-width:640px){
-  .archive-list.mode-grid{grid-template-columns:minmax(0,1fr);}
-  .mode-list .a-item{grid-template-columns:var(--sp-6) minmax(0,1fr) var(--sp-8);}
-  .mode-list .a-cat{display:none;}
-}
-.a-item{cursor:pointer;transition:background .2s ease;}
+@media (max-width:640px){.archive-list.mode-grid{grid-template-columns:minmax(0,1fr);}}
+.a-item{cursor:pointer;transition:background .2s ease,color .2s ease;}
 .archive-list .a-item[hidden]{display:none;}
 .mode-grid .a-item{padding:var(--sp-4) 0 var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-2);border-top:1px solid var(--line-strong);}
 .mode-grid .a-item:hover .a-title{color:var(--signal);}
-.mode-list .a-item{display:grid;grid-template-columns:var(--sp-7) 160px minmax(0,1fr) var(--sp-8);align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-1);border-bottom:1px solid var(--line);}
-.mode-list .a-item:hover{background:var(--bg-2);}
-.mode-list .a-desc,.mode-list .a-glyph,.mode-list .badges{display:none;}
 .a-top{display:flex;justify-content:space-between;align-items:baseline;}
-.a-item .a-no{font-size:14px;color:var(--muted);}
-.a-item .a-cat{font-size:14px;color:var(--muted);}
-.a-item .a-title{font-family:var(--font-display);font-weight:800;font-size:1.3rem;letter-spacing:-.03em;line-height:1.25;transition:color .2s ease;}
+.a-item .a-no,.a-item .a-cat,.a-item .a-year{font-size:14px;color:var(--muted);transition:color .2s ease;}
+.a-item .a-title{font-family:var(--font-display);font-weight:800;font-size:1.3rem;letter-spacing:-.03em;line-height:1.25;transition:color .2s ease,transform .3s var(--ease);}
 .a-item .a-desc{font-size:15px;color:var(--muted);line-height:1.6;}
-.a-item .a-year{font-size:14px;color:var(--muted);}
 .mode-grid .a-item .a-glyph{font-size:13px;color:var(--muted);}
 .mode-grid .a-item .badges{margin-top:auto;padding-top:var(--sp-2);}
+
+/* The archive opens as an index: one project per line, the title doing the work. */
+.mode-list .a-item{display:grid;grid-template-columns:var(--sp-7) minmax(0,1.7fr) minmax(0,1fr) auto var(--sp-8);align-items:center;column-gap:var(--sp-4);padding:var(--sp-3) var(--sp-2);border-bottom:1px solid var(--line);}
+.mode-list .a-top{order:1;}
+.mode-list .a-title{order:2;font-size:clamp(1.4rem,2.6vw,2.3rem);letter-spacing:-.045em;}
+.mode-list .a-cat{order:3;}
+.mode-list .badges{order:4;justify-content:flex-end;}
+.mode-list .a-year{order:5;text-align:right;}
+.mode-list .a-desc,.mode-list .a-glyph{display:none;}
+.mode-list .a-item:hover{background:var(--text);color:var(--bg);}
+.mode-list .a-item:hover :is(.a-no,.a-cat,.a-year){color:inherit;}
+.mode-list .a-item:hover .a-title{transform:translateX(var(--sp-2));}
+.mode-list .a-item:hover .badge{color:inherit;border-color:currentColor;background:transparent;}
+@media (max-width:760px){
+  .mode-list .a-item{grid-template-columns:var(--sp-6) minmax(0,1fr) var(--sp-8);}
+  .mode-list .a-cat,.mode-list .badges{display:none;}
+}
 
 /* ---------------- BADGES ----------------
    Two orthogonal signals: status (where the project stands) and fixed
@@ -336,22 +372,22 @@ section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--l
 .badge.award{color:var(--on-signal);background:var(--signal);border-color:var(--signal);font-weight:600;}
 
 /* ---------------- PROCESS ---------------- */
-.process-list{border-top:2px solid var(--text);}
-.p-row{display:grid;grid-template-columns:var(--sp-8) minmax(0,1fr) minmax(0,1.6fr);gap:var(--sp-5);padding:var(--sp-5) 0;border-bottom:1px solid var(--line);}
-.p-row .p-no{font-family:var(--font-display);font-weight:800;font-size:2rem;line-height:1;letter-spacing:-.04em;color:var(--signal);}
-.p-row .p-title{font-family:var(--font-display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;}
+.process-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--gap-col);row-gap:var(--sp-7);margin-top:var(--sp-8);}
+.p-row{display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--text);padding-top:var(--sp-4);}
+.p-row .p-no{font-family:var(--font-display);font-weight:800;font-size:clamp(3.5rem,6.4vw,6rem);line-height:.9;letter-spacing:-.05em;color:var(--signal);}
+.p-row .p-title{font-family:var(--font-display);font-weight:800;font-size:1.4rem;letter-spacing:-.03em;}
 .p-row .p-title span{display:block;font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--muted);margin-bottom:var(--sp-1);}
 .p-row p{font-size:15px;color:var(--muted);}
-@media (max-width:760px){.p-row{grid-template-columns:minmax(0,1fr);gap:var(--sp-2);}}
+@media (max-width:980px){.process-list{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:560px){.process-list{grid-template-columns:minmax(0,1fr);}}
 
 /* ---------------- COMMUNITY TIMELINE ---------------- */
-.timeline{--tl-prog:0;position:relative;padding-left:var(--sp-6);}
-.timeline::before,.timeline::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line);}
-.timeline::after{background:var(--signal);transform:scaleY(var(--tl-prog));transform-origin:top;}
-.tl-item{position:relative;padding-bottom:var(--sp-7);}
+.timeline{--tl-prog:0;position:relative;margin-top:var(--sp-8);}
+.tl-item{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);column-gap:var(--gap-col);border-top:2px solid var(--text);padding-block:var(--sp-5) var(--sp-7);}
 .tl-item:last-child{padding-bottom:0;}
-.tl-year{font-family:var(--font-display);font-weight:800;font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
-.tl-item h3{font-size:1.15rem;letter-spacing:-.02em;margin-top:var(--sp-1);}
+.tl-year{grid-row:1 / span 3;font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,6vw,5.5rem);line-height:.9;letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:var(--text);}
+.tl-item > :not(.tl-year){grid-column:2;}
+.tl-item h3{font-size:clamp(1.3rem,2.2vw,1.8rem);letter-spacing:-.035em;line-height:1.2;}
 .tl-item ul{margin:var(--sp-3) 0 0;padding-left:var(--sp-5);color:var(--muted);font-size:15px;line-height:1.7;}
 .tl-item a{color:var(--text);text-decoration-color:var(--signal);transition:color .2s ease;}
 .tl-item a:hover{color:var(--signal);}
@@ -360,6 +396,11 @@ section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--l
 .cred img{width:auto;height:36px;max-width:52px;object-fit:cover;display:block;}
 .cred:hover{border-color:var(--text);color:var(--text);}
 .cred:active{transform:translateY(1px);}
+@media (max-width:760px){
+  .tl-item{grid-template-columns:minmax(0,1fr);}
+  .tl-year{grid-row:auto;margin-bottom:var(--sp-3);}
+  .tl-item > :not(.tl-year){grid-column:1;}
+}
 
 /* ---------------- CHANNELS ---------------- */
 .ch-grid{display:flex;flex-wrap:wrap;gap:var(--sp-7);}
@@ -384,12 +425,25 @@ section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--l
 .skill-group .chips{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);}
 .skill-group .chips span{font-size:15px;color:var(--muted);}
 
-/* ---------------- CONTACT ---------------- */
-.contact h2{font-size:clamp(2.8rem,8.6vw,7.5rem);line-height:.96;letter-spacing:-.045em;}
-.contact .sub{margin-top:var(--sp-5);font-size:18px;color:var(--text);}
-.contact .cta-row{margin-top:var(--sp-6);}
+/* ---------------- CONTACT ----------------
+   The close is a full flood of the signal colour: the one place the page
+   asks for something, so it is the loudest thing on it. */
+.contact{background:var(--signal);color:var(--on-signal);border-top:0;
+  --text:var(--on-signal);--bg:var(--signal);--muted:color-mix(in srgb,var(--on-signal) 76%,transparent);
+  --line:color-mix(in srgb,var(--on-signal) 30%,transparent);--line-strong:color-mix(in srgb,var(--on-signal) 55%,transparent);}
+.contact h2{font-size:clamp(1.6rem,3.2vw,2.6rem);line-height:1.1;letter-spacing:-.04em;}
+.contact .mail{display:block;margin-top:var(--sp-5);font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,7.2vw,6.5rem);line-height:1;letter-spacing:-.05em;color:var(--on-signal);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:.12em;overflow-wrap:anywhere;}
+.contact .mail:hover{text-decoration-color:var(--bg);opacity:.85;}
+.contact .sub{margin-top:var(--sp-6);font-size:18px;color:var(--on-signal);}
+.contact .cta-row{margin-top:var(--sp-5);}
+.contact .btn.primary{background:var(--on-signal);color:var(--signal);}
+.contact .btn.ghost{border-color:var(--on-signal);color:var(--on-signal);}
+.contact .btn.ghost:hover{background:var(--on-signal);color:var(--signal);}
+.contact .link{color:var(--on-signal);text-decoration-color:var(--line-strong);}
+.contact .link:hover{color:var(--on-signal);text-decoration-color:var(--on-signal);}
 .contact .others{display:flex;flex-wrap:wrap;gap:var(--sp-5);margin-top:var(--sp-5);}
-.contact .note{margin-top:var(--sp-8);border-top:1px solid var(--line);padding-top:var(--sp-5);font-size:15px;max-width:64ch;}
+.contact .note{margin-top:var(--sp-8);border-top:1px solid var(--line-strong);padding-top:var(--sp-5);font-size:15px;max-width:64ch;color:var(--on-signal);}
+:is(.contact) :focus-visible{outline-color:var(--on-signal);}
 footer{padding:var(--sp-5) var(--gutter) var(--sp-7);max-width:1280px;margin-inline:auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);font-size:14px;color:var(--muted);border-top:1px solid var(--line);}
 footer .socials{display:flex;gap:var(--sp-5);flex-wrap:wrap;}
 footer a{text-decoration:none;color:var(--muted);transition:color .2s ease;}
@@ -521,65 +575,65 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
 
 <main>
   <section class="hero" id="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>Kim<br>JinWoong</h1>
-        <p class="tagline">스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지. <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
-        <div class="cta-row">
-          <a class="btn primary" href="#selected">Selected Work</a>
-          <a class="link" href="/resume.html">Resume</a>
-          <a class="link" href="#contact">Get in touch</a>
+    <div class="wrap">
+      <div class="hero-top">
+        <h1>Kim JinWoong</h1>
+        <div class="hero-side">
+          <p class="tagline">스마트 컨트랙트부터 AI 에이전트, 브랜딩 굿즈까지. <em>문제를 발견하고 구조를 설계해 끝까지 만드는</em> 엔지니어입니다.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="/resume.html">Resume</a>
+            <a class="link" href="#contact">Get in touch</a>
+            <a class="link" href="#archive">Full archive</a>
+          </div>
+          <p class="hero-avail"><b>Open to work</b><span>블록체인, AI 에이전트, 풀스택 신입/인턴. 2026 하반기 합류 가능</span></p>
         </div>
-        <p class="hero-avail"><b>Open to work</b><span>블록체인, AI 에이전트, 풀스택 신입/인턴. 2026 하반기 합류 가능</span></p>
-        <p class="hero-where">Seoul, Korea. Yonsei Univ. CS '23</p>
       </div>
-      <aside class="ledger" id="selected" aria-labelledby="ledger-h">
-        <div class="ledger-head"><h2 id="ledger-h">Selected Work</h2></div>
+      <div class="ledger" id="selected" role="group" aria-label="Selected Work">
         <div class="ledger-list">
           <span class="ledger-mark" aria-hidden="true"></span>
           <div class="ledger-row" data-project="agora">
-            <span class="no tnum">01</span><span class="title">Agora</span><span class="year tnum">2026</span>
-            <span class="cap">Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임</span><span class="state win">BlockThon 3위</span>
+            <span class="no tnum">01</span><span class="title">Agora</span><span class="cap">Sui 위임형 투자 Vault, AgoraAgent에게 제한된 거래 권한만 위임</span>
+            <span class="meta"><span class="year tnum">2026</span><span class="state win">BlockThon 3위</span></span>
           </div>
           <div class="ledger-row" data-project="cryptofunding">
-            <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="year tnum">2025</span>
-            <span class="cap">Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지</span><span class="state ">완료</span>
+            <span class="no tnum">02</span><span class="title">CryptoFunding</span><span class="cap">Sui 크라우드펀딩, 컨트랙트부터 AWS·Vercel 배포까지</span>
+            <span class="meta"><span class="year tnum">2025</span><span class="state ">완료</span></span>
           </div>
           <div class="ledger-row" data-project="sogonzip">
-            <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="year tnum">2026</span>
-            <span class="cap">소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함</span><span class="state live">운영 중</span>
+            <span class="no tnum">03</span><span class="title">Sogon.zip</span><span class="cap">소곤파일로 마음을 예약공개하는 관계 아카이브, 데이트 매치 포함</span>
+            <span class="meta"><span class="year tnum">2026</span><span class="state live">운영 중</span></span>
           </div>
           <div class="ledger-row" data-project="tapioca">
-            <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="year tnum">2026</span>
-            <span class="cap">거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트, 20년 실데이터로 각 층을 검증</span><span class="state live">운영 중</span>
+            <span class="no tnum">04</span><span class="title">TAPIoca</span><span class="cap">거시·뉴스·추세·변동성을 통합한 ETF 투자 에이전트, 20년 실데이터로 각 층을 검증</span>
+            <span class="meta"><span class="year tnum">2026</span><span class="state live">운영 중</span></span>
           </div>
           <div class="ledger-row" data-project="healeat">
-            <span class="no tnum">05</span><span class="title">HealEat</span><span class="year tnum">2024</span>
-            <span class="cap">건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift</span><span class="state ">완료</span>
+            <span class="no tnum">05</span><span class="title">HealEat</span><span class="cap">건강 정보 기반 외식 추천 iOS 앱, MVVM·RxSwift</span>
+            <span class="meta"><span class="year tnum">2024</span><span class="state ">완료</span></span>
           </div>
         </div>
-        <p class="ledger-foot"><a class="link" href="#archive">Full archive</a></p>
-      </aside>
+      </div>
     </div>
   </section>
 
-  <section id="work">
-    <div class="wrap sec-grid">
-      <div class="sec-head">
+  <section id="work" class="proof">
+    <div class="wrap">
+      <div class="proof-head">
         <h2>다섯 개의 프로젝트로 보는 작업 방식.</h2>
-        <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
-        <p class="legend"><b>Fixed ×N</b>은 운영 중 직접 겪고 원인까지 밝혀 고친 결함의 수입니다. 카드를 열면 각 건의 증상과 수정 내용을 볼 수 있습니다. 진행 상태는 숨기지 않고 그대로 표기합니다.</p>
-      </div>
-      <div class="sec-body">
-        <div class="figures">
-          <div class="st"><b class="tnum" data-uptime-days>0</b><span>Marvis 연속 운영 (일)</span></div>
-          <div class="st"><b class="tnum">6</b><span>배포·운영 중인 서비스</span></div>
-          <div class="st"><b class="tnum"><em data-fix-total>45</em></b><span>문서화한 장애 수정</span></div>
-          <div class="st"><b class="tnum">374</b><span>TAPIoca 자동 테스트</span></div>
+        <div>
+          <p>블록체인 스타트업 프로토타입부터 실제 배포된 풀스택 서비스, 개인 프로덕트와 iOS 팀 프로젝트까지—서로 다른 문제를 다룬 다섯 개를 골랐습니다.</p>
+          <p class="legend"><b>Fixed ×N</b>은 운영 중 직접 겪고 원인까지 밝혀 고친 결함의 수입니다. 카드를 열면 각 건의 증상과 수정 내용을 볼 수 있습니다. 진행 상태는 숨기지 않고 그대로 표기합니다.</p>
         </div>
+      </div>
+      <div class="figures">
+        <div class="st"><b class="tnum"><em data-fix-total>45</em></b><span>문서화한 장애 수정</span></div>
+        <div class="st"><b class="tnum">6</b><span>배포·운영 중인 서비스</span></div>
+        <div class="st"><b class="tnum">374</b><span>TAPIoca 자동 테스트</span></div>
+        <div class="st"><b class="tnum" data-uptime-days>0</b><span>Marvis 연속 운영 (일)</span></div>
+      </div>
 
-        <!-- One defect shown in full, so the Fixed xN claim is evidence on the
-             page rather than a number you have to click to verify. -->
+      <!-- One defect shown in full, so the Fixed xN claim is evidence on the
+           page rather than a number you have to click to verify. -->
       <div class="fix-specimen" data-project="tapioca">
         <div class="fs-head">
           <span class="fs-tag">FIX 07</span>
@@ -604,12 +658,11 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
         <div class="fs-foot"><span>이 프로젝트의 수정 기록 전체 보기</span><span class="fs-arrow">↗</span></div>
       </div>
 
-        <div class="work-detail">
-          <p class="where">Agora, project 01 of 05</p>
-          <h3>Delegated Investment Vault on Sui</h3>
-          <p>사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, DeepBook v3 Testnet BUY·SELL E2E와 x402 결제 검증을 마친 뒤 2026년 8월 웹 서비스를 런칭했습니다. 2026년 9월 19일 BlockThon Seoul 2026 Demo Day에서 3위에 올랐습니다.</p>
-          <div class="stack"><span>Sui Move</span><span>DeepBook v3</span><span>x402</span><span>GraphQL</span><span>Next.js</span></div>
-        </div>
+      <div class="work-detail">
+        <p class="where">Agora, project 01 of 05</p>
+        <h3>Delegated Investment Vault on Sui</h3>
+        <p>사용자가 자산의 최종 소유권과 출금 권한은 그대로 유지하면서, 제한된 자동 거래 권한만 AgoraAgent에게 위임하는 Sui 기반 투자 Vault입니다. owner·AgoraAgent·Signal Provider의 권한을 온체인에서 분리해 Agent 서버 키가 탈취되어도 임의 출금이 불가능하도록 설계했고, DeepBook v3 Testnet BUY·SELL E2E와 x402 결제 검증을 마친 뒤 2026년 8월 웹 서비스를 런칭했습니다. 2026년 9월 19일 BlockThon Seoul 2026 Demo Day에서 3위에 올랐습니다.</p>
+        <div class="stack"><span>Sui Move</span><span>DeepBook v3</span><span>x402</span><span>GraphQL</span><span>Next.js</span></div>
       </div>
     </div>
   </section>
@@ -631,12 +684,12 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
           <button data-filter="tooling">Tooling</button>
         </div>
         <div class="view-toggle" id="view-toggle">
-          <button class="active" data-view="grid">Grid</button>
-          <button data-view="list">List</button>
+          <button data-view="grid">Grid</button>
+          <button class="active" data-view="list">List</button>
         </div>
       </div>
 
-      <div class="archive-list mode-grid" id="archive-list">
+      <div class="archive-list mode-list" id="archive-list">
         <article class="a-item reveal" data-featured data-project="agora" data-cat="blockchain">
           <div class="a-top"><span class="a-no tnum">01</span><span class="a-glyph">Sui</span></div>
           <span class="a-cat">Blockchain · Startup</span><span class="a-title">Agora</span>
@@ -819,7 +872,7 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
   </section>
 
   <section id="process">
-    <div class="wrap sec-grid">
+    <div class="wrap sec-grid sec-flow">
       <div class="sec-head">
         <h2>불편함을 발견하고, 구조를 먼저 그립니다.</h2>
         <p>Textro의 스캔 PDF 문제, AI-Spoc의 민원 재이첩 문제처럼 실제 불편함에서 시작해, 검증 가능한 형태로 끝까지 만드는 네 단계입니다.</p>
@@ -850,7 +903,7 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
   </section>
 
   <section id="community">
-    <div class="wrap sec-grid">
+    <div class="wrap sec-grid sec-flow">
       <div class="sec-head">
         <h2>만드는 사람이자, 이끄는 사람.</h2>
         <p>2023년부터 학생회·동아리·연합 프로그램에서 홍보와 브랜딩을 맡았고, 2026년에는 개발팀을 이끌었습니다. 2026년 하반기에는 Google Developer Groups on Campus Yonsei AI/ML과 SOPT 서버 파트로 활동합니다.</p>
@@ -931,13 +984,11 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
 
   <section id="contact" class="contact">
     <div class="wrap">
-      <h2>Let’s build<br>the next thing.</h2>
+      <h2>Let’s build the next thing.</h2>
+      <a class="mail" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
       <p class="sub">새로운 프로젝트, 팀, 채용 제안 모두 환영합니다. 이메일이 가장 빠릅니다.</p>
       <div class="cta-row">
-        <a class="btn primary" href="mailto:jinung344@gmail.com">jinung344@gmail.com</a>
-        <a class="btn ghost" href="/resume.html">Resume</a>
-      </div>
-      <div class="others">
+        <a class="btn primary" href="/resume.html">Resume</a>
         <a class="link" href="https://github.com/Real-Woong" target="_blank" rel="noopener">GitHub</a>
         <a class="link" href="https://www.youtube.com/@%EA%B9%83%EC%9B%83%EA%B9%83%EC%9B%83" target="_blank" rel="noopener">YouTube</a>
         <a class="link" href="https://www.instagram.com/r_a_glance/" target="_blank" rel="noopener">Instagram</a>
