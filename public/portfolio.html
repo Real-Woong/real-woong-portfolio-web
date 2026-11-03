@@ -234,6 +234,39 @@ html[lang="en"] .lang-toggle span[data-lang-on="en"]{color:var(--text);font-weig
 @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 @keyframes fade{from{opacity:0;}to{opacity:1;}}
 
+/* ---------------- HERO REEL ----------------
+   Two rows of project "ads" drifting in opposite directions. They also lean
+   with the scroll position. Pointing at the reel pauses it; reduced motion
+   turns it into a plain swipeable strip. */
+.reel{position:relative;overflow:hidden;margin:var(--sp-2) 0 var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+.reel-row{transform:translate3d(var(--sx,0px),0,0);will-change:transform;}
+.reel-track{display:flex;width:max-content;margin-left:-520px;animation:reel-l 120s linear infinite;}
+.reel-row.rev .reel-track{animation-name:reel-r;animation-duration:150s;}
+.reel:hover .reel-track,.reel:focus-within .reel-track{animation-play-state:paused;}
+@keyframes reel-l{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes reel-r{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+.reel-card{flex:none;width:300px;height:92px;margin-right:var(--sp-3);display:flex;align-items:stretch;gap:var(--sp-3);
+  background:var(--bg);border:1px solid var(--line-strong);cursor:pointer;color:var(--text);
+  transition:border-color .2s ease,transform .3s var(--ease),background .2s ease;}
+.reel-card:hover,.reel-card:focus-visible{border-color:var(--text);transform:translateY(-3px);background:var(--bg-2);}
+.reel-art{flex:none;width:90px;height:90px;overflow:hidden;border-right:1px solid var(--line);}
+.reel-art .art{width:100%;height:100%;}
+.reel-txt{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;padding-right:var(--sp-3);}
+.reel-txt b{font-family:var(--font-display);font-weight:800;font-size:1.05rem;letter-spacing:-.03em;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.reel-txt span{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.reel-txt i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:6px;vertical-align:middle;}
+@media (max-width:640px){.reel-card{width:250px;height:76px;}.reel-art{width:74px;height:74px;}.reel-txt b{font-size:.98rem;}}
+@media (prefers-reduced-motion:reduce){
+  .reel{-webkit-mask-image:none;mask-image:none;}
+  .reel-row{overflow-x:auto;transform:none;scrollbar-width:none;}
+  .reel-track{animation:none;margin-left:0;}
+  .reel-card[aria-hidden="true"]{display:none;}
+}
+@media (prefers-reduced-motion:no-preference){
+  html.intro-done .reel{animation:rise .8s var(--ease) .2s backwards;}
+}
+
 /* ---------------- SECTIONS ---------------- */
 section{position:relative;padding-block:var(--sp-9);border-top:1px solid var(--line);}
 .hero + section{margin-top:var(--sp-8);}
@@ -630,6 +663,9 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
           <p class="hero-avail"><b>Open to work</b><span>블록체인, AI 에이전트, 풀스택 신입/인턴. 2026 하반기 합류 가능</span></p>
         </div>
       </div>
+    </div>
+    <div class="reel" id="reel" aria-label="Projects reel"></div>
+    <div class="wrap">
       <div class="ledger" id="selected" role="group" aria-label="Selected Work">
         <div class="ledger-list">
           <span class="ledger-mark" aria-hidden="true"></span>
@@ -4350,6 +4386,44 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
     var r = rng(seedOf(slug)), k = catKey(cat);
     return '<svg class="art" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'+esc(label || slug)+'">'+ART[k](r)+'</svg>';
   }
+
+  // Hero reel: every project as a small banner, two rows drifting apart.
+  // Built from PROJECTS so it can never list something the archive lacks. The
+  // text is language-neutral (title, category, year) so the language toggle
+  // has nothing to re-render here.
+  (function buildReel(){
+    var reel = document.getElementById('reel');
+    if(!reel) return;
+    var slugs = Object.keys(PROJECTS).sort(function(a, b){ return Number(PROJECTS[a].no) - Number(PROJECTS[b].no); });
+    function card(slug, dup){
+      var p = PROJECTS[slug], live = META[slug] && META[slug][0] === 'live';
+      return '<div class="reel-card" role="button" data-reel="'+slug+'"'+(dup ? ' aria-hidden="true" tabindex="-1"' : ' tabindex="0"')+'>'+
+        '<span class="reel-art">'+artSVG(slug, p.cat, p.title)+'</span>'+
+        '<span class="reel-txt"><b>'+esc(p.title)+'</b><span>'+(live ? '<i></i>' : '')+esc(p.cat)+'</span><span class="tnum">'+esc(p.year)+'</span></span></div>';
+    }
+    function row(list, rev){
+      var one = list.map(function(sl){ return card(sl, false); }).join('');
+      var two = list.map(function(sl){ return card(sl, true); }).join('');
+      return '<div class="reel-row'+(rev ? ' rev' : '')+'"><div class="reel-track">'+one+two+'</div></div>';
+    }
+    reel.innerHTML = row(slugs, false) + row(slugs.slice().reverse(), true);
+    function open(el){ var c = el.closest('[data-reel]'); if(c) openProject(c.getAttribute('data-reel'), c); }
+    reel.addEventListener('click', function(e){ open(e.target); });
+    reel.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(e.target); }
+    });
+    // Lean with the scroll while the hero is on screen. One rAF per frame.
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var rows = reel.querySelectorAll('.reel-row'), queued = false;
+    function lean(){
+      queued = false;
+      var d = Math.min(Math.max(window.scrollY, 0), 1200) * .4;
+      rows[0].style.setProperty('--sx', (-d) + 'px');
+      rows[1].style.setProperty('--sx', d + 'px');
+    }
+    window.addEventListener('scroll', function(){ if(!queued){ queued = true; requestAnimationFrame(lean); } }, { passive: true });
+    lean();
+  })();
 
   // Archive thumbnails: a real image when the project has media, otherwise the
   // generated cover, so every card has a picture and none is a blank box.
