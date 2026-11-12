@@ -17,6 +17,15 @@
   },
   "github": "https://github.com/Real-Woong/marvis",
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/marvis/01-telegram-reminders.png",
+      "alt": {
+        "ko": "텔레그램 알림: 반복 알림과 하루 일정 브리핑",
+        "en": "Telegram messages: repeating reminders and the daily briefing"
+      }
+    }
+  ],
   "stack": [
     "Python 3.12",
     "Google Gemini 2.5 Flash",

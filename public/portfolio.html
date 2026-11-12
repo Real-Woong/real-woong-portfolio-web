@@ -529,9 +529,15 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
 .pm-cover{margin:0 0 var(--sp-5);border:1px solid var(--line);background:var(--bg-2);}
 .pm-cover img{display:block;width:100%;height:auto;max-height:340px;object-fit:cover;}
 .pm-cover figcaption,.pm-fig figcaption,.pm-shot figcaption{padding:var(--sp-2) var(--sp-3);font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);}
-.pm-shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-3);}
-.pm-shot{margin:0;border:1px solid var(--line);background:var(--bg-2);}
-.pm-shot img{display:block;width:100%;height:auto;}
+/* Gallery: one row, one shared HEIGHT, every picture at its own aspect ratio.
+   A shared width stretched phone captures (390x844) to twice the height of
+   desktop ones (1440x900) and left empty paper around the short ones. */
+.pm-shots{display:flex;align-items:flex-start;gap:var(--sp-3);overflow-x:auto;padding-bottom:var(--sp-2);scroll-snap-type:x proximity;scrollbar-width:thin;}
+.pm-shot{flex:none;margin:0;border:1px solid var(--line);background:var(--bg-2);scroll-snap-align:start;}
+.pm-shot a{display:block;}
+.pm-shot img{display:block;height:300px;width:auto;max-width:none;}
+.pm-shot figcaption{width:0;min-width:100%;}
+@media (max-width:600px){.pm-shot img{height:240px;}}
 .pm-fig{margin:0;border:1px solid var(--line);background:var(--bg-2);}
 .pm-fig svg{display:block;width:100%;height:auto;color:var(--text);}
 .pm-fig .f-box{fill:none;stroke:var(--line-strong);stroke-width:1.2;}
@@ -1497,6 +1503,43 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/TheZoneAgora/the-zone-agora",
       "demo": "https://thezonebio.com/agora",
       "video": null,
+      "media": [
+        {
+          "src": "/projects/agora/01-arena.png",
+          "alt": {
+            "ko": "Agora 아레나: 10개 에이전트가 30일 수익률 순으로 트랙 위에 놓인 실시간 화면",
+            "en": "Agora arena: ten agents placed along a track by 30-day return"
+          }
+        },
+        {
+          "src": "/projects/agora/02-leaderboard.png",
+          "alt": {
+            "ko": "리더보드: 에이전트별 종합 점수, 30일 수익률, 리스크, 승률 비교",
+            "en": "Leaderboard comparing each agent's overall score, 30-day return, risk and win rate"
+          }
+        },
+        {
+          "src": "/projects/agora/03-follow-allocation.png",
+          "alt": {
+            "ko": "에이전트에게 맡기기 패널: 출금 권한 0, 1회 한도 등 온체인 안전장치와 위임 금액 선택",
+            "en": "Delegation panel showing the on-chain safeguards (no withdrawal rights, per-epoch loss cap) and the amount to delegate"
+          }
+        },
+        {
+          "src": "/projects/agora/04-hackathon-presentation.jpg",
+          "alt": {
+            "ko": "해커톤 현장에서 'Vault가 내 지갑에 생긴다'는 팔로우 구조를 발표하는 모습",
+            "en": "Presenting the follow-creates-a-Vault design on stage at the hackathon"
+          }
+        },
+        {
+          "src": "/projects/agora/05-mobile-arena.png",
+          "alt": {
+            "ko": "모바일 아레나 화면",
+            "en": "The arena on mobile"
+          }
+        }
+      ],
       "stack": [
         "Sui Move",
         "DeepBook v3",
@@ -1605,6 +1648,43 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/crypto-funding",
       "demo": null,
       "video": null,
+      "media": [
+        {
+          "src": "/projects/cryptofunding/01-explore.png",
+          "alt": {
+            "ko": "탐색 페이지: 카테고리·상태 필터와 프로젝트 카드 목록",
+            "en": "Explore page: category and status filters with the project cards"
+          }
+        },
+        {
+          "src": "/projects/cryptofunding/02-project-detail.png",
+          "alt": {
+            "ko": "프로젝트 상세: 목표 금액, 후원자 수, 남은 일수, 후원 버튼",
+            "en": "Project detail: goal, supporters, days left and the fund button"
+          }
+        },
+        {
+          "src": "/projects/cryptofunding/03-fund-drawer.png",
+          "alt": {
+            "ko": "SUI 후원 패널: 금액 입력과 가스비를 포함한 총액",
+            "en": "SUI funding panel: the amount and the total including gas"
+          }
+        },
+        {
+          "src": "/projects/cryptofunding/04-owner-manage.png",
+          "alt": {
+            "ko": "소유자 화면: 자금 인출과 프로젝트 삭제",
+            "en": "Owner view: withdraw funds and delete the project"
+          }
+        },
+        {
+          "src": "/projects/cryptofunding/05-wizard-basic.png",
+          "alt": {
+            "ko": "프로젝트 생성 마법사 1단계(기본 정보)",
+            "en": "Project creation wizard, step 1 (basic information)"
+          }
+        }
+      ],
       "stack": [
         "Sui Move",
         "React",
@@ -1686,6 +1766,29 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/bubblebreak",
       "demo": "https://bubblebreak-demo.jinung344.workers.dev/",
       "video": null,
+      "media": [
+        {
+          "src": "/projects/bubblebreak/01-desktop-home.png",
+          "alt": {
+            "ko": "홈 화면: 닉네임 입력, 방 만들기·참여하기, 3단계 관심사 시스템 소개",
+            "en": "Home: nickname, create or join a room, and the three-level interest system"
+          }
+        },
+        {
+          "src": "/projects/bubblebreak/02-mobile-home.png",
+          "alt": {
+            "ko": "모바일 홈 화면",
+            "en": "Home on mobile"
+          }
+        },
+        {
+          "src": "/projects/bubblebreak/03-mobile-demo-entry.png",
+          "alt": {
+            "ko": "모바일: 데모 방 코드로 입장하는 화면",
+            "en": "Mobile: joining the demo room with a room code"
+          }
+        }
+      ],
       "stack": [
         "React",
         "Vite",
@@ -1786,8 +1889,28 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
         "en": "An iOS app that recommends places to eat out based on your health profile. A UMC team project, and the first time I applied MVVM and reactive programming for real."
       },
       "github": "https://github.com/HealEat/Frontend",
-      "demo": null,
-      "video": null,
+      "demo": "https://daffy-quasar-0bf.notion.site/Heal-Eat-16852278e99180a386b7ef81385625e5",
+      "demoLabel": {
+        "ko": "상세 노션",
+        "en": "Notion write-up"
+      },
+      "video": [
+        "https://youtu.be/seBpqOZJjNQ",
+        "https://youtube.com/shorts/tPmJLQe6osY"
+      ],
+      "media": [
+        {
+          "src": "/projects/healeat/01-figma-login-health-setup.png",
+          "alt": {
+            "ko": "Figma 설계 화면: 스플래시, 소셜 로그인, 약관 동의, 프로필과 건강 정보 설정 흐름",
+            "en": "Figma screens: splash, social login, terms consent, and the profile and health-information setup flow"
+          },
+          "caption": {
+            "ko": "Figma 설계 화면이며 실제 앱 캡처가 아닙니다.",
+            "en": "Design screens from Figma, not captures of the running app."
+          }
+        }
+      ],
       "stack": [
         "Swift",
         "UIKit",
@@ -1845,6 +1968,36 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/sogon.zip",
       "demo": "https://sogon-zip.pages.dev/",
       "video": null,
+      "media": [
+        {
+          "src": "/projects/sogonzip/01-desktop-introduction.png",
+          "alt": {
+            "ko": "소개 화면: 함께한 날 카운터, 오늘의 데이트 카드, 다음에 열릴 소곤 미리보기",
+            "en": "Intro screen: days-together counter, today's date card and the next Sogon to open"
+          }
+        },
+        {
+          "src": "/projects/sogonzip/02-mobile-introduction.png",
+          "alt": {
+            "ko": "모바일 소개 화면",
+            "en": "Intro on mobile"
+          }
+        },
+        {
+          "src": "/projects/sogonzip/03-mobile-preference-tags.png",
+          "alt": {
+            "ko": "취향 태그: 짧은 답변에서 '#조용한공간' 같은 키워드를 뽑는 단계",
+            "en": "Preference tags: keywords such as #quietplace pulled from a short answer"
+          }
+        },
+        {
+          "src": "/projects/sogonzip/04-mobile-recommendations.png",
+          "alt": {
+            "ko": "추천.zip: 저장된 취향으로 오늘의 데이트를 제안하는 단계",
+            "en": "Recommendations: date ideas suggested from the saved preferences"
+          }
+        }
+      ],
       "stack": [
         "React",
         "TypeScript",
@@ -1979,7 +2132,23 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       },
       "github": "https://github.com/Uni-Made/FE",
       "demo": null,
-      "video": null,
+      "video": "https://youtu.be/mzP5YcwO7hM",
+      "media": [
+        {
+          "src": "/projects/unimade/01-mypage.png",
+          "alt": {
+            "ko": "마이페이지: 찜한 상품과 찜한 메이더",
+            "en": "My page: liked products and liked makers"
+          }
+        },
+        {
+          "src": "/projects/unimade/02-product-detail.png",
+          "alt": {
+            "ko": "상품 상세: 사이즈 선택과 구매 버튼",
+            "en": "Product detail: size selection and the buy button"
+          }
+        }
+      ],
       "stack": [
         "React",
         "Vite",
@@ -2221,6 +2390,15 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/marvis",
       "demo": null,
       "video": null,
+      "media": [
+        {
+          "src": "/projects/marvis/01-telegram-reminders.png",
+          "alt": {
+            "ko": "텔레그램 알림: 반복 알림과 하루 일정 브리핑",
+            "en": "Telegram messages: repeating reminders and the daily briefing"
+          }
+        }
+      ],
       "stack": [
         "Python 3.12",
         "Google Gemini 2.5 Flash",
@@ -2321,6 +2499,22 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/TAPIoca",
       "demo": null,
       "video": null,
+      "media": [
+        {
+          "src": "/projects/tapioca/01-telegram-daily-report.png",
+          "alt": {
+            "ko": "텔레그램 일일 보고서: 가상 장부, 벤치마크 대비 초과성과, 신호 구성",
+            "en": "Telegram daily report: the virtual ledger, excess return against the benchmark and the signal breakdown"
+          }
+        },
+        {
+          "src": "/projects/tapioca/02-toss-api-orders.png",
+          "alt": {
+            "ko": "토스 앱 주문내역: 'API 주문'으로 체결된 내역",
+            "en": "Toss app order history showing fills placed as 'API order'"
+          }
+        }
+      ],
       "stack": [
         "Node.js 20+ (ES Modules)",
         "외부 런타임 패키지 0개",
@@ -2935,6 +3129,52 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/textro",
       "demo": null,
       "video": null,
+      "media": [
+        {
+          "src": "/projects/textro/01-project-overview.png",
+          "alt": {
+            "ko": "Textro 소개: 스캔 PDF에서 한글 텍스트를 추출하는 로컬 도구",
+            "en": "Textro overview: a local tool that extracts Korean text from scanned PDFs"
+          },
+          "caption": {
+            "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+            "en": "An illustration made for this project, not a screenshot of the real app."
+          }
+        },
+        {
+          "src": "/projects/textro/02-scan-text-comparison.png",
+          "alt": {
+            "ko": "직접 만든 샘플 문서와 텍스트 출력 예시 비교",
+            "en": "A hand-made sample document next to an example of the text output"
+          },
+          "caption": {
+            "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+            "en": "An illustration made for this project, not a screenshot of the real app."
+          }
+        },
+        {
+          "src": "/projects/textro/03-processing-pipeline.png",
+          "alt": {
+            "ko": "처리 파이프라인: PDF 판별, 이미지 전처리, 한글 인식, 문단 정리",
+            "en": "Processing pipeline: PDF detection, image preprocessing, Korean recognition and paragraph clean-up"
+          },
+          "caption": {
+            "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+            "en": "An illustration made for this project, not a screenshot of the real app."
+          }
+        },
+        {
+          "src": "/projects/textro/04-mobile-comparison.png",
+          "alt": {
+            "ko": "모바일 비교 화면",
+            "en": "The comparison on mobile"
+          },
+          "caption": {
+            "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+            "en": "An illustration made for this project, not a screenshot of the real app."
+          }
+        }
+      ],
       "stack": [
         "Python",
         "로컬 OCR 파이프라인",
@@ -3393,6 +3633,43 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       "github": "https://github.com/Real-Woong/BuildTrace",
       "demo": "https://buildtrace-demo.pages.dev",
       "video": null,
+      "media": [
+        {
+          "src": "/projects/buildtrace/01-version-dispute.png",
+          "alt": {
+            "ko": "사건 재구성: 승인본 V10(500×500)과 변경본 V11(600×600) 비교, V11에는 제출·승인·배포·수신 기록이 없음",
+            "en": "Incident reconstruction: approved V10 (500×500) versus changed V11 (600×600), with no submit, approve, distribute or receive record for V11"
+          }
+        },
+        {
+          "src": "/projects/buildtrace/02-receipt-proof.png",
+          "alt": {
+            "ko": "수신 기록 증빙 화면",
+            "en": "Proof of receipt screen"
+          }
+        },
+        {
+          "src": "/projects/buildtrace/03-evidence-answer.png",
+          "alt": {
+            "ko": "AI 답변: '시공사가 V11을 받았나요?'에 근거 기록과 함께 답하는 화면",
+            "en": "AI answer: replying to 'Did the contractor receive V11?' with the supporting records attached"
+          }
+        },
+        {
+          "src": "/projects/buildtrace/04-verification-report.png",
+          "alt": {
+            "ko": "npm run demo 실행 결과: 전 과정을 0.17초에 재현하고 변조본을 감지",
+            "en": "Output of npm run demo: the whole run reproduced in 0.17 s, with the tampered copy detected"
+          }
+        },
+        {
+          "src": "/projects/buildtrace/05-mobile-dispute-question.png",
+          "alt": {
+            "ko": "모바일: 분쟁 질문 화면",
+            "en": "Mobile: the dispute question screen"
+          }
+        }
+      ],
       "stack": [
         "Hyperledger Fabric",
         "Sui Move",
@@ -3466,6 +3743,36 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
         "en": "Official site"
       },
       "video": "https://youtu.be/yD2PqwZUFnc",
+      "media": [
+        {
+          "src": "/projects/blockthon-landing/01-desktop-hero.png",
+          "alt": {
+            "ko": "랜딩 히어로: 픽셀 블록으로 조립된 WALRUS 글자와 참가 신청 버튼",
+            "en": "Landing hero: the word WALRUS assembled from pixel blocks, with the application button"
+          }
+        },
+        {
+          "src": "/projects/blockthon-landing/02-desktop-tech-stack.png",
+          "alt": {
+            "ko": "기술 스택 섹션(데스크톱)",
+            "en": "Tech stack section on desktop"
+          }
+        },
+        {
+          "src": "/projects/blockthon-landing/03-desktop-program.png",
+          "alt": {
+            "ko": "프로그램 섹션(데스크톱)",
+            "en": "Program section on desktop"
+          }
+        },
+        {
+          "src": "/projects/blockthon-landing/04-mobile-hero.png",
+          "alt": {
+            "ko": "모바일 히어로",
+            "en": "Hero on mobile"
+          }
+        }
+      ],
       "stack": [
         "Next.js",
         "React",
@@ -4216,7 +4523,12 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       var demoLabel = p.demoLabel ? L(p.demoLabel) : 'Live Demo';
       links += '<a class="btn ghost" href="'+p.demo+'" target="_blank" rel="noopener">'+esc(demoLabel)+' ↗</a>';
     }
-    if(p.video){ links += '<a class="btn ghost" href="'+p.video+'" target="_blank" rel="noopener">'+esc(L(UI.video))+' ↗</a>'; }
+    // `video` is one URL or a list. A list gets numbered buttons so two
+    // videos never share the same label.
+    var vids = p.video ? [].concat(p.video) : [];
+    vids.forEach(function(u, i){
+      links += '<a class="btn ghost" href="'+u+'" target="_blank" rel="noopener">'+esc(L(UI.video))+(vids.length > 1 ? ' '+(i+1) : '')+' ↗</a>';
+    });
     var sections = p.sections.map(function(s){
       // Dated build log: every entry lives behind its own accordion so the
       // record is complete without turning the panel into a wall of text.
@@ -4244,16 +4556,15 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       }
       return '<div class="pm-section"><h3>'+esc(L(s.h))+'</h3>'+renderBody(L(s.body))+'</div>';
     }).join('');
-    var cover = '', shots = '';
-    if(!(p.media && p.media.length)){ cover = '<div class="pm-cover pm-art" aria-hidden="true">'+artSVG(slug, p.cat, p.title)+'</div>'; }
+    // The cover is always the generated art, so every project's head looks the
+    // same whether or not it has pictures. Real screenshots never stand in for
+    // it: text-heavy ones (a Telegram report, a Figma board) crop to nothing
+    // readable in a short banner. They all go in the gallery instead.
+    var cover = '<div class="pm-cover pm-art" aria-hidden="true">'+artSVG(slug, p.cat, p.title)+'</div>', shots = '';
     if(p.media && p.media.length){
-      var m0 = p.media[0];
-      cover = '<figure class="pm-cover"><img src="'+esc(m0.src)+'" alt="'+esc(L(m0.alt))+'" loading="lazy">'+(m0.caption ? '<figcaption>'+esc(L(m0.caption))+'</figcaption>' : '')+'</figure>';
-      if(p.media.length > 1){
-        shots = '<div class="pm-section"><div class="pm-shots">'+p.media.slice(1).map(function(m){
-          return '<figure class="pm-shot"><img src="'+esc(m.src)+'" alt="'+esc(L(m.alt))+'" loading="lazy">'+(m.caption ? '<figcaption>'+esc(L(m.caption))+'</figcaption>' : '')+'</figure>';
-        }).join('')+'</div></div>';
-      }
+      shots = '<div class="pm-section"><div class="pm-shots">'+p.media.map(function(m){
+        return '<figure class="pm-shot"><a href="'+esc(m.src)+'" target="_blank" rel="noopener"><img src="'+esc(m.src)+'" alt="'+esc(L(m.alt))+'" loading="lazy"></a>'+(m.caption ? '<figcaption>'+esc(L(m.caption))+'</figcaption>' : '')+'</figure>';
+      }).join('')+'</div></div>';
     }
     var stack = (p.stack && p.stack.length) ? '<div class="pm-section"><h3>'+esc(L(UI.stack))+'</h3><div class="pm-stack">'+p.stack.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div></div>' : '';
     contentEl.innerHTML =
@@ -4263,7 +4574,7 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
       renderBadges(slug)+
       '<p class="pm-tagline">'+esc(L(p.tagline))+'</p>'+
       (links ? '<div class="pm-links">'+links+'</div>' : '')+
-      '<div class="pm-body">'+sections+shots+stack+'</div>';
+      '<div class="pm-body">'+shots+sections+stack+'</div>';
 
     // Accordion, not just a pile of <details>: opening one record closes the
     // others in the same group so the panel never scrolls away under you.
@@ -4425,20 +4736,14 @@ html.pm-lock,html.pm-lock body{overflow:hidden;}
     lean();
   })();
 
-  // Archive thumbnails: a real image when the project has media, otherwise the
-  // generated cover, so every card has a picture and none is a blank box.
+  // Archive thumbnails: always the generated cover, so the grid stays uniform
+  // whether or not a project has screenshots (those live in the modal gallery).
   Array.prototype.forEach.call(document.querySelectorAll('#archive-list .a-item[data-project]'), function(card){
     var slug = card.getAttribute('data-project'), pr = PROJECTS[slug];
     if(!pr) return;
-    var holder;
-    if(pr.media && pr.media.length){
-      holder = document.createElement('img');
-      holder.className = 'a-thumb'; holder.src = pr.media[0].src; holder.alt = ''; holder.loading = 'lazy';
-    } else {
-      holder = document.createElement('div');
-      holder.className = 'a-art'; holder.setAttribute('aria-hidden', 'true');
-      holder.innerHTML = artSVG(slug, pr.cat, pr.title);
-    }
+    var holder = document.createElement('div');
+    holder.className = 'a-art'; holder.setAttribute('aria-hidden', 'true');
+    holder.innerHTML = artSVG(slug, pr.cat, pr.title);
     card.insertBefore(holder, card.firstChild);
   });
 

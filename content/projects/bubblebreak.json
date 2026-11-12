@@ -17,6 +17,29 @@
   },
   "github": "https://github.com/Real-Woong/bubblebreak",
   "demo": "https://bubblebreak-demo.jinung344.workers.dev/",
+  "media": [
+    {
+      "src": "/projects/bubblebreak/01-desktop-home.png",
+      "alt": {
+        "ko": "홈 화면: 닉네임 입력, 방 만들기·참여하기, 3단계 관심사 시스템 소개",
+        "en": "Home: nickname, create or join a room, and the three-level interest system"
+      }
+    },
+    {
+      "src": "/projects/bubblebreak/02-mobile-home.png",
+      "alt": {
+        "ko": "모바일 홈 화면",
+        "en": "Home on mobile"
+      }
+    },
+    {
+      "src": "/projects/bubblebreak/03-mobile-demo-entry.png",
+      "alt": {
+        "ko": "모바일: 데모 방 코드로 입장하는 화면",
+        "en": "Mobile: joining the demo room with a room code"
+      }
+    }
+  ],
   "stack": [
     "React",
     "Vite",

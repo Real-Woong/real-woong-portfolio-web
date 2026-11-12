@@ -17,6 +17,43 @@
   },
   "github": "https://github.com/Real-Woong/BuildTrace",
   "demo": "https://buildtrace-demo.pages.dev",
+  "media": [
+    {
+      "src": "/projects/buildtrace/01-version-dispute.png",
+      "alt": {
+        "ko": "사건 재구성: 승인본 V10(500×500)과 변경본 V11(600×600) 비교, V11에는 제출·승인·배포·수신 기록이 없음",
+        "en": "Incident reconstruction: approved V10 (500×500) versus changed V11 (600×600), with no submit, approve, distribute or receive record for V11"
+      }
+    },
+    {
+      "src": "/projects/buildtrace/02-receipt-proof.png",
+      "alt": {
+        "ko": "수신 기록 증빙 화면",
+        "en": "Proof of receipt screen"
+      }
+    },
+    {
+      "src": "/projects/buildtrace/03-evidence-answer.png",
+      "alt": {
+        "ko": "AI 답변: '시공사가 V11을 받았나요?'에 근거 기록과 함께 답하는 화면",
+        "en": "AI answer: replying to 'Did the contractor receive V11?' with the supporting records attached"
+      }
+    },
+    {
+      "src": "/projects/buildtrace/04-verification-report.png",
+      "alt": {
+        "ko": "npm run demo 실행 결과: 전 과정을 0.17초에 재현하고 변조본을 감지",
+        "en": "Output of npm run demo: the whole run reproduced in 0.17 s, with the tampered copy detected"
+      }
+    },
+    {
+      "src": "/projects/buildtrace/05-mobile-dispute-question.png",
+      "alt": {
+        "ko": "모바일: 분쟁 질문 화면",
+        "en": "Mobile: the dispute question screen"
+      }
+    }
+  ],
   "stack": [
     "Hyperledger Fabric",
     "Sui Move",

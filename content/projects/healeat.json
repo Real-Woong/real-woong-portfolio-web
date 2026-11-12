@@ -16,7 +16,28 @@
     "en": "An iOS app that recommends places to eat out based on your health profile. A UMC team project, and the first time I applied MVVM and reactive programming for real."
   },
   "github": "https://github.com/HealEat/Frontend",
-  "demo": null,
+  "demo": "https://daffy-quasar-0bf.notion.site/Heal-Eat-16852278e99180a386b7ef81385625e5",
+  "demoLabel": {
+    "ko": "상세 노션",
+    "en": "Notion write-up"
+  },
+  "video": [
+    "https://youtu.be/seBpqOZJjNQ",
+    "https://youtube.com/shorts/tPmJLQe6osY"
+  ],
+  "media": [
+    {
+      "src": "/projects/healeat/01-figma-login-health-setup.png",
+      "alt": {
+        "ko": "Figma 설계 화면: 스플래시, 소셜 로그인, 약관 동의, 프로필과 건강 정보 설정 흐름",
+        "en": "Figma screens: splash, social login, terms consent, and the profile and health-information setup flow"
+      },
+      "caption": {
+        "ko": "Figma 설계 화면이며 실제 앱 캡처가 아닙니다.",
+        "en": "Design screens from Figma, not captures of the running app."
+      }
+    }
+  ],
   "stack": [
     "Swift",
     "UIKit",

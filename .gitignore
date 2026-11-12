@@ -92,3 +92,6 @@ _STATUS.md
 
 # 취업 관련 자료 전체(개인정보 포함, 로컬 전용)
 /Recruitment-inform/
+
+# 포트폴리오 이미지 원본(원본 해상도·개인정보 컷 포함, 로컬 전용). 웹용은 public/projects/ 에 있음
+/img-source/

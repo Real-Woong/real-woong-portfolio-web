@@ -80,8 +80,9 @@ function buildProject(doc) {
     // iframes — so this is a link out, not a frame.
     video: doc.video ?? null,
     // Pictures of the thing itself. Files come from img-source/<slug>/ via
-    // scripts/prep-images.mjs and live under /projects/<slug>/. The first one
-    // is the cover (modal head + archive thumbnail); the rest form a gallery.
+    // scripts/prep-images.mjs and live under /projects/<slug>/. All of them form
+    // the gallery at the top of the modal body; the cover (modal head + archive
+    // thumbnail) is always the generated art, so it never depends on them.
     ...(doc.media?.length
       ? {
           media: doc.media.map((m, i) => ({

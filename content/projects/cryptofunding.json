@@ -17,6 +17,43 @@
   },
   "github": "https://github.com/Real-Woong/crypto-funding",
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/cryptofunding/01-explore.png",
+      "alt": {
+        "ko": "탐색 페이지: 카테고리·상태 필터와 프로젝트 카드 목록",
+        "en": "Explore page: category and status filters with the project cards"
+      }
+    },
+    {
+      "src": "/projects/cryptofunding/02-project-detail.png",
+      "alt": {
+        "ko": "프로젝트 상세: 목표 금액, 후원자 수, 남은 일수, 후원 버튼",
+        "en": "Project detail: goal, supporters, days left and the fund button"
+      }
+    },
+    {
+      "src": "/projects/cryptofunding/03-fund-drawer.png",
+      "alt": {
+        "ko": "SUI 후원 패널: 금액 입력과 가스비를 포함한 총액",
+        "en": "SUI funding panel: the amount and the total including gas"
+      }
+    },
+    {
+      "src": "/projects/cryptofunding/04-owner-manage.png",
+      "alt": {
+        "ko": "소유자 화면: 자금 인출과 프로젝트 삭제",
+        "en": "Owner view: withdraw funds and delete the project"
+      }
+    },
+    {
+      "src": "/projects/cryptofunding/05-wizard-basic.png",
+      "alt": {
+        "ko": "프로젝트 생성 마법사 1단계(기본 정보)",
+        "en": "Project creation wizard, step 1 (basic information)"
+      }
+    }
+  ],
   "stack": [
     "Sui Move",
     "React",

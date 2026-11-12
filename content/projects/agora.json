@@ -17,6 +17,43 @@
   },
   "github": "https://github.com/TheZoneAgora/the-zone-agora",
   "demo": "https://thezonebio.com/agora",
+  "media": [
+    {
+      "src": "/projects/agora/01-arena.png",
+      "alt": {
+        "ko": "Agora 아레나: 10개 에이전트가 30일 수익률 순으로 트랙 위에 놓인 실시간 화면",
+        "en": "Agora arena: ten agents placed along a track by 30-day return"
+      }
+    },
+    {
+      "src": "/projects/agora/02-leaderboard.png",
+      "alt": {
+        "ko": "리더보드: 에이전트별 종합 점수, 30일 수익률, 리스크, 승률 비교",
+        "en": "Leaderboard comparing each agent's overall score, 30-day return, risk and win rate"
+      }
+    },
+    {
+      "src": "/projects/agora/03-follow-allocation.png",
+      "alt": {
+        "ko": "에이전트에게 맡기기 패널: 출금 권한 0, 1회 한도 등 온체인 안전장치와 위임 금액 선택",
+        "en": "Delegation panel showing the on-chain safeguards (no withdrawal rights, per-epoch loss cap) and the amount to delegate"
+      }
+    },
+    {
+      "src": "/projects/agora/04-hackathon-presentation.jpg",
+      "alt": {
+        "ko": "해커톤 현장에서 'Vault가 내 지갑에 생긴다'는 팔로우 구조를 발표하는 모습",
+        "en": "Presenting the follow-creates-a-Vault design on stage at the hackathon"
+      }
+    },
+    {
+      "src": "/projects/agora/05-mobile-arena.png",
+      "alt": {
+        "ko": "모바일 아레나 화면",
+        "en": "The arena on mobile"
+      }
+    }
+  ],
   "stack": [
     "Sui Move",
     "DeepBook v3",

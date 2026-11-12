@@ -17,6 +17,36 @@
   },
   "github": "https://github.com/Real-Woong/sogon.zip",
   "demo": "https://sogon-zip.pages.dev/",
+  "media": [
+    {
+      "src": "/projects/sogonzip/01-desktop-introduction.png",
+      "alt": {
+        "ko": "소개 화면: 함께한 날 카운터, 오늘의 데이트 카드, 다음에 열릴 소곤 미리보기",
+        "en": "Intro screen: days-together counter, today's date card and the next Sogon to open"
+      }
+    },
+    {
+      "src": "/projects/sogonzip/02-mobile-introduction.png",
+      "alt": {
+        "ko": "모바일 소개 화면",
+        "en": "Intro on mobile"
+      }
+    },
+    {
+      "src": "/projects/sogonzip/03-mobile-preference-tags.png",
+      "alt": {
+        "ko": "취향 태그: 짧은 답변에서 '#조용한공간' 같은 키워드를 뽑는 단계",
+        "en": "Preference tags: keywords such as #quietplace pulled from a short answer"
+      }
+    },
+    {
+      "src": "/projects/sogonzip/04-mobile-recommendations.png",
+      "alt": {
+        "ko": "추천.zip: 저장된 취향으로 오늘의 데이트를 제안하는 단계",
+        "en": "Recommendations: date ideas suggested from the saved preferences"
+      }
+    }
+  ],
   "stack": [
     "React",
     "TypeScript",

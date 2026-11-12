@@ -17,6 +17,23 @@
   },
   "github": "https://github.com/Uni-Made/FE",
   "demo": null,
+  "video": "https://youtu.be/mzP5YcwO7hM",
+  "media": [
+    {
+      "src": "/projects/unimade/01-mypage.png",
+      "alt": {
+        "ko": "마이페이지: 찜한 상품과 찜한 메이더",
+        "en": "My page: liked products and liked makers"
+      }
+    },
+    {
+      "src": "/projects/unimade/02-product-detail.png",
+      "alt": {
+        "ko": "상품 상세: 사이즈 선택과 구매 버튼",
+        "en": "Product detail: size selection and the buy button"
+      }
+    }
+  ],
   "stack": [
     "React",
     "Vite",

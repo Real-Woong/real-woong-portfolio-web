@@ -17,6 +17,52 @@
   },
   "github": "https://github.com/Real-Woong/textro",
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/textro/01-project-overview.png",
+      "alt": {
+        "ko": "Textro 소개: 스캔 PDF에서 한글 텍스트를 추출하는 로컬 도구",
+        "en": "Textro overview: a local tool that extracts Korean text from scanned PDFs"
+      },
+      "caption": {
+        "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+        "en": "An illustration made for this project, not a screenshot of the real app."
+      }
+    },
+    {
+      "src": "/projects/textro/02-scan-text-comparison.png",
+      "alt": {
+        "ko": "직접 만든 샘플 문서와 텍스트 출력 예시 비교",
+        "en": "A hand-made sample document next to an example of the text output"
+      },
+      "caption": {
+        "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+        "en": "An illustration made for this project, not a screenshot of the real app."
+      }
+    },
+    {
+      "src": "/projects/textro/03-processing-pipeline.png",
+      "alt": {
+        "ko": "처리 파이프라인: PDF 판별, 이미지 전처리, 한글 인식, 문단 정리",
+        "en": "Processing pipeline: PDF detection, image preprocessing, Korean recognition and paragraph clean-up"
+      },
+      "caption": {
+        "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+        "en": "An illustration made for this project, not a screenshot of the real app."
+      }
+    },
+    {
+      "src": "/projects/textro/04-mobile-comparison.png",
+      "alt": {
+        "ko": "모바일 비교 화면",
+        "en": "The comparison on mobile"
+      },
+      "caption": {
+        "ko": "프로젝트 소개용 시각화이며 실제 앱 화면이 아닙니다.",
+        "en": "An illustration made for this project, not a screenshot of the real app."
+      }
+    }
+  ],
   "stack": [
     "Python",
     "로컬 OCR 파이프라인",

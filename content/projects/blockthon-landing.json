@@ -22,6 +22,36 @@
     "en": "Official site"
   },
   "video": "https://youtu.be/yD2PqwZUFnc",
+  "media": [
+    {
+      "src": "/projects/blockthon-landing/01-desktop-hero.png",
+      "alt": {
+        "ko": "랜딩 히어로: 픽셀 블록으로 조립된 WALRUS 글자와 참가 신청 버튼",
+        "en": "Landing hero: the word WALRUS assembled from pixel blocks, with the application button"
+      }
+    },
+    {
+      "src": "/projects/blockthon-landing/02-desktop-tech-stack.png",
+      "alt": {
+        "ko": "기술 스택 섹션(데스크톱)",
+        "en": "Tech stack section on desktop"
+      }
+    },
+    {
+      "src": "/projects/blockthon-landing/03-desktop-program.png",
+      "alt": {
+        "ko": "프로그램 섹션(데스크톱)",
+        "en": "Program section on desktop"
+      }
+    },
+    {
+      "src": "/projects/blockthon-landing/04-mobile-hero.png",
+      "alt": {
+        "ko": "모바일 히어로",
+        "en": "Hero on mobile"
+      }
+    }
+  ],
   "stack": [
     "Next.js",
     "React",

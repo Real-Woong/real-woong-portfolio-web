@@ -17,6 +17,22 @@
   },
   "github": "https://github.com/Real-Woong/TAPIoca",
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/tapioca/01-telegram-daily-report.png",
+      "alt": {
+        "ko": "텔레그램 일일 보고서: 가상 장부, 벤치마크 대비 초과성과, 신호 구성",
+        "en": "Telegram daily report: the virtual ledger, excess return against the benchmark and the signal breakdown"
+      }
+    },
+    {
+      "src": "/projects/tapioca/02-toss-api-orders.png",
+      "alt": {
+        "ko": "토스 앱 주문내역: 'API 주문'으로 체결된 내역",
+        "en": "Toss app order history showing fills placed as 'API order'"
+      }
+    }
+  ],
   "stack": [
     "Node.js 20+ (ES Modules)",
     "외부 런타임 패키지 0개",
