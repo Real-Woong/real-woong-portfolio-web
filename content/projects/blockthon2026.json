@@ -50,6 +50,61 @@
         "ko": "모바일 히어로",
         "en": "Hero on mobile"
       }
+    },
+    {
+      "src": "/projects/blockthon2026/05-desktop-message.png",
+      "alt": {
+        "ko": "메시지 섹션: ‘해커톤을 넘어 생태계의 빌더로’",
+        "en": "Message section: ‘Beyond the hackathon, to ecosystem builders’"
+      },
+      "caption": {
+        "ko": "일회성 행사에 머물지 않고, 행사 이후에도 참가자가 Sui 생태계에서 계속 빌딩하도록 돕는다는 메시지를 앞에 두었습니다.",
+        "en": "The opening message: the event is not a one-off, and participants are supported in building on Sui after it ends."
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/06-desktop-resources.png",
+      "alt": {
+        "ko": "리소스 섹션: Walrus, Walrus Sites, MemWal 문서 링크",
+        "en": "Resources section: Walrus, Walrus Sites and MemWal documentation links"
+      },
+      "caption": {
+        "ko": "Walrus·Walrus Sites·MemWal·Seal·Sui 메시징 문서를 단계별로 모은 섹션입니다. 스크린샷은 그중 앞부분입니다.",
+        "en": "A section that gathers Walrus, Walrus Sites, MemWal, Seal and Sui messaging docs by stage. The screenshot shows the first part."
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/07-desktop-audience.png",
+      "alt": {
+        "ko": "참가 대상 섹션: AI 연구자·엔지니어, 창업가·프로덕트 빌더, Web3 입문자",
+        "en": "Audience section: AI researchers and engineers, founders and product builders, newcomers to Web3"
+      },
+      "caption": {
+        "ko": "참가 대상을 세 부류로 나눠 보여줍니다. 블록체인 경험이 많지 않아도 참가할 수 있다는 점을 FAQ와 함께 분명히 했습니다.",
+        "en": "Participants are split into three groups. Together with the FAQ it makes clear that blockchain experience is not required."
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/08-desktop-prize.png",
+      "alt": {
+        "ko": "상금과 혜택 섹션: 총상금 1,800,000원",
+        "en": "Prize and benefits section: 1,800,000 KRW in total"
+      },
+      "caption": {
+        "ko": "1위 100만 원, 2위 50만 원, 3위 30만 원과 함께 온보딩 세션, 전문가 멘토링, 후속 이벤트 지원을 안내합니다.",
+        "en": "1st place 1,000,000 KRW, 2nd 500,000, 3rd 300,000, plus onboarding sessions, expert mentoring and support for a follow-up event."
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/09-desktop-judging.png",
+      "alt": {
+        "ko": "심사 기준 섹션: 기술 구현 30%, Sui·Walrus 활용 25%, AI × Blockchain 결합 25%",
+        "en": "Judging criteria: technical implementation 30%, Sui and Walrus usage 25%, AI × Blockchain fit 25%"
+      },
+      "caption": {
+        "ko": "항목마다 비중을 막대로 보여주고, 무엇을 평가하는지 한두 줄로 설명합니다.",
+        "en": "Each criterion shows its weight as a bar with a line or two on what is being judged."
+      }
     }
   ],
   "stack": [

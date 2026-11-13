@@ -45,6 +45,50 @@
         "ko": "추천.zip: 저장된 취향으로 오늘의 데이트를 제안하는 단계",
         "en": "Recommendations: date ideas suggested from the saved preferences"
       }
+    },
+    {
+      "src": "/projects/sogonzip/05-app-home.png",
+      "alt": {
+        "ko": "앱 홈: 데이트 일정 정하기, 날짜에 맞춰 마음 보내기",
+        "en": "App home: set a date plan, or schedule a message for a day"
+      },
+      "caption": {
+        "ko": "홈에서는 두 갈래로 시작합니다. 둘이 만날 날짜와 시간을 정하거나, 기념일에 맞춰 메시지와 사진을 소곤.zip으로 예약합니다. 화면 속 이름은 가렸습니다.",
+        "en": "Home offers two paths: set when you two will meet, or schedule a message and photos as a Sogon.zip for a special day. Names on the screen are blurred."
+      }
+    },
+    {
+      "src": "/projects/sogonzip/06-app-compress.png",
+      "alt": {
+        "ko": "새 소곤.zip 압축하기: 태그, 내용, 민감도 입력",
+        "en": "New Sogon.zip: tags, content and sensitivity"
+      },
+      "caption": {
+        "ko": "언젠가 상대에게 열어주고 싶은 취향이나 마음을 태그와 5단계 민감도와 함께 저장하는 화면입니다.",
+        "en": "Where you save a preference or feeling you want to open for the other person someday, with tags and a five-step sensitivity."
+      }
+    },
+    {
+      "src": "/projects/sogonzip/07-app-base-course.png",
+      "alt": {
+        "ko": "둘의 기본 코스: 식사·산책·카페·관람 순서와 시간 조정",
+        "en": "Our base course: order and length of meal, walk, café and exhibit"
+      },
+      "caption": {
+        "ko": "이동 시간은 뺀 하루 흐름을 칸마다 슬라이더로 정합니다. 위 막대가 전체 길이(예: 7시간)를 보여줍니다.",
+        "en": "The day's flow, minus travel, is set slot by slot with sliders; the bar on top shows the total length (7 hours here)."
+      }
+    },
+    {
+      "src": "/projects/sogonzip/08-app-date-results.png",
+      "alt": {
+        "ko": "데이트 추천 결과: 시간대별 장소와 추천 근거",
+        "en": "Date recommendations: a place for each time slot, with the reason"
+      },
+      "caption": {
+        "ko": "시간 칸마다 장소를 배정하고, ‘둘 다 좋아한다고 답한 실내를 반영했어요’처럼 추천한 근거를 함께 보여줍니다.",
+        "en": "Each slot gets a place and the reason it was chosen, such as ‘reflects the indoor option you both said you like’."
+      }
     }
   ],
   "stack": [
