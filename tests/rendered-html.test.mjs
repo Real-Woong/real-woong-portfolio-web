@@ -363,3 +363,9 @@ test("build output inlines the portfolio", () => {
   const out = readFileSync(bundle, "utf8");
   assert.ok(out.includes("Builder Portfolio"), "portfolio HTML missing from worker bundle");
 });
+
+test("every project has a framed logo and a reel line icon on disk", () => {
+  const slugs = readdirSync("content/projects").filter((f) => f.endsWith(".json")).map((f) => f.replace(/\.json$/, ""));
+  const missing = slugs.flatMap((s) => ["icon.png", "icon-line.png"].map((f) => `public/projects/${s}/${f}`)).filter((p) => !existsSync(p));
+  assert.deepEqual(missing, [], `run node scripts/build-icons.mjs; missing:\n  ${missing.join("\n  ")}`);
+});
