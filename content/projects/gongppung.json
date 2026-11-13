@@ -17,6 +17,63 @@
   },
   "github": null,
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/gongppung/00-project-poster.png",
+      "alt": {
+        "ko": "발표 포스터 한 장: 문제 인식과 기획 배경, 컨테이너를 쓰는 이유, 프로젝트 타임라인, 앱 소개, ESG 확장 가능성",
+        "en": "A single presentation poster: the problem and background, why containers, the project timeline, the app, and ESG scalability"
+      },
+      "caption": {
+        "ko": "프로젝트 전체를 한 장에 정리한 발표 포스터(원본을 열어 보면 글자가 읽힙니다)",
+        "en": "The whole project on one presentation poster (open the original to read it)"
+      }
+    },
+    {
+      "src": "/projects/gongppung/01-figma-app-screens.jpg",
+      "alt": {
+        "ko": "공뽕 로고와 마스코트, 로그인·설정·컨테이너 목록·지도·예약 달력·결제 단계까지 이어지는 앱 화면 설계 보드",
+        "en": "Board of the Gongbbong logo and mascot and the app screens from login and settings through container listings, map, booking calendar and payment"
+      },
+      "caption": {
+        "ko": "로고·마스코트 디자인과 예약·결제까지 이어지는 앱 UI 설계",
+        "en": "Logo and mascot design, and the app UI from browsing through booking to payment"
+      }
+    },
+    {
+      "src": "/projects/gongppung/02-3d-container-exterior.jpg",
+      "alt": {
+        "ko": "지붕에 태양광 패널이 올라가고 옆면에 GBB 로고가 붙은 컨테이너 외관 3D 모델",
+        "en": "3D model of a container exterior with solar panels on the roof and a GBB logo on the side"
+      },
+      "caption": {
+        "ko": "공간 구조 설계와 3D 모델링: 태양광 패널을 얹은 컨테이너 외관",
+        "en": "Spatial design and 3D modelling: the container exterior with rooftop solar panels"
+      }
+    },
+    {
+      "src": "/projects/gongppung/03-3d-container-interior.jpg",
+      "alt": {
+        "ko": "회의 테이블과 의자, 노트북, 문, 창이 배치된 컨테이너 내부 3D 모델",
+        "en": "3D model of a container interior with a meeting table, chairs, laptops, a door and a window"
+      },
+      "caption": {
+        "ko": "컨테이너 내부 공간 배치 3D 모델",
+        "en": "3D model of the container's interior layout"
+      }
+    },
+    {
+      "src": "/projects/gongppung/04-campus-survey-boards.jpg",
+      "alt": {
+        "ko": "교내에 세워 둔 설문 보드 두 개. 공간 부족으로 불편을 느꼈는지, 어떤 공간을 이용하고 싶은지를 스티커로 응답하는 방식",
+        "en": "Two survey boards set up on campus, where people answer with stickers whether they felt a lack of space and what kind of space they would use"
+      },
+      "caption": {
+        "ko": "교내 수요 조사: 스티커 설문 보드",
+        "en": "Campus demand survey with sticker boards"
+      }
+    }
+  ],
   "stack": [],
   "sections": [
     {

@@ -17,6 +17,41 @@
   },
   "github": null,
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/daedongje2023/01-main-poster.jpg",
+      "alt": {
+        "ko": "개교 제138주년 무악대동제 ‘새벽’ 포스터: 별자리가 걸린 하늘 아래 가로등 현수막과 행사 일정",
+        "en": "Poster for the 138th-anniversary Muak Daedongje, ‘Dawn’: a lamp-post banner and the event dates under a constellation sky"
+      },
+      "caption": {
+        "ko": "행사 메인 포스터(5.23 국제캠퍼스, 5.25 신촌캠퍼스)",
+        "en": "Main event poster (23 May International Campus, 25 May Sinchon Campus)"
+      }
+    },
+    {
+      "src": "/projects/daedongje2023/02-banner-designs.png",
+      "alt": {
+        "ko": "현수막 시안 두 종: 별자리와 독수리 실루엣이 있는 보라색 그라데이션 안, 로고와 일정만 놓은 흰 배경 안",
+        "en": "Two banner mock-ups: a purple gradient with constellations and an eagle silhouette, and a white one with just the logo and dates"
+      },
+      "caption": {
+        "ko": "현수막 시안",
+        "en": "Banner mock-ups"
+      }
+    },
+    {
+      "src": "/projects/daedongje2023/03-bandana-pattern.jpg",
+      "alt": {
+        "ko": "파란 배경에 흰 깃털과 별자리 문양이 좌우 대칭으로 배치된 반다나 패턴",
+        "en": "Bandana pattern: white feathers and constellation motifs arranged symmetrically on a blue ground"
+      },
+      "caption": {
+        "ko": "반다나 디자인",
+        "en": "Bandana design"
+      }
+    }
+  ],
   "stack": [],
   "sections": [
     {

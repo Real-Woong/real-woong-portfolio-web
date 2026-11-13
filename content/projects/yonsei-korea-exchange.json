@@ -17,6 +17,30 @@
   },
   "github": null,
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/yonsei-korea-exchange/01-brand-identity-board.png",
+      "alt": {
+        "ko": "행사 브랜딩 보드: 컬러칩, 패턴 소스와 패턴, 회지 표지, 대동단결 로고 타입과 폰트, 플랑 시안",
+        "en": "Event branding board: colour chips, pattern source and repeat, the booklet cover, the Daedong-danjeol logotype and fonts, and a placard mock-up"
+      },
+      "caption": {
+        "ko": "행사 브랜딩 시스템: 분홍·파랑 팔레트, 맞물리는 도형 패턴, 대동단결 로고 타입",
+        "en": "Event branding system: a pink-and-blue palette, an interlocking-shape pattern and the logotype"
+      }
+    },
+    {
+      "src": "/projects/yonsei-korea-exchange/02-festival-site-mobile.png",
+      "alt": {
+        "ko": "동아리 교류제 웹사이트 모바일 화면: 상단에 행사명이 있고 브랜드 패턴 배경 위에 카테고리 슬라이드가 보이는 첫 화면",
+        "en": "Mobile view of the club-festival website: the event name up top and a category slider over the brand pattern background"
+      },
+      "caption": {
+        "ko": "교류제 웹사이트(모바일 화면)",
+        "en": "The festival website on mobile"
+      }
+    }
+  ],
   "stack": [],
   "sections": [
     {

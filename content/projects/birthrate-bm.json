@@ -17,6 +17,85 @@
   },
   "github": null,
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/birthrate-bm/00-title.png",
+      "alt": {
+        "ko": "발표 제목 슬라이드: 출산율 저하 문제 해결 BM, 출산 혜택 올인원 앱, 기업의 사회적 가치와 사회혁신 27조",
+        "en": "Title slide: a business model for the falling birth rate — an all-in-one app for birth benefits, by Team 27 of the Corporate Social Value and Social Innovation course"
+      },
+      "caption": {
+        "ko": "발표 제목 슬라이드: 출산 혜택 올인원 앱",
+        "en": "Title slide: the all-in-one birth-benefits app"
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/01-features-overview.png",
+      "alt": {
+        "ko": "발표 슬라이드: 임신 기간 전후 혜택 총정리, 자녀 수에 따른 혜택 총정리, 신뢰 가능한 보육 시설 연결, 육아 휴직 상담의 네 가지 주요 기능",
+        "en": "Presentation slide: the four core features — benefits around pregnancy, benefits by number of children, trusted childcare-facility matching, and parental-leave consulting"
+      },
+      "caption": {
+        "ko": "올인원 앱의 주요 기능 4가지",
+        "en": "The four core features of the all-in-one app"
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/02-pregnancy-benefits.png",
+      "alt": {
+        "ko": "임신·출산 혜택 총정리 슬라이드: 난임부부 시술비, 부모급여, 임신·출산진료비 지원 내용과 카테고리·필터·신청 링크가 있는 앱 와이어프레임",
+        "en": "Pregnancy and birth benefits slide: infertility-treatment aid, parental allowance and medical-cost support, beside an app wireframe with categories, filters and an apply link"
+      },
+      "caption": {
+        "ko": "임신 기간 전후 혜택 총정리. 카테고리와 필터로 내게 해당하는 혜택만 보고, 신청 링크로 공식 신청 페이지로 넘어가는 구성입니다.",
+        "en": "Benefits around pregnancy. Browse by category, filter down to what applies to you, and jump to the official application page from the apply link."
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/03-benefits-by-children.png",
+      "alt": {
+        "ko": "자녀 수에 따른 혜택 슬라이드: 첫만남 이용권, 아이돌봄서비스 지원 비율 표, 임신·출산진료비 바우처, 다둥이 가정 지원과 앱 와이어프레임",
+        "en": "Benefits-by-children slide: the first-meeting voucher, a table of childcare-service subsidy rates, medical-cost vouchers and multiple-birth support, beside an app wireframe"
+      },
+      "caption": {
+        "ko": "자녀 수에 따른 수혜 가능 혜택 총정리",
+        "en": "Benefits you can claim, organised by number of children"
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/04-childcare-facilities.png",
+      "alt": {
+        "ko": "보육 시설 연결 슬라이드: 평가 인증제, 어린이집 평가제, 공공 보육시설 인증 설명과 시설 위치 지도, 리뷰 보기 화면 구성",
+        "en": "Childcare-facility slide: accreditation and evaluation schemes, a map of nearby facilities and a review view, beside an app wireframe"
+      },
+      "caption": {
+        "ko": "평가·인증 정보와 지도, 리뷰로 신뢰할 수 있는 보육 시설을 찾는 기능",
+        "en": "Find trustworthy childcare through evaluation and accreditation data, a map and reviews"
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/05-parental-leave.png",
+      "alt": {
+        "ko": "육아 휴직 상담 슬라이드: 법적 육아휴직, 근로시간 단축, 기업별 혜택 설명과 육아 휴직금 모의 계산 버튼이 있는 앱 와이어프레임",
+        "en": "Parental-leave slide: statutory leave, reduced working hours and company-specific benefits, beside an app wireframe with a leave-pay simulator button"
+      },
+      "caption": {
+        "ko": "육아 휴직 제도 안내와 육아 휴직금 모의 계산",
+        "en": "Parental-leave rules and a leave-pay simulator"
+      }
+    },
+    {
+      "src": "/projects/birthrate-bm/06-future-iot.png",
+      "alt": {
+        "ko": "추후 발전 가능성 슬라이드: 홈CCTV 활용과 어린이 미아방지 목걸이 활용을 올인원 앱에 통합하는 IoT 확장 구상",
+        "en": "Future-development slide: folding home-CCTV monitoring and a child-safety GPS tag into the app as IoT extensions"
+      },
+      "caption": {
+        "ko": "추후 확장 구상: IoT 기기 모니터링을 앱 안에 통합",
+        "en": "Planned extension: IoT device monitoring inside the same app"
+      }
+    }
+  ],
   "stack": [],
   "sections": [
     {

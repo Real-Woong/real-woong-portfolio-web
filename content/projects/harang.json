@@ -17,6 +17,41 @@
   },
   "github": null,
   "demo": null,
+  "media": [
+    {
+      "src": "/projects/harang/01-cs-sticker-sheet.png",
+      "alt": {
+        "ko": "컴퓨터과학과 24대 스티커 시트: 코딩 문구, CS 육각 로고, 후드를 쓴 캐릭터, import Yonsei24 코드 스티커, YONSEI-cs-24 바코드",
+        "en": "Sticker sheet for the 24th Computer Science cohort: a coding quip, a hexagonal CS logo, a hooded character, an import Yonsei24 code snippet and a YONSEI-cs-24 barcode"
+      },
+      "caption": {
+        "ko": "컴퓨터과학과 24대 스티커 시트",
+        "en": "Sticker sheet for the 24th CS cohort"
+      }
+    },
+    {
+      "src": "/projects/harang/02-puffer-jacket-design.png",
+      "alt": {
+        "ko": "돕바(롱패딩) 앞뒤 도안: 앞면에 Y 로고와 소매 패치, 뒷면에 YONSEI 글자와 독수리, computer science 문구",
+        "en": "Front and back sketch of a long puffer jacket: a Y logo and sleeve patches on the front, YONSEI lettering, an eagle and the words computer science on the back"
+      },
+      "caption": {
+        "ko": "돕바(롱패딩) 디자인 시안",
+        "en": "Design sketch for the long puffer jacket"
+      }
+    },
+    {
+      "src": "/projects/harang/03-hockey-jersey.jpg",
+      "alt": {
+        "ko": "하키 유니폼 앞뒤 시안: 앞면에 YONSEI와 교표, 뒷면에 이름과 81번, COMPUTER SCIENCE 문구",
+        "en": "Front and back mock-up of a hockey jersey: YONSEI and the university crest on the front, a name, the number 81 and COMPUTER SCIENCE on the back"
+      },
+      "caption": {
+        "ko": "연고전 전용 하키티 디자인 시안",
+        "en": "Hockey-jersey design mock-up for the Yonsei–Korea University games"
+      }
+    }
+  ],
   "stack": [],
   "sections": [
     {

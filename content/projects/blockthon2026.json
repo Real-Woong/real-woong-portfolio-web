@@ -1,9 +1,9 @@
 {
   "slug": "blockthon2026",
-  "no": "19",
-  "cat": "Blockchain · Education",
+  "no": "18",
+  "cat": "Web · Infra",
   "year": "2026",
-  "title": "2026 BlockThon Hacker House",
+  "title": "2026 BlockThon",
   "status": {
     "kind": "done",
     "label": {
@@ -12,39 +12,76 @@
     }
   },
   "tagline": {
-    "ko": "2026 BlockThon Sui·Walrus·AI 해커하우스에서 기술 스택을 참가자 앞에서 발표하고, 교육자료와 행사 랜딩페이지를 제작한 TF 활동.",
-    "en": "A 2026 BlockThon task-force project: presented the Sui, Walrus and AI stack to hacker-house participants, and produced the learning materials and event landing page."
+    "ko": "2026 BlockThon TF로 Sui·Walrus·AI 기술 스택 발표와 교육자료를 맡고, 공식 랜딩페이지(blockthon.com)를 콘셉트부터 AWS 배포까지 처음부터 끝까지 제작했습니다. 데모가 아니라 참가자가 실제로 신청을 진행했던 공식 행사 사이트이며, 행사가 끝난 지금은 사이트만 남아 있습니다.",
+    "en": "On the 2026 BlockThon task force I presented the Sui, Walrus and AI stack, wrote the learning materials, and built the official landing page (blockthon.com) end to end, from concept to AWS deployment. It was not a demo but the official event site people actually applied through; the event has ended and only the site remains."
   },
-  "github": null,
+  "github": "https://github.com/Real-Woong/BlockThon2026-RandingPage",
   "demo": "https://blockthon.com",
+  "demoLabel": {
+    "ko": "공식 사이트",
+    "en": "Official site"
+  },
+  "video": "https://youtu.be/yD2PqwZUFnc",
+  "media": [
+    {
+      "src": "/projects/blockthon2026/01-desktop-hero.png",
+      "alt": {
+        "ko": "랜딩 히어로: 픽셀 블록으로 조립된 WALRUS 글자와 참가 신청 버튼",
+        "en": "Landing hero: the word WALRUS assembled from pixel blocks, with the application button"
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/02-desktop-tech-stack.png",
+      "alt": {
+        "ko": "기술 스택 섹션(데스크톱)",
+        "en": "Tech stack section on desktop"
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/03-desktop-program.png",
+      "alt": {
+        "ko": "프로그램 섹션(데스크톱)",
+        "en": "Program section on desktop"
+      }
+    },
+    {
+      "src": "/projects/blockthon2026/04-mobile-hero.png",
+      "alt": {
+        "ko": "모바일 히어로",
+        "en": "Hero on mobile"
+      }
+    }
+  ],
   "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "CSS Modules",
+    "Static Export",
+    "Amazon S3",
+    "CloudFront",
     "Sui",
     "Walrus",
     "Move",
-    "AI",
-    "Next.js",
-    "TypeScript",
-    "Cloudflare Workers",
-    "Amazon S3",
-    "CloudFront"
+    "AI"
   ],
   "sections": [
     {
       "h": {
-        "ko": "역할",
-        "en": "Role"
+        "ko": "TF에서의 역할",
+        "en": "Role on the task force"
       },
       "body": {
         "ko": [
           "Sui·Walrus·AI가 각각 어떤 역할을 맡고 어떻게 하나의 제품 스택으로 연결되는지 해커하우스 참가자 앞에서 발표했습니다.",
           "Move를 처음 접하는 참가자도 따라올 수 있도록 기초 개념부터 실제 조합까지 이어지는 교육자료를 설계하고 정리했습니다.",
-          "행사 정보를 한곳에서 전달하는 반응형 랜딩페이지를 기획·구현했습니다. 처음에는 Cloudflare Workers에 올렸고, 이후 정적 export를 Amazon S3·CloudFront로 옮겨 지금은 blockthon.com에서 공식 운영 중입니다. 설계와 배포 과정은 별도 기록 <b>BlockThon 2026 Landing Page</b>에 정리했습니다.",
+          "행사 정보를 한곳에서 전달하는 반응형 랜딩페이지를 기획·구현했습니다. 처음에는 Cloudflare Workers에 올렸고, 이후 정적 export를 Amazon S3·CloudFront로 옮겨 blockthon.com에서 공식 운영했습니다. 설계와 배포 과정은 아래에 자세히 정리했습니다.",
           "9월 19일 Demo Day를 끝으로 랜딩페이지 공개·교육·발표 일정을 모두 마치고 TF 활동을 종료했습니다. 온라인 예선에는 약 15팀이 참여했고 9팀이 Demo Day에 진출했습니다."
         ],
         "en": [
           "Presented to hacker-house participants how Sui, Walrus and AI each contribute and connect as one product stack.",
           "Designed and refined learning materials that move from fundamentals to a practical stack, including for participants new to Move.",
-          "Planned and built a responsive event landing page. It first went out on Cloudflare Workers, then moved as a static export to Amazon S3 and CloudFront, and now runs officially at blockthon.com. Its design and deployment are written up separately as <b>BlockThon 2026 Landing Page</b>.",
+          "Planned and built a responsive event landing page. It first went out on Cloudflare Workers, then moved as a static export to Amazon S3 and CloudFront, and ran officially at blockthon.com. Its design and deployment are written up in detail below.",
           "The task force concluded on 19 September after completing the landing-page launch, education and presentations through Demo Day. Roughly 15 teams entered the online qualifier and nine advanced to Demo Day."
         ]
       }
@@ -62,6 +99,151 @@
         "en": [
           "Reduced the demo and talk to one memorable line — ‘AI creates, Walrus preserves, and Sui owns’ — to make the relationship between the three technologies intuitive.",
           "Developed the learning material into a 74-slide chaptered deck and a refined 50-slide version for a 30–40 minute talk. Ahead of the 19 September Demo Day, a 40-second ‘Proof of Meme’ demo was split into two recording shots: Walrus preserves the image record and Sui establishes ownership so a swapped meme can be identified."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "랜딩페이지 담당 범위",
+        "en": "Landing page: scope of ownership"
+      },
+      "body": {
+        "ko": [
+          "행사 콘셉트, 전체 UX/UI, 디자인 시스템, 정보 구조, 반응형 레이아웃, 그리고 프런트엔드 아키텍처를 직접 기획하고 구현했습니다. 디자인을 받아서 화면만 옮긴 것이 아니라, <b>무엇을 어떤 순서로 보여줄지부터 정했습니다.</b>",
+          "구현은 Next.js, React, TypeScript, CSS Modules로 했습니다.",
+          "<b>AI는 코드를 대신 결정하는 도구가 아니라 구현을 가속하는 도구로 썼습니다.</b> 컴포넌트 구조, 디자인, 동작 조건, 프롬프트, 검수 기준은 제가 정했고, 생성된 코드는 그대로 두지 않고 기준에 맞을 때까지 반복해서 확인하고 고쳤습니다."
+        ],
+        "en": [
+          "I planned and built the event concept, the whole of the UX/UI, the design system, the information architecture, the responsive layout and the front-end architecture. This was not a handed-down design turned into screens — <b>I decided what the page shows and in what order.</b>",
+          "It is built with Next.js, React, TypeScript and CSS Modules.",
+          "<b>I used AI to accelerate implementation, not to make the decisions for me.</b> The component structure, the design, the behavioural conditions, the prompts and the review criteria were mine; generated code was never left as it landed, but read and reworked until it met those criteria."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "핵심 설계",
+        "en": "Core design"
+      },
+      "body": {
+        "ko": [
+          "<b>확정된 행사 정보만 공개합니다.</b> 콘텐츠는 한 파일에 모아두고, 값을 쓰면 그 섹션이 나타나고 비우면 섹션 자체가 사라지도록 만들었습니다. TBD·미정·Coming soon·$0 같은 자리표시자는 넣지 않습니다. 공식 행사 페이지에서 미확정 정보가 확정된 것처럼 읽히면 그건 디자인 문제가 아니라 사고이기 때문입니다.",
+          "<b>섹션 번호는 숨긴 뒤에 매깁니다.</b> 먼저 번호를 박아두면 숨겨진 섹션이 번호 하나를 가져가 07 다음에 09가 오고, 읽는 사람은 존재한 적 없는 섹션을 찾게 됩니다. 헤더 내비게이션과 섹션 인덱스도 같은 노출 규칙에서 파생되므로, 숨긴 섹션을 가리키는 링크가 남을 수 없습니다.",
+          "<b>히어로 인터랙션은 React state를 거치지 않습니다.</b> 포인터와 스크롤 반응은 DOM에 CSS 변수를 직접 써서 처리하므로 프레임마다 리렌더가 일어나지 않습니다.",
+          "장식 레이어는 전부 aria-hidden이고 포인터 이벤트를 받지 않으며, 그 레이어가 전달하는 의미는 텍스트로도 따로 제공합니다. prefers-reduced-motion에서는 포인터 엔진이 아예 시작되지 않고, JavaScript가 실패해도 모든 섹션이 처음부터 보입니다. CTA와 내비게이션 터치 타깃은 최소 44px입니다."
+        ],
+        "en": [
+          "<b>Only confirmed event information is published.</b> The content lives in one file, and writing a value makes its section appear while leaving it empty removes the section entirely. There are no TBD, Coming soon or $0 placeholders. On an official event page, unconfirmed information that reads as confirmed is not a design problem — it is an incident.",
+          "<b>Sections are numbered after hiding, not before.</b> Number them first and a hidden section takes one with it: 07 is followed by 09, and the reader goes looking for a section that was never published. The header navigation and the section index derive from the same visibility rules, so no link can point at a section that is not there.",
+          "<b>The hero interaction never goes through React state.</b> Pointer and scroll response is written straight into the DOM as CSS variables, so there is no re-render per frame.",
+          "Every decorative layer is aria-hidden and takes no pointer events, and whatever meaning it carries is also given as text. Under prefers-reduced-motion the pointer engine never starts, and if JavaScript fails every section is visible from the first paint. CTA and navigation touch targets are at least 44px."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "픽셀아트 시스템",
+        "en": "The pixel-art system"
+      },
+      "body": {
+        "ko": [
+          "히어로의 그래픽은 이미지 파일을 화면에 얹은 것이 아니라 <b>픽셀 데이터를 코드에서 조합해 렌더링한 결과</b>입니다. 로고 이미지를 격자 위에 이진 트레이스해서 채움 여부만 남긴 상수로 변환하고(색은 버립니다), 그 상수를 읽어 블록을 배치합니다. 로고 락업은 넓은 판 160×28(큐브 1,719개)과 작은 판 96×17(큐브 632개) 두 벌, 심볼 포함 전체 마크는 128×100(채워진 칸 3,076개)입니다.",
+          "<b>트레이스는 빌드가 아니라 손으로 한 번 돌립니다.</b> 이 페이지는 정적 export이고 블록 풀의 크기가 렌더 시점에 정해지므로, 런타임에 이미지를 비동기로 디코딩하면 첫 프레임이 빈 화면으로 나간 뒤 풀 전체가 다시 마운트됩니다. 그래서 변환 결과를 파일로 커밋하고, 로고가 바뀔 때만 스크립트를 다시 돌립니다.",
+          "같은 이유로 글자도 이미지가 아니라 데이터입니다. 7×9 픽셀 폰트를 따로 만들어 단어를 같은 블록으로 쌓기 때문에, 로고와 텍스트가 하나의 시각 언어 안에서 같은 재질로 보입니다."
+        ],
+        "en": [
+          "The hero graphic is not an image dropped onto the page but <b>pixel data composed and rendered in code</b>. The logo is traced onto a lattice as a binary constant that keeps only whether a cell is filled — colour is discarded — and the blocks are laid out by reading that constant. The lockup exists at two resolutions, 160×28 (1,719 cubes) and 96×17 (632 cubes), and the full mark including the symbol is 128×100 (3,076 filled cells).",
+          "<b>The trace is run by hand, once, not by the build.</b> The page is a static export and the block pool's size is decided while rendering, so decoding an image asynchronously at runtime would ship a first frame with an empty field and then remount the whole pool. The converted data is committed as a file instead, and the script is re-run only when the logo changes.",
+          "Letterforms are data for the same reason. A 7×9 pixel font builds words out of the same blocks, so the logo and the text read as one material inside one visual language."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "배포",
+        "en": "Deployment"
+      },
+      "body": {
+        "ko": [
+          "Next.js static export로 정적 파일을 만들어 S3 버킷에 올리고, CloudFront를 통해 서빙합니다. 라우트 핸들러·미들웨어·재검증이 없는 페이지라 서버 런타임도 어댑터도 필요하지 않습니다.",
+          "<b>AWS에서 도메인을 직접 구매</b>하고 DNS 연결, HTTPS 적용, CloudFront 연결까지 수행했습니다. 페이지는 <b>blockthon.com</b>에서 서비스되었습니다.",
+          "약 16달러의 도메인 비용은 제 돈이 아니라 행사 예산입니다. 제가 한 것은 결제가 아니라 구매부터 연결까지의 과정입니다."
+        ],
+        "en": [
+          "A Next.js static export produces plain files, which are uploaded to an S3 bucket and served through CloudFront. The page has no route handlers, middleware or revalidation, so it needs neither a server runtime nor an adapter.",
+          "I <b>bought the domain on AWS</b> myself and did the DNS, the HTTPS and the CloudFront wiring. The page was served at <b>blockthon.com</b>.",
+          "The domain cost about $16, and it came out of the event budget rather than my own pocket. What was mine was the process from purchase through to connection, not the payment."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "행사 중 운영",
+        "en": "How it was used"
+      },
+      "body": {
+        "ko": [
+          "이 페이지는 포트폴리오용 데모가 아니라 <b>2026 BlockThon의 공식 창구</b>였습니다. 참가 신청이 이 페이지의 CTA를 통해 이루어졌습니다.",
+          "페이지에 쓰인 공식 로고는 전부 <b>사용 허락을 받은 자산</b>입니다. 허락을 받기 전에는 비공식 로고를 재제작하거나 임의로 내려받지 않고 텍스트 label로 두었고, 공식 자산을 받은 뒤에 교체했습니다.",
+          "Sui 측에서도 이 페이지를 확인했습니다.",
+          "그래서 여기서 정보가 틀리면 제 포트폴리오가 흠집 나는 게 아니라 <b>행사가 틀립니다.</b> 확정된 값만 공개하고 비면 섹션째 사라지는 구조를 기능보다 먼저 만든 이유가 이것입니다."
+        ],
+        "en": [
+          "This is not a portfolio demo but the <b>official front door for BlockThon 2026</b>: applications came through this page's CTA.",
+          "Every official logo on the page is <b>used with permission</b>. Before permission came through I left them as text labels rather than recreating or helping myself to unofficial marks, and swapped in the official assets once they arrived.",
+          "The Sui side has reviewed the page as well.",
+          "So if something here is wrong, it is not a blemish on my portfolio — <b>it is the event that is wrong.</b> That is why the structure where only confirmed values publish, and an empty one removes its whole section, was built before any of the features."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "해결한 기술적 문제",
+        "en": "Defects found and fixed"
+      },
+      "collapsed": true,
+      "body": {
+        "ko": [
+          "배포 후 사이트가 <b>403을 반환했습니다.</b> 원인은 코드가 아니라 경로였습니다. CloudFront 배포에 설정된 Origin Path와 S3에 실제로 올라간 객체의 경로가 어긋나 있어서, CloudFront가 존재하지 않는 키를 요청하고 있었습니다. 두 경로를 일치시키고 캐시 무효화를 수행해 정상 응답을 확인했습니다. 빌드 산출물이 정상이어도 배포 경계의 경로 하나가 어긋나면 사이트 전체가 접근 불가가 된다는 것을 여기서 직접 겪었습니다."
+        ],
+        "en": [
+          "After deploying, the site <b>returned 403.</b> The cause was not the code but a path: the Origin Path configured on the CloudFront distribution did not match where the objects actually landed in S3, so CloudFront was requesting keys that did not exist. Aligning the two paths and invalidating the cache restored normal responses. This is where I learned first-hand that a build can be perfectly fine and one mismatched path at the deployment boundary still takes the whole site offline."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "별도로 진행한 보안 개선",
+        "en": "A separate security improvement"
+      },
+      "body": {
+        "ko": [
+          "<b>위 403과는 원인도 계기도 다른 별개의 작업입니다.</b> 배포 설정을 점검하다가 CloudFront 배포에 <b>2008년 계열의 오래된 TLS 보안 정책</b>이 그대로 남아 있는 것을 발견하고 <b>TLSv1.2_2021</b>로 업데이트했습니다.",
+          "403은 Origin Path와 S3 객체 경로가 어긋나 생긴 문제였고, 이 TLS 정책 교체는 그 문제를 고치는 과정에서 필요했던 조치가 아닙니다. 두 가지를 하나의 인과로 묶지 않으려고 여기 따로 적습니다."
+        ],
+        "en": [
+          "<b>This is separate work, with a different cause and a different trigger from the 403 above.</b> While going through the deployment settings I found that the CloudFront distribution was still on an <b>old, 2008-era TLS security policy</b>, and updated it to <b>TLSv1.2_2021</b>.",
+          "The 403 came from a mismatch between the Origin Path and the S3 object paths; replacing the TLS policy was not a step in fixing it. The two are written up separately here precisely so they are not read as one chain of cause and effect."
+        ]
+      }
+    },
+    {
+      "h": {
+        "ko": "이 프로젝트의 값과 한계",
+        "en": "What this project does and does not prove"
+      },
+      "body": {
+        "ko": [
+          "먼저 분명히 할 것. 이건 연습용도 데모도 아닙니다. 실제 행사가 이 페이지로 참가자를 받았고, 공식 로고를 허락받아 썼고, 파트너 쪽에서도 확인한 자산입니다. <b>사람들이 실제로 이 페이지를 통해 신청했습니다.</b>",
+          "한계도 분명합니다. 규모로 증명하는 프로젝트는 아닙니다. 트래픽·동시성·데이터 정합성 문제를 푼 적이 없고, 신청 접수 자체는 외부 폼이 맡았습니다. 제 몫은 페이지와 그 배포입니다.",
+          "대신 증명되는 것이 있습니다. 콘셉트와 디자인 시스템에서 시작해 실제 도메인 위의 HTTPS 페이지까지 <b>중간에 남에게 넘기는 구간 없이 한 사람이 끝까지 끌고 갔다</b>는 것, 그리고 화면이 아니라 <b>배포 경계에서 난 장애를 인프라 담당자의 일로 미루지 않고 원인까지 추적해 고쳤다</b>는 것입니다.",
+          "AI로 구현을 가속했다는 점도 숨길 이유가 없습니다. 중요한 것은 무엇을 생성했느냐가 아니라 무엇을 기준으로 검수했느냐이고, 이 저장소에는 그 기준이 문서로 남아 있습니다."
+        ],
+        "en": [
+          "First, to be clear about what this is: not an exercise and not a demo. A real event took its applicants through this page, its official logos were used with permission, and the partner side reviewed it. <b>People actually applied through it.</b>",
+          "The limits are just as clear. This is not a project that proves anything by scale. It solved no problems of traffic, concurrency or data consistency, and the application intake itself was handled by an external form. My part is the page and its deployment.",
+          "What it does prove is different. One person carried it from concept and design system to an HTTPS page on a real domain <b>with no stretch handed off to somebody else</b>, and when the failure came it came at the deployment boundary rather than in the UI — and it was <b>traced to its cause and fixed rather than passed to whoever owns the infrastructure</b>.",
+          "That AI accelerated the implementation is not worth hiding either. What matters is not what was generated but what it was reviewed against, and in this repository those criteria are written down."
         ]
       }
     }
