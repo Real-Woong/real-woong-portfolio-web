@@ -95,3 +95,6 @@ _STATUS.md
 
 # 포트폴리오 이미지 원본(원본 해상도·개인정보 컷 포함, 로컬 전용). 웹용은 public/projects/ 에 있음
 /img-source/
+
+# Hallmark 디자인 작업물 (로컬 전용)
+/.hallmark/
