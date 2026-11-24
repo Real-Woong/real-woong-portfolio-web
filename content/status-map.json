@@ -84,7 +84,9 @@
     "Project_AI/CV/Skin-Care": "주제·데이터셋 검증만 끝난 구현 착수 전 연구로, 최소 실험 결과가 나온 뒤 프로젝트 항목으로 싣는다.",
     "Project_Embedded/AnzZheng": "IMU 2개 기반 자세 알림 연구. 시뮬레이션·학습·평가·펌웨어 파이프라인은 구현됐지만 실측 수집과 직접 재현한 비교 수치가 없어, 최소 실험 결과 확인 후 게재 여부를 판단한다.",
     "Project_ContentOps/R_A_Glance": "프로젝트 카드가 아니라 SNS 활용 섹션(#channels)의 R_A_Glance 채널로 싣는다. 설명은 그 모달에 있고 손으로 유지한다.",
-    "Project_Marketing": "프로젝트 카드가 아니라 SNS 활용 섹션(#channels)의 깃웃깃웃 채널로 싣는다. 설명은 그 모달에 있고 손으로 유지한다.",
+    "Project_ContentOps/git-ut-git-ut": "프로젝트 카드가 아니라 SNS 활용 섹션(#channels)의 깃웃깃웃 채널로 싣는다(폴더는 2026-10-28 Project_Marketing 에서 이동). 설명은 그 모달에 있고 손으로 유지한다.",
+    "Project_ContentOps/Project_Showcase": "내 프로젝트 홍보 릴스·쇼츠 채널 기획 단계로 폴더·방향 문서만 있고 영상이 아직 없다. 첫 영상이 공개된 뒤 #channels 섹션에 싣는다.",
+    "Prefer_for_CodingTest": "2026-11-13 일부러 뺐다(`4c73fec`). 풀이 9문제(전부 LV1)에 마지막 풀이 커밋이 08-28 이라 대표 프로젝트로 보이기엔 이르다. 꾸준히 이어진 기록이 쌓이면 다시 본다.",
     "Project_Personal/react/My-Portfolio-Web": "이 사이트 자신.",
     "github-profile": "프로필 README 저장소. 작업물이 아니라 이 사이트를 가리키는 창구다."
   },
